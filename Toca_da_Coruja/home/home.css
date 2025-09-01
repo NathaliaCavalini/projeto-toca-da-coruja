@@ -5,11 +5,11 @@ body{
 	background: #F5DDC2;
 	color: #222;
 }
-/* Estiliza as imagens dentro dos links */
+/* Estiliza as imagens dentro dos links 
 .caixa img {
     max-height: 125px;
 }
-/* Estiliza a navegação */
+/* Estiliza a navegação
 .caixa nav ul {
     list-style: none;
     display: flex;
@@ -17,7 +17,7 @@ body{
     padding: 0;
     margin: 0;
 }
-/* Estiliza os links do menu */
+/* Estiliza os links do menu 
 .caixa nav ul li a {
     display: flex;
     align-items: center;
@@ -26,7 +26,8 @@ body{
     color: #000;
     font-weight: 20;
 }
-/* Exemplo: muda a cor do link ao passar o mouse */
+/* Exemplo: muda a cor do link ao passar o mouse 
 .caixa nav ul li a:hover {
     color: #0077cc;
 }
+*/
