@@ -1,0 +1,32 @@
+*{box-sizing: border-box;}
+body{
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background: #F5DDC2;
+	color: #222;
+}
+/* Estiliza as imagens dentro dos links */
+.caixa img {
+    max-height: 125px;
+}
+/* Estiliza a navegação */
+.caixa nav ul {
+    list-style: none;
+    display: flex;
+    gap: 100px;
+    padding: 0;
+    margin: 0;
+}
+/* Estiliza os links do menu */
+.caixa nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 20;
+}
+/* Exemplo: muda a cor do link ao passar o mouse */
+.caixa nav ul li a:hover {
+    color: #0077cc;
+}
