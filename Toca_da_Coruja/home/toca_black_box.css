@@ -1,0 +1,304 @@
+/* ===== RESET BÁSICO ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #E7CBA9; /* Cor de fundo mais próxima do layout */
+    color: #3a2d14;
+}
+
+/* ===== LOGO ===== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+}
+
+.logo h1 {
+    font-family: 'inkut';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    margin: 0;
+    color: #3a2d14;
+}
+
+/* ===== BARRA LATERAL ===== */
+.barra-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100vh;
+    background: #c49b6c;  /* tom mais quente */
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.15);
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+/* Botão de login */
+.barra-lateral .login {
+    background: #eedfcb;
+    border: none;
+    border-radius: 16px;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: #3a2d14;
+    transition: background 0.3s ease;
+}
+
+.barra-lateral .login:hover {
+    background: #dbcaad;
+}
+
+/* Caixa de pesquisa */
+.barra-lateral .pesquisa {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.barra-lateral .pesquisa label {
+    font-weight: 500;
+    color: #3a2d14;
+    margin-bottom: 4px;
+}
+
+.barra-lateral .pesquisa input {
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #5a4530;
+    outline: none;
+    font-size: 14px;
+}
+
+/* ===== GÊNEROS ===== */
+.barra-lateral .generos {
+    background: #a67547;
+    padding: 12px 15px;
+    border-radius: 14px;
+    color: white;
+}
+
+.barra-lateral .generos h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #3a2d14;
+}
+
+.barra-lateral .generos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #3a2d14;
+}
+
+.barra-lateral .generos ul li {
+    margin: 6px 0;
+    font-weight: 600;
+}
+
+.barra-lateral .generos ul li a {
+    text-decoration: none;
+    color: #3a2d14;
+    transition: color 0.3s ease;
+}
+
+.barra-lateral .generos ul li a:hover {
+    text-decoration: underline;
+    color: #5d432c;
+}
+
+/* ===== FAVORITOS ===== */
+.barra-lateral .favoritos {
+    background: #eedfcb;
+    padding: 12px 15px;
+    border-radius: 14px;
+    font-weight: 600;
+    color: #3a2d14;
+    box-shadow: inset 2px 2px 3px #c9b499, inset -3px -3px 6px #fff;
+}
+
+.barra-lateral .favoritos h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.barra-lateral .favoritos p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ícones em favoritos */
+.star-icon {
+    color: #c2923f;
+    font-weight: 900;
+    margin-right: 6px;
+}
+
+.heart-icon {
+    color: #c14444;
+    margin-right: 6px;
+    font-weight: 900;
+}
+
+/* ===== HEADER ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 220px; /* deslocado à direita da barra lateral */
+    right: 0;
+    background: #f7e5cc;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    padding: 0 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.icones button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icones button img {
+    width: 30px;
+    height: auto;
+}
+
+/* ===== MAIN ===== */
+.main {
+    margin-left: 220px;
+    margin-top: 60px;
+    padding: 30px 40px;
+    min-height: 100vh;
+    background: #ead6bc;
+}
+
+/* ===== GRID DE LIVROS ===== */
+.book-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.book-card {
+    background: #ead6bc;
+    border-radius: 16px;
+    padding: 15px 12px 22px;
+    text-align: center;
+    width: 180px;
+    flex: 0 0 auto;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 6px 8px 10px rgba(0,0,0,0.15);
+}
+
+.book-card img {
+    width: 160px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.book-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3a2d14;
+    margin: 8px 0;
+    min-height: 42px; /* para títulos com 2 linhas manter altura */
+}
+
+.book-card button {
+    background: transparent;
+    border: 1.5px solid #3a2d14;
+    border-radius: 10px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    color: #3a2d14;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.book-card button:hover {
+    background: #3a2d14;
+    color: #f7e5cc;
+}
+
+/* Remove outline no foco para melhorar design, ou personalize */
+.book-card button:focus {
+    outline: none;
+    box-shadow: 0 0 4px 2px #a67547;
+}
+
+/* Scrollbar customizada para a lista de livros */
+.book-cards::-webkit-scrollbar {
+    height: 8px;
+}
+
+.book-cards::-webkit-scrollbar-track {
+    background: #ede1c6;
+    border-radius: 4px;
+}
+
+.book-cards::-webkit-scrollbar-thumb {
+    background-color: #b8875e;
+    border-radius: 4px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .barra-lateral {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        box-shadow: none;
+    }
+    .header {
+        left: 0;
+        height: 50px;
+        padding: 0 15px;
+    }
+    .main {
+        margin: 0;
+        padding: 20px;
+    }
+    .book-cards {
+        gap: 16px;
+        padding-bottom: 0;
+    }
+}
