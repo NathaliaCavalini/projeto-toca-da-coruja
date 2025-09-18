@@ -267,13 +267,13 @@ main {
 }
 
 .caixa {
-    background-color: #ffffff;
+    background-color: #E3D4BF;
     /* Cor de fundo branca */
     padding: 20px;
     /* Espaçamento interno */
     margin-bottom: 20px;
     /* Espaçamento entre os cards */
-    border-radius: 8px;
+    border-radius: 8%;
     /* Cantos arredondados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Sombra leve */
