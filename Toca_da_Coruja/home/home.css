@@ -10,6 +10,9 @@ body {
     color: #0000;
 }
 
+.header {
+    display: flex;
+}
 .logo {
     display: flex;
     align-items: center;
@@ -35,7 +38,39 @@ body {
     transform: translateX(25%);
 }
 
-/*NAV*/
-.nav-menu ul li{
-    
+/*NAV-MENU*/
+.nav-menu {
+    display: flex;
+    gap: 117px; /* Reduz o espaço entre os itens */
+    background-color: #C5946C;
+    border: 2px solid #C5946C; /* Mantém a borda, mas com a mesma cor do fundo para efeito sutil */
+    border-radius: 20px; /* Reduz o raio para um tamanho menor */
+    padding: 5px 10px; /* Reduz o padding interno */
+    width: 60%; /* Define uma largura menor, ajustável */
+    margin: 35px auto 0; /* Centraliza horizontalmente e adiciona margem superior */
+    position: fixed; /* Fixa no topo da página */
+    top: 0; /* Alinha no topo */
+    left: 55%; /* Move para o centro horizontal */
+    transform: translateX(-50%); /* Ajusta para centralizar perfeitamente */
+    box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho */
+    justify-content: center;
+}
+
+
+.nav-menu a {
+    font-size: 15px;
+    flex-grow: 1;
+    color: black;
+}
+
+.icones {
+    display: flex;
+    padding-left: 75%;
+    background-image: none;
+}
+
+
+.icones button {
+    background-color: transparent;
+    border: none;
 }
