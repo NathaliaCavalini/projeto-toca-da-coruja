@@ -38,6 +38,16 @@ body {
     transform: translateX(25%);
 }
 
+.separator {
+    position: absolute;
+    width: 1px; /* Espessura da linha vertical */
+    height: 114px; /* Altura da linha vertical */
+    background-color: rgb(0, 0, 0); /* Cor da linha */
+    right: -22px; /* Distância do texto */
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+}
+
 /*NAV-MENU*/
 .nav-menu {
     display: flex;
@@ -73,4 +83,25 @@ body {
 .icones button {
     background-color: transparent;
     border: none;
+}
+
+/*ASIDE*/
+
+aside {
+    border: 2px solid #616161;
+    border-top: none;
+    width: 200px;
+}
+
+.login {
+    display: flex;
+    border-color: transparent;
+    background-color: #C5946C;
+    border-radius: 45px;
+    width: 180px;
+    margin: auto;
+    height: 40px;
+    gap: 20px;
+    align-items: center;
+    font-size: 15px;
 }
