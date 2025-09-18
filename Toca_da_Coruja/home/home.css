@@ -16,11 +16,13 @@ body {
     gap: 10px;
     padding: 10px 0;
     margin-bottom: 30px;
+    transform: translateY(15%);
 }
 
 .logo img {
     width: 50px;
     height: auto;
+    transform: translateX(50%);
 }
 
 .logo h1 {
@@ -30,7 +32,10 @@ body {
     font-size: 24px;
     margin: 0;
     color: #3a2d14;
+    transform: translateX(25%);
 }
-header {
+
+/*NAV*/
+.nav-menu ul li{
     
 }
