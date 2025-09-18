@@ -6,13 +6,15 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #F5DDC2; /* Cor de fundo mais próxima do layout */
+    background: #F5DDC2;
+    /* Cor de fundo mais próxima do layout */
     color: #0000;
 }
 
 .header {
     display: flex;
 }
+
 .logo {
     display: flex;
     align-items: center;
@@ -31,38 +33,39 @@ body {
 .logo h1 {
     font-family: 'inkut';
     font-weight: normal;
-    font-style: normal;
+    font-weight: bolder;
     font-size: 24px;
     margin: 0;
     color: #3a2d14;
     transform: translateX(25%);
 }
 
-.separator {
-    position: absolute;
-    width: 1px; /* Espessura da linha vertical */
-    height: 114px; /* Altura da linha vertical */
-    background-color: rgb(0, 0, 0); /* Cor da linha */
-    right: -22px; /* Distância do texto */
-    top: 50%;
-    transform: translateY(-50%); /* Centraliza verticalmente */
-}
-
 /*NAV-MENU*/
 .nav-menu {
     display: flex;
-    gap: 117px; /* Reduz o espaço entre os itens */
+    gap: 117px;
+    /* Reduz o espaço entre os itens */
     background-color: #C5946C;
-    border: 2px solid #C5946C; /* Mantém a borda, mas com a mesma cor do fundo para efeito sutil */
-    border-radius: 20px; /* Reduz o raio para um tamanho menor */
-    padding: 5px 10px; /* Reduz o padding interno */
-    width: 60%; /* Define uma largura menor, ajustável */
-    margin: 35px auto 0; /* Centraliza horizontalmente e adiciona margem superior */
-    position: fixed; /* Fixa no topo da página */
-    top: 0; /* Alinha no topo */
-    left: 55%; /* Move para o centro horizontal */
-    transform: translateX(-50%); /* Ajusta para centralizar perfeitamente */
-    box-sizing: border-box; /* Garante que padding e borda não aumentem o tamanho */
+    border: 2px solid #C5946C;
+    /* Mantém a borda, mas com a mesma cor do fundo para efeito sutil */
+    border-radius: 20px;
+    /* Reduz o raio para um tamanho menor */
+    padding: 5px 10px;
+    /* Reduz o padding interno */
+    width: 60%;
+    /* Define uma largura menor, ajustável */
+    margin: 35px auto 0;
+    /* Centraliza horizontalmente e adiciona margem superior */
+    position: fixed;
+    /* Fixa no topo da página */
+    top: 0;
+    /* Alinha no topo */
+    left: 55%;
+    /* Move para o centro horizontal */
+    transform: translateX(-50%);
+    /* Ajusta para centralizar perfeitamente */
+    box-sizing: border-box;
+    /* Garante que padding e borda não aumentem o tamanho */
     justify-content: center;
 }
 
@@ -71,12 +74,15 @@ body {
     font-size: 15px;
     flex-grow: 1;
     color: black;
+    text-decoration: none;
 }
 
 .icones {
     display: flex;
-    padding-left: 75%;
+    padding-left: 90%;
+    transform: translateY(40px);
     background-image: none;
+
 }
 
 
@@ -87,10 +93,20 @@ body {
 
 /*ASIDE*/
 
-aside {
-    border: 2px solid #616161;
-    border-top: none;
-    width: 200px;
+.barra-lateral {
+    border-right-color: #616161;
+    position: fixed;
+    /* fixa na lateral */
+    top: 0;
+    left: 0;
+    width: 250px;
+    /* ajuste a largura */
+    height: 100vh;
+    /* ocupa toda a tela */
+    background-color: #e6c9a8;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .login {
@@ -104,4 +120,109 @@ aside {
     gap: 20px;
     align-items: center;
     font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* espaço entre a lupa e o input */
+    background-color: #C5946C;
+    border: none;
+    /* cor de borda */
+    border-radius: 40px;
+    width: 180px;
+    height: 40px;
+    /* ajuste conforme precisar */
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.pesquisa img {
+    width: 20px;
+    transform: translateX(3px);
+}
+
+.pesquisa input {
+    border: none;
+    outline: none;
+    background: none;
+    flex: 1;
+    font-size: 14px;
+    color: #3a2d14
+}
+
+
+.pesquisa input::placeholder {
+    color: black;
+    /* cor do placeholder */
+    opacity: 1;
+    /* garante que a cor apareça */
+}
+
+.generos p {
+    font-size: 15px;
+    color: black;
+    text-align: center;
+}
+
+.generos {
+    border: 2px solid #C5946C;
+    border-radius: 40px;
+    background-color: #C5946C;
+    margin-bottom: 20px;
+}
+
+.generos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    gap: 37px;
+    transform: translateX(20px);
+}
+
+.generos li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.generos li img {
+    margin-right: 10px
+}
+
+.generos a {
+    text-decoration: none;
+    color: black;
+}
+
+.favoritos {
+    background-color: #b68663; /* cor do fundo */
+    border-radius: 40px;       /* bordas arredondadas */
+    display: flex;
+    align-items: center;       /* centraliza verticalmente */
+    gap: 10px;                 /* espaço entre ícone e texto */
+    font-size: 14px;   
+}
+
+.favoritos a {
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+    gap: 20px;
+    
+}
+
+.favoritos img {
+    transform: translateX(-20px);
+    gap: 20px;
+}
+
+main {
+    margin-left: 250px;
+    /* espaço para a sidebar */
+    padding: 20px;
+    flex: 1;
 }

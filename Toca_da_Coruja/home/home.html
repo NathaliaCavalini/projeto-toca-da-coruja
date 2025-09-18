@@ -7,59 +7,74 @@
     <title>Toca da Coruja</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="styles.css">
-    
+
 </head>
 
 <body>
-    <header class="header">
-        <div class="logo">
-            <img src="./imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca<br> da Coruja<span class="separator"></span></h1>
-        </div>
-        <nav>
-            <ul class="nav-menu">
-                <li><img src="./imagens/livro_aberto.png" width="20px" height="20px"><a href="home.html">Catálogo</a></li>
-                <li><img src="./imagens/quer_ler.png" width="20px" height="20px"><a href="quer_ler.html">Quer ler</a></li>
-                <li><img src="./imagens/ja_lidos.png" width="20px" height="20px"><a href="ja_lidos.html">Já lidos</a></li>
-                <li><img src="./imagens/reviews.png" height="20px"><a href="reviews.html">Reviews</a></li>
-            </ul>
-        </nav>
-        <div class="icones">
-            <button class="modo escuro" aria-label="Alternar modo claro/escuro">
-                <img src="./imagens/escuro.png" width=20px"" height="20px" alt="">
-            </button>
-            <button class="ajuda" aria-label="Ajuda">
-                <img src="./imagens/ajuda.png" width=20px"" height="20px" alt="">
-            </button>
-        </div>
-    </header>
+    <div class="icones">
+        <button class="modo escuro" aria-label="Alternar modo claro/escuro">
+            <img src="./imagens/escuro.png" width=20px"" height="20px" alt="">
+        </button>
+        <button class="ajuda" aria-label="Ajuda">
+            <img src="./imagens/ajuda.png" width=20px"" height="20px" alt="">
+        </button>
+    </div>
+    <div class="barra-lateral">
+        <header class="header">
+            <div class="logo">
+                <img src="./imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+                <h1>Toca<br> da Coruja<span class="separator"></span></h1>
 
-    <aside class="barra-lateral">
-        <button class="login"><img src="./imagens/user.png" width="20px" height="20px">Cadastre-se</button>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><img src="./imagens/livro_aberto.png" width="20px" height="20px"><a
+                            href="home.html">Catálogo</a></li>
+                    <li><img src="./imagens/quer_ler.png" width="20px" height="20px"><a href="quer_ler.html">Quer
+                            ler</a></li>
+                    <li><img src="./imagens/ja_lidos.png" width="20px" height="20px"><a href="ja_lidos.html">Já
+                            lidos</a></li>
+                    <li><img src="./imagens/reviews.png" height="20px"><a href="reviews.html">Reviews</a></li>
+                </ul>
+            </nav>
 
-        <form class="pesquisa" role="search">
-            <label for="search-input">Pesquise aqui</label>
-            <img src="./imagens/lupa.png" width="20px" height="20px"><input type="search" id="search-input" placeholder="Pesquisar...">
-        </form>
+        </header>
 
-        <section class="generos">
-            <h2>Genêros</h2>
-            <ul>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">RPG</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">LGBTQIAPN+</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">Fantasia</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">Romance</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">Clássicos</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#">Programação</a></li>
-                <li><img src="./imagens/livro_fechado.png"><a href="#"+mais>+ Mais</a></li>
-            </ul>
-        </section>
+        <aside>
+            <button class="login"><img src="./imagens/user.png" width="20px" height="20px">Cadastre-se</button>
 
-        <section class="favoritos">
-            <h3><span class="star-icon">★</span> Favoritos</h3>
-            <p><span class="heart-icon">♡</span> Minha coleção</p>
-        </section>
-    </aside>
+            <form class="pesquisa" role="search">
+                <img src="./imagens/lupa.png" alt="Buscar" class="icone">
+                <input type="search" id="search-input" placeholder="Pesquisar...">
+            </form>
+
+
+            <section class="generos">
+                <p>Genêros</p>
+                <ul>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="rpg.html">RPG</a></li>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="gay.html">LGBTQIAPN+</a></li>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="fantasia.html">Fantasia</a></li>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="romance.html">Romance</a></li>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="classico.html">Clássicos</a></li>
+                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="programacao.html">Programação</a>
+                    </li>
+                    <li><a href="mais.html" +mais>+ Mais</a></li>
+                </ul>
+            </section>
+
+            <section class="favoritos">
+                <ul>
+                    <li>
+                        <img src="./imagens/favoritos.png" width="20px"><a href="favoritos.html">favoritos</a>
+                    </li>
+                    <li>
+                        <img src="./imagens/minhacolecao.png" width="20px"><a href="colecao.html">favoritos</a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
 
     <main class="main">
         <section class="book-cards">
