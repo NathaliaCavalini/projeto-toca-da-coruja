@@ -10,7 +10,9 @@ A ideia é construir uma biblioteca digital personalizada, onde será possível 
 👀 Prévia do que está por vir
 
 Aqui está um vislumbre do que estou desenvolvendo:
-<img width="1440" height="1024" alt="Desktop" src="https://github.com/user-attachments/assets/403b3130-8498-4baf-a6bf-e6197f29dd10" />
+
+<img width="1440" height="1025" alt="Desktop - 3" src="https://github.com/user-attachments/assets/0f1e24c2-3f67-4499-846a-ff9d29595fe6" />
+<img width="1440" height="1024" alt="Desktop - 2" src="https://github.com/user-attachments/assets/8e46f2d0-0095-4ee2-b40b-556ca7f147a5" />
 
 
 
