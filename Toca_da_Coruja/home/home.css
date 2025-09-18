@@ -67,6 +67,7 @@ body {
     box-sizing: border-box;
     /* Garante que padding e borda não aumentem o tamanho */
     justify-content: center;
+    border-color: #8b694d;
 }
 
 
@@ -126,22 +127,25 @@ body {
 .pesquisa {
     display: flex;
     align-items: center;
-    gap: 10px;
-    /* espaço entre a lupa e o input */
     background-color: #C5946C;
     border: none;
-    /* cor de borda */
     border-radius: 40px;
     width: 180px;
     height: 40px;
-    /* ajuste conforme precisar */
     margin: auto;
     margin-bottom: 20px;
+    overflow: hidden;
+    padding: 5px;
+    /* Padding geral para conter os elementos */
 }
 
 .pesquisa img {
     width: 20px;
-    transform: translateX(3px);
+    height: 20px;
+    margin-left: 5px;
+    /* Espaçamento fixo à esquerda */
+    flex-shrink: 0;
+    /* Impede que a imagem encolha */
 }
 
 .pesquisa input {
@@ -150,7 +154,15 @@ body {
     background: none;
     flex: 1;
     font-size: 14px;
-    color: #3a2d14
+    color: #3a2d14;
+    padding: 0 5px;
+    /* Padding interno apenas no input */
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 5px;
+    /* Espaçamento entre a lupa e o texto */
 }
 
 
@@ -159,6 +171,11 @@ body {
     /* cor do placeholder */
     opacity: 1;
     /* garante que a cor apareça */
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .generos p {
@@ -199,12 +216,16 @@ body {
 }
 
 .favoritos {
-    background-color: #b68663; /* cor do fundo */
-    border-radius: 40px;       /* bordas arredondadas */
+    background-color: #b68663;
+    /* cor do fundo */
+    border-radius: 40px;
+    /* bordas arredondadas */
     display: flex;
-    align-items: center;       /* centraliza verticalmente */
-    gap: 10px;                 /* espaço entre ícone e texto */
-    font-size: 14px;   
+    align-items: center;
+    /* centraliza verticalmente */
+    gap: 10px;
+    /* espaço entre ícone e texto */
+    font-size: 14px;
 }
 
 .favoritos a {
@@ -212,7 +233,7 @@ body {
     color: black;
     text-decoration: none;
     gap: 20px;
-    
+
 }
 
 .favoritos img {
@@ -221,8 +242,49 @@ body {
 }
 
 main {
+    margin-top: 89px;
     margin-left: 250px;
     /* espaço para a sidebar */
     padding: 20px;
     flex: 1;
+    max-width: 300px;
+    width: 100%;
+}
+
+.book-card {
+    background-color: #C5946C;
+    /* Cor de fundo branca */
+    padding: 20px;
+    /* Espaçamento interno */
+    margin-bottom: 20px;
+    /* Espaçamento entre os cards */
+    border-radius: 8px;
+    /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra leve */
+    width: 300px;
+    /* Largura do card */
+}
+
+.caixa {
+    background-color: #ffffff;
+    /* Cor de fundo branca */
+    padding: 20px;
+    /* Espaçamento interno */
+    margin-bottom: 20px;
+    /* Espaçamento entre os cards */
+    border-radius: 8px;
+    /* Cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra leve */
+    width: 300px;
+    /* Largura do card */
+}
+
+.book-card p {
+    color: black;
+}
+
+.book-card ul {
+    border: 2px solid black;
 }
