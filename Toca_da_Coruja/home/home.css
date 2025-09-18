@@ -287,4 +287,5 @@ main {
 
 .book-card ul {
     border: 2px solid black;
+    display: flex;
 }
