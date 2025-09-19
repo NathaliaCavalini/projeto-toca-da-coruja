@@ -92,6 +92,12 @@ body {
     border: none;
 }
 
+.icones button:hover {
+    cursor: pointer;
+    background-color: #ccb090;
+    border-radius: 50%;
+}
+
 /*ASIDE*/
 
 .barra-lateral {
@@ -258,17 +264,52 @@ main {
     /* Espaçamento interno */
     margin-bottom: 20px;
     /* Espaçamento entre os cards */
-    border-radius: 8px;
+    border-radius: 30px;
     /* Cantos arredondados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* Sombra leve */
     width: 300px;
     /* Largura do card */
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-cards ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    max-width: 1000px;
+}
+
+.book-cards {
+    text-align: center;
+}
+
+.book-cards img {
+    display: block;
+    margin: 0 auto 10px;
+    width: 100px;
+    height: auto;
+}
+
+.book-cards p,
+.book-cards a {
+    margin: 5px 0;
+    display: block;
+    color: black;
+    text-decoration: none;
 }
 
 .caixa {
-    background-color: #E3D4BF;
+    background-color: #616161;
     /* Cor de fundo branca */
+    opacity: 30%;
     padding: 20px;
     /* Espaçamento interno */
     margin-bottom: 20px;
@@ -281,10 +322,9 @@ main {
     /* Largura do card */
 }
 
-.book-card p {
-    color: black;
-}
-
-.book-card ul {
-    border: 2px solid black;
+.caixinha{
+    border: 1px solid red;
+    width: 138px;
+    height: 46px;
+    border-radius: ;
 }
