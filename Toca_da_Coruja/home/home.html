@@ -1,139 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width"><!--Port para mobile-->
-    <title>Toca da Coruja</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toca da Coruja - Sua biblioteca literária</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
-    <div class="icones">
-        <button class="modo escuro" aria-label="Alternar modo claro/escuro">
+    <!-- Barra superior com ícones de utilidade -->
+    <div class="top-bar">
+        <button class="dark-mode" aria-label="Alternar modo claro/escuro">
             <img src="./imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
         </button>
-        <button class="ajuda" aria-label="Ajuda">
+        <button class="help" aria-label="Ajuda">
             <img src="./imagens/ajuda.png" width="20" height="20" alt="Ícone de ajuda">
         </button>
     </div>
 
-    <div class="barra-lateral">
-        <header class="header">
-            <div class="logo">
-                <img src="./imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-                <h1>Toca <br> da Coruja<span class="separator"></span></h1>
-
-            </div>
-            
+    <!-- Barra lateral com menu e categorias -->
+    <aside class="sidebar">
+        <header class="logo">
+            <img src="./imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <h1>Toca <br> da Coruja<span class="separator"></span></h1>
         </header>
 
-        <aside>
-            <button class="login"><img src="./imagens/user.png" width="20px" height="20px">Cadastre-se</button>
+        <button class="btn-login">
+            <img src="./imagens/user.png" width="20" height="20" alt="Ícone de usuário">
+            Cadastre-se
+        </button>
 
-            <form class="pesquisa" role="search">
-                <img src="./imagens/lupa.png" alt="Buscar" class="icone">
-                <input type="search" id="search-input" placeholder="Pesquisar...">
-            </form>
+        <form class="search-form" role="search">
+            <img src="./imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+            <input type="search" id="search-input" placeholder="Pesquisar...">
+        </form>
 
-
-            <section class="generos">
-                <p>Genêros</p>
-                <ul>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="rpg.html">RPG</a></li>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="gay.html">LGBTQIAPN+</a></li>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="fantasia.html">Fantasia</a></li>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="romance.html">Romance</a></li>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="classico.html">Clássicos</a></li>
-                    <li><img src="./imagens/livro_fechado.png" width="20px"><a href="programacao.html">Programação</a>
-                    </li>
-                    <li><a href="mais.html" +mais>+ Mais</a></li>
-                </ul>
-            </section>
-
-            <section class="favoritos">
-                <ul>
-                    <li>
-                        <img src="./imagens/favoritos.png" width="20px"><a href="favoritos.html">favoritos</a>
-                    </li>
-                    <li>
-                        <img src="./imagens/minhacolecao.png" width="20px"><a href="colecao.html">Minha coleção</a>
-                    </li>
-                </ul>
-            </section>
-        </aside>
-    </div>
-
-    <main class="main">
-        <nav>
-                <ul class="nav-menu">
-                    <li><img src="./imagens/livro_aberto.png" width="20px" height="20px"><a
-                            href="home.html">Catálogo</a></li>
-                    <li><img src="./imagens/quer_ler.png" width="20px" height="20px"><a href="quer_ler.html">Quer
-                            ler</a></li>
-                    <li><img src="./imagens/ja_lidos.png" width="20px" height="20px"><a href="ja_lidos.html">Já
-                            lidos</a></li>
-                    <li><img src="./imagens/reviews.png" height="20px"><a href="reviews.html">Reviews</a></li>
-                </ul>
-            </nav>
-
-        <section class="book-cards">
-            <ul>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/a_jogada_do_amor.png" alt="A jogada do amor">
-                    </article>
-                    <div class="caixa"><p>A jogada do amor</p></div>
-                    <div class="caixinha"><a href="a-jogada-do-amor.html">Veja mais</a></div>
-                </li>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/ela_fica_com_a_garota.png" alt="Ela fica com a garota">
-                        
-                        
-                        
-                    </article>
-                    <div class="caixa"><p>Ela fica com a garota</p></div>
-                    <div class="caixinha"><a href="ela-fica-com-a-garota.html">Veja mais</a></div>
-                </li>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/algumas_garotas_sao_assim.png" alt="Algumas garotas são assim">
-                        
-                        
-                    </article>
-                    <div class="caixa"><p>Algumas garotas são assim</p></div>
-                    <div class="caixinha"><a href="algumas-garotas-sao-assim.html">Veja mais</a>
-                        </div>
-                </li>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/a_princesa_e_o_queijo_quente.png"
-                            alt="A princesa e o queijo quente">
-                    </article>
-                    <div class="caixa"><p>A princesa e o queijo quente</p></div>
-                    <div class="caixinha"><a href="a-princesa-e-o-queijo-quente.html">Veja mais</a></div>
-                </li>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/um_milhao_de_finais_felizes.png"
-                            alt="Um milhão de finais felizes">
-                    </article>
-                    <div class="caixa"><p>Um milhão de finais felizes</p></div>
-                    <div class="caixinha"><a href="um-milhao-de-finais-felizes.html">Veja mais</a>></div>
-                </li>
-                <li>
-                    <article class="book-card">
-                        <img src="./imagens/o_amor_nao_e_obvio.png" alt="O amor não é óbvio">
-                    </article>
-                    <div class="caixa"><p>O amor não é óbvio</p></div>
-                    <div class="caixinha"><a href="o-amor-nao-e-obvio.html">Veja mais</a></div>
-                </li>
+        <section class="menu-section">
+            <h2>Gêneros</h2>
+            <ul class="menu-list">
+                <li><a href="rpg.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a></li>
+                <li><a href="gay.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">LGBTQIAPN+</a></li>
+                <li><a href="fantasia.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">Fantasia</a></li>
+                <li><a href="romance.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">Romance</a></li>
+                <li><a href="classico.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">Clássicos</a></li>
+                <li><a href="programacao.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">Programação</a></li>
+                <li><a href="mais.html"><img src="./imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a></li>
             </ul>
+        </section>
+
+        <section class="menu-section">
+            <h2>Minha Biblioteca</h2>
+            <ul class="menu-list">
+                <li><a href="favoritos.html"><img src="./imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a></li>
+                <li><a href="colecao.html"><img src="./imagens/minhacolecao.png" width="20" height="20" alt="">Minha coleção</a></li>
+            </ul>
+        </section>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="home.html"><img src="./imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="quer_ler.html"><img src="./imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+            <a href="ja_lidos.html"><img src="./imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="reviews.html"><img src="./imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+        </nav>
+
+        <section class="book-grid" aria-label="Livros em destaque">
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/a_jogada_do_amor.png" alt="Capa do livro A Jogada do Amor">
+                </div>
+                <div class="book-title">
+                    <p>A jogada do amor</p>
+                </div>
+                <div class="book-action">
+                    <a href="a-jogada-do-amor.html">Veja mais</a>
+                </div>
+            </article>
+
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/ela_fica_com_a_garota.png" alt="Capa do livro Ela Fica Com a Garota">
+                </div>
+                <div class="book-title">
+                    <p>Ela fica com a garota</p>
+                </div>
+                <div class="book-action">
+                    <a href="ela-fica-com-a-garota.html">Veja mais</a>
+                </div>
+            </article>
+
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/algumas_garotas_sao_assim.png" alt="Capa do livro Algumas Garotas São Assim">
+                </div>
+                <div class="book-title">
+                    <p>Algumas garotas são assim</p>
+                </div>
+                <div class="book-action">
+                    <a href="algumas-garotas-sao-assim.html">Veja mais</a>
+                </div>
+            </article>
+
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/a_princesa_e_o_queijo_quente.png" alt="Capa do livro A Princesa e o Queijo Quente">
+                </div>
+                <div class="book-title">
+                    <p>A princesa e o queijo quente</p>
+                </div>
+                <div class="book-action">
+                    <a href="a-princesa-e-o-queijo-quente.html">Veja mais</a>
+                </div>
+            </article>
+
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/um_milhao_de_finais_felizes.png" alt="Capa do livro Um Milhão de Finais Felizes">
+                </div>
+                <div class="book-title">
+                    <p>Um milhão de finais felizes</p>
+                </div>
+                <div class="book-action">
+                    <a href="um-milhao-de-finais-felizes.html">Veja mais</a>
+                </div>
+            </article>
+
+            <article class="book-item">
+                <div class="book-card">
+                    <img src="./imagens/o_amor_nao_e_obvio.png" alt="Capa do livro O Amor Não É Óbvio">
+                </div>
+                <div class="book-title">
+                    <p>O amor não é óbvio</p>
+                </div>
+                <div class="book-action">
+                    <a href="o-amor-nao-e-obvio.html">Veja mais</a>
+                </div>
+            </article>
         </section>
     </main>
 </body>
-
 </html>
