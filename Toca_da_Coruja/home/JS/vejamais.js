@@ -1,78 +1,6 @@
-
-// home.js — busca de títulos (filtra os .book-item pelo título)
-
-// util: normaliza texto (remove acentos e transforma minúsculas)
-function normalizeText(str) {
-    if (!str) return "";
-    // NFD + remoção de diacríticos
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.querySelector('#search-input');
-    const books = Array.from(document.querySelectorAll('.book-item'));
-
-    if (!searchInput) return;
-
-    function doSearch() {
-        const term = normalizeText(searchInput.value.trim());
-        if (term === '') {
-            // mostra todos
-            books.forEach(b => b.classList.remove('hidden'));
-            return;
-        }
-
-        books.forEach(book => {
-            // prefere data-title (se existir), senão usa texto do p
-            const dataTitle = book.getAttribute('data-title') || '';
-            const titleText = dataTitle || (book.querySelector('.book-title p')?.textContent || '');
-            const normalizedTitle = normalizeText(titleText);
-
-            const match = normalizedTitle.includes(term);
-            if (match) book.classList.remove('hidden');
-            else book.classList.add('hidden');
-        });
-    }
-
-    // evento de input (busca em tempo real)
-    searchInput.addEventListener('input', doSearch);
-
-    // opcional: permite Enter para focar apenas — já retornamos false no form
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            searchInput.value = '';
-            doSearch();
-        }
-    });
-});
-
-// seleciona o botão do modo escuro
-const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-const body = document.body;
-
-// alterna modo escuro ao clicar
-darkModeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-
-    // opcional: salvar preferência no localStorage
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-// aplica o tema salvo ao carregar a página
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-}
-
-
-
-
 // vejamais.js
 
-// 1️ Lista de livros (você cadastra todos aqui)
+// ===== 1️⃣ Lista de livros =====
 const livros = {
     "amor-obvio": {
         titulo: "O amor não é óbvio",
@@ -183,32 +111,80 @@ const livros = {
         sinopse: "Alex Claremont-Diaz, o carismático filho da presidenta dos Estados Unidos, e Henry, o príncipe da Inglaterra, têm tudo para serem inimigos. Mas após um incidente diplomático forçar os dois a fingirem uma amizade, algo inesperado acontece: uma conexão genuína. Entre e-mails secretos e encontros furtivos, eles precisam decidir se estão prontos para desafiar as regras do mundo para viver um amor que pode mudar a história."
     }
 };
-
-// 2️ Ler ID da URL
+// ===== 2️⃣ Ler ID da URL =====
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const livro = livros[id];
 
-// 3 Montar o card dinamicamente
+// ===== 3️⃣ Montar card do livro =====
 const container = document.getElementById("book-detail");
 
 if (livro) {
     container.innerHTML = `
     <div class="book-detail-card">
-    <div class="book-image">
-        <img src="${livro.imagem}" alt="Capa do livro ${livro.titulo}">
+        <div class="book-image">
+            <img src="${livro.imagem}" alt="Capa do livro ${livro.titulo}">
+        </div>
+        <div class="book-info">
+            <h1>${livro.titulo}</h1>
+            <p><strong>Autor:</strong> ${livro.autor}</p>
+            <p><strong>Gênero:</strong> ${livro.genero}</p>
+            <p><strong>Páginas:</strong> ${livro.paginas}</p>
+            <p><strong>Ano:</strong> ${livro.ano}</p>
+            <p><strong>Sinopse:</strong> ${livro.sinopse}</p>
+            <button class="download-btn">Download</button>
+        </div>
     </div>
-    <div class="book-info">
-        <h1>${livro.titulo}</h1>
-        <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Gênero:</strong> ${livro.genero}</p>
-        <p><strong>Páginas:</strong> ${livro.paginas}</p>
-        <p><strong>Ano:</strong> ${livro.ano}</p>
-        <p><strong>Sinopse:</strong> ${livro.sinopse}</p>
-        <button class="download-btn">Download</button>
-    </div>
-    </div>
-`;
+    `;
 } else {
     container.innerHTML = `<p>Livro não encontrado 😕</p>`;
 }
+
+// ===== 4️⃣ Modo escuro =====
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
+    const body = document.body;
+
+    if (darkModeBtn) {
+        darkModeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+    }
+
+    // Aplica tema salvo
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+    }
+
+    // ===== 5️⃣ Reviews =====
+    const form = document.getElementById('review-form');
+    const reviewList = document.getElementById('review-list');
+
+    // Adiciona campo de nome se quiser, ou usar "Anônimo"
+    let reviews = JSON.parse(localStorage.getItem(`reviews-${id}`)) || [];
+
+    function renderReviews() {
+        reviewList.innerHTML = reviews.map(r => `
+            <div class="review">
+                <strong>${r.name || 'Anônimo'}</strong>
+                <p>${r.text}</p>
+            </div>
+        `).join('');
+    }
+
+    renderReviews();
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const text = document.getElementById('review-text').value;
+        const name = "Anônimo"; // ou criar um input de nome
+
+        if (!text.trim()) return;
+
+        reviews.push({ name, text });
+        localStorage.setItem(`reviews-${id}`, JSON.stringify(reviews));
+        form.reset();
+        renderReviews();
+    });
+});

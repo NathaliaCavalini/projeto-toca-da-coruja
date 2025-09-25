@@ -15,10 +15,10 @@
             <h1>Toca <br> da Coruja</h1>
         </header>
 
-        <button class="btn-login">
-            <img src="../imagens/user.png" width="20" height="20" alt="Ícone de usuário">
-            Cadastre-se
-        </button>
+        <a href="../html/login.html" class="btn-login">
+            <img src="../imagens/user.png" alt="Ícone de usuário" />
+            <span>Cadastre-se</span>
+        </a>
 
         <form class="search-form" role="search" onsubmit="return false;">
             <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
@@ -28,7 +28,8 @@
         <section class="menu-section">
             <h2>Gêneros</h2>
             <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a></li>
+                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
+                </li>
                 <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
                             alt="">LGBTQIAPN+</a></li>
                 <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
@@ -73,6 +74,18 @@
     </main>
 
     <script src="../js/vejamais.js"></script>
+
+    <section class="reviews">
+        <h2>Reviews dos leitores 📚</h2>
+        <div id="review-list"></div>
+
+        <form id="review-form">
+            <textarea id="review-text" placeholder="Escreva seu review..." required></textarea>
+            <button type="submit">Enviar Review</button>
+        </form>
+    </section>
+
+
 </body>
 
 </html>

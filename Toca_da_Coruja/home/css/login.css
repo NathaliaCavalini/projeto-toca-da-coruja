@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #C5946C;
+    --secondary-color: #F5E7D7;
+    --accent-color: #8B694D;
+    --text-color: #3A2D14;
+}
+
+body {
+    background: var(--secondary-color);
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-card {
+    background: var(--primary-color);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+p {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn {
+    background: var(--accent-color);
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #714f34;
+}
+
+.link {
+    margin-top: 20px;
+}
+
+.link a {
+    color: var(--text-color);
+    text-decoration: underline;
+}
