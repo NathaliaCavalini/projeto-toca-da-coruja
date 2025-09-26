@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toca da Coruja - Detalhes do Livro</title>
-    <link rel="stylesheet" href="../css/vejamais.css" />
+    <link rel="stylesheet" href="../css/vejamais.css">
 </head>
 
 <body>
@@ -19,6 +19,7 @@
             <img src="../imagens/user.png" alt="Ícone de usuário" />
             <span>Cadastre-se</span>
         </a>
+
 
         <form class="search-form" role="search" onsubmit="return false;">
             <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
@@ -54,12 +55,13 @@
                         coleção</a></li>
             </ul>
         </section>
+
     </aside>
 
     <main class="main-content">
         <nav class="nav-menu">
             <a href="home.html"><img src="../imagens/seta-para-a-esquerda (1).png" width="20">Voltar ao catálogo</a>
-            <div class="nav-actions" aria-hidden="false">
+            <div class="nav-actions">
                 <button class="icon-btn" title="Modo escuro">
                     <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
                 </button>
@@ -69,23 +71,67 @@
             </div>
         </nav>
 
-        <!-- Aqui o card do livro vai aparecer -->
-        <section id="book-detail"></section>
+        <section id="book-detail">
+            <!-- Sistema de Avaliação -->
+            <div class="book-detail-card">
+                <div class="book-image">
+                    <img src="..." alt="Capa do livro">
+                </div>
+                <div class="book-info">
+                    <h1>Nome do Livro</h1>
+
+                    <div class="rating-container">
+                        <div class="rating">
+                            <span class="star" data-value="1"></span>
+                            <span class="star" data-value="2"></span>
+                            <span class="star" data-value="3"></span>
+                            <span class="star" data-value="4"></span>
+                            <span class="star" data-value="5"></span>
+                        </div>
+                        <div class="rating-average">
+                            Média: <span id="average-rating">0</span> ★
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </section>
+
+<div class="reviews">
+    <h2>Comentários</h2>
+
+    <!-- Formulário de review -->
+    <form id="review-form">
+        <textarea id="review-text" placeholder="Escreva seu review..." required></textarea>
+        <div class="review-rating-input">
+            <label>Avaliação:</label>
+            <div class="stars-input" id="stars-input">
+                <span data-value="0.5">&#9733;</span>
+                <span data-value="1">&#9733;</span>
+                <span data-value="1.5">&#9733;</span>
+                <span data-value="2">&#9733;</span>
+                <span data-value="2.5">&#9733;</span>
+                <span data-value="3">&#9733;</span>
+                <span data-value="3.5">&#9733;</span>
+                <span data-value="4">&#9733;</span>
+                <span data-value="4.5">&#9733;</span>
+                <span data-value="5">&#9733;</span>
+            </div>
+        </div>
+        <button type="submit">Enviar Review</button>
+    </form>
+
+    <!-- Lista de reviews -->
+    <div id="review-list"></div>
+</div>
+
     </main>
 
     <script src="../js/vejamais.js"></script>
-
-    <section class="reviews">
-        <h2>Reviews dos leitores 📚</h2>
-        <div id="review-list"></div>
-
-        <form id="review-form">
-            <textarea id="review-text" placeholder="Escreva seu review..." required></textarea>
-            <button type="submit">Enviar Review</button>
-        </form>
-    </section>
-
-
 </body>
 
 </html>
