@@ -109,7 +109,52 @@ const livros = {
         paginas: 400,
         ano: 2019,
         sinopse: "Alex Claremont-Diaz, o carismático filho da presidenta dos Estados Unidos, e Henry, o príncipe da Inglaterra, têm tudo para serem inimigos. Mas após um incidente diplomático forçar os dois a fingirem uma amizade, algo inesperado acontece: uma conexão genuína. Entre e-mails secretos e encontros furtivos, eles precisam decidir se estão prontos para desafiar as regras do mundo para viver um amor que pode mudar a história."
-    }
+    },
+    "a-arte-da-guerra": {
+        titulo: "A Arte da Guerra",
+        autor: "Sun Tzu",
+        imagem: "../imagens/a-arte-da-guerra.jpg",
+        genero: "Estratégia",
+        paginas: 160,
+        ano: -500,
+        sinopse: "Escrito por Sun Tzu, um lendário estrategista militar chinês, este clássico atemporal oferece lições sobre táticas, planejamento e liderança. Usado não apenas na guerra, mas também em negócios e na vida, o livro explora como vencer conflitos com inteligência, paciência e estratégia, influenciando líderes e pensadores por séculos."
+    },
+    "a-divina-comedia": {
+        titulo: "A Divina Comédia",
+        autor: "Dante Alighieri",
+        imagem: "../imagens/a-divina-comedia.jpg",
+        genero: "Poesia Épica",
+        paginas: 624,
+        ano: 1320,
+        sinopse: "Nesta obra-prima da literatura medieval, Dante Alighieri narra sua jornada épica pelos reinos do Inferno, Purgatório e Paraíso. Guiado por Virgílio e Beatriz, ele enfrenta pecadores, almas em redenção e a visão divina, explorando temas de pecado, redenção e a busca pela salvação eterna."
+    },
+    "fahrenheit-451": {
+        titulo: "Fahrenheit 451",
+        autor: "Ray Bradbury",
+        imagem: "../imagens/fahrenheit-451.jpg",
+        genero: "Ficção Científica",
+        paginas: 256,
+        ano: 1953,
+        sinopse: "Em um futuro distópico onde livros são proibidos e queimados por 'bombeiros', Guy Montag, um desses agentes, começa a questionar sua função e a sociedade opressiva em que vive. Movido pela curiosidade e por encontros transformadores, ele embarca em uma jornada perigosa em busca de liberdade e conhecimento."
+    },
+    "meridiano-de-sangue": {
+        titulo: "Meridiano de Sangue",
+        autor: "Cormac McCarthy",
+        imagem: "../imagens/meridiano-de-sangue.jpg",
+        genero: "Ficção Histórica",
+        paginas: 336,
+        ano: 1985,
+        sinopse: "Ambientado na violenta fronteira entre Estados Unidos e México no século XIX, o romance segue um jovem conhecido apenas como 'o garoto', que se junta a um grupo de mercenários sanguinários. Liderados pelo enigmático Juiz Holden, eles mergulham em um ciclo brutal de violência, desafiando as noções de moralidade e humanidade."
+    },
+    "os-irmaos-karamazov": {
+        titulo: "Os Irmãos Karamázov",
+        autor: "Fiódor Dostoiévski",
+        imagem: "../imagens/os-irmaos-karamazov.jpg",
+        genero: "Romance Filosófico",
+        paginas: 824,
+        ano: 1880,
+        sinopse: "Nesta obra-prima de Dostoiévski, a história dos irmãos Karamázov — Dmitri, Ivan e Aliocha — explora conflitos familiares, paixão, fé e dúvida. Após o assassinato de seu pai, Fiódor, os irmãos enfrentam um julgamento que revela tensões morais e filosóficas, questionando o sentido da vida, da justiça e da existência de Deus."
+    },
 };
 // ===== 2️⃣ Ler ID da URL =====
 const params = new URLSearchParams(window.location.search);
