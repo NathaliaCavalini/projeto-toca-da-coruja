@@ -1,17 +1,13 @@
 /* ===== VARIÁVEIS ===== */
 :root {
-    --primary-color: #C5946C;
-    /* Botões e elementos de destaque */
-    --secondary-color: #F5E7D7;
-    /* Fundo geral */
-    --accent-color: #8B694D;
-    /* Hover / efeitos */
-    --text-color: #3A2D14;
-    /* Texto principal */
-    --light-color: #E6C9A8;
-    /* Sidebar e cards */
+    --primary-color: #C5946C; /* Botões e elementos de destaque */
+    --secondary-color: #F5E7D7; /* Fundo geral */
+    --accent-color: #8B694D; /* Hover / efeitos */
+    --text-color: #3A2D14; /* Texto principal */
+    --light-color: #E6C9A8; /* Sidebar e cards */
     --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     --radius: 12px;
+    --active-color: #4CAF50; /* Cor para botões ativos */
 }
 
 /* ===== MODO ESCURO ===== */
@@ -95,7 +91,6 @@ body {
 .btn-login:hover {
     background: var(--accent-color);
 }
-
 
 /* FORM DE BUSCA (sidebar) */
 .search-form {
@@ -199,31 +194,6 @@ body {
     align-items: center;
 }
 
-.btn-login {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    /* Cor do botão na imagem */
-    color: #000;
-    text-decoration: none;
-    /* Remove a linha roxa de decoração de texto */
-    border: none;
-    border-radius: 20px;
-    /* Para o formato arredondado da imagem */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    /* Animação suave */
-}
-
-.btn-login:hover {
-    background-color: #704830;
-    /* Cor mais escura ao passar o mouse */
-    transform: scale(1.05);
-    /* Aumenta ligeiramente o tamanho */
-}
-
-
 .icon-btn {
     background: none;
     border: none;
@@ -240,188 +210,6 @@ body {
     width: 20px;
 }
 
-/* UTILITÁRIO: ESCONDER ITEM DURANTE BUSCA */
-.hidden {
-    display: none !important;
-}
-
-/* ===== LINKS DA NAV E SIDEBAR (SUBLINHADO) ===== */
-.nav-menu a,
-.menu-list a {
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a::after,
-.menu-list a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.nav-menu a:hover::after,
-.nav-menu a.active::after,
-.menu-list a:hover::after,
-.menu-list a.active::after {
-    width: 100%;
-}
-
-.menu-list a {
-    cursor: pointer;
-}
-
-.rating {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.rating .star {
-    font-size: 30px;
-    color: var(--primary-color);
-    /* cor do site */
-    position: relative;
-    display: inline-block;
-}
-
-.rating .star::before {
-    content: '★';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    overflow: hidden;
-    color: var(--accent-color);
-    /* cor da estrela cheia */
-}
-
-.rating .star.full::before {
-    width: 100%;
-}
-
-.rating .star.half::before {
-    width: 50%;
-}
-
-.rating-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    /* distância entre estrelas e média */
-    margin-top: 10px;
-}
-
-.rating-average {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--accent-color);
-}
-
-/* ===== RATING ESTRELAS MEIA/INTEIRA ===== */
-.rating-container {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* espaço entre estrelas e média */
-    margin-top: 10px;
-}
-
-.rating-average {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--accent-color);
-}
-
-.rating .star {
-    font-size: 28px;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
-    display: inline-block;
-    position: relative;
-}
-
-.rating .star.full {
-    color: var(--accent-color);
-    transform: scale(1.2);
-}
-
-.rating .star.half {
-    background: linear-gradient(to right, var(--accent-color) 50%, var(--primary-color) 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transform: scale(1.2);
-}
-
-
-/* Estrelas interativas */
-.stars-input span {
-    font-size: 24px;
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.stars-input span.hover,
-.stars-input span.selected {
-    color: #f7b500;
-}
-
-.review-rating .star {
-    font-size: 16px;
-    color: #f7b500;
-}
-
-
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 900px) {
-    body {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-    }
-
-    .sidebar {
-        grid-column: 1 / -1;
-        border-bottom: 1px solid rgba(139, 105, 77, 0.08);
-    }
-
-    .main-content {
-        grid-column: 1 / -1;
-    }
-
-    .nav-menu {
-        flex-wrap: wrap;
-    }
-
-    .book-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 30px;
-    }
-}
-
-@media (max-width:480px) {
-    .book-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .nav-actions {
-        width: 100%;
-        justify-content: flex-end;
-        margin-left: 0;
-    }
-
-    .nav-menu {
-        padding: 10px;
-    }
-}
-
-
 /* ===== CARD DO LIVRO ===== */
 .book-detail-card {
     display: flex;
@@ -432,7 +220,7 @@ body {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     animation: fadeIn 0.4s ease-in-out;
 }
 
@@ -464,6 +252,32 @@ body {
     color: var(--accent-color);
 }
 
+/* ===== BOTÕES DE AÇÃO ===== */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.action-btn.active {
+    background-color: var(--active-color);
+}
+
+.action-btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
 /* ===== BOTÃO DOWNLOAD ===== */
 .download-btn {
     margin-top: 20px;
@@ -483,108 +297,159 @@ body {
     transform: translateY(-2px);
 }
 
-/* ===== ANIMAÇÃO ===== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===== SEÇÃO DE REVIEWS ===== */
-.reviews {
-    margin-top: 40px;
-    padding: 30px;
-    background: var(--secondary-color);
-    border-radius: var(--radius);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.reviews h2 {
-    font-size: 2rem;
-    color: var(--text-color);
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 8px;
-}
-
-#review-list .review {
-    background: var(--light-color);
-    padding: 18px 20px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    transition: transform 0.2s;
-}
-
-#review-list .review:hover {
-    transform: translateY(-3px);
-}
-
-.review-header {
+/* ===== RATING ESTRELAS ===== */
+.rating-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-.review-header strong {
-    font-size: 1rem;
+.rating-average {
+    font-size: 16px;
+    font-weight: bold;
     color: var(--accent-color);
 }
 
-.review-rating {
+.rating-stars, .review-stars, .review-rating-stars {
     display: flex;
-    gap: 3px;
+    gap: 5px;
 }
 
-.review-rating .star {
-    font-size: 16px;
+.star {
+    font-size: 28px;
     color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.star.full {
+    color: var(--accent-color);
+}
+
+.star.half {
+    background: linear-gradient(to right, var(--accent-color) 50%, var(--primary-color) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Para estrelas em reviews (menores) */
+.review-rating-stars .star {
+    font-size: 20px;
+}
+
+/* ===== SEÇÃO DE NOVA AVALIAÇÃO ===== */
+.review-section {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background: var(--light-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.review-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.review-section textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    resize: vertical;
+}
+
+.submit-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: var(--primary-color);
+}
+
+/* ===== LISTA DE AVALIAÇÕES ===== */
+.reviews {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--light-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.reviews h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.review-item {
+    background: var(--secondary-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.review-item:hover {
+    transform: translateY(-3px);
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: gray;
 }
 
 .review-text {
-    font-size: 0.95rem;
-    color: var(--text-color);
-    line-height: 1.4;
-}
-
-/* ===== FORMULÁRIO DE REVIEW ===== */
-#review-form {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-#review-form textarea {
-    resize: vertical;
-    min-height: 100px;
-    padding: 14px;
-    border: 1px solid var(--accent-color);
-    border-radius: 12px;
     font-size: 1rem;
     color: var(--text-color);
 }
 
-#review-form button {
-    align-self: flex-end;
-    background-color: var(--accent-color);
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s ease, transform 0.2s ease;
+/* ===== ANIMAÇÃO ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-#review-form button:hover {
-    background: #5a1e9a;
-    transform: translateY(-2px);
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 900px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-bottom: 1px solid rgba(139, 105, 77, 0.08);
+    }
+}
+
+@media (max-width: 480px) {
+    .book-detail-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-image img {
+        width: 200px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
 }
