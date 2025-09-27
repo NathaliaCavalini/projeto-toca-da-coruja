@@ -296,12 +296,17 @@ function updateAverage() {
 updateAverage();
 
 // ==================== 6) Sistema de reviews ====================
+// ==================== 6) Sistema de reviews ====================
+// Carrega reviews do localStorage
 let reviews = JSON.parse(localStorage.getItem(`reviews-${id}`)) || [];
 
 const reviewStarsEl = document.querySelector(".review-stars");
 const reviewTextEl = document.getElementById("review-text");
 const submitBtn = document.getElementById("submit-review");
 const reviewList = document.getElementById("review-list");
+
+// Usuário simulado (depois pode vir do login real)
+const currentUser = "Usuário123";
 
 let reviewStars = initStarRating(reviewStarsEl, 0, (rating) => {
     reviewStars.setRating(rating);
@@ -313,12 +318,12 @@ function renderReviews() {
         const div = document.createElement("div");
         div.classList.add("review-item");
         div.innerHTML = `
-      <div class="review-meta">
-        <span class="review-rating">${"★".repeat(Math.floor(r.rating))}${r.rating % 1 ? "½" : ""
-            }</span>
-      </div>
-      <p class="review-text">${r.text}</p>
-    `;
+          <div class="review-meta">
+            <strong class="review-user">${r.username}</strong> - 
+            <span class="review-rating">${"★".repeat(Math.floor(r.rating))}${r.rating % 1 ? "½" : ""}</span>
+          </div>
+          <p class="review-text">${r.text}</p>
+        `;
         reviewList.appendChild(div);
     });
 }
@@ -329,11 +334,38 @@ submitBtn.addEventListener("click", () => {
 
     if (!text || rating === 0) return alert("Dê uma nota e escreva algo!");
 
-    reviews.unshift({ rating, text }); // adiciona em cima
+    // Salva com nome do usuário também
+    const newReview = { username: currentUser, rating, text };
+    reviews.unshift(newReview);
+
     localStorage.setItem(`reviews-${id}`, JSON.stringify(reviews));
+
     reviewTextEl.value = "";
     reviewStars.setRating(0);
     renderReviews();
 });
 
 renderReviews();
+
+// seleciona o botão do modo escuro
+const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
+const body = document.body;
+
+// alterna modo escuro ao clicar
+darkModeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    // opcional: salvar preferência no localStorage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+// aplica o tema salvo ao carregar a página
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+}
+
+

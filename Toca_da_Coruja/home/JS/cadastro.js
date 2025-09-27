@@ -1,4 +1,3 @@
-// js/cadastro.js
 import { auth, db } from "./firebase-config.js";
 import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
@@ -20,14 +19,16 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
 
-        // Atualiza o nome de exibição do usuário
+        // Atualiza o nome de exibição
         await updateProfile(user, { displayName: nome });
 
         // Salva dados extras no Firestore
         await setDoc(doc(db, "usuarios", user.uid), {
             nome: nome,
             email: email,
-            criadoEm: serverTimestamp()
+            criadoEm: serverTimestamp(),
+            bio: "",
+            fotoURL: ""
         });
 
         alert("✅ Conta criada com sucesso!");

@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastre-se – Toca da Coruja</title>
+    <title>Cadastro – Toca da Coruja</title>
     <link rel="stylesheet" href="../css/cadastro.css" />
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+    <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body>
     <div class="cadastro-container">
-        <h1>Crie sua conta 🌿</h1>
+        <h1>Crie sua conta 🌱</h1>
         <form id="cadastro-form">
             <input type="text" id="nome" placeholder="Nome completo" required />
             <input type="email" id="email" placeholder="E-mail" required />
@@ -20,7 +22,41 @@
         <p>Já tem conta? <a href="login.html">Entrar</a></p>
     </div>
 
-    <script type="module" src="../js/cadastro.js"></script>
+    <script type="module">
+        import { auth, db } from "../js/firebase-config.js";
+        import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+        const form = document.getElementById("cadastro-form");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+                const user = userCredential.user;
+
+                await updateProfile(user, { displayName: nome });
+
+                await setDoc(doc(db, "users", user.uid), {
+                    displayName: nome,
+                    email: user.email,
+                    createdAt: new Date(),
+                    bio: "",
+                    photoURL: ""
+                });
+
+                alert("Conta criada com sucesso!");
+                window.location.href = "login.html";
+            } catch (error) {
+                alert("Erro ao cadastrar: " + error.message);
+            }
+        });
+    </script>
 </body>
 
 </html>

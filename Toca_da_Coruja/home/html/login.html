@@ -4,26 +4,50 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Toca da Coruja</title>
+    <title>Login – Toca da Coruja</title>
     <link rel="stylesheet" href="../css/login.css" />
-    <script type="module" src="../js/auth.js"></script>
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+    <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body>
     <div class="login-container">
         <div class="login-card">
-            <h1>Bem-vindo de volta 🦉</h1>
-            <p>Entre para acessar sua biblioteca</p>
+            <h1>Bem-vindo(a) 🌿</h1>
+            <p>Entre para continuar sua jornada literária</p>
 
-            <form id="loginForm">
-                <input type="email" id="loginEmail" placeholder="E-mail" required />
-                <input type="password" id="loginPassword" placeholder="Senha" required />
+            <form id="login-form">
+                <input type="email" id="email" placeholder="E-mail" required />
+                <input type="password" id="password" placeholder="Senha" required />
                 <button type="submit" class="btn">Entrar</button>
             </form>
 
-            <p class="link">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+            <div class="link">
+                <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+            </div>
         </div>
     </div>
+
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        const form = document.getElementById("login-form");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Login realizado com sucesso!");
+                window.location.href = "../index.html"; // redireciona para página inicial
+            } catch (error) {
+                alert("Erro ao entrar: " + error.message);
+            }
+        });
+    </script>
 </body>
 
 </html>

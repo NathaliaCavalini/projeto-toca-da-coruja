@@ -2,18 +2,23 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
+// Configuração do Firebase (sua real, já cadastrada)
 const firebaseConfig = {
     apiKey: "AIzaSyAAejGKvCNE1o0NbXGxzh5lDLByzaePKX4",
     authDomain: "toca-da-coruja-79169.firebaseapp.com",
     projectId: "toca-da-coruja-79169",
-    storageBucket: "toca-da-coruja-79169.firebasestorage.app",
+    storageBucket: "toca-da-coruja-79169.appspot.com", // cuidado com o domínio errado!
     messagingSenderId: "301076436259",
     appId: "1:301076436259:web:9b1985516a85c2c8b6a896",
     measurementId: "G-8WCK816QDY"
 };
 
-// Inicializa o Firebase
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
+
+// Exporta os serviços para usar em outros arquivos
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
