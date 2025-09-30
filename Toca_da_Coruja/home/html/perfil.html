@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil – Toca da Coruja</title>
+    <link rel="stylesheet" href="../css/perfil.css">
+</head>
+
+<body>
+    <div class="perfil-container">
+        <h1>Meu Perfil</h1>
+
+        <img id="user-photo" src="https://via.placeholder.com/150" alt="Foto do usuário">
+
+        <form id="profile-form">
+            <label>Nome de usuário:</label>
+            <input type="text" id="username" />
+
+            <label>E-mail:</label>
+            <input type="email" id="email" disabled />
+
+            <label>Foto de perfil:</label>
+            <input type="file" id="photoFile" accept="image/*" />
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+
+        <button id="logout-btn">Sair</button>
+    </div>
+
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import {
+            onAuthStateChanged,
+            updateProfile,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        import {
+            getStorage,
+            ref,
+            uploadBytes,
+            getDownloadURL
+        } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
+
+        const storage = getStorage();
+
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const userPhoto = document.getElementById("user-photo");
+        const photoFile = document.getElementById("photoFile");
+        const profileForm = document.getElementById("profile-form");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        let selectedFile = null;
+
+        // Pegar arquivo selecionado
+        photoFile.addEventListener("change", (e) => {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                // preview
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    userPhoto.src = ev.target.result;
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        });
+
+        // Exibir dados do usuário logado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                username.value = user.displayName || "";
+                email.value = user.email;
+                userPhoto.src = user.photoURL || "https://via.placeholder.com/150";
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Atualizar perfil
+        profileForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            let photoURL = user.photoURL;
+
+            // Upload da foto se o usuário escolher
+            if (selectedFile) {
+                const fileRef = ref(storage, `profilePics/${user.uid}.jpg`);
+                await uploadBytes(fileRef, selectedFile);
+                photoURL = await getDownloadURL(fileRef);
+            }
+
+            await updateProfile(user, {
+                displayName: username.value,
+                photoURL: photoURL
+            });
+
+            alert("✅ Perfil atualizado com sucesso!");
+            location.reload();
+        });
+
+        // Logout
+        logoutBtn.addEventListener("click", async () => {
+            await signOut(auth);
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+
+</html>

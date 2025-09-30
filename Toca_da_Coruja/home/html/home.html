@@ -17,11 +17,11 @@
             <h1>Toca <br> da Coruja</h1>
         </header>
 
-        <a href="../html/login.html" class="btn-login">
+        <!-- Dinâmico -->
+        <a href="../html/login.html" class="btn-login" id="user-info">
             <img src="../imagens/user.png" alt="Ícone de usuário" />
             <span>Cadastre-se</span>
         </a>
-
 
         <form class="search-form" role="search" onsubmit="return false;">
             <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
@@ -61,16 +61,15 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+        <!-- NAV + AÇÕES -->
         <nav class="nav-menu" aria-label="Navegação principal">
             <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
             <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
             <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
             <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
 
-
-            <!-- ações (ícones) ficam à direita -->
-            <div class="nav-actions" aria-hidden="false">
+            <!-- ações -->
+            <div class="nav-actions">
                 <button class="icon-btn" title="Modo escuro">
                     <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
                 </button>
@@ -80,7 +79,7 @@
             </div>
         </nav>
 
-        <!-- GRID DE LIVROS -->
+        <!-- Aqui entra o grid de livros (mantive igual ao seu código) -->
         <section class="book-grid" aria-label="Livros em destaque">
 
             <article class="book-item" data-title="A jogada do amor">
@@ -212,8 +211,7 @@
 
             <article class="book-item" data-title="A arte da guerra">
                 <div class="book-card">
-                    <img src="../imagens/a-arte-da-guerra.jpg"
-                        alt="Capa do livro A arte da guerra">
+                    <img src="../imagens/a-arte-da-guerra.jpg" alt="Capa do livro A arte da guerra">
                 </div>
                 <div class="book-title">
                     <p>A arte da guerra</p>
@@ -223,8 +221,7 @@
 
             <article class="book-item" data-title="A divina comédia">
                 <div class="book-card">
-                    <img src="../imagens/a-divina-comedia.jpg"
-                        alt="Capa do livro A divina comédia">
+                    <img src="../imagens/a-divina-comedia.jpg" alt="Capa do livro A divina comédia">
                 </div>
                 <div class="book-title">
                     <p>A divina comédia</p>
@@ -234,8 +231,7 @@
 
             <article class="book-item" data-title="Fahrenheit 451">
                 <div class="book-card">
-                    <img src="../imagens/Fahrenheit-451.jpg"
-                        alt="Capa do livro Fahrenheit 451">
+                    <img src="../imagens/Fahrenheit-451.jpg" alt="Capa do livro Fahrenheit 451">
                 </div>
                 <div class="book-title">
                     <p>Fahrenheit 451</p>
@@ -245,8 +241,7 @@
 
             <article class="book-item" data-title="Meridiano de Sangue">
                 <div class="book-card">
-                    <img src="../imagens/meridiano-de-sangue.jpg"
-                        alt="Capa do livro Meridiano de Sangue">
+                    <img src="../imagens/meridiano-de-sangue.jpg" alt="Capa do livro Meridiano de Sangue">
                 </div>
                 <div class="book-title">
                     <p>Meridiano de Sangue</p>
@@ -256,8 +251,7 @@
 
             <article class="book-item" data-title="Os Irmãos Karamázov">
                 <div class="book-card">
-                    <img src="../imagens/os-irmaos-karamazov.jpg"
-                        alt="Capa do livro Os Irmãos Karamázov">
+                    <img src="../imagens/os-irmaos-karamazov.jpg" alt="Capa do livro Os Irmãos Karamázov">
                 </div>
                 <div class="book-title">
                     <p>Os Irmãos Karamázov</p>
@@ -269,6 +263,33 @@
     </main>
 
     <script src="../js/home.js"></script>
+
+    <!-- Firebase: mostrar nome do usuário -->
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        const userInfo = document.getElementById("user-info");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const nome = user.displayName || user.email.split("@")[0];
+                const foto = user.photoURL || "../imagens/user.png";
+
+                userInfo.innerHTML = `
+                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                    <span>👋 Olá, ${nome}</span>
+                `;
+                userInfo.setAttribute("href", "../html/perfil.html"); // link pro perfil
+            } else {
+                userInfo.innerHTML = `
+                    <img src="../imagens/user.png" alt="Ícone de usuário" />
+                    <span>Cadastre-se</span>
+                `;
+                userInfo.setAttribute("href", "../html/login.html");
+            }
+        });
+    </script>
 </body>
 
 </html>

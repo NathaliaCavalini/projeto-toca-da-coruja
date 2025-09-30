@@ -98,7 +98,7 @@ const livros = {
         genero: "Romance",
         paginas: 128,
         ano: 2023,
-        sinopse: "Nesta adaptação em quadrinhos, Emma, uma jovem artista, passa o verão em um acampamento onde conhece Riley, uma astrônoma amadora que adora observar as estrelas. Entre noites de fogueira e conversas sob o céu estrelado, as duas descobrem que o amor pode surgir nos lugares mais inesperados. Com ilustrações vibrantes, esta história captura a magia de um romance de verão."
+        sinopse: "Emma Lane, uma adolescente de 17 anos, é forçada a passar o verão no Acampamento Mapplewood. Planejando ser expulsa, ela se envolve com Vivian, uma misteriosa conselheira. Entre amizades inesperadas e um romance sapphic, Emma descobre que o acampamento pode ser mais do que mosquitos e dramas. Adaptação em webtoon com 50 episódios, cheia de humor e momentos fofos!"
     },
     "vermelho-branco-e-sangue-azul": {
         titulo: "Vermelho, Branco e Sangue Azul",

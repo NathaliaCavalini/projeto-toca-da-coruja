@@ -56,6 +56,43 @@
                 alert("Erro ao cadastrar: " + error.message);
             }
         });
+
+        import { auth, db } from "../js/firebase-config.js";
+import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const username = document.getElementById("username").value.trim();
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Salva no perfil do Auth
+        await updateProfile(user, {
+            displayName: username,
+            photoURL: "https://i.pravatar.cc/150?u=" + user.uid // avatar gerado
+        });
+
+        // Salva no Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            username: username,
+            email: email,
+            photoURL: user.photoURL
+        });
+
+        alert("✅ Conta criada com sucesso!");
+        window.location.href = "../home/home.html";
+
+    } catch (error) {
+        alert("❌ Erro: " + error.message);
+    }
+});
+
     </script>
 </body>
 

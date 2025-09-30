@@ -44,3 +44,30 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
         }
     }
 });
+
+import { auth } from "./firebase-config.js";
+import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Atualiza perfil com nome
+        await updateProfile(userCredential.user, {
+            displayName: nome,
+            photoURL: "https://via.placeholder.com/150" // imagem padrão
+        });
+
+        alert("✅ Conta criada com sucesso!");
+        window.location.href = "../html/home.html";
+    } catch (error) {
+        console.error(error);
+        alert("❌ Erro: " + error.message);
+    }
+});
