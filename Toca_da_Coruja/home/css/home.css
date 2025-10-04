@@ -277,12 +277,12 @@ body {
 /* LINK "VEJA MAIS" */
 .book-action {
     background-color: var(--light-color);
-    border-radius: 0 0 30px 30px;
+    border-radius: 30px;
     padding: 10px;
     width: 60%;
     text-align: center;
     margin-top: -10px;
-    transform: translateY(35%);
+    transform: translateY(60%);
 }
 
 .book-action a {
