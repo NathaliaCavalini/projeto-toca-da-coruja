@@ -154,6 +154,52 @@ const livros = {
         ano: 1880,
         sinopse: "Nesta obra-prima de Dostoiévski, a história dos irmãos Karamázov — Dmitri, Ivan e Aliocha — explora conflitos familiares, paixão, fé e dúvida. Após o assassinato de seu pai, Fiódor, os irmãos enfrentam um julgamento que revela tensões morais e filosóficas, questionando o sentido da vida, da justiça e da existência de Deus."
     },
+    "sql-em-10-minutos": {
+        titulo: "SQL em 10 Minutos, Sams Teach Yourself",
+        autor: "Ben Forta",
+        imagem: "../imagens/sql-em-10-minutos.jpg",
+        genero: "Banco de Dados",
+        paginas: 240,
+        ano: 2004,
+        sinopse: "Este guia prático e conciso ensina os fundamentos da linguagem SQL de forma rápida e acessível, com lições curtas que cobrem consultas, joins, subconsultas e gerenciamento de dados. Ideal para iniciantes, o livro usa exemplos reais para ajudar programadores e analistas a dominarem bancos de dados relacionais em pouco tempo."
+    },
+    "use-a-cabeca-sql": {
+        titulo: "Use a Cabeça! SQL",
+        autor: "Lynn Beighley",
+        imagem: "../imagens/use-a-cabeca-sql.jpg",
+        genero: "Programação",
+        paginas: 576,
+        ano: 2008,
+        sinopse: "Parte da série Head First, este livro adota uma abordagem visual e interativa para ensinar SQL, misturando quebra-cabeças, histórias e exercícios práticos. Ele explora desde conceitos básicos de bancos de dados até consultas avançadas, joins e normalização, tornando o aprendizado divertido e memorável para desenvolvedores novatos."
+    },
+    "javascript-guia-definitivo": {
+        titulo: "JavaScript: O Guia Definitivo",
+        autor: "David Flanagan",
+        imagem: "../imagens/javascript-guia-definitivo.jpg",
+        genero: "Desenvolvimento Web",
+        paginas: 704,
+        ano: 2011,
+        sinopse: "Uma referência completa e exaustiva sobre JavaScript, cobrindo desde sintaxe básica e objetos até programação assíncrona, APIs do navegador e Node.js. Escrito por um especialista, o livro serve tanto para iniciantes quanto para profissionais avançados, com exemplos práticos e explicações detalhadas sobre o ecossistema ECMAScript."
+    },
+    "html-e-css": {
+        titulo: "HTML e CSS: Desenhe e Construa Websites",
+        autor: "Jon Duckett",
+        imagem: "../imagens/html-e-css.jpg",
+        genero: "Desenvolvimento Web",
+        paginas: 480,
+        ano: 2011,
+        sinopse: "Com design visual atraente e explicações claras, este livro guia o leitor na criação de sites modernos usando HTML5 e CSS3. Ele aborda estrutura de páginas, estilos, layouts responsivos e animações, com projetos práticos que transformam conceitos teóricos em sites funcionais, perfeito para designers e desenvolvedores iniciantes."
+    },
+    "fluente-python": {
+        titulo: "Fluent Python",
+        autor: "Luciano Ramalho",
+        imagem: "../imagens/fluente-python.jpg",
+        genero: "Programação",
+        paginas: 976,
+        ano: 2015,
+        sinopse: "Explorando as nuances da linguagem Python de forma profunda, este livro foca em programação idiomática, estruturas de dados avançadas, metaprogramação e concorrência. Escrito por um expert brasileiro, ele ajuda programadores experientes a escreverem código mais eficiente e 'pythonico', com exemplos reais e insights sobre o CPython."
+    }
+
 };
 
 // ==================== 2) Pega ID do livro da URL ====================
