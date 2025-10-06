@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toca da Coruja - Sua biblioteca literária</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <header class="logo">
+            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <h1>Toca <br> da Coruja</h1>
+        </header>
+
+        <a href="../html/login.html" class="btn-login">
+            <img src="../imagens/user.png" alt="Ícone de usuário" />
+            <span>Cadastre-se</span>
+        </a>
+
+
+        <form class="search-form" role="search" onsubmit="return false;">
+            <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+            <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <section class="menu-section">
+            <h2>Gêneros</h2>
+            <ul class="menu-list">
+                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
+                </li>
+                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">LGBTQIAPN+</a></li>
+                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Fantasia</a></li>
+                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Romance</a></li>
+                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Clássicos</a></li>
+                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Programação</a></li>
+                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="menu-section">
+            <h2>Minha Biblioteca</h2>
+            <ul class="menu-list">
+                <li><a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20"
+                            alt="">Favoritos</a></li>
+                <li><a href="colecao.html"><img src="../imagens/minhacolecao.png" width="20" height="20" alt="">Minha
+                        coleção</a></li>
+            </ul>
+        </section>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+
+
+            <!-- ações (ícones) ficam à direita -->
+            <div class="nav-actions" aria-hidden="false">
+                <button class="icon-btn" title="Modo escuro">
+                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+                </button>
+                <button class="icon-btn" title="Ajuda">
+                    <img src="../imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+                </button>
+            </div>
+        </nav>
+
+        <!-- GRID DE LIVROS -->
+        <section class="book-grid" aria-label="Livros em destaque">
+
+            <article class="book-item" data-title="A arte da guerra">
+                <div class="book-card">
+                    <img src="../imagens/a-arte-da-guerra.jpg"
+                        alt="Capa do livro A arte da guerra">
+                </div>
+                <div class="book-title">
+                    <p>A arte da guerra</p>
+                </div>
+                <div class="book-action"><a href="vejamais.html?id=a-arte-da-guerra">Veja mais</a></div>
+            </article>
+
+            <article class="book-item" data-title="A divina comédia">
+                <div class="book-card">
+                    <img src="../imagens/a-divina-comedia.jpg"
+                        alt="Capa do livro A divina comédia">
+                </div>
+                <div class="book-title">
+                    <p>A divina comédia</p>
+                </div>
+                <div class="book-action"><a href="vejamais.html?id=a-divina-comedia">Veja mais</a></div>
+            </article>
+
+            <article class="book-item" data-title="Fahrenheit 451">
+                <div class="book-card">
+                    <img src="../imagens/Fahrenheit-451.jpg"
+                        alt="Capa do livro Fahrenheit 451">
+                </div>
+                <div class="book-title">
+                    <p>Fahrenheit 451</p>
+                </div>
+                <div class="book-action"><a href="vejamais.html?id=fahrenheit-451">Veja mais</a></div>
+            </article>
+
+            <article class="book-item" data-title="Meridiano de Sangue">
+                <div class="book-card">
+                    <img src="../imagens/meridiano-de-sangue.jpg"
+                        alt="Capa do livro Meridiano de Sangue">
+                </div>
+                <div class="book-title">
+                    <p>Meridiano de Sangue</p>
+                </div>
+                <div class="book-action"><a href="vejamais.html?id=meridiano-de-sangue">Veja mais</a></div>
+            </article>
+
+            <article class="book-item" data-title="Os Irmãos Karamázov">
+                <div class="book-card">
+                    <img src="../imagens/os-irmaos-karamazov.jpg"
+                        alt="Capa do livro Os Irmãos Karamázov">
+                </div>
+                <div class="book-title">
+                    <p>Os Irmãos Karamázov</p>
+                </div>
+                <div class="book-action"><a href="vejamais.html?id=os-irmaos-karamazov">Veja mais</a></div>
+            </article>
+
+        </section>
+    </main>
+
+    <script src="../js/home.js"></script>
+</body>
+
+</html>
