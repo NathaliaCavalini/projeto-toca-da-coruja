@@ -202,7 +202,7 @@ const livros = {
     "dndE5-livro-do-jogador": {
         titulo: "D&D 5e Livro do Jogador",
         autor: "Wizards of the Coast",
-        imagem: "../imagens/dd5-livro-do-jogador.jpg",
+        imagem: "../imagens/dnd e5 livro do jogador.png",
         genero: "RPG de Fantasia",
         paginas: 320,
         ano: 2014,
@@ -211,7 +211,7 @@ const livros = {
     "o-um-anel-livro-do-aventureiro": {
         titulo: "O Um Anel - Livro do Aventureiro",
         autor: "Francesco Nepitello",
-        imagem: "../imagens/o-um-anel-livro-do-aventureiro.jpg",
+        imagem: "../imagens/um anel o livro do aventureiro.jpg",
         genero: "RPG de Fantasia",
         paginas: 193,
         ano: 2021,
@@ -220,7 +220,7 @@ const livros = {
     "blades-in-the-dark": {
         titulo: "Blades in the Dark",
         autor: "John Harper",
-        imagem: "../imagens/blades-in-the-dark.jpg",
+        imagem: "../imagens/blades in the dark.png",
         genero: "RPG de Fantasia Industrial",
         paginas: 328,
         ano: 2017,
@@ -229,7 +229,7 @@ const livros = {
     "som-das-seis": {
         titulo: "O Som das Seis",
         autor: "Gael Pereira",
-        imagem: "../imagens/som-das-seis.jpg",
+        imagem: "../imagens/o som das seis.png",
         genero: "RPG de Faroeste",
         paginas: 124,
         ano: 2021,
@@ -247,7 +247,7 @@ const livros = {
     "tormenta-modulo-basico": {
         titulo: "Tormenta RPG - Módulo Básico",
         autor: "Jambô Editora",
-        imagem: "../imagens/tormenta-modulo-basico.jpg",
+        imagem: "../imagens/tormenta.jpg",
         genero: "RPG de Fantasia Épica",
         paginas: 200,
         ano: 2018,
