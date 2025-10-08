@@ -85,8 +85,7 @@
 
             <article class="book-item" data-title="A arte da guerra">
                 <div class="book-card">
-                    <img src="../imagens/a-arte-da-guerra.jpg"
-                        alt="Capa do livro A arte da guerra">
+                    <img src="../imagens/a-arte-da-guerra.jpg" alt="Capa do livro A arte da guerra">
                 </div>
                 <div class="book-title">
                     <p>A arte da guerra</p>
@@ -96,8 +95,7 @@
 
             <article class="book-item" data-title="A divina comédia">
                 <div class="book-card">
-                    <img src="../imagens/a-divina-comedia.jpg"
-                        alt="Capa do livro A divina comédia">
+                    <img src="../imagens/a-divina-comedia.jpg" alt="Capa do livro A divina comédia">
                 </div>
                 <div class="book-title">
                     <p>A divina comédia</p>
@@ -107,8 +105,7 @@
 
             <article class="book-item" data-title="Fahrenheit 451">
                 <div class="book-card">
-                    <img src="../imagens/Fahrenheit-451.jpg"
-                        alt="Capa do livro Fahrenheit 451">
+                    <img src="../imagens/Fahrenheit-451.jpg" alt="Capa do livro Fahrenheit 451">
                 </div>
                 <div class="book-title">
                     <p>Fahrenheit 451</p>
@@ -118,8 +115,7 @@
 
             <article class="book-item" data-title="Meridiano de Sangue">
                 <div class="book-card">
-                    <img src="../imagens/meridiano-de-sangue.jpg"
-                        alt="Capa do livro Meridiano de Sangue">
+                    <img src="../imagens/meridiano-de-sangue.jpg" alt="Capa do livro Meridiano de Sangue">
                 </div>
                 <div class="book-title">
                     <p>Meridiano de Sangue</p>
@@ -129,8 +125,7 @@
 
             <article class="book-item" data-title="Os Irmãos Karamázov">
                 <div class="book-card">
-                    <img src="../imagens/os-irmaos-karamazov.jpg"
-                        alt="Capa do livro Os Irmãos Karamázov">
+                    <img src="../imagens/os-irmaos-karamazov.jpg" alt="Capa do livro Os Irmãos Karamázov">
                 </div>
                 <div class="book-title">
                     <p>Os Irmãos Karamázov</p>
@@ -142,6 +137,33 @@
     </main>
 
     <script src="../js/home.js"></script>
+    
+    <!-- Firebase: mostrar nome do usuário -->
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        const userInfo = document.getElementById("user-info");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const nome = user.displayName || user.email.split("@")[0];
+                const foto = user.photoURL || "../imagens/user.png";
+
+                userInfo.innerHTML = `
+                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                    <span>${nome}</span>
+                `;
+                userInfo.setAttribute("href", "../html/perfil.html"); // link pro perfil
+            } else {
+                userInfo.innerHTML = `
+                    <img src="../imagens/user.png" alt="Ícone de usuário" />
+                    <span>Cadastre-se</span>
+                `;
+                userInfo.setAttribute("href", "../html/login.html");
+            }
+        });
+    </script>
 </body>
 
 </html>
