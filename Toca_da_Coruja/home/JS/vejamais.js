@@ -157,16 +157,16 @@ const livros = {
     "sql-em-10-minutos": {
         titulo: "SQL em 10 Minutos, Sams Teach Yourself",
         autor: "Ben Forta",
-        imagem: "../imagens/sql-em-10-minutos.jpg",
+        imagem: "../imagens/sql-em-10-minutos.png",
         genero: "Banco de Dados",
         paginas: 240,
         ano: 2004,
         sinopse: "Este guia prático e conciso ensina os fundamentos da linguagem SQL de forma rápida e acessível, com lições curtas que cobrem consultas, joins, subconsultas e gerenciamento de dados. Ideal para iniciantes, o livro usa exemplos reais para ajudar programadores e analistas a dominarem bancos de dados relacionais em pouco tempo."
     },
-    "use-a-cabeca-sql": {
-        titulo: "Use a Cabeça! SQL",
+    "use-a-cabeca": {
+        titulo: "Use a Cabeça! Java",
         autor: "Lynn Beighley",
-        imagem: "../imagens/use-a-cabeca-sql.jpg",
+        imagem: "../imagens/use a cabeça java.jpg",
         genero: "Programação",
         paginas: 576,
         ano: 2008,
@@ -175,7 +175,7 @@ const livros = {
     "javascript-guia-definitivo": {
         titulo: "JavaScript: O Guia Definitivo",
         autor: "David Flanagan",
-        imagem: "../imagens/javascript-guia-definitivo.jpg",
+        imagem: "../imagens/javascript guia definitivo.png",
         genero: "Desenvolvimento Web",
         paginas: 704,
         ano: 2011,
@@ -184,21 +184,21 @@ const livros = {
     "html-e-css": {
         titulo: "HTML e CSS: Desenhe e Construa Websites",
         autor: "Jon Duckett",
-        imagem: "../imagens/html-e-css.jpg",
+        imagem: "../imagens/html e css.png",
         genero: "Desenvolvimento Web",
         paginas: 480,
         ano: 2011,
         sinopse: "Com design visual atraente e explicações claras, este livro guia o leitor na criação de sites modernos usando HTML5 e CSS3. Ele aborda estrutura de páginas, estilos, layouts responsivos e animações, com projetos práticos que transformam conceitos teóricos em sites funcionais, perfeito para designers e desenvolvedores iniciantes."
     },
     "fluente-python": {
-        titulo: "Fluent Python",
+        titulo: "Python Fluente",
         autor: "Luciano Ramalho",
-        imagem: "../imagens/fluente-python.jpg",
+        imagem: "../imagens/fluente python.png",
         genero: "Programação",
         paginas: 976,
         ano: 2015,
         sinopse: "Explorando as nuances da linguagem Python de forma profunda, este livro foca em programação idiomática, estruturas de dados avançadas, metaprogramação e concorrência. Escrito por um expert brasileiro, ele ajuda programadores experientes a escreverem código mais eficiente e 'pythonico', com exemplos reais e insights sobre o CPython."
-    }
+    },
 
 };
 
