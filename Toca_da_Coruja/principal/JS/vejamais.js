@@ -199,7 +199,60 @@ const livros = {
         ano: 2015,
         sinopse: "Explorando as nuances da linguagem Python de forma profunda, este livro foca em programação idiomática, estruturas de dados avançadas, metaprogramação e concorrência. Escrito por um expert brasileiro, ele ajuda programadores experientes a escreverem código mais eficiente e 'pythonico', com exemplos reais e insights sobre o CPython."
     },
-
+    "dndE5-livro-do-jogador": {
+        titulo: "D&D 5e Livro do Jogador",
+        autor: "Wizards of the Coast",
+        imagem: "../imagens/dd5-livro-do-jogador.jpg",
+        genero: "RPG de Fantasia",
+        paginas: 320,
+        ano: 2014,
+        sinopse: "O Livro do Jogador é o guia essencial para jogadores de Dungeons & Dragons 5ª edição, contendo regras completas para criação e avanço de personagens, incluindo raças, classes, magias, equipamentos e mecânicas de combate e exploração. Com foco em imaginação e diversão, ele permite que heróis embarquem em aventuras épicas em mundos de fantasia, combatendo monstros e desvendando mistérios ao lado de aliados improváveis."
+    },
+    "o-um-anel-livro-do-aventureiro": {
+        titulo: "O Um Anel - Livro do Aventureiro",
+        autor: "Francesco Nepitello",
+        imagem: "../imagens/o-um-anel-livro-do-aventureiro.jpg",
+        genero: "RPG de Fantasia",
+        paginas: 193,
+        ano: 2021,
+        sinopse: "Baseado no universo de J.R.R. Tolkien, este livro guia aventureiros pela Terra-média na Terceira Era, antes da Guerra do Anel. Com regras para criação de heróis como bardos, elfos e anões, ele explora jornadas perigosas, combates contra a Sombra crescente e dilemas morais, enfatizando coragem, astúcia e a beleza sombria do mundo de O Hobbit e O Senhor dos Anéis."
+    },
+    "blades-in-the-dark": {
+        titulo: "Blades in the Dark",
+        autor: "John Harper",
+        imagem: "../imagens/blades-in-the-dark.jpg",
+        genero: "RPG de Fantasia Industrial",
+        paginas: 328,
+        ano: 2017,
+        sinopse: "Em Doskvol, uma cidade assombrada por fantasmas e impulsionada por máquinas a vapor, jogadores assumem o papel de uma gangue de criminosos audaciosos. O livro apresenta mecânicas inovadoras para assaltos, intrigas e downtime, onde falhas geram complicações dramáticas, misturando steampunk, horror sobrenatural e crime organizado em uma narrativa impulsionada pela ficção e pela sorte dos dados."
+    },
+    "som-das-seis": {
+        titulo: "O Som das Seis",
+        autor: "Gael Pereira",
+        imagem: "../imagens/som-das-seis.jpg",
+        genero: "RPG de Faroeste",
+        paginas: 124,
+        ano: 2021,
+        sinopse: "Inspirado em clássicos do western como Red Dead Redemption e filmes de Clint Eastwood, este RPG simples transporta jogadores para a selvageria da Fronteira Americana. Como xerifes, caçadores de recompensas ou nativos vingativos, os heróis enfrentam duelos ao pôr do sol, buscas por ouro e dilemas morais sob o sol impiedoso, com regras ágeis que priorizam narrativa e diversão em sessões rápidas e intensas."
+    },
+    "paranoia": {
+        titulo: "Paranoia",
+        autor: "Allen Varney",
+        imagem: "../imagens/paranoia.jpg",
+        genero: "RPG de Ficção Científica Satírica",
+        paginas: 256,
+        ano: 2017,
+        sinopse: "No complexo Alpha de um futuro distópico, clones de clearance vermelho servem ao Computador onipresente, mas a paranoia reina: amigos são traidores potenciais e a lealdade é questionada a cada passo. Este livro cômico e caótico oferece regras para missões absurdas cheias de burocracia, mutações secretas e traições hilárias, satirizando RPGs tradicionais em um mundo onde a diversão vem da desconfiança e do caos hilariante."
+    },
+    "tormenta-modulo-basico": {
+        titulo: "Tormenta RPG - Módulo Básico",
+        autor: "Jambô Editora",
+        imagem: "../imagens/tormenta-modulo-basico.jpg",
+        genero: "RPG de Fantasia Épica",
+        paginas: 200,
+        ano: 2018,
+        sinopse: "No mundo de Arton, ameaçado pela Tormenta — uma chuva mágica que corrompe a realidade —, heróis de diversas raças e classes lutam contra deuses caídos, monstros aberrantes e intrigas políticas. Este módulo básico fornece regras essenciais para criação de personagens, combates dinâmicos e aventuras épicas, convidando jogadores a forjar lendas em um cenário brasileiro rico em mitos, com influências de animes e quadrinhos."
+    }
 };
 
 // ==================== 2) Pega ID do livro da URL ====================

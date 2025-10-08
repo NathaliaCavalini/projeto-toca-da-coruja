@@ -67,6 +67,33 @@
     </main>
 
     <script src="../js/vejamais.js"></script>
+
+        <!-- Firebase: mostrar nome do usuário -->
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        const userInfo = document.getElementById("user-info");
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const nome = user.displayName || user.email.split("@")[0];
+                const foto = user.photoURL || "../imagens/user.png";
+
+                userInfo.innerHTML = `
+                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                    <span>${nome}</span>
+                `;
+                userInfo.setAttribute("href", "../html/perfil.html"); // link pro perfil
+            } else {
+                userInfo.innerHTML = `
+                    <img src="../imagens/user.png" alt="Ícone de usuário" />
+                    <span>Cadastre-se</span>
+                `;
+                userInfo.setAttribute("href", "../html/login.html");
+            }
+        });
+    </script>
 </body>
 
 </html>
