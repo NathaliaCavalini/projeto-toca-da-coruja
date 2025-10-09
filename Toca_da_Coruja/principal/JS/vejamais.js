@@ -252,7 +252,70 @@ const livros = {
         paginas: 200,
         ano: 2018,
         sinopse: "No mundo de Arton, ameaçado pela Tormenta — uma chuva mágica que corrompe a realidade —, heróis de diversas raças e classes lutam contra deuses caídos, monstros aberrantes e intrigas políticas. Este módulo básico fornece regras essenciais para criação de personagens, combates dinâmicos e aventuras épicas, convidando jogadores a forjar lendas em um cenário brasileiro rico em mitos, com influências de animes e quadrinhos."
-    }
+    },
+    "a-biblioteca-da-meia-noite": {
+        titulo: "A Biblioteca da Meia-Noite",
+        autor: "Matt Haig",
+        imagem: "../imagens/biblioteca da meia noite.jpg",
+        genero: "Romance",
+        paginas: 308,
+        ano: 2020,
+        sinopse: "Nora Seed, em meio a uma crise existencial, encontra-se na misteriosa Biblioteca da Meia-Noite, onde cada livro oferece uma vida alternativa que ela poderia ter vivido. Ao explorar diferentes caminhos, ela enfrenta escolhas, arrependimentos e possibilidades, descobrindo o que realmente faz uma vida valer a pena em uma narrativa emocionante sobre segundas chances e autodescoberta."
+    },
+    "caninos-brancos": {
+        titulo: "Caninos Brancos",
+        autor: "Jack London",
+        imagem: "../imagens/caninos brancos.jpg",
+        genero: "Romance",
+        paginas: 272,
+        ano: 1906,
+        sinopse: "Ambientado no selvagem território do Yukon durante a Corrida do Ouro, este clássico acompanha Caninos Brancos, um lobo-cão que enfrenta a brutalidade da natureza e dos homens. Passando por donos cruéis e bondosos, sua jornada explora a luta entre instinto selvagem e domesticação, revelando temas de sobrevivência, lealdade e redenção."
+    },
+    "o-impulso": {
+        titulo: "O Impulso",
+        autor: "Ashley Audrain",
+        imagem: "../imagens/o impulso.jpg",
+        genero: "Romance",
+        paginas: 320,
+        ano: 2021,
+        sinopse: "Blythe Connor deseja ser a mãe perfeita, mas sua filha, Violet, desperta nela dúvidas e temores profundos. Conforme comportamentos perturbadores emergem, Blythe questiona se é paranoia ou algo mais sombrio. Este thriller psicológico intenso explora maternidade, trauma geracional e os limites do instinto maternal em uma narrativa que prende até a última página."
+    },
+    "walden": {
+        titulo: "Walden",
+        autor: "Henry David Thoreau",
+        imagem: "../imagens/walden.jpg",
+        genero: "Romance",
+        paginas: 352,
+        ano: 1854,
+        sinopse: "Relato da experiência de Thoreau vivendo por dois anos em uma cabana isolada às margens do lago Walden, este livro é uma reflexão profunda sobre simplicidade, autossuficiência e conexão com a natureza. Combinando observações naturalistas e crítica social, ele questiona o materialismo e inspira uma vida mais consciente e essencial."
+    },
+    "legend-of-the-guardians-collection": {
+        titulo: "The Legend of the Guardians Collection",
+        autor: "Kathryn Lasky",
+        imagem: "../imagens/lenda dos guardiões.jpg",
+        genero: "Fantasia",
+        paginas: 1200,
+        ano: 2010,
+        sinopse: "Esta coleção reúne os livros da série 'Guardians of Ga'Hoole', uma saga épica sobre corujas heroicas em um mundo de fantasia. Lideradas por Soren, uma jovem coruja, elas lutam contra forças malignas que ameaçam o reino de Ga'Hoole. Com temas de coragem, amizade e destino, a série combina aventura e mitologia, cativando leitores com suas batalhas aéreas e intrigas."
+    },
+    "arvore-dos-desejos": {
+        titulo: "Árvore dos Desejos",
+        autor: "Katherine Applegate",
+        imagem: "../imagens/árvore dos desejos.jpg",
+        genero: "Fantasia",
+        paginas: 224,
+        ano: 2017,
+        sinopse: "Red, uma árvore centenária, narra esta história comovente sobre uma comunidade e seus desejos mais profundos. Como uma 'árvore dos desejos', Red testemunha esperanças, sonhos e preconceitos dos humanos ao seu redor, enquanto reflete sobre amizade, aceitação e o impacto de pequenas ações, em um conto delicado e poético que encanta leitores de todas as idades."
+    },
+    "flores-para-algernon": {
+        titulo: "Flores para Algernon",
+        autor: "Daniel Keyes",
+        imagem: "../imagens/flores para algernon.jpg",
+        genero: "Fantasia",
+        paginas: 336,
+        ano: 1966,
+        sinopse: "Charlie Gordon, um homem com deficiência intelectual, participa de um experimento que aumenta sua inteligência, assim como a do rato Algernon. Narrado por meio de relatórios de progresso, o livro acompanha sua transformação, revelando alegrias, descobertas e tragédias. Uma história comovente que explora ética científica, humanidade e o desejo de aceitação em um mundo que nem sempre acolhe diferenças."
+    },
 };
 
 // ==================== 2) Pega ID do livro da URL ====================
