@@ -2,12 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login – Toca da Coruja</title>
     <link rel="stylesheet" href="../css/login.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    <!-- Removido o <script src="../js/firebase-config.js"> desnecessário para evitar inicialização dupla do Firebase -->
 </head>
 
 <body>
@@ -32,30 +30,22 @@
         import { auth } from "../js/firebase-config.js";
         import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
-        document.getElementById("login-form").addEventListener("submit", async (e) => {
+        const form = document.getElementById("login-form");
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
-
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
 
-            if (!email || !password) {
-                alert("⚠️ Preencha todos os campos.");
-                return;
-            }
+            if (!email || !password) { alert("Preencha todos os campos."); return; }
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                alert("✅ Login realizado com sucesso!");
-                window.location.href = "home.html"; // ✅ mesma pasta
-            } catch (error) {
-                console.error(error);
-                if (error.code === "auth/invalid-credential") {
-                    alert("❌ E-mail ou senha incorretos.");
-                } else {
-                    alert("❌ Erro: " + error.message);
-                }
+                // redireciona para home.html (está na mesma pasta html/)
+                window.location.href = "home.html";
+            } catch (err) {
+                console.error(err);
+                alert("Erro: " + (err.message || err));
             }
-
         });
     </script>
 </body>

@@ -2,21 +2,19 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cadastro – Toca da Coruja</title>
     <link rel="stylesheet" href="../css/cadastro.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    <script type="module" src="../js/firebase-config.js"></script>
 </head>
 
 <body>
     <div class="cadastro-container">
-        <h1>Crie sua conta 🌱</h1>
+        <h1>Crie sua conta 🌿</h1>
         <form id="cadastro-form">
-            <input type="text" id="nome" placeholder="Nome completo" required />
+            <input type="text" id="nome" placeholder="Nome de exibição" required />
             <input type="email" id="email" placeholder="E-mail" required />
-            <input type="password" id="senha" placeholder="Senha" required />
+            <input type="password" id="senha" placeholder="Senha (mín. 6 caracteres)" required />
             <button type="submit">Cadastrar</button>
         </form>
         <p>Já tem conta? <a href="login.html">Entrar</a></p>
@@ -25,74 +23,33 @@
     <script type="module">
         import { auth, db } from "../js/firebase-config.js";
         import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
         const form = document.getElementById("cadastro-form");
-
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
+            const nome = document.getElementById("nome").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value.trim();
 
-            const nome = document.getElementById("nome").value;
-            const email = document.getElementById("email").value;
-            const senha = document.getElementById("senha").value;
-
+            if (!nome || !email || !senha) { alert("Preencha todos os campos."); return; }
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-                const user = userCredential.user;
-
+                const userCred = await createUserWithEmailAndPassword(auth, email, senha);
+                const user = userCred.user;
                 await updateProfile(user, { displayName: nome });
-
-                await setDoc(doc(db, "users", user.uid), {
+                await setDoc(doc(db, "usuarios", user.uid), {
                     displayName: nome,
                     email: user.email,
-                    createdAt: new Date(),
-                    bio: "",
-                    photoURL: ""
+                    photoURL: "",
+                    createdAt: serverTimestamp()
                 });
-
                 alert("Conta criada com sucesso!");
-                window.location.href = "login.html";
-            } catch (error) {
-                alert("Erro ao cadastrar: " + error.message);
+                window.location.href = "home.html";
+            } catch (err) {
+                console.error(err);
+                alert("Erro: " + (err.message || err));
             }
         });
-
-        import { auth, db } from "../js/firebase-config.js";
-import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-
-document.getElementById("cadastro-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const username = document.getElementById("username").value.trim();
-
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // Salva no perfil do Auth
-        await updateProfile(user, {
-            displayName: username,
-            photoURL: "https://i.pravatar.cc/150?u=" + user.uid // avatar gerado
-        });
-
-        // Salva no Firestore
-        await setDoc(doc(db, "users", user.uid), {
-            username: username,
-            email: email,
-            photoURL: user.photoURL
-        });
-
-        alert("✅ Conta criada com sucesso!");
-        window.location.href = "../home/home.html";
-
-    } catch (error) {
-        alert("❌ Erro: " + error.message);
-    }
-});
-
     </script>
 </body>
 
