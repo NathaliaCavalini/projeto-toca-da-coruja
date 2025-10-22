@@ -352,7 +352,7 @@ if (livro) {
           <button class="action-btn" id="btn-favorito">⭐ Favorito</button>
         </div>
 
-        <button class="download-btn">⬇️ Download</button>
+        
       </div>
     </div>
 
