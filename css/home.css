@@ -221,6 +221,13 @@ body {
     margin-top: 6px;
 }
 
+#botao-quero-ler {
+    background: transparent;
+    color: transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
 .book-item {
     display: flex;
     flex-direction: column;
