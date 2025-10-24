@@ -1,26 +1,40 @@
-/* ===== VARIÁVEIS ===== */
-:root {
-    --primary-color: #C5946C;
-    /* Botões e elementos de destaque */
-    --secondary-color: #F5E7D7;
-    /* Fundo geral */
-    --accent-color: #8B694D;
-    /* Hover / efeitos */
-    --text-color: #3A2D14;
-    /* Texto principal */
-    --light-color: #E6C9A8;
-    /* Sidebar e cards */
+/* ===== PALETA (valores originais - mantidos) ===== */
+:root{
+    /* Palette (não alterei os hex, só criei aliases semânticos) */
+    --c-primary: #C5946C;   /* tom dourado/bronze (original) */
+    --c-surface: #F5E7D7;   /* fundo claro (original) */
+    --c-accent:  #8B694D;   /* tom mais escuro / acento (original) */
+    --c-text:    #3A2D14;   /* texto escuro (original) */
+    --c-muted:   #E6C9A8;   /* tom claro intermediário (original) */
+
+    /* Semantic roles (usadas no layout) */
+    --color-primary: var(--c-primary);    /* ações principais, CTA */
+    --color-surface: var(--c-surface);    /* fundo geral, painéis neutros */
+    --color-accent:  var(--c-accent);     /* hover/estado ativo, contraste */
+    --color-text:    var(--c-text);       /* texto principal */
+    --color-muted:   var(--c-muted);      /* superfícies secundárias, cards */
+
+    /* layout tokens */
     --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     --radius: 12px;
 }
 
-/* ===== MODO ESCURO ===== */
+/* ===== MODO ESCURO (reaponto semanticamente sem alterar hex base) ===== */
 body.dark-mode {
-    --primary-color: #C5946C;
-    --secondary-color: #7D5237;
-    --accent-color: #A67C52;
-    --text-color: #F1F1F1;
-    --light-color: #995e40;
+    /* valores originais do seu dark-mode foram preservados como bases: */
+    --c-primary: #C5946C;
+    --c-surface: #7D5237;  /* fundo escuro - mantido do seu dark-mode */
+    --c-accent:  #A67C52;  /* acento escuro do dark-mode */
+    --c-text:    #F1F1F1;  /* texto claro no dark-mode */
+    --c-muted:   #995e40;  /* superfície clara secundária no dark-mode */
+
+    /* semantic roles remapeadas para dark-mode */
+    --color-primary: var(--c-primary);
+    --color-surface: var(--c-surface);
+    --color-accent:  var(--c-accent);
+    --color-text:    var(--c-text);
+    --color-muted:   var(--c-muted);
+
     --shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
@@ -33,8 +47,9 @@ body.dark-mode {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    /* agora usa surface semanticamente (melhor clareza do papel de fundo) */
+    background-color: var(--color-surface);
+    color: var(--color-text);
     line-height: 1.5;
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -45,7 +60,7 @@ body {
 
 /* ===== SIDEBAR ===== */
 .sidebar {
-    background-color: var(--secondary-color);
+    background-color: var(--color-surface);
     padding: 24px;
 }
 
@@ -63,12 +78,12 @@ body {
 
 .logo h1 {
     font-size: 22px;
-    color: var(--text-color);
+    color: var(--color-text);
     line-height: 1.05;
 }
 
-
 /* BOTÃO LOGIN/CADASTRO NOVO */
+/* botão principal usa --color-primary (hierarquia de CTAs) */
 .btn-login {
     display: flex;
     align-items: center;
@@ -78,8 +93,8 @@ body {
     width: 202px;
     height: 35px;
     font-size: 14px;
-    background: var(--primary-color);
-    color: var(--text-color);
+    background: var(--color-primary);
+    color: var(--color-text);
     border: none;
     border-radius: 40px;
     cursor: pointer;
@@ -95,16 +110,17 @@ body {
 }
 
 .btn-login:hover {
-    background: var(--accent-color);
+    /* hover usa --color-accent para indicar estado ativo */
+    background: var(--color-accent);
 }
-
 
 /* FORM DE BUSCA (sidebar) */
 .search-form {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: var(--primary-color);
+    /* input/fundo usa --color-primary para criar contraste leve no sidebar */
+    background-color: var(--color-primary);
     border-radius: 40px;
     padding: 8px 14px;
     margin-bottom: 22px;
@@ -115,17 +131,18 @@ body {
     outline: none;
     background: transparent;
     font-size: 14px;
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .search-form input::placeholder {
-    color: var(--text-color);
+    color: var(--color-text);
     opacity: 0.7;
 }
 
 /* MENU LATERAL */
 .menu-section {
-    background-color: var(--primary-color);
+    /* cards de menu usam --color-primary para manter leitura e contraste */
+    background-color: var(--color-primary);
     border-radius: 16px;
     padding: 14px;
     margin-bottom: 18px;
@@ -135,6 +152,7 @@ body {
     text-align: center;
     margin-bottom: 12px;
     font-size: 15px;
+    color: var(--color-text);
 }
 
 .menu-list {
@@ -150,12 +168,13 @@ body {
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--color-text);
     padding: 6px;
     border-radius: 8px;
     transition: background-color 0.3s;
 }
 
+/* hover dos itens usa leve overlay derivado de --color-accent */
 .menu-list a:hover {
     background-color: rgba(139, 105, 77, 0.08);
 }
@@ -170,7 +189,8 @@ body {
     display: flex;
     align-items: center;
     gap: 14px;
-    background-color: var(--primary-color);
+    /* nav usa surface leve derivado de primary para reforçar agrupamento */
+    background-color: var(--color-primary);
     border: 1px solid rgba(139, 105, 77, 0.08);
     border-radius: 40px;
     padding: 10px 18px;
@@ -182,7 +202,7 @@ body {
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--color-text);
     padding: 8px 12px;
     border-radius: 10px;
     font-size: 15px;
@@ -190,7 +210,7 @@ body {
 
 .nav-menu a:hover {
     background-color: rgba(139, 105, 77, 0.08);
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 /* Ações/ícones à direita da nav */
@@ -221,9 +241,10 @@ body {
     margin-top: 6px;
 }
 
+/* ACTION BUTTON */
 .action-btn {
-    background-color: #C5946C; /* tom principal */
-    color: #fff;
+    background-color: var(--color-primary); /* tom principal */
+    color: #fff; /* contraste forte no CTA */
     border: none;
     border-radius: 10px;
     padding: 10px 18px;
@@ -244,7 +265,7 @@ body {
 }
 
 .action-btn:hover {
-    background-color: #8B694D; /* tom mais escuro */
+    background-color: var(--color-accent); /* tom mais escuro no hover */
     box-shadow: 0 6px 12px rgba(139, 105, 77, 0.4);
     transform: translateY(-2px);
 }
@@ -257,7 +278,6 @@ body {
     transform: scale(0.97);
 }
 
-
 .book-item {
     display: flex;
     flex-direction: column;
@@ -265,9 +285,9 @@ body {
 }
 
 /* CARD DA CAPA */
-/* CARD DA CAPA */
 .book-card {
-    background-color: var(--primary-color);
+    /* card da capa usa surface de destaque (usar primary cria unidade com CTAs) */
+    background-color: var(--color-primary);
     border-radius: var(--radius) var(--radius) 0 0;
     padding: 18px;
     width: 100%;
@@ -277,19 +297,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* transition removido */
 }
 
-/* REMOVIDO: .book-card:hover */
 .book-card img {
     max-width: 140px;
     max-height: 200px;
     object-fit: cover;
 }
 
-/* TITULO DO LIVRO */
+/* TITULO DO LIVRO - usa muted surface para separar visualmente do card */
 .book-title {
-    background-color: var(--light-color);
+    background-color: var(--color-muted);
     border-radius: 0 0 var(--radius) var(--radius);
     padding: 14px;
     width: 100%;
@@ -305,6 +323,7 @@ body {
     margin: 0;
     transition: text-decoration 0.2s ease;
     cursor: pointer;
+    color: var(--color-text);
 }
 
 .book-title p:hover {
@@ -313,7 +332,7 @@ body {
 
 /* LINK "VEJA MAIS" */
 .book-action {
-    background-color: var(--light-color);
+    background-color: var(--color-muted);
     border-radius: 30px;
     padding: 10px;
     width: 60%;
@@ -325,7 +344,7 @@ body {
 .book-action a {
     text-decoration: none;
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--color-text);
     transition: text-decoration 0.2s ease;
 }
 
@@ -353,7 +372,7 @@ body {
     bottom: -4px;
     width: 0;
     height: 2px;
-    background-color: var(--text-color);
+    background-color: var(--color-text);
     border-radius: 2px;
     transition: all 0.3s ease;
 }
