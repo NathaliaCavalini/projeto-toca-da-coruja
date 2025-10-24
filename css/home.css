@@ -221,12 +221,42 @@ body {
     margin-top: 6px;
 }
 
-#botao-quero-ler {
-    background: transparent;
-    color: transparent;
-    padding: 10px 20px;
+.action-btn {
+    background-color: #C5946C; /* tom principal */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(197, 148, 108, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
 }
+
+.action-btn::before {
+    content: "📖";
+    transition: transform 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #8B694D; /* tom mais escuro */
+    box-shadow: 0 6px 12px rgba(139, 105, 77, 0.4);
+    transform: translateY(-2px);
+}
+
+.action-btn:hover::before {
+    transform: rotate(-10deg);
+}
+
+.action-btn:active {
+    transform: scale(0.97);
+}
+
 
 .book-item {
     display: flex;
@@ -265,7 +295,7 @@ body {
     width: 100%;
     text-align: center;
     margin-top: -6px;
-    transform: translateY(8%);
+    transform: translateY(4%);
     box-shadow: var(--shadow);
 }
 
