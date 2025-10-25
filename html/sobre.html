@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre — Toca da Coruja</title>
+  <link rel="stylesheet" href="../css/home.css" />
+  <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <header class="logo">
+      <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+      <h1>Toca <br> da Coruja</h1>
+    </header>
+
+    <!-- id user-info (usado pelo script para mostrar nome/foto) -->
+    <a href="../html/login.html" class="btn-login" id="user-info">
+      <img src="../imagens/user.png" alt="Ícone de usuário" />
+      <span>Cadastre-se</span>
+    </a>
+
+    <form class="search-form" role="search" onsubmit="return false;">
+      <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+      <input type="search" id="search-input" placeholder="Pesquisar..." />
+    </form>
+
+    <section class="menu-section" aria-labelledby="generos-title">
+      <h2 id="generos-title">Gêneros</h2>
+      <ul class="menu-list">
+        <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a></li>
+        <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">LGBTQIAPN+</a></li>
+        <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Fantasia</a></li>
+        <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Romance</a></li>
+        <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Clássicos</a></li>
+        <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Programação</a></li>
+        <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a></li>
+      </ul>
+    </section>
+
+    <section class="menu-section" aria-labelledby="minha-biblioteca-title">
+      <h2 id="minha-biblioteca-title">Minha Biblioteca</h2>
+      <ul class="menu-list">
+        <li><a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a></li>
+        <li><a href="colecao.html"><img src="../imagens/minhacolecao.png" width="20" height="20" alt="">Minha coleção</a></li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <nav class="nav-menu" aria-label="Navegação principal">
+      <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+      <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+      <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+      <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+
+      <div class="nav-actions" aria-hidden="false">
+        <button class="icon-btn" title="Modo escuro" aria-pressed="false">
+          <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+        </button>
+        <button class="icon-btn" title="Ajuda">
+          <img src="../imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+        </button>
+      </div>
+    </nav>
+
+    <!-- SOBRE NÓS -->
+    <section aria-labelledby="sobre-title" class="about-page" style="max-width: 1000px; margin: 0 auto;">
+      <header id="sobre-title" style="margin-bottom: 18px;">
+        <h2 style="font-size: 2rem; color: var(--color-accent);">Sobre a Toca da Coruja</h2>
+        <p style="margin-top:8px; color: var(--color-text);">
+          A Toca da Coruja é uma biblioteca literária online criada para conectar leitores a histórias que confortam, desafiam e transformam.
+          Aqui você encontra desde clássicos que moldaram gerações até títulos independentes e contemporâneos.
+        </p>
+      </header>
+
+      <!-- MISSÃO + HISTÓRIA -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
+        <article aria-labelledby="missao-title" style="background: var(--color-muted); border-radius: 12px; padding:16px;">
+          <h3 id="missao-title" style="color: var(--color-accent); margin-bottom:8px;">Nossa missão</h3>
+          <p>
+            Tornar a leitura mais acessível e prazerosa: reunir livros diversos, recomendar boas leituras e apoiar descoberta literária — para todos os
+            gostos e idades.
+          </p>
+          <ul style="margin-top:10px; padding-left:18px;">
+            <li>Promover inclusão por meio do catálogo</li>
+            <li>Incentivar a formação leitora</li>
+            <li>Ser um espaço seguro para todas as histórias</li>
+          </ul>
+        </article>
+
+        <article aria-labelledby="historia-title" style="background: var(--color-muted); border-radius: 12px; padding:16px;">
+          <h3 id="historia-title" style="color: var(--color-accent); margin-bottom:8px;">Nossa história</h3>
+          <p>
+            A Toca nasceu da paixão por livros e do desejo de criar um lugar onde leitores pudessem descobrir títulos de forma simples.
+            Começamos como uma curadoria pequena e hoje hospedamos centenas de obras — sempre com curadoria humana e carinho.
+          </p>
+        </article>
+      </div>
+
+      <!-- EQUIPE -->
+      <section aria-labelledby="equipe-title" style="margin-bottom: 28px;">
+        <h3 id="equipe-title" style="color: var(--color-accent); margin-bottom:12px;">Equipe</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <!-- cartão simples de equipe -->
+          <div style="background: var(--color-primary); color: #fff; padding:14px; border-radius:12px; box-shadow: var(--shadow);">
+            <img src="../imagens/eu.jpeg" alt="Foto de equipe" style="width:56px; height:56px; border-radius:50%; object-fit:cover;">
+            <h4 style="margin-top:10px;">Nathália Cavalini</h4>
+            <p style="font-size:0.9rem;">Fundadora & curadora — escolhe os livros e cuida da curadoria temática.</p>
+          </div>
+
+          <div style="background: var(--color-primary); color: #fff; padding:14px; border-radius:12px; box-shadow: var(--shadow);">
+            <img src="../imagens/eu.jpeg" alt="Foto de equipe" style="width:56px; height:56px; border-radius:50%; object-fit:cover;">
+            <h4 style="margin-top:10px;">Equipe Editorial</h4>
+            <p style="font-size:0.9rem;">Leitores e revisores que garantem a qualidade das recomendações e descrições.</p>
+          </div>
+
+          <div style="background: var(--color-primary); color: #fff; padding:14px; border-radius:12px; box-shadow: var(--shadow);">
+            <img src="../imagens/eu.jpeg" alt="Foto de equipe" style="width:56px; height:56px; border-radius:50%; object-fit:cover;">
+            <h4 style="margin-top:10px;">Suporte & Tecnologia</h4>
+            <p style="font-size:0.9rem;">Quem mantém o site, integra o sistema e cuida dos recursos de conta e busca.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALORES + COMO AJUDAR -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
+        <article aria-labelledby="valores-title" style="background: var(--color-muted); border-radius: 12px; padding:16px;">
+          <h3 id="valores-title" style="color: var(--color-accent); margin-bottom:8px;">Nossos valores</h3>
+          <ol style="padding-left:18px;">
+            <li>Diversidade — representamos vozes variadas.</li>
+            <li>Transparência — sobre curadoria e fontes.</li>
+            <li>Comunidade — apoio entre leitores.</li>
+          </ol>
+        </article>
+
+        <article aria-labelledby="ajude-title" style="background: var(--color-muted); border-radius: 12px; padding:16px;">
+          <h3 id="ajude-title" style="color: var(--color-accent); margin-bottom:8px;">Como ajudar</h3>
+          <p>Você pode colaborar de várias formas:</p>
+          <ul style="padding-left:18px;">
+            <li>Doando livros ou indicando títulos</li>
+            <li>Enviando avaliações e reviews</li>
+            <li>Compartilhando a Toca nas redes</li>
+          </ul>
+          <p style="margin-top:8px;"><strong>Quer doar?</strong> Escreva para <a href="mailto:cavalinilivros@gmail.com">cavalinilivros@gmail.com</a> com título, estado do livro e sua cidade.</p>
+        </article>
+      </div>
+
+      <!-- CONTATO + FAQ -->
+      <section aria-labelledby="contato-title" style="margin-bottom: 28px;">
+        <h3 id="contato-title" style="color: var(--color-accent); margin-bottom:12px;">Contato & Perguntas</h3>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:260px; background: var(--color-muted); padding:14px; border-radius:12px;">
+            <h4 style="margin-bottom:8px;">Fale conosco</h4>
+            <p>Email: <a href="mailto:cavalinilivros@gmail.com">cavalinilivros@gmail.com</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/tocadacoruja24" aria-label="Instagram @tocadacoruja24">@tocadacoruja24</a></p>
+          </div>
+
+          <div style="flex:1; min-width:260px; background: var(--color-muted); padding:14px; border-radius:12px;">
+            <h4 style="margin-bottom:8px;">FAQ rápido</h4>
+            <p><strong>Posso sugerir um livro?</strong> Sim — use o formulário de contato com a sugestão.</p>
+            <p><strong>Como criar conta?</strong> Clique em "Cadastre-se" no canto esquerdo e siga as instruções.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAMADA PARA AÇÃO -->
+      <div style="text-align:center; margin-top: 8px; margin-bottom: 24px;">
+        <a href="../html/contato.html" class="action-btn" style="text-decoration:none;">Fale conosco / Faça sua Doação</a>
+      </div>
+    </section>
+
+    <!-- você pode manter aqui um rodapé menor ou usar o footer global -->
+  </main>
+
+  <!-- FOOTER (igual ao da home) -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
+        <h3>Toca da Coruja</h3>
+        <p>Sua biblioteca literária online, onde cada história ganha asas.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="../html/home.html">Catálogo</a></li>
+          <li><a href="../html/sobre.html">Sobre Nós</a></li>
+          <li><a href="../html/contato.html">Contato</a></li>
+        </ul>
+      </div>
+
+     <div class="footer-social">
+        <h4>Nossas redes sociais</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank" rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
+            <img src="../imagens/instagram.png" alt="Instagram" style="width:22px;height:22px;">
+          </a>
+          <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer" aria-label="X Toca da Coruja">
+            <img src="../imagens/twitter.png" alt="X" style="width:22px;height:22px;">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Toca da Coruja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../js/home.js"></script>
+
+  <!-- Script robusto para mostrar o nome/foto do usuário no sidebar (mantive igual ao seu exemplo) -->
+  <script type="module">
+    import { auth } from "../js/firebase-config.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+    const userInfo = document.getElementById("user-info");
+
+    if (!userInfo) {
+        console.warn("Elemento #user-info não encontrado nesta página. Adicione id='user-info' ao link do sidebar.");
+    } else {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const nome = user.displayName || (user.email ? user.email.split("@")[0] : "Usuário");
+                const foto = user.photoURL || "../imagens/user.png";
+
+                userInfo.innerHTML = `
+                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                    <span>${nome}</span>
+                `;
+                userInfo.setAttribute("href", "../html/perfil.html");
+            } else {
+                userInfo.innerHTML = `
+                    <img src="../imagens/user.png" alt="Ícone de usuário" />
+                    <span>Cadastre-se</span>
+                `;
+                userInfo.setAttribute("href", "../html/login.html");
+            }
+        });
+    }
+  </script>
+</body>
+</html>

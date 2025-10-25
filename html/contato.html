@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contato — Toca da Coruja</title>
+  <link rel="stylesheet" href="../css/home.css" />
+  <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <header class="logo">
+      <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+      <h1>Toca <br> da Coruja</h1>
+    </header>
+
+    <a href="../html/login.html" class="btn-login" id="user-info">
+      <img src="../imagens/user.png" alt="Ícone de usuário" />
+      <span>Cadastre-se</span>
+    </a>
+
+    <form class="search-form" role="search" onsubmit="return false;">
+      <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+      <input type="search" id="search-input" placeholder="Pesquisar..." />
+    </form>
+
+    <section class="menu-section" aria-labelledby="generos-title">
+      <h2 id="generos-title">Gêneros</h2>
+      <ul class="menu-list">
+        <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a></li>
+        <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">LGBTQIAPN+</a></li>
+        <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Fantasia</a></li>
+        <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Romance</a></li>
+        <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Clássicos</a></li>
+        <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">Programação</a></li>
+        <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a></li>
+      </ul>
+    </section>
+
+    <section class="menu-section" aria-labelledby="minha-biblioteca-title">
+      <h2 id="minha-biblioteca-title">Minha Biblioteca</h2>
+      <ul class="menu-list">
+        <li><a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a></li>
+        <li><a href="colecao.html"><img src="../imagens/minhacolecao.png" width="20" height="20" alt="">Minha coleção</a></li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <nav class="nav-menu" aria-label="Navegação principal">
+      <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+      <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+      <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+      <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+
+      <div class="nav-actions" aria-hidden="false">
+        <button class="icon-btn" title="Modo escuro" aria-pressed="false">
+          <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+        </button>
+        <button class="icon-btn" title="Ajuda">
+          <img src="../imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+        </button>
+      </div>
+    </nav>
+
+    <!-- CONTEÚDO DE CONTATO -->
+    <section aria-labelledby="contato-title" style="max-width:1000px; margin:0 auto;">
+      <header id="contato-title" style="margin-bottom:16px;">
+        <h2 style="font-size:2rem; color:var(--color-accent);">Fale com a Toca da Coruja</h2>
+        <p style="margin-top:8px; color:var(--color-text);">
+          Tem uma sugestão, dúvida ou quer doar livros? Envie uma mensagem — responderemos o mais rápido possível.
+        </p>
+      </header>
+
+      <div style="display:grid; grid-template-columns: 1fr 360px; gap:24px; margin-bottom:28px;">
+        <!-- FORMULÁRIO (abre mailto com conteúdo) -->
+        <div style="background:var(--color-muted); padding:16px; border-radius:12px;">
+          <h3 style="color:var(--color-accent); margin-bottom:10px;">Envie uma mensagem</h3>
+
+          <form id="contact-form" onsubmit="handleContactSubmit(event)" aria-label="Formulário de contato">
+            <label for="nome" style="display:block; margin-bottom:6px; font-weight:700;">Seu nome</label>
+            <input id="nome" name="nome" type="text" required placeholder="Seu nome" style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); margin-bottom:12px;" />
+
+            <label for="email" style="display:block; margin-bottom:6px; font-weight:700;">Seu e-mail</label>
+            <input id="email" name="email" type="email" required placeholder="seu@email.com" style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); margin-bottom:12px;" />
+
+            <label for="assunto" style="display:block; margin-bottom:6px; font-weight:700;">Assunto</label>
+            <input id="assunto" name="assunto" type="text" placeholder="Ex: Doação de livros / Sugestão" style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); margin-bottom:12px;" />
+
+            <label for="mensagem" style="display:block; margin-bottom:6px; font-weight:700;">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="6" required placeholder="Escreva sua mensagem aqui..." style="width:100%; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); margin-bottom:12px;"></textarea>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button type="submit" class="action-btn" style="font-weight:700;">Enviar mensagem</button>
+              <button type="reset" class="icon-btn" title="Limpar formulário" style="background:transparent; border:1px solid rgba(0,0,0,0.06); padding:8px 12px; border-radius:8px;">Limpar</button>
+            </div>
+
+            <p id="contact-note" style="margin-top:10px; font-size:0.9rem; color:var(--color-text);">
+              Observação: este formulário usa seu cliente de e-mail para enviar a mensagem (mailto). Para envio automático, conecte um back-end.
+            </p>
+          </form>
+        </div>
+
+        <!-- INFORMACÕES DE CONTATO E REDES -->
+        <aside style="background:var(--color-muted); padding:16px; border-radius:12px; display:flex; flex-direction:column; gap:12px;">
+          <div>
+            <h4 style="color:var(--color-accent); margin-bottom:8px;">E-mail</h4>
+            <p><a href="mailto:cavalinilivros@gmail.com">cavalinilivros@gmail.com</a></p>
+          </div>
+
+          <div>
+            <h4 style="color:var(--color-accent); margin-bottom:8px;">Redes sociais</h4>
+            <p>
+              <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank" rel="noopener noreferrer">
+                Instagram: @tocadacoruja24
+              </a>
+            </p>
+            <p>
+              <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer">
+                X: @TocaDaCoruja24
+              </a>
+            </p>
+          </div>
+
+          <div>
+            <h4 style="color:var(--color-accent); margin-bottom:8px;">Doações e logística</h4>
+            <p>Quer doar livros? Envie um e-mail com <strong>lista dos títulos</strong>, cidade e estado. Respondemos com instruções.</p>
+          </div>
+
+          <div>
+            <h4 style="color:var(--color-accent); margin-bottom:8px;">Horário de resposta</h4>
+            <p>Normalmente respondemos em até 3 dias úteis.</p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- FAQ pequeno/atalhos -->
+      <section aria-labelledby="faq-title" style="margin-bottom:20px;">
+        <h3 id="faq-title" style="color:var(--color-accent); margin-bottom:8px;">Perguntas frequentes</h3>
+        <div style="display:grid; gap:10px;">
+          <div style="background:var(--color-muted); padding:12px; border-radius:10px;">
+            <strong>Como sugiro um livro?</strong>
+            <p>Use o formulário acima ou envie um e-mail com título, autor e por que você recomenda.</p>
+          </div>
+          <div style="background:var(--color-muted); padding:12px; border-radius:10px;">
+            <strong>Como criar conta?</strong>
+            <p>Clique em "Cadastre-se" no menu lateral e siga o fluxo de registro.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
+        <h3>Toca da Coruja</h3>
+        <p>Sua biblioteca literária online, onde cada história ganha asas.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="../html/home.html">Catálogo</a></li>
+          <li><a href="../html/sobre.html">Sobre Nós</a></li>
+          <li><a href="../html/contato.html">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>Nossas redes sociais</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank" rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
+            <img src="../imagens/instagram.png" alt="Instagram" style="width:22px;height:22px;">
+          </a>
+          <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer" aria-label="X Toca da Coruja">
+            <img src="../imagens/twitter.png" alt="X" style="width:22px;height:22px;">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Toca da Coruja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="../js/home.js"></script>
+
+  <!-- Script do formulário: abre o cliente de e-mail com os campos preenchidos -->
+<!-- Substitua o script antigo por este -->
+<script>
+  // monta query string simples
+  function qs(params) {
+    return Object.entries(params)
+      .filter(([, v]) => v !== undefined && v !== null && v !== "")
+      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+      .join('&');
+  }
+
+  function handleContactSubmit(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const assuntoInput = document.getElementById('assunto').value.trim();
+    const assunto = assuntoInput || 'Contato via site - Toca da Coruja';
+    const mensagem = document.getElementById('mensagem').value.trim();
+
+    // corpo do e-mail formatado
+    const body = `Nome: ${nome}\nE-mail de contato: ${email}\n\nMensagem:\n${mensagem}`;
+
+    // endereço destino
+    const to = 'cavalinilivros@gmail.com';
+
+    // URL que abre o compose do Gmail no navegador
+    const gmailUrlBase = 'https://mail.google.com/mail/';
+    const gmailParams = {
+      view: 'cm',
+      fs: '1',
+      to: to,
+      su: assunto,
+      body: body
+    };
+    const gmailUrl = `${gmailUrlBase}?${qs(gmailParams)}`;
+
+    // fallback mailto (caso o navegador bloqueie popups ou não tenha sessão no Gmail)
+    const mailtoParams = [];
+    mailtoParams.push(`subject=${encodeURIComponent(assunto)}`);
+    mailtoParams.push(`body=${encodeURIComponent(body)}`);
+    const mailtoUrl = `mailto:${encodeURIComponent(to)}?${mailtoParams.join('&')}`;
+
+    // Tenta abrir em nova aba o compose do Gmail. Se window.open for bloqueado (retorna null),
+    // faz fallback para mailto (abre o cliente padrão).
+    const newWindow = window.open(gmailUrl, '_blank');
+
+    // Se window.open falhar (popup bloqueado), usa mailto (no mesmo tab/janela).
+    if (!newWindow) {
+      // como fallback, navegamos para mailto (bem compatível)
+      window.location.href = mailtoUrl;
+    } else {
+      // foco na nova janela/aba (se possível)
+      try { newWindow.focus(); } catch (_) {}
+    }
+  }
+</script>
+
+
+  <!-- Script robusto para mostrar o nome/foto do usuário no sidebar (mantive igual ao seu exemplo) -->
+  <script type="module">
+    import { auth } from "../js/firebase-config.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+    const userInfo = document.getElementById("user-info");
+
+    if (!userInfo) {
+        console.warn("Elemento #user-info não encontrado nesta página. Adicione id='user-info' ao link do sidebar.");
+    } else {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const nome = user.displayName || (user.email ? user.email.split("@")[0] : "Usuário");
+                const foto = user.photoURL || "../imagens/user.png";
+
+                userInfo.innerHTML = `
+                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                    <span>${nome}</span>
+                `;
+                userInfo.setAttribute("href", "../html/perfil.html");
+            } else {
+                userInfo.innerHTML = `
+                    <img src="../imagens/user.png" alt="Ícone de usuário" />
+                    <span>Cadastre-se</span>
+                `;
+                userInfo.setAttribute("href", "../html/login.html");
+            }
+        });
+    }
+  </script>
+</body>
+</html>
