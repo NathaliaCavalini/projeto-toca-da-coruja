@@ -150,33 +150,85 @@
         </section>
     </main>
 
+<footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
+  <div class="footer-content">
+    <div class="footer-logo" aria-hidden="false">
+      <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
+      <div>
+        <h3>Toca da Coruja</h3>
+        <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
+      </div>
+    </div>
+
+    <div class="footer-links" aria-labelledby="explorar-title">
+      <h4 id="explorar-title">Explorar</h4>
+      <ul>
+        <li><a href="../html/home.html">Catálogo</a></li>
+        <li><a href="../html/sobre.html">Sobre Nós</a></li>
+        <li><a href="../html/contato.html">Contato</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 style="margin:0 0 6px 0; color:var(--color-accent)">Conecte-se</h4>
+      <div class="social-icons" role="navigation" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank" rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
+          <img src="../imagens/instagram.png" alt="Instagram">
+        </a>
+        <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer" aria-label="X Toca da Coruja">
+          <img src="../imagens/twitter.png" alt="X">
+        </a>
+      </div>
+
+      <div class="footer-quick" style="margin-top:10px;">
+        <div style="font-size:0.95rem; color:var(--color-text)">Email: <a href="mailto:cavalinilivros@gmail.com" style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a></div>
+        <div class="footer-cta">
+          <a href="../html/contato.html" class="action-btn" style="display:inline-block; margin-top:8px;">Fale conosco</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
+  </div>
+</footer>
+
+
     <script src="../js/home.js"></script>
-    
-    <!-- Firebase: mostrar nome do usuário -->
+
+    <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
     <script type="module">
         import { auth } from "../js/firebase-config.js";
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
+        // pega o elemento (pode ser null se a página não tiver sidebar)
         const userInfo = document.getElementById("user-info");
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const nome = user.displayName || user.email.split("@")[0];
-                const foto = user.photoURL || "../imagens/user.png";
+        if (!userInfo) {
+            // debug: se faltou o id em alguma página, aparece aqui no console
+            console.warn("Elemento #user-info não encontrado nesta página. Adicione id='user-info' ao link do sidebar.");
+        } else {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const nome = user.displayName || (user.email ? user.email.split("@")[0] : "Usuário");
+                    const foto = user.photoURL || "../imagens/user.png";
 
-                userInfo.innerHTML = `
-                    <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
-                    <span>${nome}</span>
-                `;
-                userInfo.setAttribute("href", "../html/perfil.html"); // link pro perfil
-            } else {
-                userInfo.innerHTML = `
-                    <img src="../imagens/user.png" alt="Ícone de usuário" />
-                    <span>Cadastre-se</span>
-                `;
-                userInfo.setAttribute("href", "../html/login.html");
-            }
-        });
+                    userInfo.innerHTML = `
+                        <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                        <span>${nome}</span>
+                    `;
+                    // linka pro perfil
+                    userInfo.setAttribute("href", "../html/perfil.html");
+                } else {
+                    userInfo.innerHTML = `
+                        <img src="../imagens/user.png" alt="Ícone de usuário" />
+                        <span>Cadastre-se</span>
+                    `;
+                    userInfo.setAttribute("href", "../html/login.html");
+                }
+            });
+        }
     </script>
 </body>
 
