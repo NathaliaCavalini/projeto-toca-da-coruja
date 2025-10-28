@@ -1,0 +1,176 @@
+/* =========================
+   Toca da Coruja — Lista & Botões
+   ========================= */
+:root {
+    --c-primary: #c5946c;
+    /* dourado/bronze */
+    --c-surface: #f5e7d7;
+    /* fundo claro */
+    --c-accent: #8b694d;
+    /* acento */
+    --c-text: #3a2d14;
+    /* texto escuro */
+    --c-muted: #9b8b75;
+    --c-fav: #e85656;
+    --radius: 12px;
+    --card-shadow: 0 8px 18px rgba(58, 45, 20, 0.06);
+}
+
+/* Book grid (reaproveita sua grade) */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
+    margin-top: 18px;
+}
+
+/* Card */
+.book-item {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--c-surface));
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform .16s ease, box-shadow .16s ease;
+    border: 1px solid rgba(58, 45, 20, 0.04);
+}
+
+.book-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px rgba(58, 45, 20, 0.08);
+}
+
+.book-card {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(245, 231, 215, 0.8), rgba(197, 148, 108, 0.06));
+}
+
+.book-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Title */
+.book-title p {
+    margin: 10px 0 6px 0;
+    color: var(--c-text);
+    font-weight: 700;
+    line-height: 1.15;
+    font-size: 0.95rem;
+}
+
+/* Actions area */
+.book-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Botões padronizados */
+.action-btn {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+    background: transparent;
+    color: var(--c-text);
+    box-shadow: none;
+}
+
+/* Quero Ler (destaque primário) */
+.btn-quer-ler {
+    background: linear-gradient(180deg, var(--c-primary), var(--c-accent));
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(197, 148, 108, 0.18);
+}
+
+.btn-quer-ler:hover {
+    transform: translateY(-2px);
+}
+
+/* Já Li (neutro / confirm) */
+.btn-ja-li {
+    background: transparent;
+    border: 1px solid rgba(58, 45, 20, 0.06);
+    color: var(--c-text);
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+.btn-ja-li.active {
+    background: var(--c-accent);
+    color: #fff;
+}
+
+/* Favorito (red) */
+.btn-favorito {
+    background: transparent;
+    border: 1px dashed rgba(232, 86, 86, 0.12);
+    color: var(--c-fav);
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.btn-favorito.active {
+    background: var(--c-fav);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(232, 86, 86, 0.12);
+}
+
+/* Remover (chip vermelho discreto) */
+.btn-remove {
+    background: transparent;
+    color: var(--c-fav);
+    border: 1px solid rgba(232, 86, 86, 0.14);
+    padding: 6px 8px;
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+.btn-remove:hover {
+    background: rgba(232, 86, 86, 0.06);
+    transform: translateY(-1px);
+}
+
+/* Link de ver detalhes (botão secundário) */
+.action-link {
+    margin-left: auto;
+    text-decoration: none;
+    color: var(--c-muted);
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(58, 45, 20, 0.04);
+    background: transparent;
+}
+
+.action-link:hover {
+    color: var(--c-text);
+    box-shadow: 0 6px 12px rgba(58, 45, 20, 0.06);
+    transform: translateY(-1px);
+}
+
+/* Mensagem vazia */
+.list-empty {
+    color: var(--c-muted);
+    font-style: italic;
+    margin-top: 12px;
+}
