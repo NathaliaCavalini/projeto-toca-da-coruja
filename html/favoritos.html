@@ -17,12 +17,6 @@
             <h1>Toca <br> da Coruja</h1>
         </header>
 
-        <a href="../html/login.html" class="btn-login">
-            <img src="../imagens/user.png" alt="Ícone de usuário" />
-            <span>Cadastre-se</span>
-        </a>
-
-
         <form class="search-form" role="search" onsubmit="return false;">
             <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
             <input type="search" id="search-input" placeholder="Pesquisar..." />
@@ -85,7 +79,7 @@
     </main>
 
     <script src="../js/home.js"></script>
-    
+
     <!-- Firebase: mostrar nome do usuário -->
     <script type="module">
         import { auth } from "../js/firebase-config.js";
@@ -111,7 +105,20 @@
                 userInfo.setAttribute("href", "../html/login.html");
             }
         });
+
+        import { readLibraryList } from "../js/library-actions.js";
+
+        const favs = readLibraryList('favoritos'); // array de objetos {id,title,img,...}
+        const container = document.getElementById('favorites-list');
+        container.innerHTML = favs.length ? favs.map(b => `
+        <article class="book-item" data-id="${b.id}">
+    <div class="book-card"><img src="${b.img}" alt="${b.title}"></div>
+    <div class="book-title"><p>${b.title}</p></div>
+        </article>
+`).join('') : '<p>Sem favoritos ainda.</p>';
+
     </script>
+    <script type="module" src="../js/user-info-global.js"></script>
 </body>
 
 </html>
