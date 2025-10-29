@@ -15,13 +15,13 @@ function applyUserUI() {
         <span class="user-name">${nome}</span>
       `;
             // leva pro perfil
-            userInfo.setAttribute('href', '/Toca_da_Coruja/html/perfil.html');
+            userInfo.setAttribute('href', '/perfil.html');
         } else {
             userInfo.innerHTML = `
         <img src="/Toca_da_Coruja/imagens/user.png" class="user-thumb" alt="Ícone usuário" />
         <span class="user-name">Cadastre-se</span>
       `;
-            userInfo.setAttribute('href', '/Toca_da_Coruja/html/login.html');
+            userInfo.setAttribute('href', '/login.html');
         }
     });
 }

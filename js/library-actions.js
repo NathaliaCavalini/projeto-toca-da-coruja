@@ -1,16 +1,5 @@
-// js/library-actions.js
-// Gerencia: "Quero Ler", "Já Li", "Favoritos" com persistência por usuário (localStorage).
-// Importante: inclua este arquivo com <script type="module" src="..."></script> em todas as páginas relevantes.
-
-// Tenta importar auth automaticamente se existir um arquivo firebase-config.js que exporte `auth`.
-// Se não houver, continuamos sem autenticação (usamos 'guest').
 let auth;
 try {
-    // ajuste o caminho se necessário (ex: './firebase-config.js' ou '../js/firebase-config.js')
-    // o arquivo firebase-config.js deve exportar `auth` (Firebase Auth).
-    // Ex.: export const auth = getAuth(app);
-    // Se não usar Firebase, ignore — o código usa 'guest' como fallback.
-    // eslint-disable-next-line
     import('./firebase-config.js').then(mod => { auth = mod.auth; }).catch(() => { auth = null; });
 } catch (e) {
     auth = null;

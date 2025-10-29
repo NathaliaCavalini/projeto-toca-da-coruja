@@ -4,119 +4,51 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Favoritos — Toca da Coruja</title>
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="icon" href="../imagens/favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="icon" href="imagens/favicon.png" type="image/png">
+  <style>.book-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}.book-card img{max-width:160px;max-height:220px;object-fit:cover}</style>
 </head>
 <body>
-  <!-- Sidebar (puxe sua sidebar real se quiser) -->
-  <aside class="sidebar">
-    <header class="logo">
-      <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-      <h1>Toca <br> da Coruja</h1>
-    </header>
-    <nav class="menu">
-      <ul>
-        <li><a href="/home.html">Catálogo</a></li>
-        <li><a href="/quer_ler.html">Quer ler</a></li>
-        <li><a href="/ja_lidos.html">Já lidos</a></li>
-      </ul>
-    </nav>
-    <a id="user-info" href="/login.html" class="user-info-link"></a>
-  </aside>
+  <aside class="sidebar"><header class="logo"><img src="imagens/logo.png" class="logo-img"><h1>Toca <br> da Coruja</h1></header>
+  <form class="search-form" role="search" onsubmit="return false;"><img src="imagens/lupa.png" width="20"><input type="search" id="search-input" placeholder="Pesquisar..."></form>
+  <section class="menu-section"><h2>Minha Biblioteca</h2><ul class="menu-list"><li><a href="quer_ler.html">Quer ler</a></li><li><a href="ja_lidos.html">Já lidos</a></li></ul></section></aside>
 
   <main class="main-content">
-    <nav class="top-nav"><a href="/home.html">← Voltar ao catálogo</a></nav>
-
-    <section class="list-page">
-      <h1>Favoritos</h1>
-      <div id="favoritos-container" class="book-grid" aria-live="polite"></div>
-      <p id="empty-msg" class="list-empty" style="display:none;">Nenhum favorito ainda.</p>
-    </section>
+    <nav class="nav-menu"><a href="home.html"><img src="imagens/livro_aberto.png" width="20">Catálogo</a><a href="favoritos.html" class="active"><img src="imagens/favoritos.png" width="20">Favoritos</a></nav>
+    <section class="hero-section"><div class="hero-content"><h2 class="hero-title">Sua lista — <span class="hero-subtitle">Favoritos</span></h2></div><div class="hero-wave"></div></section>
+    <section class="book-grid" id="favoritos-section"><div id="favoritos-container" class="book-grid"></div><p id="empty-msg" style="display:none; text-align:center; margin-top:24px;">Nenhum favorito ainda.</p></section>
   </main>
 
-  <footer class="footer">© Toca da Coruja</footer>
+  <footer class="footer"><div class="footer-bottom"><p>© 2025 Toca da Coruja</p></div></footer>
 
-  <!-- Global scripts -->
-  <script src="/js/library-actions-delegated.js"></script>
-  <script type="module" src="/js/user-info-global.js"></script>
-
-  <!-- Renderizador local da lista "favoritos" (autônomo) -->
+  <script src="js/library-actions-delegated.js"></script>
+  <script type="module" src="js/user-info-global.js"></script>
   <script>
   (function(){
-    const LIST_SUFFIX = '::favoritos';
-    const container = document.getElementById('favoritos-container');
-    const emptyMsg = document.getElementById('empty-msg');
+    const SUFFIX='::favoritos', container=document.getElementById('favoritos-container'), emptyMsg=document.getElementById('empty-msg');
+    function findKey(){ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.endsWith(SUFFIX)) return k } return 'guest'+SUFFIX }
+    function loadList(k){ try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]} }
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 
-    function findListKey(){
-      for(let i=0;i<localStorage.length;i++){
-        const k = localStorage.key(i);
-        if(k && k.endsWith(LIST_SUFFIX)) return k;
-      }
-      return 'guest' + LIST_SUFFIX;
-    }
-    function loadListByKey(k){
-      try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e){ return []; }
-    }
-    function saveListByKey(k, arr){ localStorage.setItem(k, JSON.stringify(arr)); }
+    function buildCard(b){ const img=esc(b.img||'imagens/sem-capa.png'); return `
+<article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
+  <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>
+  <div class="book-title"><p>${esc(b.title)}</p><div class="book-actions">
+    <button class="action-btn btn-quer-ler">Quero Ler</button>
+    <button class="action-btn btn-ja-li">Já Li</button>
+    <button class="action-btn btn-favorito">♥</button>
+    <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
+  </div></div>
+  <div class="book-action"><a class="action-link" href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
+</article>`;}
 
-    function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function render(){ const k=findKey(), items=loadList(k); if(!items||items.length===0){ container.innerHTML=''; emptyMsg.style.display='block'; return } emptyMsg.style.display='none'; container.innerHTML = items.map(buildCard).join(''); setTimeout(()=>{ try{ window.__libraryActions.refreshAll(); }catch(e){} },60); }
 
-    function render(){
-      const key = findListKey();
-      const items = loadListByKey(key);
-      if(!items || items.length === 0){
-        emptyMsg.style.display = 'block';
-        container.innerHTML = '';
-        return;
-      }
-      emptyMsg.style.display = 'none';
-      container.innerHTML = items.map(b => `
-        <article class="book-item" data-id="${escapeHtml(b.id)}" data-title="${escapeHtml(b.title)}">
-          <div class="book-card">
-            <img src="${escapeHtml(b.img || '../imagens/sem-capa.png')}" alt="${escapeHtml(b.title)}">
-          </div>
-          <div class="book-title"><p>${escapeHtml(b.title)}</p></div>
-          <div class="book-actions">
-            <button class="action-btn btn-quer-ler">Quero Ler</button>
-            <button class="action-btn btn-ja-li">Já Li</button>
-            <button class="action-btn btn-favorito">♥</button>
-            <button class="action-btn btn-remove" data-book-id="${escapeHtml(b.id)}" aria-label="Remover ${escapeHtml(b.title)}">Remover</button>
-            <a class="action-link" href="./vejamais.html?id=${encodeURIComponent(b.id)}">Ver detalhes</a>
-          </div>
-        </article>
-      `).join('');
-      // Atualiza estados visuais dos botões caso necessário
-      setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); } catch(e){} }, 80);
-    }
+    container.addEventListener('click', (ev)=>{ const rem=ev.target.closest('.btn-remove'); if(!rem) return; const id=rem.dataset.bookId; if(!id) return; const k=findKey(); let arr=loadList(k); arr=arr.filter(x=>x.id!==id); localStorage.setItem(k, JSON.stringify(arr)); render(); });
 
-    // Remover item (apenas desta lista)
-    container.addEventListener('click', function(e){
-      const btn = e.target.closest && e.target.closest('.btn-remove');
-      if(!btn) return;
-      const bookId = btn.dataset.bookId;
-      if(!bookId) return;
-      const key = findListKey();
-      let items = loadListByKey(key);
-      items = items.filter(x => x.id !== bookId);
-      saveListByKey(key, items);
-      render();
-    });
+    document.addEventListener('click', (ev)=>{ const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito'); if(!btn) return; if(container.contains(btn)){ setTimeout(()=>{ try{ window.__libraryActions.refreshAll(); render(); }catch(e){} },160); } });
 
-    // Intercepta cliques dos botões dentro da própria página para evitar redirecionamento imediato
-    document.addEventListener('click', function(e){
-      const btn = e.target.closest && e.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito, [id^="btn-quer-ler"], [id^="btn-ja-li"], [id^="btn-favorito"]');
-      if(!btn) return;
-      if(container.contains(btn)){
-        // permite que o library-actions grave a alteração, depois re-renderiza sem sair da página
-        setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); render(); } catch(e){} }, 220);
-      }
-    });
-
-    // Inicializa render
-    render();
-
-    // expõe utilitário para debug se necessário
-    window.__favoritosPage = { render };
+    render(); window.__favoritosPage = { render };
   })();
   </script>
 </body>

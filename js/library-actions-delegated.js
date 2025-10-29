@@ -1,128 +1,187 @@
 // js/library-actions-delegated.js
-// Versão compatível com botões que usam classes OU ids que começam com "btn-quer-ler*", "btn-ja-li*", "btn-favorito*"
-// Persistência: localStorage por usuário (usa Firebase se disponível).
+// Versão robusta — extrai título e imagem de várias fontes, normaliza id,
+// salva img como URL absoluta sempre que possível, aceita vários formatos de botão,
+// e redireciona corretamente para as páginas de lista.
 
-// ----- Configuração / fallback para Firebase -----
 let auth = null;
 try {
-    import('./firebase-config.js').then(mod => { auth = mod.auth; }).catch(() => { auth = null; });
-} catch (e) {
-    auth = null;
+  import('./firebase-config.js').then(m => { auth = m.auth; }).catch(()=>{ auth = null; });
+} catch(e){ auth = null; }
+
+function getUserKey(){
+  try { if(auth && auth.currentUser && auth.currentUser.uid) return `user-${auth.currentUser.uid}`; } catch(e){}
+  return 'guest';
+}
+function sKey(listName){ return `${getUserKey()}::${listName}`; }
+function load(listName){ const raw = localStorage.getItem(sKey(listName)); return raw ? JSON.parse(raw) : []; }
+function save(listName, arr){ localStorage.setItem(sKey(listName), JSON.stringify(arr)); }
+function inList(listName, id){ return load(listName).some(i => i.id === id); }
+
+function normalizeToId(v){
+  return String(v||'').trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'').replace(/\-+/g,'-').replace(/^\-+|\-+$/g,'');
+}
+function absoluteUrl(url){
+  if(!url) return '';
+  try { return new URL(url, window.location.origin).href; } catch(e){ return url; }
 }
 
-// ----- Storage helpers -----
-function getUserKey() {
-    try { if (auth && auth.currentUser && auth.currentUser.uid) return `user-${auth.currentUser.uid}`; } catch (e) { }
-    return 'guest';
+// heurísticas para extrair título e imagem
+function findClosestBookCard(el){
+  return el.closest('.book-item') || el.closest('[data-id]') || el.closest('.book-detail') || null;
 }
-function sKey(listName) { return `${getUserKey()}::${listName}`; }
-function load(listName) { const r = localStorage.getItem(sKey(listName)); return r ? JSON.parse(r) : []; }
-function save(listName, arr) { localStorage.setItem(sKey(listName), JSON.stringify(arr)); }
-function inList(listName, id) { if (!id) return false; return load(listName).some(i => i.id === id); }
-function toggle(listName, book) {
-    const arr = load(listName);
-    const idx = arr.findIndex(i => i.id === book.id);
-    if (idx > -1) { arr.splice(idx, 1); save(listName, arr); return false; }
-    arr.push(book); save(listName, arr); return true;
+function findTitleFromCard(card){
+  if(!card) return '';
+  if(card.dataset && card.dataset.title) return card.dataset.title.trim();
+  const p = card.querySelector && card.querySelector('.book-title p');
+  if(p && p.textContent.trim()) return p.textContent.trim();
+  const h1 = card.querySelector && card.querySelector('.book-info h1');
+  if(h1 && h1.textContent.trim()) return h1.textContent.trim();
+  const pageH1 = document.querySelector('.book-info h1') || document.querySelector('h1');
+  if(pageH1 && pageH1.textContent.trim()) return pageH1.textContent.trim();
+  const og = document.querySelector('meta[property="og:title"]');
+  if(og && og.content) return og.content.trim();
+  return (document.title || '').trim() || '';
 }
-
-// ----- utils -----
-function normalizeToId(v) { return String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, ''); }
-function findClosestBookCard(el) { return el.closest('.book-item') || el.closest('[data-id]') || document.querySelector('.book-detail') || null; }
-function buildBookFromEl(el) {
-    const card = findClosestBookCard(el);
-    const id = card?.dataset?.id || card?.getAttribute('data-id') || normalizeToId(card?.dataset?.title || card?.querySelector?.('.book-title p')?.textContent || document.querySelector('.book-info h1')?.textContent || document.title);
-    const title = card?.dataset?.title || card?.querySelector?.('.book-title p')?.textContent?.trim?.() || document.querySelector('.book-info h1')?.textContent || document.title || 'Sem título';
-    const img = card?.querySelector?.('img')?.src || '';
-    return { id, title, img, when: new Date().toISOString() };
-}
-
-// ----- selectors compatíveis -----
-// CSS selector que encontra botões por classe OU por id prefixado
-const BUTTON_SELECTOR = [
-    '.btn-quer-ler', '[id^="btn-quer-ler"]',
-    '.btn-ja-li', '[id^="btn-ja-li"]',
-    '.btn-favorito', '[id^="btn-favorito"]'
-].join(', ');
-
-// helper para detectar tipo de ação a partir do elemento encontrado
-function detectActionFromElement(el) {
-    if (!el) return null;
-    if (el.matches('.btn-quer-ler') || (el.id && el.id.startsWith('btn-quer-ler'))) return 'querLer';
-    if (el.matches('.btn-ja-li') || (el.id && el.id.startsWith('btn-ja-li'))) return 'jaLi';
-    if (el.matches('.btn-favorito') || (el.id && el.id.startsWith('btn-favorito'))) return 'favoritos';
-    return null;
-}
-
-// ----- atualização visual dos botões de um card -----
-function refreshButtonState(card) {
-    if (!card) return;
-    // determina id do livro
-    const id = card.dataset?.id || normalizeToId(card.dataset?.title || card.querySelector?.('.book-title p')?.textContent || '');
-    if (!id) return;
-    // encontra os botões (por classe ou id prefix)
-    const q = card.querySelector('.btn-quer-ler, [id^="btn-quer-ler"]');
-    const j = card.querySelector('.btn-ja-li, [id^="btn-ja-li"]');
-    const f = card.querySelector('.btn-favorito, [id^="btn-favorito"]');
-    if (q) q.classList.toggle('active', inList('querLer', id));
-    if (j) j.classList.toggle('active', inList('jaLi', id));
-    if (f) f.classList.toggle('active', inList('favoritos', id));
+function findImageFromCard(card){
+  try {
+    if(card){
+      const candidate = card.querySelector && (card.querySelector('img[data-src], img[src], img'));
+      if(candidate){
+        const s = candidate.getAttribute('src') || candidate.getAttribute('data-src') || candidate.src;
+        if(s) return absoluteUrl(s);
+      }
+      const fig = card.querySelector && card.querySelector('figure img');
+      if(fig){
+        const s = fig.getAttribute('src') || fig.src;
+        if(s) return absoluteUrl(s);
+      }
+    }
+    const detailImg = document.querySelector('.book-info img, .book-detail img, #book-detail img');
+    if(detailImg){
+      const s = detailImg.getAttribute('src') || detailImg.src;
+      if(s) return absoluteUrl(s);
+    }
+    const og = document.querySelector('meta[property="og:image"]');
+    if(og && og.content) return absoluteUrl(og.content);
+    const imgs = Array.from(document.images || []);
+    if(imgs.length){
+      let best = imgs[0];
+      imgs.forEach(i => {
+        try {
+          const area = (i.naturalWidth||0)*(i.naturalHeight||0);
+          const bestArea = (best.naturalWidth||0)*(best.naturalHeight||0);
+          if(area > bestArea) best = i;
+        } catch(e){}
+      });
+      const s = best.getAttribute('src') || best.src;
+      if(s) return absoluteUrl(s);
+    }
+  } catch(e){}
+  return '';
 }
 
-// ----- redirecionamento (mantém compatibilidade com estrutura /html/) -----
-function goToListPage(action) {
-    const map = { querLer: 'quer_ler.html', jaLi: '/ja_lidos.html', favoritos: '/favoritos.html' };
-    let target = map[action];
-    if (!target) return;
-    // Se a página atual está dentro de /html/ (ex: /html/vejamais.html), navegar relativo, senão usar /html/ prefixado
-    const inHtmlDir = window.location.pathname.includes('/html/');
-    if (inHtmlDir) target = `./${target}`;
-    else target = `/html/${target}`;
-    setTimeout(() => { window.location.href = target; }, 200);
+function buildBookFromEl(el){
+  const card = findClosestBookCard(el);
+  const rawTitle = findTitleFromCard(card) || 'Sem título';
+  let id = (card && (card.dataset && card.dataset.id)) || (card && card.getAttribute && card.getAttribute('data-id')) || '';
+  if(!id) id = normalizeToId(rawTitle);
+  const img = findImageFromCard(card) || '';
+  return { id: normalizeToId(id), title: rawTitle.trim(), img: img, when: new Date().toISOString() };
 }
 
-// ----- delegação de clique (captura botões mesmo que tenham id específico) -----
-document.addEventListener('click', (ev) => {
-    const clicked = ev.target;
-    // busca o botão mais próximo que corresponda ao selector compatível
-    const btn = clicked.closest && clicked.closest(BUTTON_SELECTOR);
-    if (!btn) return;
-    ev.preventDefault();
+function toggle(listName, book){
+  book.id = normalizeToId(book.id || book.title);
+  const arr = load(listName);
+  const idx = arr.findIndex(i => i.id === book.id);
+  if(idx > -1){ arr.splice(idx,1); save(listName, arr); return false; }
+  const toSave = { id: book.id, title: book.title, img: book.img || '', when: book.when || new Date().toISOString() };
+  arr.push(toSave);
+  save(listName, arr);
+  return true;
+}
 
-    const action = detectActionFromElement(btn);
-    if (!action) return;
+function refreshButtonState(card){
+  if(!card) return;
+  const id = normalizeToId(card.dataset?.id || card.dataset?.title || card.querySelector?.('.book-title p')?.textContent || '');
+  if(!id) return;
+  const q = card.querySelector('.btn-quer-ler, #btn-quer-ler, .action-btn.btn-quer-ler') || card.querySelector('[id^="btn-quer-ler-"]');
+  const j = card.querySelector('.btn-ja-li, #btn-ja-li, .action-btn.btn-ja-li') || card.querySelector('[id^="btn-ja-li-"]');
+  const f = card.querySelector('.btn-favorito, #btn-favorito, .action-btn.btn-favorito') || card.querySelector('[id^="btn-favorito-"], [id^="btn-favoritos-"]');
+  if(q) q.classList.toggle('active', inList('querLer', id));
+  if(j) j.classList.toggle('active', inList('jaLi', id));
+  if(f) f.classList.toggle('active', inList('favoritos', id));
+}
 
-    // constroi book object e alterna na lista
-    const book = buildBookFromEl(btn);
-    if (!book?.id) { console.warn('[Library] não foi possível inferir id do livro para o botão:', btn); return; }
-    const added = toggle(action, book);
+function refreshAllButtons(){ document.querySelectorAll('.book-item, .book-detail').forEach(c => refreshButtonState(c)); }
+window.__libraryActions = window.__libraryActions || {};
+window.__libraryActions.refreshAll = refreshAllButtons;
 
-    // atualiza estado visual do card (todos os botões no card)
-    const card = findClosestBookCard(btn);
-    refreshButtonState(card);
+function goToListPage(action){
+  const map = { querLer: 'quer_ler.html', jaLi: 'ja_lidos.html', favoritos: 'favoritos.html' };
+  const filename = map[action];
+  if(!filename) return;
+  try {
+    const url = new URL(filename, window.location.origin + '/');
+    setTimeout(()=> { window.location.href = url.href; }, 140);
+  } catch(e){
+    setTimeout(()=> { window.location.href = '/' + filename.replace(/^\/+/, ''); }, 140);
+  }
+}
 
-    console.log(`[Library] ${added ? 'Adicionado' : 'Removido'} "${book.title}" em ${action}`);
+const delegateSelector = [
+  '.btn-quer-ler',
+  '#btn-quer-ler',
+  '.btn-ja-li',
+  '#btn-ja-li',
+  '.btn-favorito',
+  '#btn-favorito',
+  '.action-btn.btn-quer-ler',
+  '.action-btn.btn-ja-li',
+  '.action-btn.btn-favorito'
+].join(',');
 
-    // redireciona para página correspondente
-    goToListPage(action);
+document.addEventListener('click', (e) => {
+  let btn = e.target.closest && e.target.closest(delegateSelector);
+
+  if(!btn){
+    let p = e.target;
+    while(p && p !== document){
+      if(p.id && (p.id.startsWith('btn-quer-ler-') || p.id.startsWith('btn-querler-') || p.id.startsWith('btn-ja-li-') || p.id.startsWith('btn-jali-') || p.id.startsWith('btn-favorito-') || p.id.startsWith('btn-fav-'))){
+        btn = p; break;
+      }
+      p = p.parentElement;
+    }
+  }
+  if(!btn) return;
+
+  e.preventDefault();
+
+  const idLower = (btn.id || '').toLowerCase();
+  let action = null;
+  if(btn.classList.contains('btn-quer-ler') || btn.id === 'btn-quer-ler' || idLower.startsWith('btn-quer-ler-') || idLower.startsWith('btn-querler-') || (btn.classList.contains('action-btn') && btn.classList.contains('btn-quer-ler'))){
+    action = 'querLer';
+  } else if(btn.classList.contains('btn-ja-li') || btn.id === 'btn-ja-li' || idLower.startsWith('btn-ja-li-') || idLower.startsWith('btn-jali-') || (btn.classList.contains('action-btn') && btn.classList.contains('btn-ja-li'))){
+    action = 'jaLi';
+  } else {
+    action = 'favoritos';
+  }
+
+  const book = buildBookFromEl(btn);
+  const added = toggle(action, book);
+  const card = findClosestBookCard(btn);
+  refreshButtonState(card);
+
+  try{ console.log(`[Library] ${added ? 'ADICIONADO' : 'REMOVIDO'} "${book.title}" -> ${action}`); }catch(e){}
+
+  const isInsideListPage = !!btn.closest('#quer-ler-container, #ja-li-container, #favoritos-container');
+  if(isInsideListPage){
+    setTimeout(()=> { try{ window.__libraryActions.refreshAll(); }catch(e){} }, 120);
+    return;
+  }
+
+  goToListPage(action);
 });
 
-// ----- init visual para botões já existentes -----
-function initVisual() {
-    document.querySelectorAll('.book-item, [data-id], .book-detail').forEach(c => refreshButtonState(c));
-}
-// inicializa quando DOM pronto
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initVisual);
-else initVisual();
-
-// ---- interface de debug (opcional) ----
-window.__libraryActions = {
-    status: () => {
-        console.log('userKey:', getUserKey());
-        console.log('querLer:', load('querLer'));
-        console.log('jaLi:', load('jaLi'));
-        console.log('favoritos:', load('favoritos'));
-        console.log('botões correspondentes na página (BUTTON_SELECTOR):', document.querySelectorAll(BUTTON_SELECTOR).length);
-    },
-    refreshAll: () => initVisual()
-};
+document.addEventListener('DOMContentLoaded', () => { refreshAllButtons(); });

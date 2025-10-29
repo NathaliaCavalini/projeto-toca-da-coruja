@@ -3,114 +3,111 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quer Ler — Toca da Coruja</title>
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="icon" href="../imagens/favicon.png" type="image/png">
+  <title>Quer ler — Toca da Coruja</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="icon" href="imagens/favicon.png" type="image/png">
+  <style>
+    .book-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
+    .book-card img{ max-width:160px; max-height:220px; object-fit:cover; }
+  </style>
 </head>
 <body>
   <aside class="sidebar">
-    <header class="logo">
-      <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-      <h1>Toca <br> da Coruja</h1>
-    </header>
-    <nav class="menu">
-      <ul>
-        <li><a href="../home.html">Catálogo</a></li>
-        <li><a href="./favoritos.html">Favoritos</a></li>
-        <li><a href="./ja_lidos.html">Já lidos</a></li>
-      </ul>
-    </nav>
-    <a id="user-info" href="./login.html" class="user-info-link"></a>
+    <header class="logo"><img src="imagens/logo.png" class="logo-img"><h1>Toca <br> da Coruja</h1></header>
+    <form class="search-form" role="search" onsubmit="return false;"><img src="imagens/lupa.png" width="20"><input id="search-input" type="search" placeholder="Pesquisar..."></form>
+    <section class="menu-section"><h2>Gêneros</h2><ul class="menu-list"><li><a href="rpg.html">RPG</a><li><a href="fantasia.html">Fantasia</a></li></ul></section>
+    <section class="menu-section"><h2>Minha Biblioteca</h2><ul class="menu-list"><li><a href="favoritos.html">Favoritos</a></li><li><a href="ja_lidos.html">Já lidos</a></li></ul></section>
   </aside>
 
   <main class="main-content">
-    <nav class="top-nav"><a href="../home.html">← Voltar ao catálogo</a></nav>
+    <nav class="nav-menu" aria-label="Navegação principal">
+      <a href="home.html"><img src="imagens/livro_aberto.png" width="20">Catálogo</a>
+      <a href="quer_ler.html" class="active"><img src="imagens/quer_ler.png" width="20">Quer ler</a>
+      <a href="ja_lidos.html"><img src="imagens/ja_lidos.png" width="20">Já lidos</a>
+      <div class="nav-actions"><button class="icon-btn" title="Modo escuro"><img src="imagens/escuro.png" width="20"></button></div>
+    </nav>
 
-    <section class="list-page">
-      <h1>Quer ler</h1>
-      <div id="quer-ler-container" class="book-grid" aria-live="polite"></div>
-      <p id="empty-msg" class="list-empty" style="display:none;">Nenhum livro adicionado à lista "Quer ler" ainda.</p>
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h2 id="hero-title" class="hero-title">Sua lista — <span class="hero-subtitle">Quer ler</span></h2>
+        <div class="hero-owl">🦉</div>
+        <p class="hero-explore">Livros que você marcou para ler</p>
+      </div>
+      <div class="hero-wave"></div>
+    </section>
+
+    <section class="book-grid" id="quer-ler-section">
+      <div id="quer-ler-container" class="book-grid"></div>
+      <p id="empty-msg" style="display:none; text-align:center; margin-top:24px;">Nenhum livro em "Quer ler".</p>
     </section>
   </main>
 
-  <footer class="footer">© Toca da Coruja</footer>
+  <footer class="footer"><div class="footer-content"><div class="footer-logo"><img src="imagens/logo.png" class="footer-img"><div><h3>Toca da Coruja</h3><p>Sua biblioteca literária.</p></div></div><div class="footer-links"><h4 id="explorar-title">Explorar</h4><ul><li><a href="home.html">Catálogo</a></li></ul></div><div><h4 style="margin:0 0 6px 0; color:var(--color-accent)">Conecte-se</h4><div class="social-icons"><a href="#"><img src="imagens/instagram.png" alt="Instagram"></a></div></div></div><div class="footer-bottom"><p>© 2025 Toca da Coruja</p></div></footer>
 
-  <!-- Global scripts -->
-  <script src="/js/library-actions-delegated.js"></script>
-  <script type="module" src="/js/user-info-global.js"></script>
+  <script src="js/library-actions-delegated.js"></script>
+  <script type="module" src="js/user-info-global.js"></script>
 
-  <!-- Renderizador local da lista "querLer" -->
   <script>
   (function(){
-    const LIST_SUFFIX = '::querLer';
+    const SUFFIX = '::querLer';
     const container = document.getElementById('quer-ler-container');
     const emptyMsg = document.getElementById('empty-msg');
 
-    function findListKey(){
-      for(let i=0;i<localStorage.length;i++){
-        const k = localStorage.key(i);
-        if(k && k.endsWith(LIST_SUFFIX)) return k;
-      }
-      return 'guest' + LIST_SUFFIX;
+    function findKey(){
+      for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if(k && k.endsWith(SUFFIX)) return k; }
+      return 'guest' + SUFFIX;
     }
-    function loadListByKey(k){
-      try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e){ return []; }
-    }
-    function saveListByKey(k, arr){ localStorage.setItem(k, JSON.stringify(arr)); }
+    function loadList(k){ try{ return JSON.parse(localStorage.getItem(k))||[] }catch(e){ return []; } }
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-    function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function buildCard(b){
+      const img = esc(b.img || 'imagens/sem-capa.png');
+      return `
+<article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
+  <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>
+  <div class="book-title">
+    <p>${esc(b.title)}</p>
+    <div class="book-actions">
+      <button class="action-btn btn-quer-ler">Quero Ler</button>
+      <button class="action-btn btn-ja-li">Já Li</button>
+      <button class="action-btn btn-favorito">♥</button>
+      <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
+    </div>
+  </div>
+  <div class="book-action"><a class="action-link" href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
+</article>`;
+    }
 
     function render(){
-      const key = findListKey();
-      const items = loadListByKey(key);
-      if(!items || items.length === 0){
-        emptyMsg.style.display = 'block';
-        container.innerHTML = '';
-        return;
-      }
-      emptyMsg.style.display = 'none';
-      container.innerHTML = items.map(b => `
-        <article class="book-item" data-id="${escapeHtml(b.id)}" data-title="${escapeHtml(b.title)}">
-          <div class="book-card">
-            <img src="${escapeHtml(b.img || '../imagens/sem-capa.png')}" alt="${escapeHtml(b.title)}">
-          </div>
-          <div class="book-title"><p>${escapeHtml(b.title)}</p></div>
-          <div class="book-actions">
-            <button class="action-btn btn-quer-ler">Quero Ler</button>
-            <button class="action-btn btn-ja-li">Já Li</button>
-            <button class="action-btn btn-favorito">♥</button>
-            <button class="action-btn btn-remove" data-book-id="${escapeHtml(b.id)}" aria-label="Remover ${escapeHtml(b.title)}">Remover</button>
-            <a class="action-link" href="./vejamais.html?id=${encodeURIComponent(b.id)}">Ver detalhes</a>
-          </div>
-        </article>
-      `).join('');
-      setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); } catch(e){} }, 80);
+      const k = findKey();
+      const items = loadList(k);
+      if(!items || items.length===0){ container.innerHTML=''; emptyMsg.style.display='block'; return; }
+      emptyMsg.style.display='none';
+      container.innerHTML = items.map(buildCard).join('');
+      setTimeout(()=> { try{ window.__libraryActions.refreshAll(); }catch(e){} }, 60);
     }
 
-    container.addEventListener('click', function(e){
-      const btn = e.target.closest && e.target.closest('.btn-remove');
-      if(!btn) return;
-      const bookId = btn.dataset.bookId;
-      if(!bookId) return;
-      const key = findListKey();
-      let items = loadListByKey(key);
-      items = items.filter(x => x.id !== bookId);
-      saveListByKey(key, items);
+    container.addEventListener('click', (ev) => {
+      const rem = ev.target.closest('.btn-remove');
+      if(!rem) return;
+      const id = rem.dataset.bookId;
+      if(!id) return;
+      const k = findKey();
+      let arr = loadList(k);
+      arr = arr.filter(x => x.id !== id);
+      localStorage.setItem(k, JSON.stringify(arr));
       render();
     });
 
-    // Evita redirecionamento imediato quando clicar nos botões dentro desta página
-    document.addEventListener('click', function(e){
-      const btn = e.target.closest && e.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito, [id^="btn-quer-ler"], [id^="btn-ja-li"], [id^="btn-favorito"]');
+    document.addEventListener('click', (ev) => {
+      const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito');
       if(!btn) return;
       if(container.contains(btn)){
-        setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); render(); } catch(e){} }, 220);
+        setTimeout(()=> { try{ window.__libraryActions.refreshAll(); render(); } catch(e){} }, 160);
       }
     });
 
-    // init
     render();
-
     window.__querLerPage = { render };
   })();
   </script>
