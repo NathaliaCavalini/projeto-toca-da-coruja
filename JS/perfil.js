@@ -7,7 +7,7 @@ onAuthStateChanged(auth, (user) => {
         document.getElementById("perfil-foto").src = user.photoURL || "../imagens/default-user.png";
         document.getElementById("novo-username").value = user.displayName || "";
     } else {
-        window.location.href = "../login.html";
+        window.location.href = "/login.html";
     }
 });
 
@@ -38,5 +38,5 @@ document.getElementById("salvar").addEventListener("click", async () => {
     });
 
     alert("✅ Perfil atualizado!");
-    window.location.href = "../home/home.html";
+    window.location.href = "/home.html";
 });

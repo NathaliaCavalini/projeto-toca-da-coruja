@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Já lidos — Toca da Coruja</title>
+  <title>Favoritos — Toca da Coruja</title>
   <link rel="stylesheet" href="../css/home.css">
   <link rel="icon" href="../imagens/favicon.png" type="image/png">
 </head>
 <body>
+  <!-- Sidebar (puxe sua sidebar real se quiser) -->
   <aside class="sidebar">
     <header class="logo">
       <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
@@ -15,21 +16,21 @@
     </header>
     <nav class="menu">
       <ul>
-        <li><a href="../home.html">Catálogo</a></li>
-        <li><a href="./quer_ler.html">Quer ler</a></li>
-        <li><a href="./favoritos.html">Favoritos</a></li>
+        <li><a href="/home.html">Catálogo</a></li>
+        <li><a href="/quer_ler.html">Quer ler</a></li>
+        <li><a href="/ja_lidos.html">Já lidos</a></li>
       </ul>
     </nav>
-    <a id="user-info" href="./login.html" class="user-info-link"></a>
+    <a id="user-info" href="/login.html" class="user-info-link"></a>
   </aside>
 
   <main class="main-content">
-    <nav class="top-nav"><a href="../home.html">← Voltar ao catálogo</a></nav>
+    <nav class="top-nav"><a href="/home.html">← Voltar ao catálogo</a></nav>
 
     <section class="list-page">
-      <h1>Já lidos</h1>
-      <div id="ja-li-container" class="book-grid" aria-live="polite"></div>
-      <p id="empty-msg" class="list-empty" style="display:none;">Nenhum livro em "Já lidos".</p>
+      <h1>Favoritos</h1>
+      <div id="favoritos-container" class="book-grid" aria-live="polite"></div>
+      <p id="empty-msg" class="list-empty" style="display:none;">Nenhum favorito ainda.</p>
     </section>
   </main>
 
@@ -39,11 +40,11 @@
   <script src="/js/library-actions-delegated.js"></script>
   <script type="module" src="/js/user-info-global.js"></script>
 
-  <!-- Renderizador local da lista "jaLi" -->
+  <!-- Renderizador local da lista "favoritos" (autônomo) -->
   <script>
   (function(){
-    const LIST_SUFFIX = '::jaLi';
-    const container = document.getElementById('ja-li-container');
+    const LIST_SUFFIX = '::favoritos';
+    const container = document.getElementById('favoritos-container');
     const emptyMsg = document.getElementById('empty-msg');
 
     function findListKey(){
@@ -84,9 +85,11 @@
           </div>
         </article>
       `).join('');
+      // Atualiza estados visuais dos botões caso necessário
       setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); } catch(e){} }, 80);
     }
 
+    // Remover item (apenas desta lista)
     container.addEventListener('click', function(e){
       const btn = e.target.closest && e.target.closest('.btn-remove');
       if(!btn) return;
@@ -99,18 +102,21 @@
       render();
     });
 
+    // Intercepta cliques dos botões dentro da própria página para evitar redirecionamento imediato
     document.addEventListener('click', function(e){
       const btn = e.target.closest && e.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito, [id^="btn-quer-ler"], [id^="btn-ja-li"], [id^="btn-favorito"]');
       if(!btn) return;
       if(container.contains(btn)){
+        // permite que o library-actions grave a alteração, depois re-renderiza sem sair da página
         setTimeout(()=> { try{ window.__libraryActions?.refreshAll?.(); render(); } catch(e){} }, 220);
       }
     });
 
-    // init
+    // Inicializa render
     render();
 
-    window.__jaLiPage = { render };
+    // expõe utilitário para debug se necessário
+    window.__favoritosPage = { render };
   })();
   </script>
 </body>

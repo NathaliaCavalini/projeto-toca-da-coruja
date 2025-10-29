@@ -32,7 +32,7 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
         });
 
         alert("✅ Conta criada com sucesso!");
-        window.location.href = "login.html";
+        window.location.href = "/login.html";
     } catch (error) {
         console.error(error);
         if (error.code === "auth/email-already-in-use") {
@@ -65,7 +65,7 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
         });
 
         alert("✅ Conta criada com sucesso!");
-        window.location.href = "../html/home.html";
+        window.location.href = "/home.html";
     } catch (error) {
         console.error(error);
         alert("❌ Erro: " + error.message);

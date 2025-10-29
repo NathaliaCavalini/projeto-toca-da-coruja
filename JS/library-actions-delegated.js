@@ -71,7 +71,7 @@ function refreshButtonState(card) {
 
 // ----- redirecionamento (mantém compatibilidade com estrutura /html/) -----
 function goToListPage(action) {
-    const map = { querLer: 'quer_ler.html', jaLi: 'ja_lidos.html', favoritos: 'favoritos.html' };
+    const map = { querLer: 'quer_ler.html', jaLi: '/ja_lidos.html', favoritos: '/favoritos.html' };
     let target = map[action];
     if (!target) return;
     // Se a página atual está dentro de /html/ (ex: /html/vejamais.html), navegar relativo, senão usar /html/ prefixado
