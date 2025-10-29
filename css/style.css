@@ -1,0 +1,275 @@
+/* =============================
+   PALETA DE CORES (sua identidade)
+   ============================= */
+:root {
+    --c-primary: #c5946c;
+    /* dourado/bronze */
+    --c-surface: #f5e7d7;
+    /* fundo claro */
+    --c-accent: #8b694d;
+    /* acento */
+    --c-text: #3a2d14;
+    /* texto escuro */
+    --c-muted: #e6c9a8;
+    /* superfície secundária */
+
+    --color-primary: var(--c-primary);
+    --color-surface: var(--c-surface);
+    --color-accent: var(--c-accent);
+    --color-text: var(--c-text);
+    --color-muted: var(--c-muted);
+
+    --shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    --radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* ===== MODO ESCURO ===== */
+body.dark-mode {
+    --c-primary: #c5946c;
+    --c-surface: #7d5237;
+    --c-accent: #d4a574;
+    --c-text: #f1f1f1;
+    --c-muted: #995e40;
+
+    --color-primary: var(--c-primary);
+    --color-surface: var(--c-surface);
+    --color-accent: var(--c-accent);
+    --color-text: var(--c-text);
+    --color-muted: var(--c-muted);
+
+    --shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== RESET & BASE ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    line-height: 1.6;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+.intro-container {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* ===== CAIXA DE INTRODUÇÃO ===== */
+.intro-box {
+    background: linear-gradient(135deg,
+            rgba(197, 148, 108, 0.15),
+            rgba(245, 231, 215, 0.25));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(197, 148, 108, 0.2);
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: float-pulse 5s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.intro-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.intro-box:hover::before {
+    opacity: 1;
+}
+
+.intro-box h1 {
+    font-family: 'Georgia', serif;
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+}
+
+.intro-box p {
+    font-size: 1.05rem;
+    margin: 14px 0;
+    opacity: 0.92;
+}
+
+.beautiful-phrase {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--color-accent);
+    margin-top: 24px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* ===== BOTÃO PRINCIPAL (ESTILO DO SITE) ===== */
+.main-page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text);
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    border-radius: 40px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(197, 148, 108, 0.15);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-page-btn .btn-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.main-page-btn:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(197, 148, 108, 0.3);
+}
+
+.main-page-btn:hover .btn-logo {
+    transform: rotate(-15deg) scale(1.1);
+}
+
+.main-page-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Efeito de onda no hover */
+.main-page-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.main-page-btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes float-pulse {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1) rotateX(0deg);
+        box-shadow: var(--shadow);
+    }
+
+    50% {
+        transform: translateY(-12px) scale(1.02) rotateX(3deg);
+        box-shadow: 0 16px 32px rgba(139, 105, 77, 0.18);
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 6px rgba(212, 165, 116, 0.3);
+    }
+
+    to {
+        text-shadow: 0 0 12px rgba(212, 165, 116, 0.5);
+    }
+}
+
+/* ===== MODO ESCURO ===== */
+body.dark-mode .intro-box {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.12), rgba(125, 82, 55, 0.18));
+    border-color: rgba(212, 165, 116, 0.25);
+}
+
+body.dark-mode .intro-box h1 {
+    color: #f1f1f1;
+}
+
+body.dark-mode .beautiful-phrase {
+    color: var(--color-accent);
+}
+
+body.dark-mode .main-page-btn {
+    color: #f1f1f1;
+    border-color: var(--color-primary);
+}
+
+body.dark-mode .main-page-btn:hover {
+    background-color: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
+    .intro-box {
+        padding: 36px 24px;
+    }
+
+    .intro-box h1 {
+        font-size: 1.7rem;
+    }
+
+    .beautiful-phrase {
+        font-size: 1.05rem;
+    }
+
+    .main-page-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        gap: 10px;
+    }
+
+    .main-page-btn .btn-logo {
+        width: 28px;
+        height: 28px;
+    }
+}
