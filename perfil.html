@@ -5,64 +5,94 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Perfil – Toca da Coruja</title>
+    <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/perfil.css" />
     <link rel="icon" href="../imagens/favicon.png" type="image/png">
 </head>
 
 <body>
-    <div class="perfil-container">
-        <h1>Meu Perfil</h1>
-        <img id="user-photo" src="../imagens/user.png" alt="Foto do usuário" width="120" height="120"
-            style="border-radius:50%;">
-        <form id="profile-form">
-            <label>Nome de usuário</label>
-            <input type="text" id="username" />
+    <main class="perfil-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h1>Meu Perfil</h1>
+                <p>Atualize suas informações na Toca da Coruja</p>
+            </div>
 
-            <label>E-mail</label>
-            <input type="email" id="email" disabled />
+            <img id="user-photo" src="../imagens/user.png" alt="Foto do usuário">
 
-            <label>Foto (arquivo)</label>
-            <input type="file" id="photo-file" accept="image/*" />
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="username">Nome de usuário</label>
+                    <input type="text" id="username" placeholder="Seu nome completo" />
+                </div>
 
-            <button type="submit">Salvar Alterações</button>
-        </form>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" disabled />
+                </div>
 
-        <button id="logout-btn">Sair</button>
-    </div>
+                <div class="form-group">
+                    <label for="photo-file">Foto de perfil</label>
+                    <input type="file" id="photo-file" accept="image/*" />
+                </div>
 
+                <button type="submit" class="btn-save">Salvar Alterações</button>
+            </form>
+
+            <button id="logout-btn" class="btn-logout">Sair da Conta</button>
+        </div>
+    </main>
+
+    <!-- JS CORRIGIDO -->
     <script type="module">
         import { auth, db, storage } from "../js/firebase-config.js";
-        import { onAuthStateChanged, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-        import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
+        import { 
+            onAuthStateChanged, 
+            updateProfile, 
+            signOut 
+        } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { 
+            doc, 
+            setDoc, 
+            getDoc 
+        } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { 
+            ref, 
+            uploadBytes, 
+            getDownloadURL 
+        } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
-        const username = document.getElementById("username");
-        const email = document.getElementById("email");
-        const photoFile = document.getElementById("photo-file");
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const photoFileInput = document.getElementById("photo-file");
         const userPhoto = document.getElementById("user-photo");
         const profileForm = document.getElementById("profile-form");
         const logoutBtn = document.getElementById("logout-btn");
 
+        // Verifica usuário logado
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = "login.html";
                 return;
             }
-            // preenche campos
-            username.value = user.displayName || "";
-            email.value = user.email || "";
+
+            // Preenche os campos
+            usernameInput.value = user.displayName || "";
+            emailInput.value = user.email || "";
             userPhoto.src = user.photoURL || "../imagens/user.png";
 
-            // tenta buscar dados extras no Firestore
+            // Tenta carregar do Firestore (caso tenha foto personalizada)
             try {
                 const snap = await getDoc(doc(db, "usuarios", user.uid));
-                if (snap.exists()) {
-                    const data = snap.data();
-                    if (data.photoURL) userPhoto.src = data.photoURL;
+                if (snap.exists() && snap.data().photoURL) {
+                    userPhoto.src = snap.data().photoURL;
                 }
-            } catch (err) { console.warn(err); }
+            } catch (err) {
+                console.warn("Erro ao carregar dados do Firestore:", err);
+            }
         });
 
+        // Salvar perfil
         profileForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const user = auth.currentUser;
@@ -70,33 +100,44 @@
 
             try {
                 let photoURL = user.photoURL || "";
-                const file = photoFile.files[0];
-                if (file) {
-                    // faz upload para storage em /avatars/<uid>
-                    const storageRef = ref(storage, `avatars/${user.uid}/${Date.now()}_${file.name}`);
-                    await uploadBytes(storageRef, file);
-                    photoURL = await getDownloadURL(storageRef);
+
+                // Upload da nova foto (se houver)
+                if (photoFileInput.files[0]) {
+                    const file = photoFileInput.files[0];
+                    const fileRef = ref(storage, `avatars/${user.uid}/${Date.now()}_${file.name}`);
+                    
+                    // Mostra preview imediato
+                    userPhoto.src = URL.createObjectURL(file);
+
+                    // Upload
+                    const snapshot = await uploadBytes(fileRef, file);
+                    photoURL = await getDownloadURL(snapshot.ref);
                 }
 
-                // atualiza Auth
-                await updateProfile(user, { displayName: username.value, photoURL });
+                // Atualiza Auth
+                await updateProfile(user, {
+                    displayName: usernameInput.value.trim(),
+                    photoURL
+                });
 
-                // atualiza Firestore
+                // Atualiza Firestore
                 await setDoc(doc(db, "usuarios", user.uid), {
-                    displayName: username.value,
+                    displayName: usernameInput.value.trim(),
                     email: user.email,
                     photoURL,
                     updatedAt: new Date()
                 }, { merge: true });
 
-                alert("Perfil atualizado!");
-                location.reload();
+                alert("Perfil atualizado com sucesso!");
+                // Opcional: recarrega para garantir sincronia
+                // location.reload();
             } catch (err) {
-                console.error(err);
-                alert("Erro ao salvar: " + (err.message || err));
+                console.error("Erro ao salvar perfil:", err);
+                alert("Erro ao salvar: " + (err.message || "Tente novamente."));
             }
         });
 
+        // Sair
         logoutBtn.addEventListener("click", async () => {
             await signOut(auth);
             window.location.href = "login.html";

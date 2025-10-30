@@ -3,19 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Favoritos — Toca da Coruja</title>
+  <title>Quer ler — Toca da Coruja</title>
   <link rel="stylesheet" href="css/home.css">
   <link rel="icon" href="imagens/favicon.png" type="image/png">
-  <style>.book-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}.book-card img{max-width:160px;max-height:220px;object-fit:cover}</style>
+  <style>
+    .book-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
+    .book-card img{ max-width:160px; max-height:220px; object-fit:cover; }
+  </style>
 </head>
 <body>
-  <aside class="sidebar"><header class="logo"><img src="imagens/logo.png" class="logo-img"><h1>Toca <br> da Coruja</h1></header>
-  <form class="search-form" role="search" onsubmit="return false;"><img src="imagens/lupa.png" width="20"><input type="search" id="search-input" placeholder="Pesquisar..."></form>
-  <section class="menu-section"><h2>Minha Biblioteca</h2><ul class="menu-list"><li><a href="quer_ler.html">Quer ler</a></li><li><a href="ja_lidos.html">Já lidos</a></li></ul></section></aside>
+    <aside class="sidebar">
+        <header class="logo">
+            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <h1>Toca <br> da Coruja</h1>
+        </header>
 
-  <main class="main-content">
-    <nav class="nav-menu"><a href="home.html"><img src="imagens/livro_aberto.png" width="20">Catálogo</a><a href="favoritos.html" class="active"><img src="imagens/favoritos.png" width="20">Favoritos</a></nav>
-    <section class="hero-section"><div class="hero-content"><h2 class="hero-title">Sua lista — <span class="hero-subtitle">Favoritos</span></h2></div><div class="hero-wave"></div></section>
+        <form class="search-form" role="search" onsubmit="return false;">
+            <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+            <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <section class="menu-section">
+            <h2>Gêneros</h2>
+            <ul class="menu-list">
+                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
+                </li>
+                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">LGBTQIAPN+</a></li>
+                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Fantasia</a></li>
+                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Romance</a></li>
+                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Clássicos</a></li>
+                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
+                            alt="">Programação</a></li>
+                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="menu-section">
+            <h2>Minha Biblioteca</h2>
+            <ul class="menu-list">
+                <li><a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20"
+                            alt="">Favoritos</a></li>
+                <li><a href="colecao.html"><img src="../imagens/minhacolecao.png" width="20" height="20" alt="">Minha
+                        coleção</a></li>
+            </ul>
+        </section>
+    </aside>
+
+    <main class="main-content">
+        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+
+            <!-- ações (ícones) ficam à direita -->
+            <div class="nav-actions" aria-hidden="false">
+                <button class="icon-btn" title="Modo escuro">
+                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+                </button>
+                <button class="icon-btn" title="Ajuda">
+                    <img src="../imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+                </button>
+            </div>
+        </nav>
+
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h2 id="hero-title" class="hero-title">Sua lista <span class="hero-subtitle">Favoritos</span></h2>
+        <div class="hero-owl">🦉</div>
+        <p class="hero-explore">Livros que você marcou para ler</p>
+      </div>
+      <div class="hero-wave"></div>
+    </section>
     <section class="book-grid" id="favoritos-section"><div id="favoritos-container" class="book-grid"></div><p id="empty-msg" style="display:none; text-align:center; margin-top:24px;">Nenhum favorito ainda.</p></section>
   </main>
 
@@ -51,5 +116,165 @@
     render(); window.__favoritosPage = { render };
   })();
   </script>
+      <script src="../js/home.js"></script>
+
+    <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+        // pega o elemento (pode ser null se a página não tiver sidebar)
+        const userInfo = document.getElementById("user-info");
+
+        if (!userInfo) {
+            // debug: se faltou o id em alguma página, aparece aqui no console
+            console.warn("Elemento #user-info não encontrado nesta página. Adicione id='user-info' ao link do sidebar.");
+        } else {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const nome = user.displayName || (user.email ? user.email.split("@")[0] : "Usuário");
+                    const foto = user.photoURL || "../imagens/user.png";
+
+                    userInfo.innerHTML = `
+                        <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
+                        <span>${nome}</span>
+                    `;
+                    // linka pro perfil
+                    userInfo.setAttribute("href", "perfil.html");
+                } else {
+                    userInfo.innerHTML = `
+                        <img src="../imagens/user.png" alt="Ícone de usuário" />
+                        <span>Cadastre-se</span>
+                    `;
+                    userInfo.setAttribute("href", "login.html");
+                }
+            });
+        }
+    </script>
+    <!-- PARTÍCULAS MÁGICAS NO HERO -->
+    <canvas id="hero-particles"></canvas>
+    <script>
+        // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
+        const canvas = document.getElementById('hero-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 20;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = -(Math.random() * 2 + 0.5);
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.life = 0;
+                this.maxLife = Math.random() * 100 + 100;
+                this.opacity = 1;
+                this.wingAngle = 0;
+                this.wingSpeed = Math.random() * 0.1 + 0.05;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.life++;
+                this.opacity = 1 - (this.life / this.maxLife);
+                this.wingAngle += this.wingSpeed;
+
+                if (this.life > this.maxLife || this.y < -20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+
+                // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
+                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+                gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`);     // #ffd4a3 - brilho quente
+                gradient.addColorStop(0.6, `rgba(197, 148, 108, ${this.opacity * 0.8})`); // #c5946c - núcleo
+                gradient.addColorStop(1, `rgba(197, 148, 108, 0)`);                 // fade suave
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // ASAS SUTIS (efeito de coruja voando)
+                ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
+                ctx.lineWidth = 1.2;
+                ctx.setLineDash([2, 4]);
+
+                ctx.beginPath();
+                ctx.moveTo(-this.size * 1.8, 0);
+                ctx.quadraticCurveTo(-this.size * 3.5, Math.sin(this.wingAngle) * 6, -this.size * 2.2, -this.size * 0.6);
+                ctx.moveTo(this.size * 1.8, 0);
+                ctx.quadraticCurveTo(this.size * 3.5, Math.sin(-this.wingAngle) * 6, this.size * 2.2, -this.size * 0.6);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(canvas.width / 15), 80);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // Inicialização
+        window.addEventListener('load', () => {
+            const hero = document.querySelector('.hero-section');
+            if (!hero) return;
+
+            canvas.style.position = 'absolute';
+            hero.style.position = 'relative';
+            hero.appendChild(canvas);
+
+            resizeCanvas();
+            initParticles();
+            animate();
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            // Ajuste no dark mode
+            const observer = new MutationObserver(() => {
+                if (document.body.classList.contains('dark-mode')) {
+                    ctx.globalCompositeOperation = 'soft-light';
+                } else {
+                    ctx.globalCompositeOperation = 'screen';
+                }
+            });
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        });
+    </script>
+    <script type="module" src="../js/user-info-global.js"></script>
+    <script src="/js/library-actions-delegated.js"></script>
 </body>
 </html>
