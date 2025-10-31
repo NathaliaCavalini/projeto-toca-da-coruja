@@ -1,245 +1,308 @@
-/* =============================
-   PERFIL – TEMA BIBLIOTECA/CAFÉ
-   Card HORIZONTAL, achatado, cores idênticas ao home.css
-   ============================= */
-
-/* ---------- PALETA DO home.css (exata) ---------- */
 :root {
-    --c-primary: #c5946c;      /* dourado/bronze – botão salvar */
-    --c-accent:  #8b694d;      /* marrom escuro – hover salvar */
-    --c-danger:  #a63f3f;      /* vermelho vinho – botão sair */
-    --c-danger-hover: #c0392b;
-
-    --profile-bg: #f5e7d7;           /* fundo claro – exatamente como home.css */
-    --profile-card: #ffffff;         /* cartão branco */
-    --profile-text: #3a2d14;         /* texto escuro */
-    --profile-muted: #e6c9a8;        /* texto secundário */
-    --profile-shadow: 0 12px 28px rgba(139,105,77,.15);
-    --profile-radius: 16px;
-    --profile-gap: 1.4rem;
-    --profile-font: "Georgia", serif;
+    --primary-color: #C5946C;     /* cartão + borda foto */
+    --secondary-color: #F5E7D7;   /* fundo da página */
+    --accent-color: #8B694D;      /* botão salvar + hover */
+    --text-color: #3A2D14;        /* texto */
+    --danger-color: #a63f3f;      /* botão sair */
+    --danger-hover: #c0392b;
 }
 
-/* modo escuro – mantém paleta do home.css */
-body.dark-mode {
-    --c-primary: #c5946c;
-    --c-accent:  #d4a574;
-    --c-danger:  #d9534f;
-    --c-danger-hover: #c9302c;
-
-    --profile-bg: #7d5237;
-    --profile-card: #3a2d14;
-    --profile-text: #f1f1f1;
-    --profile-muted: #995e40;
-    --profile-shadow: 0 12px 28px rgba(0,0,0,.5);
-}
-
-/* ---------- RESET DO BODY (remove grid da sidebar) ---------- */
+/* Reset / Layout */
 body {
-    display: flex !important;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    background: var(--profile-bg);
-    font-family: var(--profile-font);
-    color: var(--profile-text);
-}
-
-/* ---------- CONTAINER CENTRALIZADO ---------- */
-.perfil-container {
-    flex: 1;
+    background: var(--secondary-color);
+    font-family: 'Segoe UI', Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
     min-height: 100vh;
-    background-image:
-        radial-gradient(circle at 15% 25%, rgba(139,105,77,.06) 0%, transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(197,148,108,.05) 0%, transparent 40%);
+    margin: 0;
+    color: var(--text-color);
 }
 
-/* ---------- CARD HORIZONTAL (achatado) ---------- */
-.profile-card {
-    background: var(--profile-card);
-    border-radius: var(--profile-radius);
-    padding: 2rem 2.5rem;           /* mais padding horizontal */
+.perfil-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-width: 560px;               /* mais largo */
-    height: auto;
-    min-height: 320px;              /* altura mínima fixa */
-    box-shadow: var(--profile-shadow);
-    border: 1px solid rgba(139,105,77,.15);
-    position: relative;
-    overflow: hidden;
+    padding: 1rem;
+}
+
+/* Card principal */
+.perfil-card {
+    background: #e6c9a8;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.6s ease-in-out;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    animation: fadeInUp .6s ease-out;
+    gap: 16px;
+    position: relative; /* necessário para o back-btn absoluto */
 }
 
-/* barra superior decorativa */
-.profile-card::before {
-    content: "";
+/* Back button (link + circle icon) */
+.back-btn {
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(90deg,
-        var(--c-primary), #d4a574, var(--c-primary));
-    opacity: .85;
+    left: 16px;
+    top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
 }
 
-/* ---------- CABEÇALHO ---------- */
-.profile-header {
-    text-align: center;
-    margin-bottom: var(--profile-gap);
-}
-.profile-header h1 {
-    font-size: 1.9rem;
-    margin: 0 0 .3rem;
-    color: var(--c-primary);
+/* o link principal estilizado (pílula) */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    background: rgba(245, 231, 215, 0.95);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+    font-size: 15px;
     font-weight: 600;
-    letter-spacing: -0.6px;
-}
-.profile-header p {
-    font-size: .94rem;
-    color: var(--profile-muted);
-    font-style: italic;
-    margin: 0;
-    opacity: .9;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-/* ---------- FOTO ---------- */
+.back-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+    background: #fff;
+}
+
+/* círculo com borda contendo o ícone (abaixo do link) */
+.back-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-color);
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* leve movimento do ícone quando o botão é hoverado */
+.back-btn:hover .back-icon {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+}
+
+/* ícone centralizado */
+.back-icon svg,
+.back-icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Títulos e textos */
+h1 {
+    margin: 0 0 8px;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+p {
+    color: var(--text-color);
+    margin: 0 0 20px;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* Foto do usuário */
 #user-photo {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto 1.2rem;
-    display: block;
-    border: 4px solid var(--c-primary);
-    box-shadow: 0 6px 16px rgba(139,105,77,.22);
-    transition: all .3s ease;
-}
-#user-photo:hover {
-    transform: scale(1.07);
-    box-shadow: 0 10px 24px rgba(139,105,77,.3);
+    margin: 0 auto 16px;
+    border: 4px solid var(--secondary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
-/* ---------- FORMULÁRIO ---------- */
+#user-photo:hover {
+    transform: scale(1.08);
+}
+
+/* Formulário */
 #profile-form {
     display: flex;
     flex-direction: column;
-    gap: var(--profile-gap);
-    margin-top: .8rem;
+    gap: 14px;
 }
-.form-group {
-    text-align: left;
-}
-.form-group label {
-    display: block;
-    font-size: .92rem;
-    font-weight: 600;
-    color: var(--profile-muted);
-    margin-bottom: .4rem;
-    font-family: "Segoe UI", sans-serif;
-}
-.form-group input[type="text"],
-.form-group input[type="email"] {
-    width: 100%;
-    padding: .8rem 1rem;
-    font-size: 1rem;
-    border: 1.6px solid rgba(139,105,77,.22);
+
+input {
+    padding: 12px;
+    height: 30px;
     border-radius: 10px;
-    background: rgba(245,231,215,.3);
-    color: var(--profile-text);
-    font-family: inherit;
-    transition: all .3s ease;
-}
-.form-group input:focus {
+    border: 1px solid #ccc;
+    font-size: 16px;
     outline: none;
-    border-color: var(--c-primary);
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+}
+
+input::placeholder { color: #999; }
+
+input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
     background: #fff;
-    box-shadow: 0 0 0 4px rgba(197,148,108,.15);
 }
-.form-group input:disabled {
-    background: rgba(139,105,77,.1);
-    color: var(--profile-muted);
+
+input:disabled {
+    background: rgba(139, 105, 77, 0.15);
+    color: var(--text-color);
+    opacity: 0.8;
     cursor: not-allowed;
-    opacity: .8;
 }
 
-/* input file – botão estilizado */
-.form-group input[type="file"] {
-    width: 100%;
-    padding: .7rem 0;
-    font-size: .92rem;
-    color: var(--profile-muted);
-    cursor: pointer;
-}
-.form-group input[type="file"]::file-selector-button {
-    background: var(--c-primary);
-    color: #fff;
-    border: none;
-    padding: .55rem 1rem;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-right: .8rem;
-    transition: background .3s ease;
-}
-.form-group input[type="file"]::file-selector-button:hover {
-    background: var(--c-accent);
-}
-
-/* ---------- BOTÕES – CORES EXATAS DO home.css ---------- */
-.btn-save,
-.btn-logout {
-    padding: .85rem 1.6rem;
+/* Botões */
+.btn {
+    background: rgba(245, 231, 215, 0.95);
+    color: #000;
+    padding: 14px;
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: all .3s ease;
-    font-family: "Segoe UI", sans-serif;
-    margin-top: .4rem;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
 }
 
-/* SALVAR – dourado/bronze */
-.btn-save {
-    background: var(--c-primary);
-    color: #fff;
-}
-.btn-save:hover,
-.btn-save:active {
-    background: var(--c-accent);
+.btn:hover {
+    background: #b18c6f;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139,105,77,.28);
 }
 
-/* SAIR – vermelho vinho */
 .btn-logout {
-    background: var(--c-danger);
+    background: var(--danger-color);
     color: #fff;
-    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 8px;
 }
-.btn-logout:hover,
-.btn-logout:active {
-    background: var(--c-danger-hover);
+
+.btn-logout:hover {
+    background: var(--danger-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(166,63,63,.28);
 }
 
-/* ---------- ANIMAÇÃO ---------- */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+.link { margin-top: 8px; }
+
+/* Input file estilizado */
+input[type="file"] {
+    font-size: 14px;
+    padding: 10px 0;
 }
 
-/* ---------- RESPONSIVO ---------- */
-@media (max-width: 600px) {
-    .perfil-container { padding: 1.5rem; }
-    .profile-card { padding: 1.8rem 2rem; max-width: 100%; }
-    #user-photo { width: 100px; height: 100px; border-width: 3px; }
-    .profile-header h1 { font-size: 1.7rem; }
+input[type="file"]::file-selector-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 10px;
+    padding: 5px;
+    background: rgba(245, 231, 215, 0.95);
+    border: 2px solid var(--primary-color);
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #b18c6f;
+    transform: translateY(-2px);
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.back-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 10px; /* centraliza e dá espaço abaixo */
+    padding: 10px 18px;
+    background: rgba(245, 231, 215, 0.95);
+    border: 2px solid var(--primary-color);
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.back-box:hover {
+    background: #b18c6f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.back-box svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--text-color);
+    transition: transform 0.2s ease;
+}
+
+.back-box:hover svg {
+    transform: translateX(-3px);
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .back-box {
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .back-box svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+/* Animação */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+    .perfil-card { padding: 30px 25px; }
+    h1 { font-size: 1.6rem; }
+    #user-photo { width: 80px; height: 80px; }
+    .back-btn { left: 12px; top: 12px; gap: 6px; }
+    .back-link { padding: 7px 12px; font-size: 14px; border-radius: 10px; }
+    .back-icon { width: 40px; height: 40px; border-width: 2.5px; }
+    .back-icon svg, .back-icon img { width: 18px; height: 18px; }
 }

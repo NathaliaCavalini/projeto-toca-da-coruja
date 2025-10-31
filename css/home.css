@@ -1,10 +1,10 @@
 
 :root{
-  --c-primary: #c5946c; /* dourado/bronze */
-  --c-surface: #f5e7d7; /* fundo claro */
-  --c-accent: #8b694d;  /* acento */
-  --c-text: #3a2d14;    /* texto escuro */
-  --c-muted: #e6c9a8;   /* superfície secundária */
+  --c-primary: #c5946c; 
+  --c-surface: #f5e7d7; 
+  --c-accent: #8b694d;  
+  --c-text: #3a2d14;    
+  --c-muted: #e6c9a8;   
 
   /* semantic tokens */
   --color-primary: var(--c-primary);
@@ -17,27 +17,9 @@
   --shadow: 0 6px 16px rgba(0,0,0,0.08);
   --radius: 12px;
 
-  /* page padding used to keep content from touching viewport edges */
+
   --page-side-padding: 20px;
 }
-
-/* ===== MODO ESCURO ===== */
-body.dark-mode{
-  --c-primary: #c5946c;
-  --c-surface: #7d5237;
-  --c-accent: #d4a574; /* MARROM MAIS CLARO E VIBRANTE */
-  --c-text: #f1f1f1;
-  --c-muted: #995e40;
-
-  --color-primary: var(--c-primary);
-  --color-surface: var(--c-surface);
-  --color-accent: var(--c-accent);
-  --color-text: var(--c-text);
-  --color-muted: var(--c-muted);
-
-  --shadow: 0 6px 16px rgba(0,0,0,0.5);
-}
-
 /* ===== RESET BÁSICO ===== */
 *{ box-sizing: border-box; margin:0; padding:0; }
 html,body { height:100%; }

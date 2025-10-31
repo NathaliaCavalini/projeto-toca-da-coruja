@@ -5,61 +5,60 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Perfil – Toca da Coruja</title>
-    <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/perfil.css" />
     <link rel="icon" href="../imagens/favicon.png" type="image/png">
 </head>
 
 <body>
-    <main class="perfil-container">
-        <div class="profile-card">
-            <div class="profile-header">
-                <h1>Meu Perfil</h1>
-                <p>Atualize suas informações na Toca da Coruja</p>
-            </div>
+    <div class="perfil-container">
+        <div class="perfil-card">
+
+            <!-- Botão voltar (caixa única com seta + texto) -->
+            <a href="home.html" class="back-box" aria-label="Voltar para a página inicial">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                </svg>
+                <span>Voltar à home</span>
+            </a>
+
+            <!-- Conteúdo do card (apenas 1 vez) -->
+            <h1>Meu Perfil</h1>
+            <p>Atualize suas informações na Toca da Coruja</p>
 
             <img id="user-photo" src="../imagens/user.png" alt="Foto do usuário">
 
             <form id="profile-form">
-                <div class="form-group">
-                    <label for="username">Nome de usuário</label>
-                    <input type="text" id="username" placeholder="Seu nome completo" />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" disabled />
-                </div>
-
-                <div class="form-group">
-                    <label for="photo-file">Foto de perfil</label>
-                    <input type="file" id="photo-file" accept="image/*" />
-                </div>
-
-                <button type="submit" class="btn-save">Salvar Alterações</button>
+                <input type="text" id="username" placeholder="Nome de usuário" />
+                <input type="email" id="email" placeholder="E-mail" disabled />
+                <input type="file" id="photo-file" accept="image/*" />
+                <button type="submit" class="btn">Salvar Alterações</button>
             </form>
 
-            <button id="logout-btn" class="btn-logout">Sair da Conta</button>
-        </div>
-    </main>
+            <div class="link">
+                <button id="logout-btn" class="btn-logout">Sair da Conta</button>
+            </div>
 
-    <!-- JS CORRIGIDO -->
+        </div> <!-- .perfil-card -->
+    </div> <!-- .perfil-container -->
+
+    <!-- JS (mantido: imports + lógica) -->
     <script type="module">
         import { auth, db, storage } from "../js/firebase-config.js";
-        import { 
-            onAuthStateChanged, 
-            updateProfile, 
-            signOut 
+        import {
+            onAuthStateChanged,
+            updateProfile,
+            signOut
         } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-        import { 
-            doc, 
-            setDoc, 
-            getDoc 
+        import {
+            doc,
+            setDoc,
+            getDoc
         } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-        import { 
-            ref, 
-            uploadBytes, 
-            getDownloadURL 
+        import {
+            ref,
+            uploadBytes,
+            getDownloadURL
         } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
         const usernameInput = document.getElementById("username");
@@ -69,19 +68,16 @@
         const profileForm = document.getElementById("profile-form");
         const logoutBtn = document.getElementById("logout-btn");
 
-        // Verifica usuário logado
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = "login.html";
                 return;
             }
 
-            // Preenche os campos
             usernameInput.value = user.displayName || "";
             emailInput.value = user.email || "";
             userPhoto.src = user.photoURL || "../imagens/user.png";
 
-            // Tenta carregar do Firestore (caso tenha foto personalizada)
             try {
                 const snap = await getDoc(doc(db, "usuarios", user.uid));
                 if (snap.exists() && snap.data().photoURL) {
@@ -92,35 +88,39 @@
             }
         });
 
-        // Salvar perfil
         profileForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const user = auth.currentUser;
-            if (!user) return alert("Usuário não encontrado.");
+            if (!user) {
+                alert("Usuário não encontrado.");
+                return;
+            }
 
             try {
                 let photoURL = user.photoURL || "";
 
-                // Upload da nova foto (se houver)
                 if (photoFileInput.files[0]) {
                     const file = photoFileInput.files[0];
-                    const fileRef = ref(storage, `avatars/${user.uid}/${Date.now()}_${file.name}`);
-                    
-                    // Mostra preview imediato
+                    const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+                    const fileRef = ref(storage, `avatars/${user.uid}/${Date.now()}_${safeName}`);
+
+                    // preview imediato
                     userPhoto.src = URL.createObjectURL(file);
 
-                    // Upload
+                    // upload
                     const snapshot = await uploadBytes(fileRef, file);
+
+                    // pega URL pública
                     photoURL = await getDownloadURL(snapshot.ref);
                 }
 
-                // Atualiza Auth
+                // atualiza perfil no Auth
                 await updateProfile(user, {
                     displayName: usernameInput.value.trim(),
                     photoURL
                 });
 
-                // Atualiza Firestore
+                // atualiza dados no Firestore
                 await setDoc(doc(db, "usuarios", user.uid), {
                     displayName: usernameInput.value.trim(),
                     email: user.email,
@@ -128,16 +128,25 @@
                     updatedAt: new Date()
                 }, { merge: true });
 
+                // tenta recarregar currentUser (se disponível)
+                try {
+                    if (auth.currentUser && typeof auth.currentUser.reload === 'function') {
+                        await auth.currentUser.reload();
+                    }
+                } catch (reloadErr) {
+                    console.warn('Não foi possível recarregar currentUser:', reloadErr);
+                }
+
+                // garante que exibimos a URL definitiva
+                if (photoURL) userPhoto.src = photoURL;
+
                 alert("Perfil atualizado com sucesso!");
-                // Opcional: recarrega para garantir sincronia
-                // location.reload();
             } catch (err) {
                 console.error("Erro ao salvar perfil:", err);
                 alert("Erro ao salvar: " + (err.message || "Tente novamente."));
             }
         });
 
-        // Sair
         logoutBtn.addEventListener("click", async () => {
             await signOut(auth);
             window.location.href = "login.html";
