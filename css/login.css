@@ -1,10 +1,8 @@
 :root {
-    --primary-color: #C5946C;     /* cartão + borda foto */
-    --secondary-color: #F5E7D7;   /* fundo da página */
-    --accent-color: #8B694D;      /* botão salvar + hover */
-    --text-color: #3A2D14;        /* texto */
-    --danger-color: #a63f3f;      /* botão sair */
-    --danger-hover: #c0392b;
+    --primary-color: #C5946C;
+    --secondary-color: #F5E7D7;
+    --accent-color: #8B694D;
+    --text-color: #3A2D14;
 }
 
 body {
@@ -15,18 +13,16 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    color: var(--text-color);
 }
 
-.perfil-container {
+.login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 1rem;
 }
 
-.perfil-card {
+.login-card {
     background: var(--primary-color);
     padding: 40px;
     border-radius: 20px;
@@ -35,66 +31,21 @@ body {
     width: 100%;
     max-width: 400px;
     animation: fadeIn 0.6s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative; /* necessário para posicionar o botão voltar */
-}
-
-/* Botão voltar (seta) */
-.back-btn {
-    position: absolute;
-    left: 14px;
-    top: 14px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: rgba(245, 231, 215, 0.9);
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.back-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
 }
 
 h1 {
-    margin: 0 0 8px;
+    margin-bottom: 10px;
     color: var(--text-color);
     font-size: 1.8rem;
-    font-weight: 600;
 }
 
 p {
     color: var(--text-color);
-    margin: 0 0 20px;
+    margin-bottom: 20px;
     font-size: 0.95rem;
-    opacity: 0.9;
 }
 
-/* Foto do usuário */
-#user-photo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 16px;
-    border: 4px solid var(--secondary-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-#user-photo:hover {
-    transform: scale(1.08);
-}
-
-/* Formulário */
-#profile-form {
+form {
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -107,28 +58,13 @@ input {
     font-size: 16px;
     outline: none;
     transition: 0.3s;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-color);
-}
-
-input::placeholder {
-    color: #999;
 }
 
 input:focus {
     border-color: var(--accent-color);
     box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
-    background: #fff;
 }
 
-input:disabled {
-    background: rgba(139, 105, 77, 0.15);
-    color: var(--text-color);
-    opacity: 0.8;
-    cursor: not-allowed;
-}
-
-/* Botão Salvar */
 .btn {
     background: var(--accent-color);
     color: #fff;
@@ -138,77 +74,30 @@ input:disabled {
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+    transition: background 0.3s;
 }
 
 .btn:hover {
     background: #714f34;
-    transform: translateY(-2px);
-}
-
-/* Botão Sair */
-.btn-logout {
-    background: var(--danger-color);
-    color: #fff;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.2s;
-    margin-top: 8px;
-}
-
-.btn-logout:hover {
-    background: var(--danger-hover);
-    transform: translateY(-2px);
 }
 
 .link {
-    margin-top: 8px;
+    margin-top: 20px;
 }
 
-/* Input file estilizado */
-input[type="file"] {
-    font-size: 14px;
-    padding: 10px 0;
+.link a {
+    color: var(--text-color);
+    text-decoration: underline;
 }
 
-input[type="file"]::file-selector-button {
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-right: 10px;
-    transition: background 0.3s;
-}
-
-input[type="file"]::file-selector-button:hover {
-    background: #714f34;
-}
-
-/* Animação */
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* Responsivo */
-@media (max-width: 480px) {
-    .perfil-card {
-        padding: 30px 25px;
-    }
-    h1 { font-size: 1.6rem; }
-    #user-photo { width: 80px; height: 80px; }
-    .back-btn { left: 12px; top: 12px; width: 34px; height: 34px; }
 }
