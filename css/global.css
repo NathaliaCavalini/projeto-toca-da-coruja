@@ -2,18 +2,30 @@
    Toca da Coruja — Lista & Botões
    ========================= */
 :root {
-    --c-primary: #c5946c;
+    /* Light mode - mesma paleta do vejamais.css */
+    --c-primary: #C5946C;
     /* dourado/bronze */
-    --c-surface: #f5e7d7;
+    --c-surface: #F5E7D7;
     /* fundo claro */
-    --c-accent: #8b694d;
+    --c-accent: #8B694D;
     /* acento */
-    --c-text: #3a2d14;
+    --c-text: #3A2D14;
     /* texto escuro */
-    --c-muted: #9b8b75;
+    --c-muted: #E6C9A8;
     --c-fav: #e85656;
     --radius: 12px;
     --card-shadow: 0 8px 18px rgba(58, 45, 20, 0.06);
+}
+
+/* Dark mode - mesma paleta do vejamais.css */
+body.dark-mode {
+    --c-primary: #C5946C;
+    --c-surface: #7D5237;
+    --c-accent: #A67C52;
+    --c-text: #F1F1F1;
+    --c-muted: #995e40;
+    --c-fav: #ff6b6b;
+    --card-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
 }
 
 /* Book grid (reaproveita sua grade) */
@@ -33,8 +45,14 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    transition: transform .16s ease, box-shadow .16s ease;
+    transition: transform .16s ease, box-shadow .16s ease, background .3s ease;
     border: 1px solid rgba(58, 45, 20, 0.04);
+}
+
+/* Dark mode adjustments */
+body.dark-mode .book-item {
+    background: linear-gradient(180deg, rgba(26, 21, 17, 0.98), var(--c-surface));
+    border: 1px solid rgba(197, 148, 108, 0.1);
 }
 
 .book-item:hover {
