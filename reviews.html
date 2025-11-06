@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
-    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/reviews.css" />
     <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
 </head>
 
@@ -13,19 +14,19 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
             <h1>Toca <br> da Coruja</h1>
         </header>
 
         <form class="search-form" role="search" onsubmit="return false;">
-            <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+            <img src="/imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
             <input type="search" id="search-input" placeholder="Pesquisar..." />
         </form>
 
         <section class="menu-section">
             <h2>Gêneros</h2>
             <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
+                <li><a href="rpg.html"><img src="/imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
                 </li>
                 <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
                             alt="">LGBTQIAPN+</a></li>
@@ -41,6 +42,11 @@
                 </li>
             </ul>
         </section>
+
+        <a href="login.html" class="btn-login">
+            <img src="../imagens/user.png" alt="Ícone de usuário">
+            <span>Login</span>
+        </a>
 
         <section class="menu-section">
             <h2>Minha Biblioteca</h2>
@@ -78,7 +84,7 @@
         <section class="book-grid" aria-label="Livros em destaque">
     </main>
 
-    <script src="../js/home.js"></script>
+    <script type="module" src="/js/reviews-page.js"></script>
 
     <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
     <script type="module">

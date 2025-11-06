@@ -1,0 +1,30 @@
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--color-primary);
+    padding: 8px 14px;
+    border-radius: 40px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.user-info:hover {
+    background: var(--color-accent);
+}
+
+.user-info img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info span {
+    font-size: 14px;
+    font-weight: 500;
+}

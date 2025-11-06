@@ -4,7 +4,7 @@ const livros = {
     "amor-obvio": {
         titulo: "O amor não é óbvio",
         autor: "Elayne Baeta",
-        imagem: "../imagens/o_amor_nao_e_obvio.png",
+        imagem: "/imagens/o_amor_nao_e_obvio.png",
         genero: "Literatura lésbica",
         paginas: 342,
         ano: 2022,
@@ -459,16 +459,12 @@ updateAverage();
 
 // ==================== 6) Sistema de reviews ====================
 // ==================== 6) Sistema de reviews ====================
-// Carrega reviews do localStorage
-let reviews = JSON.parse(localStorage.getItem(`reviews-${id}`)) || [];
+import { saveReview, getBookReviews, createReviewElement } from './reviews-manager.js';
 
 const reviewStarsEl = document.querySelector(".review-stars");
 const reviewTextEl = document.getElementById("review-text");
 const submitBtn = document.getElementById("submit-review");
 const reviewList = document.getElementById("review-list");
-
-// Usuário simulado (depois pode vir do login real)
-const currentUser = "Usuário123";
 
 let reviewStars = initStarRating(reviewStarsEl, 0, (rating) => {
     reviewStars.setRating(rating);
@@ -476,35 +472,31 @@ let reviewStars = initStarRating(reviewStarsEl, 0, (rating) => {
 
 function renderReviews() {
     reviewList.innerHTML = "";
-    reviews.forEach((r) => {
-        const div = document.createElement("div");
-        div.classList.add("review-item");
-        div.innerHTML = `
-          <div class="review-meta">
-            <strong class="review-user">${r.username}</strong> - 
-            <span class="review-rating">${"★".repeat(Math.floor(r.rating))}${r.rating % 1 ? "½" : ""}</span>
-          </div>
-          <p class="review-text">${r.text}</p>
-        `;
-        reviewList.appendChild(div);
+    const reviews = getBookReviews(id);
+    reviews.forEach((review) => {
+        const reviewElement = createReviewElement(review);
+        reviewList.appendChild(reviewElement);
     });
 }
 
 submitBtn.addEventListener("click", () => {
-    const text = reviewTextEl.value.trim();
-    const rating = reviewStars.getRating();
+    try {
+        const text = reviewTextEl.value.trim();
+        const rating = reviewStars.getRating();
 
-    if (!text || rating === 0) return alert("Dê uma nota e escreva algo!");
+        if (!text || rating === 0) {
+            alert("Dê uma nota e escreva algo!");
+            return;
+        }
 
-    // Salva com nome do usuário também
-    const newReview = { username: currentUser, rating, text };
-    reviews.unshift(newReview);
-
-    localStorage.setItem(`reviews-${id}`, JSON.stringify(reviews));
-
-    reviewTextEl.value = "";
-    reviewStars.setRating(0);
-    renderReviews();
+        saveReview(id, { rating, text });
+        
+        reviewTextEl.value = "";
+        reviewStars.setRating(0);
+        renderReviews();
+    } catch (error) {
+        alert(error.message);
+    }
 });
 
 renderReviews();
