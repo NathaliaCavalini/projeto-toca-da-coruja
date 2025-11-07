@@ -101,9 +101,10 @@ export function createReviewElement(review, showBookInfo = false) {
     
     // Adiciona botão de deletar se o review for do usuário atual
     if (auth.currentUser && review.userId === auth.currentUser.uid) {
-        const deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete-review");
-        deleteBtn.innerHTML = "🗑️ Deletar";
+    const deleteBtn = document.createElement("button");
+    // Usa a mesma classe visual do botão de envio de review para manter o estilo
+    deleteBtn.classList.add("delete-review", "submit-btn");
+    deleteBtn.innerHTML = "🗑️ Deletar";
         deleteBtn.onclick = () => {
             if (confirm("Tem certeza que deseja deletar esta review?")) {
                 deleteReview(review.bookId, review.timestamp);

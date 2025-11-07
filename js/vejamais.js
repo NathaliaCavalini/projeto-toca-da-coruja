@@ -460,6 +460,8 @@ updateAverage();
 // ==================== 6) Sistema de reviews ====================
 // ==================== 6) Sistema de reviews ====================
 import { saveReview, getBookReviews, createReviewElement } from './reviews-manager.js';
+import { auth } from './firebase-config.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 const reviewStarsEl = document.querySelector(".review-stars");
 const reviewTextEl = document.getElementById("review-text");
@@ -499,7 +501,15 @@ submitBtn.addEventListener("click", () => {
     }
 });
 
+// Renderiza inicialmente e também quando o estado de autenticação mudar.
 renderReviews();
+
+// Se o Firebase ainda não tiver definido `auth.currentUser` no primeiro carregamento,
+// garante que re-renderizaremos (o que faz com que o botão de deletar apareça quando
+// o usuário estiver disponível).
+onAuthStateChanged(auth, () => {
+    renderReviews();
+});
 
 // seleciona o botão do modo escuro
 const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');

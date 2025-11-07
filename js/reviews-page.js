@@ -114,15 +114,28 @@ function renderUserReviews() {
                     <span class="review-date">${new Date(review.timestamp).toLocaleDateString()}</span>
                 </div>
                 <p class="review-text">${review.text}</p>
-                <button class="delete-review" onclick="if(confirm('Tem certeza que deseja deletar esta review?')) { 
-                    import('./reviews-manager.js').then(module => {
-                        module.deleteReview('${review.bookId}', '${review.timestamp}');
-                        renderUserReviews();
-                    });
-                }">🗑️ Deletar</button>
+                <button class="submit-btn delete-review">🗑️ Deletar</button>
             </div>
         `;
         
+        // Adiciona listener ao botão de deletar de forma segura (escopo do módulo)
+        const deleteBtn = reviewCard.querySelector('.delete-review');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', async () => {
+                if (!confirm('Tem certeza que deseja deletar esta review?')) return;
+                try {
+                    const module = await import('./reviews-manager.js');
+                    // chama a função exportada para deletar
+                    module.deleteReview(review.bookId, review.timestamp);
+                    // re-renderiza a lista
+                    renderUserReviews();
+                } catch (err) {
+                    console.error('Erro ao deletar review:', err);
+                    alert(err.message || 'Erro ao deletar a review.');
+                }
+            });
+        }
+
         reviewsContainer.appendChild(reviewCard);
     });
 
