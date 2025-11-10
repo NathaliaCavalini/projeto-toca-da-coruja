@@ -1,4 +1,4 @@
-import { getCurrentUserReviews } from './reviews-manager.js';
+import { getCurrentUserReviews, saveReview } from './reviews-manager.js';
 import { auth } from './firebase-config.js';
 
 // Importa os dados dos livros do vejamais.js
@@ -149,3 +149,101 @@ document.addEventListener('DOMContentLoaded', renderUserReviews);
 auth.onAuthStateChanged(() => {
     renderUserReviews();
 });
+
+// Floating review card - cria um pequeno UI flutuante para adicionar uma review rápido
+function createFloatingReviewCard() {
+    // evita duplicar
+    if (document.querySelector('.floating-review-wrapper')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'floating-review-wrapper';
+
+    const btn = document.createElement('button');
+    btn.className = 'floating-btn';
+    btn.type = 'button';
+    btn.title = 'Escrever review';
+    btn.innerHTML = '✍️';
+
+    const card = document.createElement('div');
+    card.className = 'floating-review-card';
+
+    // constrói options do select a partir dos livros conhecidos
+    const options = Object.keys(bookData).map(key => `<option value="${key}">${bookData[key].titulo}</option>`).join('');
+
+    card.innerHTML = `
+        <h4>Nova review</h4>
+        <label for="fr-book">Livro</label>
+        <select id="fr-book">${options}</select>
+        <label for="fr-rating">Avaliação (1-5)</label>
+        <input id="fr-rating" type="number" min="1" max="5" value="5" />
+        <label for="fr-text">Comentário</label>
+        <textarea id="fr-text" placeholder="Escreva sua opinião (opcional)"></textarea>
+        <div class="actions">
+            <button type="button" class="btn-cancel">Cancelar</button>
+            <button type="button" class="btn-submit">Enviar</button>
+        </div>
+    `;
+
+    wrapper.appendChild(card);
+    wrapper.appendChild(btn);
+    document.body.appendChild(wrapper);
+
+    const openCard = () => card.classList.add('open');
+    const closeCard = () => card.classList.remove('open');
+
+    btn.addEventListener('click', () => {
+        // Se usuário não estiver logado, redireciona para login
+        if (!auth.currentUser) {
+            if (confirm('Você precisa estar logado para adicionar uma review. Ir para login?')) {
+                window.location.href = '/login.html';
+            }
+            return;
+        }
+        if (card.classList.contains('open')) {
+            closeCard();
+        } else {
+            openCard();
+            // pré-seleciona o primeiro livro (opcional)
+            const sel = card.querySelector('#fr-book');
+            if (sel) sel.selectedIndex = 0;
+            card.querySelector('#fr-text').focus();
+        }
+    });
+
+    card.querySelector('.btn-cancel').addEventListener('click', () => {
+        closeCard();
+    });
+
+    card.querySelector('.btn-submit').addEventListener('click', async () => {
+        const bookId = card.querySelector('#fr-book').value;
+        const rating = Number(card.querySelector('#fr-rating').value) || 5;
+        const text = card.querySelector('#fr-text').value.trim();
+
+        try {
+            // saveReview lançará se não estiver logado
+            saveReview(bookId, { rating, text });
+            // limpa e fecha
+            card.querySelector('#fr-text').value = '';
+            closeCard();
+            // re-render
+            renderUserReviews();
+            alert('Review salva com sucesso!');
+        } catch (err) {
+            console.error('Erro ao salvar review:', err);
+            alert(err.message || 'Erro ao salvar a review.');
+            if (err.message && err.message.toLowerCase().includes('logado')) {
+                window.location.href = '/login.html';
+            }
+        }
+    });
+
+    // fecha ao clicar fora
+    document.addEventListener('click', (ev) => {
+        if (!wrapper.contains(ev.target) && card.classList.contains('open')) {
+            closeCard();
+        }
+    });
+}
+
+// inicializa componente flutuante imediatamente
+document.addEventListener('DOMContentLoaded', () => createFloatingReviewCard());
