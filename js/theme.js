@@ -19,7 +19,7 @@ function updateIcons(dark) {
     // (so user can click to toggle to that mode).
     // If dark mode is ON, show the light icon (to switch to light).
     // If dark mode is OFF, show the dark icon (to switch to dark).
-    const iconPath = dark ? '../imagens/claro.png' : '../imagens/escuro.png';
+    const iconPath = dark ? '/imagens/claro.png' : '/imagens/escuro.png';
     const iconAlt = dark ? 'Ícone modo claro' : 'Ícone modo escuro';
 
     const btn = document.querySelector('.icon-btn[title="Modo escuro"]');

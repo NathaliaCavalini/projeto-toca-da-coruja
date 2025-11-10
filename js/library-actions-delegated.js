@@ -143,6 +143,15 @@ const delegateSelector = [
 ].join(',');
 
 document.addEventListener('click', (e) => {
+  // Ignore clicks that happen inside the site footer (social / contact links)
+  // so this global delegator doesn't accidentally intercept footer anchors.
+  // Check both e.target and its closest footer ancestor
+  const inFooter = e.target && e.target.closest && e.target.closest('.footer');
+  if (inFooter) {
+    console.log('📍 Click ignored: inside footer', e.target);
+    return;
+  }
+
   let btn = e.target.closest && e.target.closest(delegateSelector);
 
   if(!btn){

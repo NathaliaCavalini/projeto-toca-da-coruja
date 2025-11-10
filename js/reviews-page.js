@@ -3,52 +3,41 @@ import { auth } from './firebase-config.js';
 
 // Importa os dados dos livros do vejamais.js
 const bookData = {
-    "amor-obvio": {
-        titulo: "O amor não é óbvio",
-        autor: "Elayne Baeta",
-        imagem: "/imagens/o_amor_nao_e_obvio.png"
-    },
-    "jogada-amor": {
-        titulo: "A jogada do amor",
-        autor: "Kelly Quindlen",
-        imagem: "/imagens/a_jogada_do_amor.png"
-    },
-    "ela-fica": {
-        titulo: "Ela fica com a garota",
-        autor: "Rachael Lippincott",
-        imagem: "/imagens/ela_fica_com_a_garota.png"
-    },
-    "algumas-garotas": {
-        titulo: "Algumas garotas são assim",
-        autor: "Jennifer Dugan",
-        imagem: "/imagens/algumas_garotas_sao_assim.png"
-    },
-    "um-milhao-de-finais-felizes": {
-        titulo: "Um Milhão de Finais Felizes",
-        autor: "Vitor Martins",
-        imagem: "/imagens/um_milhao_de_finais_felizes.png"
-    },
-    "coisas-obvias-sobre-o-amor": {
-        titulo: "Coisas Óbvias Sobre o Amor",
-        autor: "Clara Alves",
-        imagem: "/imagens/coisas_obvias_sobre_o_amor.png"
-    },
-    "girls-like-girls": {
-        titulo: "Girls Like Girls",
-        autor: "Hayley Kiyoko",
-        imagem: "/imagens/girls_like_girls.jpg"
-    },
-    "isso-nao-e-um-conto-de-fadas": {
-        titulo: "Isso Não É um Conto de Fadas",
-        autor: "Emeli J. Santos",
-        imagem: "/imagens/isso-não-é-um-conto-de-fadas.jpg"
-    },
-    "lembre-se-de-nos": {
-        titulo: "Lembre-se de Nós",
-        autor: "Nina Lacour",
-        imagem: "/imagens/lembre-se-de-nos.jpg"
-    },
-    // ... (todos os outros livros)
+    "amor-obvio": { titulo: "O amor não é óbvio", autor: "Elayne Baeta", imagem: "/imagens/o_amor_nao_e_obvio.png" },
+    "jogada-amor": { titulo: "A jogada do amor", autor: "Kelly Quindlen", imagem: "/imagens/a_jogada_do_amor.png" },
+    "ela-fica": { titulo: "Ela fica com a garota", autor: "Rachael Lippincott", imagem: "/imagens/ela_fica_com_a_garota.png" },
+    "algumas-garotas": { titulo: "Algumas garotas são assim", autor: "Jennifer Dugan", imagem: "/imagens/algumas_garotas_sao_assim.png" },
+    "princesa-e-o-queijo-quente": { titulo: "Princesa e o Queijo Quente", autor: "Laura Pohl", imagem: "/imagens/a_princesa_e_o_queijo_quente.png" },
+    "um-milhao-de-finais-felizes": { titulo: "Um Milhão de Finais Felizes", autor: "Vitor Martins", imagem: "/imagens/um_milhao_de_finais_felizes.png" },
+    "coisas-obvias-sobre-o-amor": { titulo: "Coisas Óbvias Sobre o Amor", autor: "Clara Alves", imagem: "/imagens/coisas_obvias_sobre_o_amor.png" },
+    "girls-like-girls": { titulo: "Girls Like Girls", autor: "Hayley Kiyoko", imagem: "/imagens/girls_like_girls.jpg" },
+    "isso-nao-e-um-conto-de-fadas": { titulo: "Isso Não É um Conto de Fadas", autor: "Emeli J. Santos", imagem: "/imagens/isso-não-é-um-conto-de-fadas.jpg" },
+    "lembre-se-de-nos": { titulo: "Lembre-se de Nós", autor: "Nina Lacour", imagem: "/imagens/lembre-se-de-nos.jpg" },
+    "night-owls-and-summer-skies": { titulo: "Night Owls and Summer Skies (HQ)", autor: "Tara Frejas", imagem: "/imagens/night-owls-and-summer-skies.jpg" },
+    "vermelho-branco-e-sangue-azul": { titulo: "Vermelho, Branco e Sangue Azul", autor: "Casey McQuiston", imagem: "/imagens/vermelho-branco-e-sangue-azul.jpg" },
+    "a-arte-da-guerra": { titulo: "A Arte da Guerra", autor: "Sun Tzu", imagem: "/imagens/a-arte-da-guerra.jpg" },
+    "a-divina-comedia": { titulo: "A Divina Comédia", autor: "Dante Alighieri", imagem: "/imagens/a-divina-comedia.jpg" },
+    "fahrenheit-451": { titulo: "Fahrenheit 451", autor: "Ray Bradbury", imagem: "/imagens/fahrenheit-451.jpg" },
+    "meridiano-de-sangue": { titulo: "Meridiano de Sangue", autor: "Cormac McCarthy", imagem: "/imagens/meridiano-de-sangue.jpg" },
+    "os-irmaos-karamazov": { titulo: "Os Irmãos Karamázov", autor: "Fiódor Dostoiévski", imagem: "/imagens/os-irmaos-karamazov.jpg" },
+    "sql-em-10-minutos": { titulo: "SQL em 10 Minutos, Sams Teach Yourself", autor: "Ben Forta", imagem: "/imagens/sql-em-10-minutos.png" },
+    "use-a-cabeca": { titulo: "Use a Cabeça! Java", autor: "Lynn Beighley", imagem: "/imagens/use a cabeça java.jpg" },
+    "javascript-guia-definitivo": { titulo: "JavaScript: O Guia Definitivo", autor: "David Flanagan", imagem: "/imagens/javascript guia definitivo.png" },
+    "html-e-css": { titulo: "HTML e CSS: Desenhe e Construa Websites", autor: "Jon Duckett", imagem: "/imagens/html e css.png" },
+    "fluente-python": { titulo: "Python Fluente", autor: "Luciano Ramalho", imagem: "/imagens/fluente python.png" },
+    "dndE5-livro-do-jogador": { titulo: "D&D 5e Livro do Jogador", autor: "Wizards of the Coast", imagem: "/imagens/dnd e5 livro do jogador.png" },
+    "o-um-anel-livro-do-aventureiro": { titulo: "O Um Anel - Livro do Aventureiro", autor: "Francesco Nepitello", imagem: "/imagens/um anel o livro do aventureiro.jpg" },
+    "blades-in-the-dark": { titulo: "Blades in the Dark", autor: "John Harper", imagem: "/imagens/blades in the dark.png" },
+    "som-das-seis": { titulo: "O Som das Seis", autor: "Gael Pereira", imagem: "/imagens/o som das seis.png" },
+    "paranoia": { titulo: "Paranoia", autor: "Allen Varney", imagem: "/imagens/paranoia.jpg" },
+    "tormenta-modulo-basico": { titulo: "Tormenta RPG - Módulo Básico", autor: "Jambô Editora", imagem: "/imagens/tormenta.jpg" },
+    "a-biblioteca-da-meia-noite": { titulo: "A Biblioteca da Meia-Noite", autor: "Matt Haig", imagem: "/imagens/biblioteca da meia noite.jpg" },
+    "caninos-brancos": { titulo: "Caninos Brancos", autor: "Jack London", imagem: "/imagens/caninos brancos.jpg" },
+    "o-impulso": { titulo: "O Impulso", autor: "Ashley Audrain", imagem: "/imagens/o impulso.jpg" },
+    "walden": { titulo: "Walden", autor: "Henry David Thoreau", imagem: "/imagens/walden.jpg" },
+    "legend-of-the-guardians-collection": { titulo: "The Legend of the Guardians Collection", autor: "Kathryn Lasky", imagem: "/imagens/lenda dos guardiões.jpg" },
+    "arvore-dos-desejos": { titulo: "Árvore dos Desejos", autor: "Katherine Applegate", imagem: "/imagens/árvore dos desejos.jpg" },
+    "flores-para-algernon": { titulo: "Flores para Algernon", autor: "Daniel Keyes", imagem: "/imagens/flores para algernon.jpg" }
 };
 
 // Referência para a seção de reviews
@@ -191,6 +180,18 @@ function createFloatingReviewCard() {
     const openCard = () => card.classList.add('open');
     const closeCard = () => card.classList.remove('open');
 
+    btn.addEventListener('mousedown', () => {
+        // Não precisa fazer nada aqui
+    });
+
+    btn.addEventListener('mouseup', () => {
+        // Não precisa fazer nada aqui
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        // Não precisa fazer nada aqui
+    });
+
     btn.addEventListener('click', () => {
         // Se usuário não estiver logado, redireciona para login
         if (!auth.currentUser) {
@@ -243,6 +244,33 @@ function createFloatingReviewCard() {
             closeCard();
         }
     });
+
+    // Manter o wrapper acima do footer: calcular a posição baseado na altura do footer visível
+    const footer = document.querySelector('.footer');
+    
+    function adjustWrapperPosition() {
+        if (!footer) return;
+        
+        const footerRect = footer.getBoundingClientRect();
+        const gap = 20;
+        
+        // Se o footer está visível na tela, calcular quanto dele é visível
+        if (footerRect.top < window.innerHeight) {
+            // Calcular quantos pixels do footer estão visíveis
+            const visibleFooterHeight = window.innerHeight - footerRect.top;
+            wrapper.style.bottom = `${visibleFooterHeight + gap}px`;
+        } else {
+            // Footer não está visível, posição padrão
+            wrapper.style.bottom = '24px';
+        }
+    }
+    
+    // Ajustar quando a página rola ou redimensiona
+    window.addEventListener('scroll', adjustWrapperPosition, { passive: true });
+    window.addEventListener('resize', adjustWrapperPosition);
+    
+    // Ajuste inicial
+    adjustWrapperPosition();
 }
 
 // inicializa componente flutuante imediatamente

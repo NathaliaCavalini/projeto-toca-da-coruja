@@ -8,6 +8,34 @@
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/reviews.css" />
     <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+    
+    <!-- FIX: Ensure footer links are clickable -->
+    <style>
+        .footer a, .footer a *, .social-icons a, .social-icons a *, .action-btn {
+            pointer-events: auto !important;
+            cursor: pointer !important;
+        }
+        .footer { pointer-events: auto !important; }
+        
+        /* Ensure hero canvas doesn't block footer */
+        #hero-particles {
+            pointer-events: none !important;
+        }
+        
+        /* CRITICAL: Make sure hero section doesn't block footer */
+        .hero-section {
+            pointer-events: none !important;
+        }
+        .hero-content {
+            pointer-events: auto !important;
+        }
+        
+        /* Make footer ABSOLUTELY clickable */
+        .footer {
+            z-index: 1000 !important;
+            position: relative !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -109,11 +137,11 @@
                 <div class="social-icons" role="navigation" aria-label="Redes sociais">
                     <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
                         rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="../imagens/instagram.png" alt="Instagram">
+                        <img src="/imagens/instagram.png" alt="Instagram">
                     </a>
                     <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
                         aria-label="X Toca da Coruja">
-                        <img src="../imagens/twitter.png" alt="X">
+                        <img src="/imagens/twitter.png" alt="X">
                     </a>
                 </div>
 
@@ -135,6 +163,12 @@
         </div>
     </footer>
 
+
+    <!-- Removed temporary capture-phase interceptor script; footer links now use standard navigation. -->
+
+    <!-- SIDEBAR -->
+
+    <script type="module" src="/js/theme.js"></script>
     <script type="module" src="/js/reviews-page.js"></script>
 
     <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
@@ -294,7 +328,12 @@
         });
     </script>
     <script type="module" src="../js/user-info-global.js"></script>
+    
+    <!-- (Removed temporary debug logger that printed elementFromPoint info.) -->
+    
     <script src="/js/library-actions-delegated.js"></script>
+
+
 </body>
 
 </html>
