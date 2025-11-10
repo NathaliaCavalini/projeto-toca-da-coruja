@@ -39,28 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // MODO ESCURO - ADICIONE ESTA PARTE DENTRO DO DOMContentLoaded
-    const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-    const body = document.body;
-
-    if(darkModeBtn) {
-        // alterna modo escuro ao clicar
-        darkModeBtn.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-
-            // salvar preferência no localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // aplica o tema salvo ao carregar a página
-        if (localStorage.getItem('theme') === 'dark') {
-            body.classList.add('dark-mode');
-        }
-    }
+    // Theme is handled centrally by /js/theme.js
 
     // ===== GÊNEROS: trocar ícone de livro quando selecionado =====
     try {
@@ -101,37 +80,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Função utilitária para atualizar o ícone do botão de modo escuro
-function updateDarkModeIcon(isDark) {
-    const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-    if (!darkModeBtn) return;
-    const icon = darkModeBtn.querySelector('img');
-    if (!icon) return;
-
-    // caminhos relativos mantidos os mesmos usados no HTML
-    if (isDark) {
-        // agora mostra o ícone de 'modo escuro' quando o tema está escuro
-        icon.src = "../imagens/escuro.png";
-        icon.alt = "Ícone modo escuro";
-    } else {
-        // mostra o ícone de 'modo claro' quando o tema está claro
-        icon.src = "../imagens/claro.png";
-        icon.alt = "Ícone modo claro";
-    }
-}
-
-// Garante que, quando o usuário clicar no botão, o ícone também seja atualizado.
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-    const body = document.body;
-    if (!darkModeBtn) return;
-
-    darkModeBtn.addEventListener('click', () => {
-        const isDark = body.classList.contains('dark-mode');
-        // a classe já foi alternada pelo handler anterior; atualiza ícone de acordo
-        updateDarkModeIcon(!isDark);
-    });
-
-    // aplica ícone correto ao carregar a página
-    updateDarkModeIcon(body.classList.contains('dark-mode'));
-});
+// Theme visuals are initialized by /js/theme.js (imported in HTML)

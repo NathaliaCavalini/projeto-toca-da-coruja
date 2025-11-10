@@ -459,6 +459,7 @@ updateAverage();
 
 // ==================== 6) Sistema de reviews ====================
 // ==================== 6) Sistema de reviews ====================
+import '/js/theme.js';
 import { saveReview, getBookReviews, createReviewElement } from './reviews-manager.js';
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
@@ -511,31 +512,6 @@ onAuthStateChanged(auth, () => {
     renderReviews();
 });
 
-// seleciona o botão do modo escuro (seguro: só anexa se existir)
-const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-const body = document.body;
-
-if (darkModeBtn) {
-    // alterna modo escuro ao clicar
-    darkModeBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-
-        // salvar preferência no localStorage
-        const isDark = body.classList.contains('dark-mode');
-        if (isDark) localStorage.setItem('theme', 'dark');
-        else localStorage.setItem('theme', 'light');
-
-        // atualiza ícone
-        const icon = darkModeBtn.querySelector('img');
-        if (icon) icon.src = isDark ? "../imagens/escuro.png" : "../imagens/claro.png";
-    });
-}
-
-// aplica o tema salvo ao carregar a página e atualiza ícone se necessário
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    const icon = document.querySelector('.icon-btn[title="Modo escuro"] img');
-    if (icon) icon.src = "../imagens/escuro.png";
-}
+// Theme handled by /js/theme.js (import above)
 
 
