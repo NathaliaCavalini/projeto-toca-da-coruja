@@ -511,25 +511,31 @@ onAuthStateChanged(auth, () => {
     renderReviews();
 });
 
-// seleciona o botão do modo escuro
+// seleciona o botão do modo escuro (seguro: só anexa se existir)
 const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
 const body = document.body;
 
-// alterna modo escuro ao clicar
-darkModeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+if (darkModeBtn) {
+    // alterna modo escuro ao clicar
+    darkModeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
 
-    // opcional: salvar preferência no localStorage
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
+        // salvar preferência no localStorage
+        const isDark = body.classList.contains('dark-mode');
+        if (isDark) localStorage.setItem('theme', 'dark');
+        else localStorage.setItem('theme', 'light');
 
-// aplica o tema salvo ao carregar a página
+        // atualiza ícone
+        const icon = darkModeBtn.querySelector('img');
+        if (icon) icon.src = isDark ? "../imagens/escuro.png" : "../imagens/claro.png";
+    });
+}
+
+// aplica o tema salvo ao carregar a página e atualiza ícone se necessário
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
+    const icon = document.querySelector('.icon-btn[title="Modo escuro"] img');
+    if (icon) icon.src = "../imagens/escuro.png";
 }
 
 

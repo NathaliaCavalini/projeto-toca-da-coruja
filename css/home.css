@@ -463,6 +463,22 @@ body.dark-mode .social-icons a{ background: rgba(255,255,255,0.04); border-color
   50% { transform: translateY(-12px) rotate(3deg); }
 }
 
+/* Gêneros: destaque do ícone selecionado e animação breve ao clicar */
+.menu-list a.genre-selected img {
+  transform: scale(1.06);
+  transition: transform 160ms ease;
+}
+
+.menu-list img.icon-animate {
+  animation: iconPop 140ms ease;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+
 /* ===== MODO ESCURO ===== */
 body.dark-mode .hero-section {
   background: linear-gradient(135deg, 
@@ -518,4 +534,16 @@ body.dark-mode .hero-wave {
 body.dark-mode #hero-particles {
   opacity: 0.85;
   mix-blend-mode: soft-light;
+}
+
+/* Define variables para todo o documento quando o modo escuro estiver ativo.
+   Isso garante que componentes que usam variáveis (por exemplo cards, sidebar,
+   botões) adotem a paleta escura de forma consistente. */
+body.dark-mode {
+  --color-surface: #7D5237; /* fundo escuro */
+  --color-primary: #C5946C; /* destaque (mantido dourado) */
+  --color-accent: #A67C52;  /* accent para hover */
+  --color-text: #F1F1F1;    /* texto claro */
+  --color-muted: #995e40;   /* tom mais quente para seções */
+  --shadow: 0 8px 20px rgba(0,0,0,0.5);
 }

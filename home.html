@@ -770,41 +770,7 @@
             observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
         });
 
-        function toggleDarkModeIcon(isDark) {
-    const darkModeBtn = document.querySelector('.icon-btn[title="Modo escuro"]');
-    if(darkModeBtn) {
-        const icon = darkModeBtn.querySelector('img');
-        if(icon) {
-            if(isDark) {
-                icon.src = "../imagens/claro.png"; // Ícone para modo claro
-                icon.alt = "Ícone modo claro";
-            } else {
-                icon.src = "../imagens/escuro.png"; // Ícone para modo escuro
-                icon.alt = "Ícone modo escuro";
-            }
-        }
-    }
-}
-
-// E modifique o evento de clique para:
-darkModeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    
-    toggleDarkModeIcon(isDark);
-    
-    if (isDark) {
-        localStorage.setItem('theme', 'dark');
-    } else {
-        localStorage.setItem('theme', 'light');
-    }
-});
-
-// E também modifique a aplicação do tema salvo:
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    toggleDarkModeIcon(true);
-}
+        <!-- dark mode icon handler moved to js/home.js -->
     </script>
     <script type="module" src="../js/user-info-global.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
