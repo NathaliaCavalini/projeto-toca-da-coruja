@@ -1,0 +1,514 @@
+/* Admin-specific styles - extends home.css */
+
+.admin-container {
+    padding: 30px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh - 500px);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.admin-header h2 {
+    color: var(--color-text);
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.admin-tab-content {
+    display: block;
+}
+
+.admin-tab-content.hidden {
+    display: none;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-edit {
+    background: var(--color-accent);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Books List */
+.books-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Estilo unificado para todos os cards */
+.book-admin-card,
+.review-admin-card,
+.genre-card {
+    background: var(--color-muted);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.book-admin-card:hover,
+.review-admin-card:hover,
+.genre-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-accent);
+}
+
+.book-admin-card {
+    display: flex;
+    gap: 20px;
+}
+
+.book-admin-card img {
+    width: 100px;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-admin-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 145px;
+}
+
+.book-admin-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: var(--color-text);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.book-admin-info p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.85;
+    line-height: 1.4;
+}
+
+.book-admin-info p strong {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.book-admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* Reviews List */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.review-admin-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.review-admin-info {
+    flex: 1;
+}
+
+.review-admin-info h4 {
+    margin: 0 0 8px 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+}
+
+.review-admin-meta {
+    display: flex;
+    gap: 16px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.7;
+}
+
+.review-admin-text {
+    margin: 12px 0;
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.review-rating {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--color-muted);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-text);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.modal-close:hover {
+    opacity: 0.7;
+}
+
+/* Form */
+#form-book {
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(197, 148, 108, 0.15);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.genre-selector-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.genre-selector-wrapper select {
+    flex: 1;
+}
+
+.new-genre-toggle {
+    background: var(--color-accent);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.new-genre-toggle:hover {
+    opacity: 0.9;
+}
+
+.new-genre-input {
+    margin-top: 12px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-preview {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 200px;
+    max-height: 280px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    flex-direction: row-reverse; /* Inverte ordem: Salvar à direita, Cancelar à esquerda */
+}
+
+/* Active nav link */
+.nav-menu a.active {
+    background: var(--color-accent);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+/* Responsividade */
+/* Genres List */
+.genres-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.genre-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.genre-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.genre-info p {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.6;
+}
+
+.genre-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Empty state messages */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-text);
+    opacity: 0.7;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    margin: 20px 0;
+}
+
+.empty-state img {
+    width: 120px;
+    opacity: 0.3;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 20px 16px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .admin-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .books-list {
+        grid-template-columns: 1fr;
+    }
+
+    .book-admin-card {
+        flex-direction: column;
+    }
+
+    .book-admin-card img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
+    
+    .genre-selector-wrapper {
+        flex-direction: column;
+    }
+    
+    .new-genre-toggle {
+        width: 100%;
+    }
+}

@@ -1,6 +1,12 @@
+// ==================== IMPORTS ====================
+import '/js/theme.js';
+import { saveReview, getBookReviews, createReviewElement } from './reviews-manager.js';
+import { auth } from './firebase-config.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
 // ==================== 1) Banco de livros ====================
 // Aqui poderia vir de um backend futuramente, mas por enquanto fica mockado
-const livros = {
+export const livros = {
     "amor-obvio": {
         titulo: "O amor não é óbvio",
         autor: "Elayne Baeta",
@@ -319,12 +325,26 @@ const livros = {
 };
 
 // ==================== 2) Pega ID do livro da URL ====================
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-const livro = livros[id];
+// Combinar livros hardcoded com livros do localStorage (admin)
+function getAllBooks() {
+    const storageBooks = JSON.parse(localStorage.getItem('books-data') || '{}');
+    return { ...livros, ...storageBooks };
+}
+
+// Apenas executar código DOM se o elemento existir (não quando importado pelo admin)
+const container = document.getElementById("book-detail");
+
+if (!container) {
+    // Sendo importado como módulo (admin.js) - não executar código DOM
+    console.log('📚 Módulo vejamais.js carregado (apenas dados exportados)');
+} else {
+    // Executar código normal da página vejamais.html
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const allBooks = getAllBooks();
+    const livro = allBooks[id];
 
 // ==================== 3) Monta card de detalhes ====================
-const container = document.getElementById("book-detail");
 
 if (livro) {
     container.innerHTML = `
@@ -458,11 +478,6 @@ function updateAverage() {
 updateAverage();
 
 // ==================== 6) Sistema de reviews ====================
-// ==================== 6) Sistema de reviews ====================
-import '/js/theme.js';
-import { saveReview, getBookReviews, createReviewElement } from './reviews-manager.js';
-import { auth } from './firebase-config.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 const reviewStarsEl = document.querySelector(".review-stars");
 const reviewTextEl = document.getElementById("review-text");
@@ -511,6 +526,8 @@ renderReviews();
 onAuthStateChanged(auth, () => {
     renderReviews();
 });
+
+} // Fim do bloco if (container)
 
 // Theme handled by /js/theme.js (import above)
 

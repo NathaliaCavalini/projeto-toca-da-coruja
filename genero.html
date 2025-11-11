@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Gênero - Toca da Coruja</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="icon" href="/imagens/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <header class="logo">
+            <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <h1>Toca <br> da Coruja</h1>
+        </header>
+
+        <form class="search-form" role="search" onsubmit="return false;">
+            <img src="/imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+            <input type="search" id="search-input" placeholder="Pesquisar...">
+        </form>
+
+        <section class="menu-section">
+            <h2>Gêneros</h2>
+            <ul class="menu-list" id="genres-menu">
+                <!-- Gêneros serão carregados dinamicamente -->
+            </ul>
+        </section>
+
+        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+        <section class="menu-section" id="admin-section" style="display:none;">
+            <h2>Administração</h2>
+            <ul class="menu-list">
+                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">⚙️ Painel Admin</a></li>
+            </ul>
+        </section>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- NAV + AÇÕES -->
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="home.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="favoritos.html"><img src="/imagens/coracao.png" width="20" height="20" alt="">Favoritos</a>
+            <a href="quer_ler.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Quero ler</a>
+            <a href="ja_lidos.html"><img src="/imagens/livro_fechado.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="reviews.html"><img src="/imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+            <a href="perfil.html" id="user-info-link"><img src="/imagens/perfil.png" width="20" height="20" alt="">Perfil</a>
+
+            <!-- ações (ícones) ficam à direita -->
+            <div class="nav-actions" aria-hidden="false">
+                <button class="icon-btn" title="Modo escuro">
+                    <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+                </button>
+                <button class="icon-btn" title="Ajuda">
+                    <img src="/imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+                </button>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h2 id="hero-title" class="hero-title">
+                    <span id="genre-title">Gênero</span><br>
+                    <span class="hero-subtitle">Explore nossa seleção de livros</span>
+                </h2>
+                <div class="hero-owl">🦉</div>
+                <p class="hero-explore" id="genre-description">Descubra histórias incríveis neste gênero</p>
+            </div>
+            <div class="hero-wave"></div>
+        </section>
+
+        <!-- GRID DE LIVROS -->
+        <section class="book-grid" aria-label="Livros do gênero" id="books-container">
+            <!-- Livros serão carregados dinamicamente -->
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
+        <div class="footer-content">
+            <div class="footer-logo" aria-hidden="false">
+                <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
+                <div>
+                    <h3>Toca da Coruja</h3>
+                    <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
+                </div>
+            </div>
+
+            <div class="footer-links" aria-labelledby="explorar-title">
+                <h4 id="explorar-title">Explorar</h4>
+                <ul>
+                    <li><a href="home.html">Catálogo</a></li>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="margin:0 0 6px 0; color:var(--color-accent)">Conecte-se</h4>
+                <div class="social-icons" role="navigation" aria-label="Redes sociais">
+                    <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
+                        rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
+                        <img src="/imagens/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
+                        aria-label="X Toca da Coruja">
+                        <img src="/imagens/twitter.png" alt="X">
+                    </a>
+                </div>
+
+                <div class="footer-quick" style="margin-top:10px;">
+                    <div style="font-size:0.95rem; color:var(--color-text)">Email: <a
+                            href="mailto:cavalinilivros@gmail.com"
+                            style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a>
+                    </div>
+                    <div class="footer-cta">
+                        <a href="contato.html" class="action-btn" style="display:inline-block; margin-top:8px;">Fale
+                            conosco</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/user-info-global.js"></script>
+    <script type="module" src="/js/admin-button.js"></script>
+    <script type="module" src="/js/dynamic-genres-menu.js"></script>
+    <script type="module" src="/js/genre-page-loader.js"></script>
+    <script src="/js/library-actions-delegated.js"></script>
+</body>
+</html>
