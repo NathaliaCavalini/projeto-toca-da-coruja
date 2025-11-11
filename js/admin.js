@@ -20,24 +20,29 @@ onAuthStateChanged(auth, (user) => {
 
 // ==================== GERENCIAMENTO DE LIVROS ====================
 
-// Carregar livros do localStorage
-function loadBooks() {
-    const stored = localStorage.getItem('books-data');
-    if (stored) {
-        return JSON.parse(stored);
-    }
-    // Se não houver dados, inicializar com dados vazios
-    return {};
+// Carregar livros: vejamais.js (base) + localStorage (adicionados pelo admin)
+async function loadBooks() {
+    const { livros } = await import('./vejamais.js');
+    const adminBooks = JSON.parse(localStorage.getItem('admin-books') || '{}');
+    
+    // Mesclar: livros do vejamais.js + livros adicionados pelo admin
+    return { ...livros, ...adminBooks };
 }
 
-// Salvar livros no localStorage
-function saveBooks(books) {
-    localStorage.setItem('books-data', JSON.stringify(books));
+// Carregar apenas livros adicionados pelo admin
+function loadAdminBooks() {
+    return JSON.parse(localStorage.getItem('admin-books') || '{}');
+}
+
+// Salvar livros adicionados pelo admin (separado do vejamais.js)
+function saveAdminBooks(books) {
+    localStorage.setItem('admin-books', JSON.stringify(books));
+    console.log('💾 Livros do admin salvos:', Object.keys(books).length);
 }
 
 // Renderizar lista de livros
-function renderBooksList() {
-    const books = loadBooks();
+async function renderBooksList() {
+    const books = await loadBooks();
     const container = document.getElementById('books-list');
     
     if (!container) return;
@@ -51,22 +56,31 @@ function renderBooksList() {
         return;
     }
     
+    const adminBooks = loadAdminBooks();
+    
     bookIds.forEach(id => {
         const book = books[id];
+        const isAdminBook = adminBooks[id] !== undefined;
+        const badge = isAdminBook ? '<span class="badge-custom">Adicionado pelo Admin</span>' : '<span class="badge-original">Original</span>';
+        
         const card = document.createElement('div');
         card.className = 'book-admin-card';
         card.innerHTML = `
-            <img src="${book.imagem}" alt="${book.titulo}" onerror="this.onerror=null;this.src='imagens/placeholder.png'">
+            <img src="${book.imagem}" alt="${book.titulo}" onerror="this.onerror=null;this.src='/imagens/placeholder.svg'">
             <div class="book-admin-info">
                 <div>
-                    <h3>${book.titulo}</h3>
+                    <h3>${book.titulo} ${badge}</h3>
+                    <p><strong>ID:</strong> <code>${id}</code></p>
                     <p><strong>Autor:</strong> ${book.autor}</p>
                     <p><strong>Gênero:</strong> ${book.genero}</p>
                     <p><strong>Ano:</strong> ${book.ano} | <strong>Páginas:</strong> ${book.paginas}</p>
                 </div>
                 <div class="book-admin-actions">
-                    <button class="btn-edit" onclick="window.editBook('${id}')">Editar</button>
-                    <button class="btn-danger" onclick="window.deleteBook('${id}')">Deletar</button>
+                    <a href="vejamais.html?id=${id}" target="_blank" class="btn-edit">Ver Página</a>
+                    ${isAdminBook ? `
+                        <button class="btn-secondary" onclick="window.editBook('${id}')">Editar</button>
+                        <button class="btn-danger" onclick="window.deleteBook('${id}')">Deletar</button>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -83,41 +97,57 @@ let editingBookId = null;
 // Abrir modal para adicionar livro
 document.getElementById('btn-add-book')?.addEventListener('click', () => {
     editingBookId = null;
-    modalTitle.textContent = 'Adicionar Livro';
+    modalTitle.textContent = 'Adicionar Novo Livro';
     form.reset();
     document.getElementById('book-id').disabled = false;
+    document.getElementById('image-preview').innerHTML = '';
     modal.classList.add('active');
 });
 
-// Fechar modal
-document.querySelectorAll('.modal-close').forEach(btn => {
-    btn.addEventListener('click', () => {
-        modal.classList.remove('active');
+// Fechar modais (X e Cancelar) de forma genérica para qualquer modal da página
+document.querySelectorAll('.modal .modal-close, .modal .btn-cancel').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const m = btn.closest('.modal');
+        if (m) m.classList.remove('active');
     });
 });
 
-// Editar livro
-window.editBook = function(id) {
-    const books = loadBooks();
-    const book = books[id];
+// Editar livro (apenas livros adicionados pelo admin)
+window.editBook = async function(id) {
+    const adminBooks = loadAdminBooks();
+    const book = adminBooks[id];
     
-    if (!book) return;
+    if (!book) {
+        alert('Apenas livros adicionados pelo admin podem ser editados.');
+        return;
+    }
     
     editingBookId = id;
     modalTitle.textContent = 'Editar Livro';
     
     document.getElementById('book-id').value = id;
-    document.getElementById('book-id').disabled = true; // Não permitir alterar o ID
+    document.getElementById('book-id').disabled = true;
     document.getElementById('book-titulo').value = book.titulo;
     document.getElementById('book-autor').value = book.autor;
     
     // Configurar gênero
     const generoSelect = document.getElementById('book-genero-select');
     const generoHidden = document.getElementById('book-genero');
+    const generoNovoInput = document.getElementById('book-genero-novo');
     
-    // Selecionar o gênero no dropdown (deve ser um dos 6 fixos)
-    generoSelect.value = book.genero;
-    generoHidden.value = book.genero;
+    // Verificar se é gênero fixo ou customizado
+    const fixedGenres = ['RPG', 'LGBTQIAPN+', 'Fantasia', 'Romance', 'Clássicos', 'Programação'];
+    if (fixedGenres.includes(book.genero)) {
+        generoSelect.value = book.genero;
+        generoHidden.value = book.genero;
+        generoNovoInput.classList.add('hidden');
+    } else {
+        generoSelect.value = 'novo';
+        generoNovoInput.value = book.genero;
+        generoHidden.value = book.genero;
+        generoNovoInput.classList.remove('hidden');
+    }
     
     document.getElementById('book-paginas').value = book.paginas;
     document.getElementById('book-ano').value = book.ano;
@@ -131,15 +161,21 @@ window.editBook = function(id) {
     modal.classList.add('active');
 };
 
-// Deletar livro
+// Deletar livro (apenas livros adicionados pelo admin)
 window.deleteBook = function(id) {
-    if (!confirm('Tem certeza que deseja deletar este livro? Esta ação não pode ser desfeita.')) {
+    const adminBooks = loadAdminBooks();
+    
+    if (!adminBooks[id]) {
+        alert('Apenas livros adicionados pelo admin podem ser deletados.\n\nLivros originais do vejamais.js são permanentes.');
         return;
     }
     
-    const books = loadBooks();
-    delete books[id];
-    saveBooks(books);
+    if (!confirm('Tem certeza que deseja deletar este livro?')) {
+        return;
+    }
+    
+    delete adminBooks[id];
+    saveAdminBooks(adminBooks);
     renderBooksList();
     alert('Livro deletado com sucesso!');
 };
@@ -230,7 +266,7 @@ document.getElementById('book-imagem-file')?.addEventListener('change', (e) => {
 });
 
 // Salvar livro (adicionar ou editar)
-form?.addEventListener('submit', (e) => {
+form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const id = document.getElementById('book-id').value.trim();
@@ -253,7 +289,6 @@ form?.addEventListener('submit', (e) => {
     if (imageType === 'url') {
         imagem = document.getElementById('book-imagem-url').value.trim();
     } else {
-        // Para arquivo, usamos o data URL já carregado no preview
         const previewImg = document.querySelector('#image-preview img');
         if (previewImg) {
             imagem = previewImg.src;
@@ -265,10 +300,11 @@ form?.addEventListener('submit', (e) => {
         return;
     }
     
-    const books = loadBooks();
+    // Verificar se ID já existe
+    const allBooks = await loadBooks();
+    const adminBooks = loadAdminBooks();
     
-    // Verificar se o ID já existe (apenas ao adicionar novo)
-    if (!editingBookId && books[id]) {
+    if (!editingBookId && allBooks[id]) {
         alert('Já existe um livro com este ID. Por favor, escolha outro.');
         return;
     }
@@ -284,25 +320,33 @@ form?.addEventListener('submit', (e) => {
         sinopse
     };
     
-    // Salvar
-    books[id] = book;
-    saveBooks(books);
+    // Salvar no localStorage do admin
+    adminBooks[id] = book;
+    saveAdminBooks(adminBooks);
     
     console.log(`📚 Livro "${titulo}" salvo com gênero "${genero}"`);
-    // Se gênero não for fixo, registrar como customizado e criar página
-    const fixedGenres=['RPG','LGBTQIAPN+','Fantasia','Romance','Clássicos','Programação'];
+    
+    // Se gênero não for fixo, criar página de gênero
+    const fixedGenres = ['RPG', 'LGBTQIAPN+', 'Fantasia', 'Romance', 'Clássicos', 'Programação'];
     if (!fixedGenres.includes(genero)) {
-        const generoSelect=document.getElementById('book-genero-select');
-        let exists=false;
-        for (let opt of generoSelect.options) { if (opt.value===genero) { exists=true; break; } }
-        if(!exists){
-            const newOpt=document.createElement('option');
-            newOpt.value=genero; newOpt.textContent=genero;
-            const beforeOpt=Array.from(generoSelect.options).find(o=>o.value==='novo');
-            generoSelect.insertBefore(newOpt,beforeOpt||null);
+        const generoSelect = document.getElementById('book-genero-select');
+        let exists = false;
+        for (let opt of generoSelect.options) {
+            if (opt.value === genero) {
+                exists = true;
+                break;
+            }
         }
-        const customGenres=JSON.parse(localStorage.getItem('custom-genres')||'[]');
-        if(!customGenres.includes(genero)){
+        if (!exists) {
+            const newOpt = document.createElement('option');
+            newOpt.value = genero;
+            newOpt.textContent = genero;
+            const beforeOpt = Array.from(generoSelect.options).find(o => o.value === 'novo');
+            generoSelect.insertBefore(newOpt, beforeOpt || null);
+        }
+        
+        const customGenres = JSON.parse(localStorage.getItem('custom-genres') || '[]');
+        if (!customGenres.includes(genero)) {
             customGenres.push(genero);
             localStorage.setItem('custom-genres', JSON.stringify(customGenres));
             createGenrePage(genero);
@@ -311,15 +355,17 @@ form?.addEventListener('submit', (e) => {
     
     // Fechar modal e atualizar lista
     modal.classList.remove('active');
-    renderBooksList();
+    await renderBooksList();
     
     alert(editingBookId ? 'Livro atualizado com sucesso!' : 'Livro adicionado com sucesso!');
     
     // Resetar form
     form.reset();
     document.getElementById('book-genero-novo').classList.add('hidden');
-    document.getElementById('book-genero-select').disabled=false;
-    const btn=document.getElementById('new-genre-btn'); if(btn) btn.textContent='+ Novo Gênero';
+    document.getElementById('book-genero-select').disabled = false;
+    const btn = document.getElementById('new-genre-btn');
+    if (btn) btn.textContent = '+ Novo Gênero';
+    editingBookId = null;
 });
 
 // ==================== GERENCIAMENTO DE REVIEWS ====================
@@ -331,8 +377,9 @@ function loadAllReviews() {
 }
 
 // Renderizar lista de reviews
-function renderReviewsList() {
+async function renderReviewsList() {
     const reviews = loadAllReviews();
+    const books = await loadBooks();
     const container = document.getElementById('reviews-list');
     
     if (!container) return;
@@ -352,13 +399,17 @@ function renderReviewsList() {
         card.className = 'review-admin-card';
         
         const date = new Date(review.timestamp).toLocaleDateString('pt-BR');
+        const book = books[review.bookId];
+        const userLabel = (review.username && review.username !== 'Usuário Anônimo')
+            ? review.username
+            : (review.userEmail || 'Usuário');
         
         card.innerHTML = `
             <div class="review-admin-info">
-                <h4>Livro ID: ${review.bookId}</h4>
+                <h4>${book ? `Livro: ${book.titulo}` : `Livro ID: ${review.bookId}`}</h4>
                 <div class="review-admin-meta">
                     <span class="review-rating">${'★'.repeat(Math.floor(review.rating))}${review.rating % 1 ? '½' : ''}</span>
-                    <span>Usuário: ${review.userId}</span>
+                    <span class="review-user" title="${review.userEmail || ''}">Usuário: ${userLabel}</span>
                     <span>Data: ${date}</span>
                 </div>
                 <div class="review-admin-text">${review.text || '<em>Sem comentário</em>'}</div>
@@ -384,9 +435,9 @@ window.deleteReviewAdmin = function(bookId, timestamp) {
 // ==================== GERENCIAMENTO DE GÊNEROS ====================
 
 // Renderizar lista de gêneros customizados
-function renderGenresList() {
+async function renderGenresList() {
     const genrePages = JSON.parse(localStorage.getItem('genre-pages') || '{}');
-    const books = loadBooks();
+    const books = await loadBooks();
     const container = document.getElementById('genres-list');
     
     if (!container) return;
@@ -537,142 +588,107 @@ function createGenrePage(genero) {
     }
 }
 
-// ==================== IMPORTAR LIVROS EXISTENTES ====================
+// ==================== ADICIONAR NOVO GÊNERO ====================
 
-// Importar todos os livros do vejamais.js para o localStorage
-async function importExistingBooks(showAlert = false) {
-    // Verificar se já foi importado (apenas para importação automática)
-    const imported = localStorage.getItem('books-imported');
-    if (imported === 'true' && !showAlert) {
-        console.log('ℹ️ Livros já foram importados anteriormente');
-        return false;
+// Botão para adicionar gênero
+document.getElementById('btn-add-genre')?.addEventListener('click', () => {
+    const modal = document.getElementById('modal-genre');
+    document.getElementById('form-genre').reset();
+    modal.classList.add('active');
+});
+
+// Salvar novo gênero
+document.getElementById('form-genre')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const genreName = document.getElementById('genre-name').value.trim();
+    
+    if (!genreName) {
+        alert('Por favor, digite um nome para o gênero');
+        return;
     }
     
-    try {
-        console.log('🔄 Iniciando importação de livros...');
-        
-        // Importar apenas o objeto livros do vejamais.js
-        const { livros } = await import('./vejamais.js');
-        
-        // Carregar livros existentes do localStorage
-        const existingBooks = loadBooks();
-        
-        // NÃO mesclar - usar APENAS os livros do vejamais.js como estão
-        // Isso evita duplicação e mantém os dados originais intactos
-        const finalBooks = { ...livros };
-        
-        // Salvar no localStorage (substitui completamente)
-        saveBooks(finalBooks);
-        
-        // Limpar gêneros customizados
-        localStorage.setItem('custom-genres', JSON.stringify([]));
-        localStorage.setItem('genre-pages', JSON.stringify({}));
-        localStorage.setItem('books-imported', 'true');
-        
-        console.log(`✅ ${Object.keys(finalBooks).length} livros importados exatamente como estão no vejamais.js`);        if (showAlert) {
-            alert(`Importação concluída!\n\n${Object.keys(finalBooks).length} livros importados do vejamais.js\nDados mantidos exatamente como no original.\n\nA página será recarregada.`);
-            location.reload();
-        }
-        
-        return true;
-        
-    } catch (error) {
-        console.error('❌ Erro ao importar livros:', error);
-        if (showAlert) {
-            alert('Erro ao importar livros. Verifique o console para mais detalhes.');
-        }
-        return false;
+    // Verificar se já existe
+    const genrePages = JSON.parse(localStorage.getItem('genre-pages') || '{}');
+    if (genrePages[genreName]) {
+        alert('Este gênero já existe!');
+        return;
     }
-}
+    
+    // Verificar se é gênero fixo
+    const fixedGenres = ['RPG', 'LGBTQIAPN+', 'Fantasia', 'Romance', 'Clássicos', 'Programação'];
+    if (fixedGenres.includes(genreName)) {
+        alert('Este é um gênero fixo. Escolha outro nome.');
+        return;
+    }
+    
+    // Criar página de gênero
+    createGenrePage(genreName);
+    
+    // Adicionar à lista de gêneros customizados
+    const customGenres = JSON.parse(localStorage.getItem('custom-genres') || '[]');
+    if (!customGenres.includes(genreName)) {
+        customGenres.push(genreName);
+        localStorage.setItem('custom-genres', JSON.stringify(customGenres));
+    }
+    
+    // Adicionar ao select de livros
+    const generoSelect = document.getElementById('book-genero-select');
+    if (generoSelect) {
+        const newOpt = document.createElement('option');
+        newOpt.value = genreName;
+        newOpt.textContent = genreName;
+        const beforeOpt = Array.from(generoSelect.options).find(o => o.value === 'novo');
+        generoSelect.insertBefore(newOpt, beforeOpt || null);
+    }
+    
+    // Fechar modal e atualizar lista
+    document.getElementById('modal-genre').classList.remove('active');
+    renderGenresList();
+    
+    alert(`Gênero "${genreName}" criado com sucesso!\n\nAgora você pode adicionar livros neste gênero.`);
+    console.log(`✅ Novo gênero criado: "${genreName}"`);
+});
 
 // ==================== INICIALIZAÇÃO ====================
 
-// Carregar gêneros customizados salvos no select
+document.addEventListener('DOMContentLoaded', async () => {
+    // Limpar localStorage antigo (não é mais usado)
+    localStorage.removeItem('books-data');
+    localStorage.removeItem('books-imported');
+    localStorage.removeItem('books-reset-2025-11-11');
+    
+    console.log('✅ Admin carregado');
+    console.log('📚 Livros originais: vejamais.js');
+    console.log('➕ Livros adicionados: localStorage[admin-books]');
+    
+    // Carregar gêneros customizados no select
+    loadCustomGenres();
+    
+    // Renderizar lista inicial de livros
+    await renderBooksList();
+});
+
+// Carregar gêneros customizados no select do formulário
 function loadCustomGenres() {
     const customGenres = JSON.parse(localStorage.getItem('custom-genres') || '[]');
     const generoSelect = document.getElementById('book-genero-select');
     if (!generoSelect) return;
+    
     customGenres.forEach(genre => {
-        let exists=false;
-        for (let option of generoSelect.options) { if (option.value===genre) { exists=true; break; } }
-        if(!exists){
-            const newOption=document.createElement('option');
-            newOption.value=genre; newOption.textContent=genre;
-            // Inserir antes da opção "novo"
-            const last = Array.from(generoSelect.options).find(o=>o.value==='novo');
-            generoSelect.insertBefore(newOption, last||null);
+        let exists = false;
+        for (let option of generoSelect.options) {
+            if (option.value === genre) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            const newOption = document.createElement('option');
+            newOption.value = genre;
+            newOption.textContent = genre;
+            const last = Array.from(generoSelect.options).find(o => o.value === 'novo');
+            generoSelect.insertBefore(newOption, last || null);
         }
     });
-}
-
-// Botão de reimportação manual
-document.getElementById('btn-reimport-books')?.addEventListener('click', async () => {
-    if (!confirm('Deseja reimportar todos os livros do site?\n\nIsso irá:\n✅ Substituir todos os livros pelos do vejamais.js\n✅ Manter dados exatamente como no original\n\n⚠️ ATENÇÃO: Livros adicionados manualmente SERÃO PERDIDOS!')) {
-        return;
-    }
-    
-    try {
-        // Forçar reimportação com alerta
-        localStorage.removeItem('books-imported');
-        await importExistingBooks(true); // showAlert = true para reimportação manual
-    } catch (error) {
-        console.error('❌ Erro ao reimportar:', error);
-        alert('Erro ao reimportar livros. Verifique o console.');
-    }
-});
-
-document.addEventListener('DOMContentLoaded', async () => {
-    // Forçar uma reimportação única para alinhar com o catálogo original do vejamais.js
-    const resetStampKey = 'books-reset-2025-11-11';
-    if (!localStorage.getItem(resetStampKey)) {
-        localStorage.setItem(resetStampKey, 'true');
-        localStorage.removeItem('books-imported'); // garante substituição completa
-    }
-
-    // Importar livros existentes (substitui por vejamais.js quando necessário)
-    const imported = await importExistingBooks(false);
-    
-    // Se houve importação, recarregar a página
-    if (imported) {
-        console.log('🔄 Primeira importação concluída, recarregando...');
-        location.reload();
-        return;
-    }
-    
-    // Carregar gêneros customizados
-    loadCustomGenres();
-    
-    // Renderizar lista inicial de livros
-    renderBooksList();
-
-    // Após renderização inicial, purgar livros não canônicos que possam ter sido adicionados manualmente
-    // sem querer (ex: 'A Arte de Jogar', 'Iliada', 'Jogador Número 1') mantendo apenas os do vejamais.js.
-    try {
-        await purgeNonCanonicalBooks();
-        // Re-renderizar caso algo tenha sido removido
-        renderBooksList();
-    } catch(err) {
-        console.warn('⚠️ Falha ao purgar livros não canônicos:', err);
-    }
-});
-
-// ==================== PURGA DE LIVROS NÃO CANÔNICOS ====================
-// Remove livros que não existem no objeto livros original do vejamais.js
-async function purgeNonCanonicalBooks() {
-    const { livros } = await import('./vejamais.js');
-    const canonicalIds = new Set(Object.keys(livros));
-    const existing = loadBooks();
-    let removed = [];
-    Object.keys(existing).forEach(id => {
-        if (!canonicalIds.has(id)) {
-            removed.push(id);
-            delete existing[id];
-        }
-    });
-    if (removed.length) {
-        saveBooks(existing);
-        console.log(`🧹 Purga concluída. Removidos ${removed.length} livro(s) não canônico(s):`, removed);
-    } else {
-        console.log('✅ Nenhum livro não canônico para remover.');
-    }
 }

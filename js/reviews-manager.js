@@ -1,6 +1,14 @@
 // Importa auth do firebase-config
 import { auth } from "./firebase-config.js";
 
+// Email do administrador
+const ADMIN_EMAIL = 'tatacavalini@gmail.com';
+
+// Verificar se o usuário atual é admin
+function isAdmin() {
+    return auth.currentUser && auth.currentUser.email === ADMIN_EMAIL;
+}
+
 // Função para salvar uma review
 export function saveReview(bookId, review) {
     // Verifica se o usuário está logado
@@ -12,9 +20,12 @@ export function saveReview(bookId, review) {
     let allReviews = getAllReviews();
     
     // Cria a nova review com informações do usuário
+    const username = auth.currentUser.displayName
+        || (auth.currentUser.email ? auth.currentUser.email.split('@')[0] : 'Usuário');
     const newReview = {
         bookId,
-        username: auth.currentUser.displayName || "Usuário Anônimo",
+        username,
+        userEmail: auth.currentUser.email || null,
         userId: auth.currentUser.uid,
         rating: review.rating,
         text: review.text,
@@ -59,7 +70,12 @@ export function deleteReview(bookId, timestamp) {
     // Encontra a review para verificar se o usuário atual é o autor
     const review = allReviews.find(r => r.bookId === bookId && r.timestamp === timestamp);
     
-    if (!review || review.userId !== auth.currentUser.uid) {
+    // Admin pode deletar qualquer review, usuário comum só pode deletar a sua própria
+    if (!review) {
+        throw new Error("Review não encontrada!");
+    }
+    
+    if (!isAdmin() && review.userId !== auth.currentUser.uid) {
         throw new Error("Você só pode deletar suas próprias reviews!");
     }
 
@@ -99,8 +115,8 @@ export function createReviewElement(review, showBookInfo = false) {
         <p class="review-text">${review.text}</p>
     `;
     
-    // Adiciona botão de deletar se o review for do usuário atual
-    if (auth.currentUser && review.userId === auth.currentUser.uid) {
+        // Adiciona botão de deletar se o review for do usuário atual OU se for admin
+        if (auth.currentUser && (review.userId === auth.currentUser.uid || isAdmin())) {
     const deleteBtn = document.createElement("button");
     // Usa a mesma classe visual do botão de envio de review para manter o estilo
     deleteBtn.classList.add("delete-review", "submit-btn");

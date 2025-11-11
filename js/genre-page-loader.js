@@ -6,13 +6,21 @@ function getGenreFromURL() {
     return params.get('genero') || '';
 }
 
-// Carregar todos os livros do localStorage
-function getAllBooks() {
-    const stored = localStorage.getItem('books-data');
-    if (stored) {
-        return JSON.parse(stored);
+// Carregar todos os livros (vejamais.js + admin-books)
+async function getAllBooks() {
+    // Importar livros do vejamais.js
+    let baseBooks = {};
+    try {
+        const module = await import('./vejamais.js');
+        baseBooks = module.livros || {};
+    } catch (error) {
+        console.warn('Não foi possível importar vejamais.js, usando apenas localStorage');
     }
-    return {};
+    
+    // Adicionar livros do admin
+    const adminBooks = JSON.parse(localStorage.getItem('admin-books') || '{}');
+    
+    return { ...baseBooks, ...adminBooks };
 }
 
 // Obter todos os gêneros únicos dos livros (apenas fixos agora)
@@ -63,8 +71,7 @@ function renderBookCard(id, book) {
 }
 
 // Filtrar livros por gênero
-function filterBooksByGenre(genre) {
-    const books = getAllBooks();
+function filterBooksByGenre(genre, books) {
     const filtered = {};
     
     Object.keys(books).forEach(id => {
@@ -82,7 +89,7 @@ function filterBooksByGenre(genre) {
 }
 
 // Renderizar livros do gênero
-function renderGenreBooks() {
+async function renderGenreBooks() {
     const genre = getGenreFromURL();
     const container = document.getElementById('books-container');
     
@@ -100,8 +107,9 @@ function renderGenreBooks() {
     if (genreTitleElement) genreTitleElement.textContent = genre;
     if (genreDescElement) genreDescElement.textContent = `Descubra nossa coleção de ${genre}`;
     
-    // Filtrar e renderizar livros
-    const books = filterBooksByGenre(genre);
+    // Filtrar e renderizar livros (aguardar carregar todos os livros)
+    const allBooks = await getAllBooks();
+    const books = filterBooksByGenre(genre, allBooks);
     const bookIds = Object.keys(books);
     
     if (bookIds.length === 0) {

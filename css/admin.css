@@ -31,38 +31,58 @@
     display: none;
 }
 
-/* Buttons */
+/* Buttons (unificados com estilo do site) */
 .btn-primary,
-.btn-secondary {
-    padding: 10px 20px;
+.btn-secondary,
+.btn-danger,
+.btn-edit {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 12px 22px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    transition: all 0.2s ease;
+    letter-spacing: .3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background .25s, color .25s, transform .25s, box-shadow .25s;
 }
 
 .btn-primary {
-    background: var(--color-accent);
-    color: white;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #a06d3d 100%);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(197,148,108,.35);
 }
-
-.btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
+.btn-primary:hover { transform: translateY(-2px); box-shadow:0 6px 18px rgba(197,148,108,.45); }
+.btn-primary:active { transform: translateY(0); box-shadow:0 3px 8px rgba(197,148,108,.3); }
 
 .btn-secondary {
-    background: transparent;
+    background: rgba(197,148,108,0.08);
     color: var(--color-text);
     border: 2px solid var(--color-accent);
 }
+.btn-secondary:hover { background: var(--color-accent); color:#fff; }
+.btn-secondary:active { transform: translateY(1px); }
 
-.btn-secondary:hover {
-    background: var(--color-accent);
-    color: white;
+.btn-danger {
+    background: linear-gradient(135deg,#dc3545,#a60014);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(220,53,69,.35);
 }
+.btn-danger:hover { transform: translateY(-2px); box-shadow:0 6px 18px rgba(220,53,69,.45); }
+.btn-danger:active { transform: translateY(0); box-shadow:0 3px 8px rgba(220,53,69,.3); }
+
+.btn-edit { background: linear-gradient(135deg,#6c757d,#4b5257); color:#fff; }
+.btn-edit:hover { transform: translateY(-2px); box-shadow:0 6px 16px rgba(108,117,125,.4); }
+.btn-edit:active { transform: translateY(0); }
+
+/* Corrige bug de hover específico do botão cancelar (antes sobreposto por .modal-close) */
+.btn-cancel { position: relative; }
+.btn-cancel:hover { background: var(--color-accent); color:#fff; }
 
 .btn-danger {
     background: #dc3545;
@@ -241,26 +261,31 @@
     border-radius: 12px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
+    transform: translateY(8px) scale(.98);
+    opacity: 0;
+    transition: transform .25s ease, opacity .25s ease;
 }
+
+.modal.active .modal-content { transform: translateY(0) scale(1); opacity:1; }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 16px 28px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .modal-header h3 {
     margin: 0;
     color: var(--color-text);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
-.modal-close {
+.modal-header .modal-close {
     background: none;
     border: none;
     font-size: 2rem;
@@ -272,25 +297,27 @@
     height: 32px;
 }
 
-.modal-close:hover {
-    opacity: 0.7;
-}
+.modal-header .modal-close:hover { opacity:.7; transform: rotate(8deg); }
 
 /* Form */
-#form-book {
-    padding: 24px;
+#form-book, #form-genre {
+    padding: 28px 40px 32px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     color: var(--color-text);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
+}
+
+.form-group small {
+    font-size: 0.8rem;
 }
 
 .form-group input[type="text"],
@@ -399,13 +426,19 @@
 
 .form-actions {
     display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    flex-direction: row-reverse; /* Inverte ordem: Salvar à direita, Cancelar à esquerda */
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,.08);
 }
+
+/* Estado foco acessível nos botões */
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-danger:focus,
+.btn-edit:focus,
+.modal-close:focus { outline:3px solid rgba(197,148,108,.4); outline-offset:2px; }
 
 /* Active nav link */
 .nav-menu a.active {
@@ -453,6 +486,30 @@
     font-size: 0.75rem;
     font-weight: 600;
     margin-top: 8px;
+}
+
+/* Badges para livros */
+.badge-original,
+.badge-custom {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.badge-original {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.badge-custom {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid #28a745;
 }
 
 /* Empty state messages */

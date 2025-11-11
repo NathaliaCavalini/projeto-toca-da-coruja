@@ -23,9 +23,9 @@ function getAcceptedGenres() {
     return pageGenreMap[currentPage] || [];
 }
 
-// Carregar livros do localStorage
+// Carregar livros adicionados pelo admin
 function getStorageBooks() {
-    const stored = localStorage.getItem('books-data');
+    const stored = localStorage.getItem('admin-books');
     if (stored) {
         return JSON.parse(stored);
     }

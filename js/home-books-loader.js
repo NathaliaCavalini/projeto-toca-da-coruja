@@ -1,8 +1,8 @@
 // home-books-loader.js - Carrega livros do localStorage e ADICIONA aos hardcoded
 
-// Carregar livros do localStorage (adicionados pelo admin)
+// Carregar livros adicionados pelo admin (novo localStorage)
 function getStorageBooks() {
-    const stored = localStorage.getItem('books-data');
+    const stored = localStorage.getItem('admin-books');
     if (stored) {
         return JSON.parse(stored);
     }

@@ -63,7 +63,7 @@ function updateGenresMenu() {
         a.href=genre.url;
         const isCurrent = currentGenre===genre.name || genre.url===currentPage;
         const icon=isCurrent?'livro_aberto.png':'livro_fechado.png';
-        a.innerHTML=`<img src="../imagens/${icon}" width="20" height="20" alt="">${genre.name}` + (genre.isCustom? ' ⭐':'' );
+        a.innerHTML=`<img src="../imagens/${icon}" width="20" height="20" alt="">${genre.name}`;
         if(isCurrent) a.classList.add('genre-selected');
         li.appendChild(a);
         menuList.appendChild(li);

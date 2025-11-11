@@ -325,10 +325,11 @@ export const livros = {
 };
 
 // ==================== 2) Pega ID do livro da URL ====================
-// Combinar livros hardcoded com livros do localStorage (admin)
+
+// Função para obter todos os livros (originais + adicionados pelo admin)
 function getAllBooks() {
-    const storageBooks = JSON.parse(localStorage.getItem('books-data') || '{}');
-    return { ...livros, ...storageBooks };
+    const adminBooks = JSON.parse(localStorage.getItem('admin-books') || '{}');
+    return { ...livros, ...adminBooks };
 }
 
 // Apenas executar código DOM se o elemento existir (não quando importado pelo admin)

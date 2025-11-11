@@ -36,8 +36,14 @@
                             alt="">Clássicos</a></li>
                 <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
                             alt="">Programação</a></li>
-                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
-                </li>
+            </ul>
+        </section>
+
+        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+        <section class="menu-section" id="admin-section" style="display:none;">
+            <h2>Administração</h2>
+            <ul class="menu-list">
+                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">⚙️ Painel Admin</a></li>
             </ul>
         </section>
         <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
@@ -63,6 +69,8 @@
 
     <script type="module" src="/js/theme.js"></script>
     <script type="module" src="/js/vejamais.js"></script>
+    <script type="module" src="/js/admin-button.js"></script>
+    <script type="module" src="/js/dynamic-genres-menu.js"></script>
 
     <!-- Firebase: mostrar nome do usuário -->
     <script type="module">
