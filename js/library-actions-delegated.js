@@ -55,6 +55,26 @@ function findTitleFromCard(card){
   if(og && og.content) return og.content.trim();
   return (document.title || '').trim() || '';
 }
+function findDescriptionFromCard(card){
+  try {
+    if(card){
+      const p = card.querySelector('.book-title p');
+      if(p && p.innerHTML){
+        // Extrai o texto depois de <br><br>
+        const html = p.innerHTML;
+        const parts = html.split(/<br\s*\/?>\s*<br\s*\/?>/i);
+        if(parts.length > 1){
+          // Remove tags HTML e retorna apenas o texto
+          const desc = parts[1].replace(/<[^>]*>/g, '').trim();
+          if(desc) return desc;
+        }
+      }
+    }
+    const descEl = document.querySelector('.book-description, .book-desc, .description');
+    if(descEl && descEl.textContent) return descEl.textContent.trim();
+  } catch(e){}
+  return '';
+}
 function findImageFromCard(card){
   try {
     if(card){
@@ -99,7 +119,8 @@ function buildBookFromEl(el){
   let id = (card && (card.dataset && card.dataset.id)) || (card && card.getAttribute && card.getAttribute('data-id')) || '';
   if(!id) id = normalizeToId(rawTitle);
   const img = findImageFromCard(card) || '';
-  return { id: normalizeToId(id), title: rawTitle.trim(), img: img, when: new Date().toISOString() };
+  const desc = findDescriptionFromCard(card) || '';
+  return { id: normalizeToId(id), title: rawTitle.trim(), img: img, desc: desc, when: new Date().toISOString() };
 }
 
 function toggle(listName, book){
@@ -107,7 +128,7 @@ function toggle(listName, book){
   const arr = load(listName);
   const idx = arr.findIndex(i => i.id === book.id);
   if(idx > -1){ arr.splice(idx,1); save(listName, arr); return false; }
-  const toSave = { id: book.id, title: book.title, img: book.img || '', when: book.when || new Date().toISOString() };
+  const toSave = { id: book.id, title: book.title, img: book.img || '', desc: book.desc || '', when: book.when || new Date().toISOString() };
   arr.push(toSave);
   save(listName, arr);
   return true;

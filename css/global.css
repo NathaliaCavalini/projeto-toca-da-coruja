@@ -22,6 +22,13 @@
     --book-grid-mincol: 220px;
     --book-grid-gap: 36px;
     --book-title-min-height: 150px;
+
+    /* Remove button theme */
+    --remove-start: #ef6b6b;
+    --remove-end: #d64545;
+    --remove-hover-start: #db5050;
+    --remove-hover-end: #bf3434;
+    --remove-ring: rgba(214, 69, 69, 0.35);
 }
 
 /* Dark mode - mesma paleta do vejamais.css */
@@ -33,6 +40,12 @@ body.dark-mode {
     --c-muted: #995e40;
     --c-fav: #ff6b6b;
     --card-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    /* Remover button palette (ajustada para contraste em fundo escuro) */
+    --remove-start: #ff6e6e;
+    --remove-end: #e54545;
+    --remove-hover-start: #ff5555;
+    --remove-hover-end: #d23232;
+    --remove-ring: rgba(255, 110, 110, 0.45);
 }
 
 /* Book grid (reaproveita sua grade) */
@@ -110,17 +123,19 @@ body.dark-mode .book-item {
 .book-title {
     background-color: var(--c-muted);
     border-radius: 0 0 var(--radius) var(--radius);
-    padding: 14px;
+    padding: 12px 14px;
     width: 100%;
     text-align: center;
     margin-top: -6px;
     transform: translateY(4%);
     box-shadow: var(--card-shadow);
+    height: var(--book-title-min-height);
     min-height: var(--book-title-min-height);
+    max-height: var(--book-title-min-height);
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content: space-between;
+    justify-content: flex-start; /* empilha conteúdo; botão desce com margin-top:auto */
 }
 
 .book-title p {
@@ -130,24 +145,13 @@ body.dark-mode .book-item {
     cursor: pointer;
     color: var(--c-text);
     transition: text-decoration .2s ease;
-    line-height: 1.25;
+    line-height: 1.15;
+    flex: 1 1 auto;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: calc(1.25em * 3);
-}
-
-/* Legacy paragraph style (title + <br><br> + description) */
-.book-title p{ 
-    font-size:15px; 
-    font-weight:700; 
-    margin:0; 
-    cursor:pointer; 
-    color:var(--c-text); 
-    line-height:1.25; 
 }
 .book-title p:hover{ text-decoration:underline; }
 
@@ -159,25 +163,38 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
 
 /* VEJA MAIS */
 .book-action {
-    background-color: var(--c-muted);
-    border-radius: 30px;
-    padding: 10px;
-    width: 60%;
+    /* contêiner neutro, deixa o link virar botão de verdade */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
     text-align: center;
-    margin-top: -10px;
+    margin: -10px auto 0;
     transform: translateY(60%);
 }
 
 .book-action a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     font-weight: 700;
-    color: var(--c-text);
-    transition: text-decoration .2s ease;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--c-primary);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(197, 148, 108, 0.18);
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, filter .18s ease;
 }
 
 .book-action a:hover {
-    text-decoration: underline;
+    transform: translateY(-2px);
+    background: var(--c-accent);
+    box-shadow: 0 8px 16px rgba(197, 148, 108, 0.26);
 }
+
+.book-action a:active { transform: translateY(0); }
+.book-action a:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(197,148,108,0.35), 0 8px 16px rgba(197,148,108,0.22); }
 
 /* Actions area (legacy - manter para compatibilidade) */
 .book-actions {
@@ -251,20 +268,25 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
     box-shadow: 0 6px 12px rgba(232, 86, 86, 0.12);
 }
 
-/* Remover (chip vermelho discreto) */
+/* Remover (botão vermelho moderno) */
 .btn-remove {
-    background: transparent;
-    color: var(--c-fav);
-    border: 1px solid rgba(232, 86, 86, 0.14);
-    padding: 6px 8px;
-    border-radius: 10px;
-    font-weight: 800;
+    background: linear-gradient(135deg, var(--remove-start), var(--remove-end));
+    color: #fff;
+    border: none;
+    padding: 7px 14px; /* menor */
+    border-radius: 999px; /* pílula */
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 6px 14px rgba(214, 69, 69, 0.22);
+    transition: all 0.2s ease;
+    display:inline-flex; align-items:center; justify-content:center; line-height:1;
+    position: relative;
 }
 
-.btn-remove:hover {
-    background: rgba(232, 86, 86, 0.06);
-    transform: translateY(-1px);
-}
+.btn-remove:hover { background: linear-gradient(135deg, var(--remove-hover-start), var(--remove-hover-end)); box-shadow: 0 8px 18px rgba(214, 69, 69, 0.28); transform: translateY(-2px); }
+.btn-remove:active{ transform: translateY(0); box-shadow:0 4px 10px rgba(214,69,69,0.2); }
+.btn-remove:focus-visible{ outline: none; box-shadow: 0 0 0 3px var(--remove-ring); }
+.btn-remove::before{ content: "\1F5D1"; margin-right:6px; font-size:0.9em; }
 
 /* Link de ver detalhes (botão secundário) */
 .action-link {
@@ -298,5 +320,10 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
     justify-content:center;
     align-items:center;
     flex-wrap:wrap;
-    margin-top:auto;
+    flex-shrink: 0;
+    margin-top:auto; /* fixa na base do bloco de título */
+    padding-top:6px;
+    width:100%;
 }
+/* Evita que o botão remover herde largura elástica de estilos genéricos */
+.botao-quero-ler .btn-remove{ flex:0 0 auto; width:auto; }

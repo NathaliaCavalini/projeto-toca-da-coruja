@@ -43,13 +43,17 @@ async function validateAndCleanList() {
 
 function buildCard(b){
     const img = esc(b.img || 'imagens/sem-capa.png');
+    const desc = esc(b.desc || '');
     return `
 <article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
     <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>
-    <div class="book-title"><p>${esc(b.title)}</p><div class="book-actions">
-        <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
-    </div></div>
-    <div class="book-action"><a class="action-link" href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
+    <div class="book-title">
+        <p>${esc(b.title)}<br><br>${desc}</p>
+        <div class="botao-quero-ler">
+            <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
+        </div>
+    </div>
+    <div class="book-action"><a href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
 </article>`;
 }
 

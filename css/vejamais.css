@@ -330,6 +330,7 @@ body {
 .star.half {
     background: linear-gradient(to right, var(--accent-color) 50%, var(--primary-color) 50%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -399,6 +400,8 @@ body {
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     transition: transform 0.2s;
+    overflow: hidden;
+    min-width: 0;
 }
 
 .review-item:hover {
@@ -410,6 +413,8 @@ body {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .review-date {
@@ -420,6 +425,11 @@ body {
 .review-text {
     font-size: 1rem;
     color: var(--text-color);
+    overflow: hidden;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    line-height: 1.5;
 }
 
 /* ===== ANIMAÇÃO ===== */

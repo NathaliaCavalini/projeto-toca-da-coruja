@@ -11,9 +11,16 @@
     --book-card-height: 210px;
     --book-img-max-width: 120px;
     --book-img-max-height: 170px;
+    --book-title-min-height: 150px;
     --book-grid-mincol: 220px;
     --book-grid-gap: 36px;
     --book-title-min-height: 150px;
+    /* Remove button theme */
+    --remove-start: #ef6b6b;
+    --remove-end: #d64545;
+    --remove-hover-start: #db5050;
+    --remove-hover-end: #bf3434;
+    --remove-ring: rgba(214,69,69,0.35);
 }
 
 /* RESET BÁSICO */
@@ -121,21 +128,88 @@ body{
 .book-title{
     background-color: #E3D4BF;
     border-radius: 0 0 var(--radius) var(--radius);
-    padding:14px; width:100%; text-align:center; margin-top:-6px; transform: translateY(4%);
+    padding:12px 14px; width:100%; text-align:center; margin-top:-6px; transform: translateY(4%);
     box-shadow: var(--shadow);
+    height: var(--book-title-min-height);
     min-height: var(--book-title-min-height);
-    display:flex; flex-direction:column; align-items:center;
+    max-height: var(--book-title-min-height);
+    display:flex; flex-direction:column; align-items:center; justify-content: flex-start;
 }
-.book-title p{ font-size:15px; font-weight:700; margin:0; line-height:1.25; display:-webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp:3; line-clamp:3; overflow:hidden; text-overflow:ellipsis; max-height:calc(1.25em * 3); }
+.book-title p{ font-size:15px; font-weight:700; margin:0; line-height:1.15; flex: 1 1 auto; display:-webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp:6; line-clamp:6; overflow:hidden; cursor:pointer; }
+.book-title p:hover{ text-decoration:underline; }
+.botao-quero-ler{ display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; flex-shrink: 0; margin-top:auto; padding-top:6px; width:100%; }
+/* Remover não deve esticar em páginas de gênero */
+.botao-quero-ler .btn-remove{ flex:0 0 auto; width:auto; }
 
 /* AÇÃO "Veja mais" */
 .book-action{
-    background-color: #E3D4BF;
-    border-radius: 0 0 30px 30px;
-    padding:10px; width:60%; text-align:center; margin-top:-10px; transform: translateY(60%);
+    /* deixa o contêiner neutro e o link vira botão */
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    width: auto;
+    text-align: center;
+    margin: -10px auto 0;
+    transform: translateY(60%);
 }
-.book-action a{ text-decoration:none; font-weight:700; color:var(--text-color); }
-.book-action a:hover{ text-decoration:underline; }
+.book-action a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(197,148,108,0.18);
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, filter .18s ease;
+}
+.book-action a:hover{
+    transform: translateY(-2px);
+    background: var(--accent-color);
+    box-shadow: 0 8px 16px rgba(197,148,108,0.26);
+}
+.book-action a:active{ transform: translateY(0); }
+.book-action a:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(197,148,108,0.35), 0 8px 16px rgba(197,148,108,0.22); }
+
+/* Remover - pílula moderna */
+.btn-remove{
+    background: linear-gradient(135deg, var(--remove-start), var(--remove-end));
+    color:#fff; border:none;
+    padding:7px 14px; border-radius:999px;
+    font-weight:700; font-size:0.85rem; line-height:1;
+    display:inline-flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(214,69,69,0.22); transition:.2s ease;
+}
+.btn-remove:hover{ background:linear-gradient(135deg,var(--remove-hover-start),var(--remove-hover-end)); box-shadow:0 8px 18px rgba(214,69,69,0.28); transform:translateY(-2px); }
+.btn-remove:active{ transform:translateY(0); box-shadow:0 4px 10px rgba(214,69,69,0.2); }
+.btn-remove:focus-visible{ outline:none; box-shadow:0 0 0 3px var(--remove-ring); }
+.btn-remove::before{ content:"\1F5D1"; margin-right:6px; font-size:0.9em; }
+
+/* ==== MODO ESCURO (usa mesmo padrão de variáveis que home/global) ==== */
+body.dark-mode {
+    --primary-color: #C5946C;
+    --secondary-color: #7D5237; /* fundo escuro */
+    --accent-color: #A67C52;
+    --text-color: #F1F1F1;
+    --light-color: #995e40; /* blocos intermediários */
+    --shadow: 0 8px 20px rgba(0,0,0,0.5);
+    /* remover button em dark mode - contraste extra */
+    --remove-start: #ff6e6e;
+    --remove-end: #e54545;
+    --remove-hover-start: #ff5555;
+    --remove-hover-end: #d23232;
+    --remove-ring: rgba(255,110,110,0.45);
+}
+
+body.dark-mode .book-card { background-color: var(--primary-color); }
+body.dark-mode .book-title { background-color: var(--light-color); }
+body.dark-mode .book-action { background-color: var(--light-color); }
+body.dark-mode .nav-menu { background-color: var(--primary-color); }
+body.dark-mode .menu-section { background-color: var(--primary-color); }
+body.dark-mode .sidebar { background-color: var(--secondary-color); }
+body.dark-mode { background-color: var(--secondary-color); }
 
 /* UTIL: esconder item durante busca */
 .hidden{ display:none !important; }

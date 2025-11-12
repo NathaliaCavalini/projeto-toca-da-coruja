@@ -25,6 +25,13 @@
   --book-grid-mincol: 220px;
   --book-grid-gap: 36px;
   --book-title-min-height: 150px;
+
+  /* Remove button theme */
+  --remove-start: #ef6b6b;
+  --remove-end: #d64545;
+  --remove-hover-start: #db5050;
+  --remove-hover-end: #bf3434;
+  --remove-ring: rgba(214, 69, 69, 0.35);
 }
 /* ===== RESET BÁSICO ===== */
 *{ box-sizing: border-box; margin:0; padding:0; }
@@ -176,7 +183,7 @@ body{
 .book-title{
   background-color:var(--color-muted) !important; 
   border-radius:0 0 var(--radius) var(--radius) !important;
-  padding:14px !important; 
+  padding:12px 14px !important; 
   width:100% !important; 
   text-align:center !important; 
   margin-top:-6px !important; 
@@ -185,10 +192,12 @@ body{
   display:flex !important;
   flex-direction:column !important;
   align-items:center !important;
-  justify-content:space-between !important; /* fixa o botão na base do bloco */
+  justify-content:flex-start !important; /* conteúdo empilha e botão vai para a base pelo margin-top:auto */
   gap:8px !important;
-  /* altura mínima padronizada para todos os cards */
+  /* altura fixa padronizada para todos os cards */
+  height: var(--book-title-min-height) !important;
   min-height: var(--book-title-min-height) !important;
+  max-height: var(--book-title-min-height) !important;
 }
 /* Legacy paragraph style (title + <br><br> + description) */
 .book-title p{ 
@@ -197,34 +206,93 @@ body{
   margin:0; 
   cursor:pointer; 
   color:var(--color-text); 
-  line-height:1.25; 
+  line-height:1.2; 
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
 }
 .book-title p:hover{ text-decoration:underline; }
 
 /* BOTÕES DE AÇÃO DA BIBLIOTECA */
 .botao-quero-ler{
-  display:flex; gap:8px; justify-content:center; align-items:center; margin-top:auto; flex-wrap:wrap; /* empurra para a base */
+  display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap;
+  flex-shrink: 0; /* impede que os botões encolham */
+  margin-top:auto; /* garante que o botão fique colado na base do título */
+  padding-top:6px; /* reduz sensação de "vazio" acima do botão */
+  width:100%;
 }
 .botao-quero-ler .action-btn{
   font-size:0.85rem; padding:6px 12px; flex:1; min-width:80px;
+}
+/* Não deixar o botão Remover expandir em largura (sobrepõe o flex:1 genérico) */
+.botao-quero-ler .btn-remove{
+  flex: 0 0 auto;
+  width: auto;
 }
 /* Quando há apenas um botão (modo single na home), não expande */
 body[data-button-mode="single"] .botao-quero-ler .action-btn{
   flex:0 1 auto;
 }
 
+/* Botão Remover — visual moderno consistente nas listas */
+.btn-remove{
+  background: linear-gradient(135deg, var(--remove-start), var(--remove-end));
+  color:#fff;
+  border:none;
+  padding:7px 14px; /* menor */
+  border-radius:999px; /* pílula */
+  font-weight:700;
+  font-size:0.85rem;
+  flex:0 0 auto; /* não esticar na área de botões */
+  box-shadow:0 6px 14px rgba(214,69,69,0.22);
+  transition: all .2s ease;
+  display:inline-flex; align-items:center; justify-content:center;
+  line-height:1;
+  position: relative;
+}
+.btn-remove:hover{
+  background: linear-gradient(135deg, var(--remove-hover-start), var(--remove-hover-end));
+  box-shadow:0 8px 18px rgba(214,69,69,0.28);
+  transform: translateY(-2px);
+}
+.btn-remove:active{ transform: translateY(0); box-shadow:0 4px 10px rgba(214,69,69,0.2); }
+.btn-remove:focus-visible{ outline: none; box-shadow: 0 0 0 3px var(--remove-ring); }
+.btn-remove::before{ content: "\1F5D1"; /* lixeira unicode */ margin-right:6px; font-size:0.9em; }
+
 /* VEJA MAIS */
 .book-action{
-  background-color:var(--color-muted) !important; 
-  border-radius:30px !important; 
-  padding:10px !important; 
-  width:60% !important;
-  text-align:center !important; 
-  margin-top:-10px !important; 
-  transform:translateY(60%) !important;
+  /* torna o contêiner neutro e deixa o link com aparência de botão */
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  text-align: center !important;
+  margin: -10px auto 0 !important;
+  transform: translateY(60%) !important;
 }
-.book-action a{ text-decoration:none; font-weight:700; color:var(--color-text); transition:text-decoration .2s ease; }
-.book-action a:hover{ text-decoration:underline; }
+.book-action a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(139,105,77,0.18);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, filter .18s ease;
+}
+.book-action a:hover{
+  transform: translateY(-2px);
+  background: var(--color-accent);
+  box-shadow: 0 8px 16px rgba(139,105,77,0.26);
+}
+.book-action a:active{ transform: translateY(0); }
+.book-action a:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(197,148,108,0.35), 0 8px 16px rgba(139,105,77,0.22); }
 
 /* UTILITÁRIO */
 .hidden{ display:none !important; }
@@ -611,4 +679,10 @@ body.dark-mode {
   --color-text: #F1F1F1;    /* texto claro */
   --color-muted: #995e40;   /* tom mais quente para seções */
   --shadow: 0 8px 20px rgba(0,0,0,0.5);
+  /* Remover button palette em modo escuro (cores levemente mais vivas para contraste) */
+  --remove-start: #ff6e6e;
+  --remove-end: #e54545;
+  --remove-hover-start: #ff5555;
+  --remove-hover-end: #d23232;
+  --remove-ring: rgba(255,110,110,0.45);
 }
