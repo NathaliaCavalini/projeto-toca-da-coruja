@@ -19,9 +19,6 @@ function buildCard(b){
 <article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
     <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>
     <div class="book-title"><p>${esc(b.title)}</p><div class="book-actions">
-        <button class="action-btn btn-quer-ler">Quero Ler</button>
-        <button class="action-btn btn-ja-li">Já Li</button>
-        <button class="action-btn btn-favorito">♥</button>
         <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
     </div></div>
     <div class="book-action"><a class="action-link" href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
@@ -62,13 +59,7 @@ container?.addEventListener('click', ev => {
     renderFavoritos();
 });
 
-document.addEventListener('click', ev => {
-    const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito');
-    if(!btn) return;
-    if(container && container.contains(btn)){
-        setTimeout(()=>{ renderFavoritos(); }, 160);
-    }
-});
+// Delegação removida (apenas botão de remover permanece)
 
 document.addEventListener('DOMContentLoaded', renderFavoritos);
 auth.onAuthStateChanged(()=> renderFavoritos());

@@ -21,9 +21,6 @@ function buildCard(b){
     <div class="book-title">
         <p>${esc(b.title)}</p>
         <div class="book-actions">
-            <button class="action-btn btn-quer-ler">Quero Ler</button>
-            <button class="action-btn btn-ja-li">Já Li</button>
-            <button class="action-btn btn-favorito">♥</button>
             <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
         </div>
     </div>
@@ -65,13 +62,7 @@ container?.addEventListener('click', ev => {
     renderJaLidos();
 });
 
-document.addEventListener('click', ev => {
-    const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito');
-    if(!btn) return;
-    if(container && container.contains(btn)){
-        setTimeout(()=>{ renderJaLidos(); }, 160);
-    }
-});
+// Não há outros botões para observar aqui
 
 document.addEventListener('DOMContentLoaded', renderJaLidos);
 auth.onAuthStateChanged(()=> renderJaLidos());

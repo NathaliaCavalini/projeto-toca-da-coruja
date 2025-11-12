@@ -23,9 +23,6 @@ function buildCard(b){
     <div class="book-title">
         <p>${esc(b.title)}</p>
         <div class="book-actions">
-            <button class="action-btn btn-quer-ler">Quero Ler</button>
-            <button class="action-btn btn-ja-li">Já Li</button>
-            <button class="action-btn btn-favorito">♥</button>
             <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
         </div>
     </div>
@@ -71,13 +68,7 @@ container?.addEventListener('click', ev => {
 });
 
 // Re-render após cliques de ação dentro da lista
-document.addEventListener('click', ev => {
-    const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito');
-    if(!btn) return;
-    if(container && container.contains(btn)){
-        setTimeout(()=>{ renderQuerLer(); }, 160);
-    }
-});
+// Não precisamos mais monitorar cliques nos outros botões (removidos)
 
 document.addEventListener('DOMContentLoaded', renderQuerLer);
 auth.onAuthStateChanged(()=> renderQuerLer());

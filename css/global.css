@@ -30,10 +30,35 @@ body.dark-mode {
 
 /* Book grid (reaproveita sua grade) */
 .book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 20px;
-    margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 50px;
+        margin-top: 6px;
+}
+
+@media (max-width:900px){
+    .book-grid{ grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:30px; }
+}
+@media (max-width:480px){
+    .book-grid{ grid-template-columns:1fr; }
+}
+
+/* Força exatamente 3 colunas nas páginas de listas (evita comportamento auto-fill variável) */
+body.list-page #favoritos-container.book-grid,
+body.list-page #ja-li-container.book-grid,
+body.list-page #quer-ler-container.book-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+@media (max-width: 1000px){
+    body.list-page #favoritos-container.book-grid,
+    body.list-page #ja-li-container.book-grid,
+    body.list-page #quer-ler-container.book-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px){
+    body.list-page #favoritos-container.book-grid,
+    body.list-page #ja-li-container.book-grid,
+    body.list-page #quer-ler-container.book-grid { grid-template-columns: 1fr; }
 }
 
 /* Card */
