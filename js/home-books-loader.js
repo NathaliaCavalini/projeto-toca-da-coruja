@@ -9,31 +9,44 @@ function getStorageBooks() {
     return {};
 }
 
+// Utilitário simples para evitar XSS ao renderizar textos
+function esc(html){
+    return String(html)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#39;');
+}
+
 // Renderizar um livro no grid
 function renderBookCard(id, book) {
     const article = document.createElement('article');
     article.className = 'book-item';
     article.setAttribute('data-title', book.titulo);
-    article.setAttribute('data-genre', book.genero);
-    
-    // Gerar descrição curta (primeiras 100 caracteres da sinopse)
-    const shortDesc = book.sinopse && book.sinopse.length > 100 
-        ? book.sinopse.substring(0, 100) + '...' 
-        : (book.sinopse || 'Descrição não disponível');
-    
+    article.setAttribute('data-genre', book.genero || '');
+    article.setAttribute('data-id', id);
+
+    // Preferir 'descricao' definida pelo admin; caso contrário, resumir a sinopse
+    const baseDesc = (book.descricao && book.descricao.trim())
+        ? book.descricao.trim()
+        : (book.sinopse || '');
+    const shortDesc = baseDesc.length > 140 ? baseDesc.substring(0, 140) + '…' : baseDesc || 'Descrição não disponível';
+
+    // Markup padronizado igual ao catálogo (single button + veja mais)
     article.innerHTML = `
         <div class="book-card">
-            <img src="${book.imagem}" alt="Capa do livro ${book.titulo}">
+            <img src="${esc(book.imagem)}" alt="Capa do livro ${esc(book.titulo)}">
         </div>
         <div class="book-title">
-            <p>${book.titulo}<br><br>${shortDesc}</p>
+            <p>${esc(book.titulo)}<br><br>${esc(shortDesc)}</p>
             <div class="botao-quero-ler">
-                <button class="action-btn" data-book-id="${id}">Quero Ler</button>
+                <button class="action-btn btn-quer-ler" data-library-action="querLer">📖 Quero Ler</button>
             </div>
         </div>
         <div class="book-action"><a href="vejamais.html?id=${id}">Veja mais</a></div>
     `;
-    
+
     return article;
 }
 
@@ -56,7 +69,17 @@ function addStorageBooksToGrid() {
         const bookCard = renderBookCard(id, book);
         bookGrid.appendChild(bookCard); // Adiciona ao final
     });
-    
+
+    // Atualiza estados dos botões após inserir dinamicamente
+    const tryRefresh = () => {
+        if (window.__libraryActions && typeof window.__libraryActions.refreshAll === 'function') {
+            window.__libraryActions.refreshAll();
+        } else {
+            setTimeout(tryRefresh, 60);
+        }
+    };
+    tryRefresh();
+
     console.log(`✅ ${bookIds.length} livros do localStorage adicionados à home`);
 }
 

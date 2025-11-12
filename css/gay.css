@@ -7,6 +7,13 @@
     --light-color: #E6C9A8;     /* sidebar, card backgrounds */
     --shadow: 0 6px 16px rgba(0,0,0,0.08);
     --radius: 12px;
+    /* padronização global de tamanhos (igual home.css/global.css) */
+    --book-card-height: 210px;
+    --book-img-max-width: 120px;
+    --book-img-max-height: 170px;
+    --book-grid-mincol: 220px;
+    --book-grid-gap: 36px;
+    --book-title-min-height: 150px;
 }
 
 /* RESET BÁSICO */
@@ -93,8 +100,8 @@ body{
 /* GRID DE LIVROS — espaçamento aumentado */
 .book-grid{
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 50px;  /* AUMENTEI gap */
+    grid-template-columns: repeat(auto-fill, minmax(var(--book-grid-mincol), 1fr));
+    gap: var(--book-grid-gap);
     margin-top: 6px;
 }
 
@@ -106,24 +113,26 @@ body{
     background-color: #C5946C;
     border-radius: var(--radius) var(--radius) 0 0;
     padding:18px; width:100%; text-align:center; box-shadow: var(--shadow);
-    height: 250px; display:flex; align-items:center; justify-content:center;
+    height: var(--book-card-height); display:flex; align-items:center; justify-content:center;
 }
-.book-card img{ max-width:140px; max-height:200px; object-fit:cover; }
+.book-card img{ max-width: var(--book-img-max-width); max-height: var(--book-img-max-height); object-fit:cover; }
 
 /* TITULO */
 .book-title{
     background-color: #E3D4BF;
     border-radius: 0 0 var(--radius) var(--radius);
-    padding:14px; width:100%; text-align:center; margin-top:-6px; transform: translateY(8%);
+    padding:14px; width:100%; text-align:center; margin-top:-6px; transform: translateY(4%);
     box-shadow: var(--shadow);
+    min-height: var(--book-title-min-height);
+    display:flex; flex-direction:column; align-items:center;
 }
-.book-title p{ font-size:15px; font-weight:700; margin:0; }
+.book-title p{ font-size:15px; font-weight:700; margin:0; line-height:1.25; display:-webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp:3; line-clamp:3; overflow:hidden; text-overflow:ellipsis; max-height:calc(1.25em * 3); }
 
 /* AÇÃO "Veja mais" */
 .book-action{
     background-color: #E3D4BF;
     border-radius: 0 0 30px 30px;
-    padding:10px; width:60%; text-align:center; margin-top:-10px; transform: translateY(35%);
+    padding:10px; width:60%; text-align:center; margin-top:-10px; transform: translateY(60%);
 }
 .book-action a{ text-decoration:none; font-weight:700; color:var(--text-color); }
 .book-action a:hover{ text-decoration:underline; }

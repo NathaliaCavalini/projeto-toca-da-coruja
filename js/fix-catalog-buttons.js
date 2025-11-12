@@ -8,8 +8,13 @@
     
     // Espera o DOM carregar
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fixButtons);
+        document.addEventListener('DOMContentLoaded', initFixes);
     } else {
+        initFixes();
+    }
+    
+    function initFixes(){
+        // Apenas garantir botões; não alterar markup legacy das descrições
         fixButtons();
     }
     
@@ -109,6 +114,7 @@
         };
         setTimeout(tryRefresh, 100);
     }
+    
     
     // Função helper para normalizar título em ID
     function normalizeToId(str) {

@@ -152,6 +152,10 @@ window.editBook = async function(id) {
     document.getElementById('book-paginas').value = book.paginas;
     document.getElementById('book-ano').value = book.ano;
     document.getElementById('book-sinopse').value = book.sinopse;
+    if (book.descricao) {
+        const descEl = document.getElementById('book-descricao');
+        if (descEl) descEl.value = book.descricao;
+    }
     document.getElementById('book-imagem-url').value = book.imagem;
     
     // Preview da imagem
@@ -276,6 +280,8 @@ form?.addEventListener('submit', async (e) => {
     const paginas = parseInt(document.getElementById('book-paginas').value);
     const ano = parseInt(document.getElementById('book-ano').value);
     const sinopse = document.getElementById('book-sinopse').value.trim();
+    const descricaoCurtaInput = document.getElementById('book-descricao');
+    const descricaoCurta = descricaoCurtaInput ? descricaoCurtaInput.value.trim() : '';
     
     if (!genero) {
         alert('Por favor, selecione ou digite um gênero');
@@ -317,7 +323,8 @@ form?.addEventListener('submit', async (e) => {
         genero,
         paginas,
         ano,
-        sinopse
+        sinopse,
+        descricao: descricaoCurta || ''
     };
     
     // Salvar no localStorage do admin
