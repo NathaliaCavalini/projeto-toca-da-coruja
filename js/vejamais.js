@@ -349,7 +349,7 @@ if (!container) {
 
 if (livro) {
     container.innerHTML = `
-    <div class="book-detail-card">
+    <div class="book-detail-card" data-id="${id}" data-title="${livro.titulo}">
       <div class="book-image">
         <img src="${livro.imagem}" alt="Capa do livro ${livro.titulo}">
       </div>
@@ -368,9 +368,9 @@ if (livro) {
         </div>
 
         <div class="action-buttons">
-          <button class="action-btn" id="btn-quer-ler">📖 Quero Ler</button>
-          <button class="action-btn" id="btn-ja-li">✅ Já Li</button>
-          <button class="action-btn" id="btn-favorito">⭐ Favorito</button>
+          <button class="action-btn btn-quer-ler" id="btn-quer-ler">📖 Quero Ler</button>
+          <button class="action-btn btn-ja-li" id="btn-ja-li">✅ Já Li</button>
+          <button class="action-btn btn-favorito" id="btn-favorito">⭐ Favorito</button>
         </div>
 
         

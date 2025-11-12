@@ -3,13 +3,24 @@
 // salva img como URL absoluta sempre que possível, aceita vários formatos de botão,
 // e redireciona corretamente para as páginas de lista.
 
-let auth = null;
-try {
-  import('./firebase-config.js').then(m => { auth = m.auth; }).catch(()=>{ auth = null; });
-} catch(e){ auth = null; }
+// Auth será acessado via window se disponível (evita conflitos de declaração)
+function getAuth() {
+  try {
+    // Tenta pegar auth do window.__fb (definido por firebase-config.js)
+    if (window.__fb && window.__fb.auth) return window.__fb.auth;
+    // Fallback para window.auth direto
+    if (window.auth) return window.auth;
+    // Último fallback: firebase global
+    if (typeof firebase !== 'undefined' && firebase.auth) return firebase.auth();
+  } catch(e) {}
+  return null;
+}
 
 function getUserKey(){
-  try { if(auth && auth.currentUser && auth.currentUser.uid) return `user-${auth.currentUser.uid}`; } catch(e){}
+  try { 
+    const auth = getAuth();
+    if(auth && auth.currentUser && auth.currentUser.uid) return `user-${auth.currentUser.uid}`; 
+  } catch(e){}
   return 'guest';
 }
 function sKey(listName){ return `${getUserKey()}::${listName}`; }
@@ -29,7 +40,7 @@ function absoluteUrl(url){
 
 // heurísticas para extrair título e imagem
 function findClosestBookCard(el){
-  return el.closest('.book-item') || el.closest('[data-id]') || el.closest('.book-detail') || null;
+  return el.closest('.book-item') || el.closest('[data-id]') || el.closest('.book-detail') || el.closest('.book-detail-card') || null;
 }
 function findTitleFromCard(card){
   if(!card) return '';
@@ -142,13 +153,14 @@ const delegateSelector = [
   '.action-btn.btn-favorito'
 ].join(',');
 
+// Previne múltiplos event listeners
+if (!window.__libraryActionsListenerAdded) {
+  window.__libraryActionsListenerAdded = true;
+  
 document.addEventListener('click', (e) => {
   // Ignore clicks that happen inside the site footer (social / contact links)
-  // so this global delegator doesn't accidentally intercept footer anchors.
-  // Check both e.target and its closest footer ancestor
   const inFooter = e.target && e.target.closest && e.target.closest('.footer');
   if (inFooter) {
-    console.log('📍 Click ignored: inside footer', e.target);
     return;
   }
 
@@ -163,6 +175,7 @@ document.addEventListener('click', (e) => {
       p = p.parentElement;
     }
   }
+  
   if(!btn) return;
 
   e.preventDefault();
@@ -178,11 +191,30 @@ document.addEventListener('click', (e) => {
   }
 
   const book = buildBookFromEl(btn);
+  console.log('📚 Livro extraído:', { id: book.id, title: book.title, img: book.img?.substring(0, 50) + '...' });
+  
   const added = toggle(action, book);
+  
+  // Debug: verificar o que foi salvo
+  const storageKey = sKey(action);
+  const savedData = load(action);
+  console.log('💾 Chave de storage:', storageKey);
+  console.log('💾 Dados salvos agora:', savedData);
+  
   const card = findClosestBookCard(btn);
   refreshButtonState(card);
 
-  try{ console.log(`[Library] ${added ? 'ADICIONADO' : 'REMOVIDO'} "${book.title}" -> ${action}`); }catch(e){}
+  console.log(`[Library] ${added ? 'ADICIONADO' : 'REMOVIDO'} "${book.title}" -> ${action}`);
+
+  // Mostra notificação toast com nome do livro
+  const actionNames = { querLer: 'Quero Ler', jaLi: 'Já Li', favoritos: 'Favoritos' };
+  const actionName = actionNames[action] || action;
+  if (typeof window.showToast === 'function') {
+    const message = added 
+      ? `"${book.title}" adicionado a ${actionName}` 
+      : `"${book.title}" removido de ${actionName}`;
+    window.showToast(message, 'success', 2500);
+  }
 
   const isInsideListPage = !!btn.closest('#quer-ler-container, #ja-li-container, #favoritos-container');
   if(isInsideListPage){
@@ -192,5 +224,7 @@ document.addEventListener('click', (e) => {
 
   goToListPage(action);
 });
+
+} // Fim do if que previne múltiplos listeners
 
 document.addEventListener('DOMContentLoaded', () => { refreshAllButtons(); });

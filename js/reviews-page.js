@@ -62,8 +62,9 @@ async function renderUserReviews() {
         const emptyMessage = document.createElement('div');
         emptyMessage.className = 'empty-reviews';
         emptyMessage.innerHTML = `
-            <p>Você ainda não fez nenhuma review.</p>
-            <a href="/home.html" class="browse-books">Explorar Livros</a>
+            <h2>✍️ Nenhuma review publicada ainda</h2>
+            <p>Compartilhe suas opiniões sobre os livros que leu! Use o botão flutuante ✍️ ou visite as páginas dos livros para deixar suas avaliações.</p>
+            <a href="/home.html" class="browse-books">Explorar Catálogo</a>
         `;
         reviewsSection.appendChild(emptyMessage);
         return;

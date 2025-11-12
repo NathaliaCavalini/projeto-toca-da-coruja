@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
     <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/toast-notifications.css" />
     <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
 </head>
 
-<body>
+<body data-button-mode="single">
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <header class="logo">
@@ -46,7 +47,7 @@
         <section class="menu-section" id="admin-section" style="display:none;">
             <h2>Administração</h2>
             <ul class="menu-list">
-                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">⚙️ Painel Admin</a></li>
+                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;">⚙️ Painel Admin</a></li>
             </ul>
         </section>
         <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
@@ -199,7 +200,7 @@
                 <div class="book-action"><a href="vejamais.html?id=girls-like-girls">Veja mais</a></div>
             </article>
 
-            <article class="book-item" data-title="Isso não é um conto de fadas">
+            <article class="book-item" data-title="Isso não é um conto de fadas" data-id="isso-nao-e-um-conto-de-fadas">
                 <div class="book-card">
                     <img src="../imagens/isso-não-é-um-conto-de-fadas.jpg"
                         alt="Capa do livro Isso não é um conto de fadas">
@@ -207,7 +208,9 @@
                 <div class="book-title">
                     <p>Isso não é um conto de fadas<br><br>Releitura sombria e realista dos contos clássicos.</p>
                     <div class="botao-quero-ler">
-                        <button class="action-btn" id="btn-quer-ler-tormenta-modulo-basico">Quero Ler</button>
+                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+                        <button class="action-btn btn-ja-li">✅ Já Li</button>
+                        <button class="action-btn btn-favorito">⭐ Favorito</button>
                     </div>
                 </div>
                 <div class="book-action"><a href="vejamais.html?id=isso-nao-e-um-conto-de-fadas">Veja mais</a></div>
@@ -778,6 +781,8 @@
     <script type="module" src="../js/admin-button.js"></script>
     <script type="module" src="../js/dynamic-genres-menu.js"></script>
     <script type="module" src="../js/home-books-loader.js"></script>
+    <script src="/js/toast-notifications.js"></script>
+    <script src="/js/fix-catalog-buttons.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
 </body>
 

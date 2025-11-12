@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Quer ler — Toca da Coruja</title>
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/reviews.css">
   <link rel="icon" href="imagens/favicon.png" type="image/png">
   <style>
     .book-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
@@ -26,20 +27,7 @@
         <section class="menu-section">
             <h2>Gêneros</h2>
             <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
-                </li>
-                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">LGBTQIAPN+</a></li>
-                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Fantasia</a></li>
-                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Romance</a></li>
-                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Clássicos</a></li>
-                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Programação</a></li>
-                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
-                </li>
+                <!-- Gêneros carregados dinamicamente via dynamic-genres-menu.js -->
             </ul>
         </section>
         <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
@@ -126,37 +114,9 @@
         </div>
     </footer>
 
-  <script src="js/library-actions-delegated.js"></script>
-  <script type="module" src="js/user-info-global.js"></script>
-  <script>
-  (function(){
-    const SUFFIX='::favoritos', container=document.getElementById('favoritos-container'), emptyMsg=document.getElementById('empty-msg');
-    function findKey(){ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.endsWith(SUFFIX)) return k } return 'guest'+SUFFIX }
-    function loadList(k){ try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]} }
-    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
-
-    function buildCard(b){ const img=esc(b.img||'imagens/sem-capa.png'); return `
-<article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
-  <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>
-  <div class="book-title"><p>${esc(b.title)}</p><div class="book-actions">
-    <button class="action-btn btn-quer-ler">Quero Ler</button>
-    <button class="action-btn btn-ja-li">Já Li</button>
-    <button class="action-btn btn-favorito">♥</button>
-    <button class="action-btn btn-remove" data-book-id="${esc(b.id)}">Remover</button>
-  </div></div>
-  <div class="book-action"><a class="action-link" href="vejamais.html?id=${encodeURIComponent(b.id)}">Veja mais</a></div>
-</article>`;}
-
-    function render(){ const k=findKey(), items=loadList(k); if(!items||items.length===0){ container.innerHTML=''; emptyMsg.style.display='block'; return } emptyMsg.style.display='none'; container.innerHTML = items.map(buildCard).join(''); setTimeout(()=>{ try{ window.__libraryActions.refreshAll(); }catch(e){} },60); }
-
-    container.addEventListener('click', (ev)=>{ const rem=ev.target.closest('.btn-remove'); if(!rem) return; const id=rem.dataset.bookId; if(!id) return; const k=findKey(); let arr=loadList(k); arr=arr.filter(x=>x.id!==id); localStorage.setItem(k, JSON.stringify(arr)); render(); });
-
-    document.addEventListener('click', (ev)=>{ const btn = ev.target.closest && ev.target.closest('.btn-quer-ler, .btn-ja-li, .btn-favorito'); if(!btn) return; if(container.contains(btn)){ setTimeout(()=>{ try{ window.__libraryActions.refreshAll(); render(); }catch(e){} },160); } });
-
-    render(); window.__favoritosPage = { render };
-  })();
-  </script>
+    <script type="module" src="js/user-info-global.js"></script>
     <script type="module" src="/js/theme.js"></script>
+    <script type="module" src="/js/favoritos-page.js"></script>
     <script src="../js/home.js"></script>
 
     <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
@@ -316,6 +276,7 @@
         });
     </script>
     <script type="module" src="../js/user-info-global.js"></script>
+    <script type="module" src="../js/dynamic-genres-menu.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
 </body>
 </html>
