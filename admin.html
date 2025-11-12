@@ -169,9 +169,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Descrição curta (aparece no card) <span style="opacity:.7; font-weight:normal;">(opcional)</span></label>
-                    <textarea id="book-descricao" rows="3" maxlength="220" placeholder="Ex.: Duas ex-colegas se reencontram e o amor floresce."></textarea>
-                    <small style="display:block; opacity:.6; margin-top:4px;">Se deixar em branco, usaremos um resumo automático da sinopse.</small>
+                    <label>Descrição curta (aparece no card) <span style="color:#d32f2f; font-weight:600;">*</span></label>
+                    <textarea id="book-descricao" rows="3" maxlength="150" placeholder="Ex.: Duas ex-colegas se reencontram e o amor floresce." required></textarea>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <small style="opacity:.6;">Máximo de 70 caracteres para manter o visual padronizado.</small>
+                        <small id="desc-counter" style="opacity:.8; font-weight:600; color:var(--color-accent);">0/70</small>
+                    </div>
                 </div>
                 
                 <div class="form-group">

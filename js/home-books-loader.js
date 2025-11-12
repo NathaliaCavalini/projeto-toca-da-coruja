@@ -28,10 +28,12 @@ function renderBookCard(id, book) {
     article.setAttribute('data-id', id);
 
     // Preferir 'descricao' definida pelo admin; caso contrário, resumir a sinopse
+    const MAX_DESC = 70; // limite baseado no maior resumo legacy medido nos HTML estáticos
     const baseDesc = (book.descricao && book.descricao.trim())
         ? book.descricao.trim()
         : (book.sinopse || '');
-    const shortDesc = baseDesc.length > 140 ? baseDesc.substring(0, 140) + '…' : baseDesc || 'Descrição não disponível';
+    const cleanDesc = baseDesc.replace(/\s+/g,' ').trim();
+    const shortDesc = cleanDesc.length > MAX_DESC ? cleanDesc.substring(0, MAX_DESC) + '…' : (cleanDesc || 'Descrição não disponível');
 
     // Markup padronizado igual ao catálogo (single button + veja mais)
     article.innerHTML = `

@@ -152,10 +152,13 @@ window.editBook = async function(id) {
     document.getElementById('book-paginas').value = book.paginas;
     document.getElementById('book-ano').value = book.ano;
     document.getElementById('book-sinopse').value = book.sinopse;
-    if (book.descricao) {
-        const descEl = document.getElementById('book-descricao');
-        if (descEl) descEl.value = book.descricao;
+    
+    // Descrição é obrigatória, sempre deve estar presente
+    const descEl = document.getElementById('book-descricao');
+    if (descEl) {
+        descEl.value = book.descricao || '';
     }
+    
     document.getElementById('book-imagem-url').value = book.imagem;
     
     // Preview da imagem
@@ -269,6 +272,46 @@ document.getElementById('book-imagem-file')?.addEventListener('change', (e) => {
     }
 });
 
+// ==================== CONTADOR DE DESCRIÇÃO ====================
+
+// Contador de caracteres em tempo real para descrição curta
+const descricaoInput = document.getElementById('book-descricao');
+const descCounter = document.getElementById('desc-counter');
+const MAX_DESC = 70; // Limite baseado na maior descrição legacy (70 chars)
+
+if (descricaoInput && descCounter) {
+    const updateCounter = () => {
+        const cleanText = descricaoInput.value.replace(/\s+/g, ' ').trim();
+        const len = cleanText.length;
+        const remaining = MAX_DESC - len;
+        
+        descCounter.textContent = `${len}/${MAX_DESC}`;
+        
+        // Mudar cor: verde se OK, laranja perto do limite, vermelho se ultrapassou
+        if (len > MAX_DESC) {
+            descCounter.style.color = '#d32f2f'; // vermelho
+            descCounter.style.fontWeight = '700';
+        } else if (len > MAX_DESC - 10) {
+            descCounter.style.color = '#f57c00'; // laranja
+            descCounter.style.fontWeight = '600';
+        } else {
+            descCounter.style.color = 'var(--color-accent)';
+            descCounter.style.fontWeight = '600';
+        }
+    };
+    
+    descricaoInput.addEventListener('input', updateCounter);
+    descricaoInput.addEventListener('change', updateCounter);
+    
+    // Inicializar contador quando modal abrir
+    const observer = new MutationObserver(() => {
+        if (modal.classList.contains('active')) {
+            updateCounter();
+        }
+    });
+    observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+}
+
 // Salvar livro (adicionar ou editar)
 form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -285,6 +328,27 @@ form?.addEventListener('submit', async (e) => {
     
     if (!genero) {
         alert('Por favor, selecione ou digite um gênero');
+        return;
+    }
+    
+    // Validar descrição curta (OBRIGATÓRIO e não pode exceder 74)
+    if (!descricaoCurta) {
+        alert('A descrição curta é obrigatória!\n\nEla aparecerá no card do livro no catálogo.');
+        document.getElementById('book-descricao').focus();
+        return;
+    }
+    
+    const cleanDesc = descricaoCurta.replace(/\s+/g, ' ').trim();
+    if (cleanDesc.length > MAX_DESC) {
+        const excesso = cleanDesc.length - MAX_DESC;
+        alert(`❌ Descrição muito longa!\n\nA descrição tem ${cleanDesc.length} caracteres.\nLimite máximo: ${MAX_DESC} caracteres.\nExcesso: ${excesso} caracteres.\n\nPor favor, reduza o texto para manter o visual padronizado dos cards.`);
+        document.getElementById('book-descricao').focus();
+        return;
+    }
+    
+    if (cleanDesc.length === 0) {
+        alert('A descrição curta não pode estar vazia ou conter apenas espaços.');
+        document.getElementById('book-descricao').focus();
         return;
     }
     
@@ -315,7 +379,7 @@ form?.addEventListener('submit', async (e) => {
         return;
     }
     
-    // Criar objeto do livro
+    // Criar objeto do livro (descricao sempre presente, validada acima)
     const book = {
         titulo,
         autor,
@@ -324,7 +388,7 @@ form?.addEventListener('submit', async (e) => {
         paginas,
         ano,
         sinopse,
-        descricao: descricaoCurta || ''
+        descricao: cleanDesc // usar versão normalizada
     };
     
     // Salvar no localStorage do admin
