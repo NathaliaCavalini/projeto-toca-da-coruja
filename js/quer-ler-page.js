@@ -45,8 +45,13 @@ function renderQuerLer(){
     }
     const items = loadList();
     if(!items.length){
-        container.innerHTML='';
-        if(emptyMsg) emptyMsg.style.display='block';
+        emptyMsg.style.display='none';
+        container.innerHTML = `
+            <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
+                <h2>📖 Nenhum livro na lista "Quero Ler"</h2>
+                <p>Adicione livros clicando em "Quero Ler" nas páginas ou no catálogo principal.</p>
+                <a href="/home.html" class="browse-books">Explorar Catálogo</a>
+            </div>`;
         return;
     }
     if(emptyMsg) emptyMsg.style.display='none';

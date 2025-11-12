@@ -42,8 +42,13 @@ function renderJaLidos(){
     }
     const items = loadList();
     if(!items.length){
-        container.innerHTML='';
-        if(emptyMsg) emptyMsg.style.display='block';
+        emptyMsg.style.display='none';
+        container.innerHTML = `
+            <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
+                <h2>✅ Nenhum livro marcado como lido</h2>
+                <p>Clique em "Já Li" nas páginas dos livros para mover suas leituras para esta lista.</p>
+                <a href="/home.html" class="browse-books">Explorar Catálogo</a>
+            </div>`;
         return;
     }
     if(emptyMsg) emptyMsg.style.display='none';

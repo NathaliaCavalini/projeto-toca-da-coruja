@@ -39,8 +39,13 @@ function renderFavoritos(){
     }
     const items = loadList();
     if(!items.length){
-        container.innerHTML='';
-        if(emptyMsg) emptyMsg.style.display='block';
+        emptyMsg.style.display='none';
+        container.innerHTML = `
+            <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
+                <h2>⭐ Nenhum favorito ainda</h2>
+                <p>Marque livros como favoritos nas páginas deles para vê-los aqui mais tarde.</p>
+                <a href="/home.html" class="browse-books">Explorar Catálogo</a>
+            </div>`;
         return;
     }
     if(emptyMsg) emptyMsg.style.display='none';
