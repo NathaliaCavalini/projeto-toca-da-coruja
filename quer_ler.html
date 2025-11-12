@@ -123,39 +123,6 @@
     <script type="module" src="/js/quer-ler-page.js"></script>
     <script src="../js/home.js"></script>
 
-    <!-- Script robusto para mostrar o nome/foto do usuário no sidebar -->
-    <script type="module">
-        import { auth } from "../js/firebase-config.js";
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-
-        // pega o elemento (pode ser null se a página não tiver sidebar)
-        const userInfo = document.getElementById("user-info");
-
-        if (!userInfo) {
-            // debug: se faltou o id em alguma página, aparece aqui no console
-            console.warn("Elemento #user-info não encontrado nesta página. Adicione id='user-info' ao link do sidebar.");
-        } else {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const nome = user.displayName || (user.email ? user.email.split("@")[0] : "Usuário");
-                    const foto = user.photoURL || "../imagens/user.png";
-
-                    userInfo.innerHTML = `
-                        <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
-                        <span>${nome}</span>
-                    `;
-                    // linka pro perfil
-                    userInfo.setAttribute("href", "perfil.html");
-                } else {
-                    userInfo.innerHTML = `
-                        <img src="../imagens/user.png" alt="Ícone de usuário" />
-                        <span>Cadastre-se</span>
-                    `;
-                    userInfo.setAttribute("href", "login.html");
-                }
-            });
-        }
-    </script>
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
     <script>

@@ -177,15 +177,49 @@ window.deleteBook = function(id) {
         return;
     }
     
-    if (!confirm('Tem certeza que deseja deletar este livro?')) {
+    if (!confirm('Tem certeza que deseja deletar este livro?\n\nEle será removido de todas as listas de usuários (Quero Ler, Já Lidos, Favoritos).')) {
         return;
     }
     
+    // Remover o livro do admin-books
     delete adminBooks[id];
     saveAdminBooks(adminBooks);
+    
+    // Limpar o livro de TODAS as listas de usuários no localStorage
+    cleanBookFromUserLists(id);
+    
     renderBooksList();
-    alert('Livro deletado com sucesso!');
+    alert('Livro deletado com sucesso!\n\nFoi removido de todas as listas de usuários.');
 };
+
+// Limpar livro deletado de todas as listas de usuários
+function cleanBookFromUserLists(bookId) {
+    // Lista de chaves localStorage que podem conter referências ao livro
+    const listKeys = [
+        'quer-ler',
+        'ja-lidos', 
+        'favoritos'
+    ];
+    
+    let totalRemoved = 0;
+    
+    listKeys.forEach(key => {
+        const list = JSON.parse(localStorage.getItem(key) || '[]');
+        const before = list.length;
+        const filtered = list.filter(id => id !== bookId);
+        const removed = before - filtered.length;
+        
+        if (removed > 0) {
+            localStorage.setItem(key, JSON.stringify(filtered));
+            totalRemoved += removed;
+            console.log(`🧹 Removido "${bookId}" de ${key}`);
+        }
+    });
+    
+    if (totalRemoved > 0) {
+        console.log(`✅ Total: livro removido de ${totalRemoved} lista(s)`);
+    }
+}
 
 // ==================== SELETOR DE GÊNEROS ====================
 

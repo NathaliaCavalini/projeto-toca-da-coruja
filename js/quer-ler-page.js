@@ -15,6 +15,34 @@ function loadList(){
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
+// Carregar todos os livros disponíveis (vejamais.js + admin-books)
+async function getAllBooks() {
+    try {
+        const { livros } = await import('./vejamais.js');
+        const adminBooks = JSON.parse(localStorage.getItem('admin-books') || '{}');
+        return { ...livros, ...adminBooks };
+    } catch (e) {
+        console.warn('Erro ao carregar livros:', e);
+        return JSON.parse(localStorage.getItem('admin-books') || '{}');
+    }
+}
+
+// Validar e limpar lista removendo livros deletados
+async function validateAndCleanList() {
+    const items = loadList();
+    const allBooks = await getAllBooks();
+    const validItems = items.filter(item => allBooks[item.id]);
+    
+    // Se encontrou itens inválidos, limpar do localStorage
+    if (validItems.length !== items.length) {
+        const removed = items.length - validItems.length;
+        localStorage.setItem(storageKey(), JSON.stringify(validItems));
+        console.log(`🧹 Removidos ${removed} livro(s) deletado(s) da lista Quero Ler`);
+    }
+    
+    return validItems;
+}
+
 function buildCard(b){
     const img = esc(b.img || 'imagens/sem-capa.png');
     return `
@@ -30,7 +58,7 @@ function buildCard(b){
 </article>`;
 }
 
-function renderQuerLer(){
+async function renderQuerLer(){
     if(!container) return;
     // estado de login
     if(!auth.currentUser){
@@ -38,19 +66,22 @@ function renderQuerLer(){
             <div class="login-message">
                 <h2>Faça login para ver sua lista de leitura</h2>
                 <p>Você precisa estar logado para acessar sua lista de livros que quer ler.</p>
-                <a href="/login.html" class="login-button">Fazer Login</a>
+                <a href="login.html" class="login-button">Fazer Login</a>
             </div>`;
         if(emptyMsg) emptyMsg.style.display='none';
         return;
     }
-    const items = loadList();
+    
+    // Validar e limpar lista antes de renderizar
+    const items = await validateAndCleanList();
+    
     if(!items.length){
         emptyMsg.style.display='none';
         container.innerHTML = `
             <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
                 <h2>📖 Nenhum livro na lista "Quero Ler"</h2>
                 <p>Adicione livros clicando em "Quero Ler" nas páginas ou no catálogo principal.</p>
-                <a href="/home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="home.html" class="browse-books">Explorar Catálogo</a>
             </div>`;
         return;
     }

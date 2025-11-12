@@ -42,11 +42,10 @@
         <!-- NAV + AÇÕES -->
         <nav class="nav-menu" aria-label="Navegação principal">
             <a href="home.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="favoritos.html"><img src="/imagens/coracao.png" width="20" height="20" alt="">Favoritos</a>
-            <a href="quer_ler.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Quero ler</a>
-            <a href="ja_lidos.html"><img src="/imagens/livro_fechado.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="quer_ler.html"><img src="/imagens/quer_ler.png" width="20" height="20" alt="">Quero ler</a>
+            <a href="ja_lidos.html"><img src="/imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="favoritos.html"><img src="/imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
             <a href="reviews.html"><img src="/imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
-            <a href="perfil.html" id="user-info-link"><img src="/imagens/perfil.png" width="20" height="20" alt="">Perfil</a>
 
             <!-- ações (ícones) ficam à direita -->
             <div class="nav-actions" aria-hidden="false">
@@ -76,6 +75,28 @@
         <section class="book-grid" aria-label="Livros do gênero" id="books-container">
             <!-- Livros serão carregados dinamicamente -->
         </section>
+
+        <!-- CARD FLUTUANTE DE INFORMAÇÃO -->
+        <div class="floating-info-wrapper">
+            <button class="floating-btn" id="info-btn" title="Informações sobre gêneros customizados">
+                ℹ️
+            </button>
+            <div class="floating-info-card" id="info-card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <h4 style="margin:0; color:var(--color-accent);">🦉 Gênero Customizado</h4>
+                    <button class="btn-close-info" aria-label="Fechar">×</button>
+                </div>
+                <p style="margin:8px 0; font-size:0.95rem; line-height:1.5;">
+                    Este é um gênero criado especialmente pela administração da Toca da Coruja!
+                </p>
+                <p style="margin:8px 0; font-size:0.9rem; opacity:0.8; line-height:1.4;">
+                    Os livros aqui foram cuidadosamente selecionados para expandir nosso catálogo e oferecer ainda mais opções de leitura.
+                </p>
+                <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.08);">
+                    <small style="opacity:0.6;">💡 Dica: Explore os outros gêneros no menu lateral!</small>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- FOOTER -->
@@ -128,6 +149,118 @@
             <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
         </div>
     </footer>
+
+    <!-- CSS para o card flutuante -->
+    <style>
+        .floating-info-wrapper {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 999;
+        }
+
+        .floating-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .floating-info-card {
+            position: absolute;
+            right: 0;
+            bottom: 70px;
+            width: 320px;
+            max-width: 90vw;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border, rgba(0,0,0,0.1));
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .floating-info-card.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .btn-close-info {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-text);
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            line-height: 1;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-close-info:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .floating-info-wrapper {
+                right: 16px;
+                bottom: 16px;
+            }
+            .floating-info-card {
+                width: calc(100vw - 32px);
+                bottom: 70px;
+            }
+        }
+    </style>
+
+    <!-- Script para controlar o card flutuante -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const infoBtn = document.getElementById('info-btn');
+            const infoCard = document.getElementById('info-card');
+            const closeBtn = document.querySelector('.btn-close-info');
+
+            if (infoBtn && infoCard) {
+                infoBtn.addEventListener('click', () => {
+                    infoCard.classList.toggle('open');
+                });
+
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        infoCard.classList.remove('open');
+                    });
+                }
+
+                // Fechar ao clicar fora
+                document.addEventListener('click', (e) => {
+                    if (!infoCard.contains(e.target) && !infoBtn.contains(e.target)) {
+                        infoCard.classList.remove('open');
+                    }
+                });
+            }
+        });
+    </script>
 
     <script type="module" src="/js/theme.js"></script>
     <script type="module" src="/js/user-info-global.js"></script>

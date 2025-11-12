@@ -28,7 +28,7 @@ if (signupForm) {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             alert("✅ Cadastro realizado com sucesso!");
-            window.location.href = "/home.html";
+            window.location.href = "home.html";
         } catch (error) {
             alert("❌ Erro: " + error.message);
         }
@@ -46,7 +46,7 @@ if (loginForm) {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("✅ Login bem-sucedido!");
-            window.location.href = "/home.html";
+            window.location.href = "home.html";
         } catch (error) {
             alert("❌ Erro: " + error.message);
         }

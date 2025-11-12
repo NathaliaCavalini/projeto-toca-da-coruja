@@ -137,7 +137,7 @@ function goToListPage(action){
     const url = new URL(filename, window.location.origin + '/');
     setTimeout(()=> { window.location.href = url.href; }, 140);
   } catch(e){
-    setTimeout(()=> { window.location.href = '/' + filename.replace(/^\/+/, ''); }, 140);
+    setTimeout(()=> { window.location.href = filename.replace(/^\/+/, ''); }, 140);
   }
 }
 

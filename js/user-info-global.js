@@ -12,7 +12,7 @@ function ensureUserInfoExists() {
             el = document.createElement('a');
             el.id = 'user-info';
             el.className = 'btn-login';
-            el.href = '/login.html'; // ajuste relativo se necessário
+            el.href = 'login.html'; // caminho relativo
             sidebar.insertBefore(el, sidebar.firstElementChild?.nextSibling || sidebar.firstChild);
         }
     }
@@ -27,11 +27,11 @@ if (userInfo) {
             const nome = user.displayName || (user.email ? user.email.split('@')[0] : 'Usuário');
             const foto = user.photoURL || './imagens/user.png';
             userInfo.innerHTML = `<img src="${foto}" alt="Avatar" style="width:30px;height:30px;border-radius:50%;margin-right:8px;"> <span>${nome}</span>`;
-            // garante link para perfil (ajuste conforme estrutura)
-            userInfo.setAttribute('href', '/perfil.html');
+            // garante link para perfil (caminho relativo)
+            userInfo.setAttribute('href', 'perfil.html');
         } else {
             userInfo.innerHTML = `<img src="./imagens/user.png" alt="Ícone" style="width:22px;height:22px;margin-right:8px;"> <span>Cadastre-se</span>`;
-            userInfo.setAttribute('href', '/Toca_da_Coruja/login.html');
+            userInfo.setAttribute('href', 'login.html');
         }
     });
 } else {

@@ -50,7 +50,7 @@ async function renderUserReviews() {
         loginMessage.innerHTML = `
             <h2>Faça login para ver suas reviews</h2>
             <p>Você precisa estar logado para ver e gerenciar suas reviews.</p>
-            <a href="/login.html" class="login-button">Fazer Login</a>
+            <a href="login.html" class="login-button">Fazer Login</a>
         `;
         reviewsSection.appendChild(loginMessage);
         return;
@@ -64,7 +64,7 @@ async function renderUserReviews() {
         emptyMessage.innerHTML = `
             <h2>✍️ Nenhuma review publicada ainda</h2>
             <p>Compartilhe suas opiniões sobre os livros que leu! Use o botão flutuante ✍️ ou visite as páginas dos livros para deixar suas avaliações.</p>
-            <a href="/home.html" class="browse-books">Explorar Catálogo</a>
+            <a href="home.html" class="browse-books">Explorar Catálogo</a>
         `;
         reviewsSection.appendChild(emptyMessage);
         return;
@@ -171,7 +171,7 @@ async function createFloatingReviewCard() {
     toggleBtn.addEventListener('click', () => {
         if (!auth.currentUser) {
             if (confirm('Você precisa estar logado para adicionar uma review. Ir para login?')) {
-                window.location.href = '/login.html';
+                window.location.href = 'login.html';
             }
             return;
         }
