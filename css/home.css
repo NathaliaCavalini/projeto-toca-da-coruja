@@ -74,7 +74,7 @@ body{
   background:var(--color-muted);
   border:1px solid rgba(197,148,108,0.2);
   border-radius:40px; padding:8px 14px;
-  margin-left:20px; /* espaçamento à esquerda do Reviews */
+  margin-left:20px; /* revertido para posição original */
   flex-shrink:0; /* não encolher quando a nav fica pequena */
   box-shadow:0 2px 8px rgba(0,0,0,0.06);
   transition:all 0.2s ease;
@@ -159,6 +159,59 @@ body{
   gap: var(--book-grid-gap); 
   margin-top:6px;
 }
+
+/* (empty-state removido para seguir padrão simples de parágrafo) */
+/* ===== EMPTY STATE (UNIFICADO) ===== */
+.empty-state-box {
+  --empty-bg1: rgba(197,148,108,0.18);
+  --empty-bg2: rgba(245,231,215,0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 46px 38px;
+  margin: 50px auto 40px;
+  max-width: 760px;
+  text-align: center;
+  background: linear-gradient(135deg,var(--empty-bg1) 0%, var(--empty-bg2) 100%);
+  border: 2px dashed rgba(58,45,20,0.18);
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgba(58,45,20,0.08);
+  backdrop-filter: blur(2px);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  animation: emptyFade .4s ease;
+}
+.empty-state-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(58,45,20,0.12);
+  border-color: rgba(58,45,20,0.28);
+}
+.empty-state-box h3 {
+  font-size: 1.28rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+  color: var(--color-text);
+}
+.empty-state-box p {
+  margin: 0;
+  font-size: 0.97rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  opacity: 0.78;
+  font-weight: 500;
+}
+.empty-state-box .hint { opacity: .65; font-size: 0.9rem; }
+@keyframes emptyFade { from { opacity:0; transform:translateY(16px);} to { opacity:1; transform:translateY(0);} }
+body.dark-mode .empty-state-box {
+  --empty-bg1: rgba(166,124,82,0.26);
+  --empty-bg2: rgba(125,82,55,0.35);
+  border-color: rgba(241,241,241,0.25);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+}
+body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
 
 /* ===== ACTION BUTTON ===== */
 .action-btn{
@@ -709,3 +762,11 @@ body.dark-mode {
   --remove-hover-end: #d23232;
   --remove-ring: rgba(255,110,110,0.45);
 }
+.empty-state-box .owl {
+  font-size:3.2rem;
+  line-height:1;
+  margin:0 0 4px;
+  filter: drop-shadow(0 6px 14px rgba(58,45,20,0.18));
+  animation: owlFloat 5s ease-in-out infinite;
+}
+@keyframes owlFloat { 0%,100% { transform:translateY(0);} 50% { transform:translateY(-10px);} }

@@ -52,7 +52,13 @@ async function renderBooksList() {
     const bookIds = Object.keys(books);
     
     if (bookIds.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:var(--color-text); padding:40px;">Nenhum livro cadastrado ainda.</p>';
+        container.innerHTML = `
+            <div class="empty-state-box" role="status">
+                <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
+                <h3>Nenhum livro cadastrado ainda.</h3>
+                <p class="hint">Adicione livros usando o botão \"Adicionar Livro\" acima.</p>
+            </div>
+        `;
         return;
     }
     
@@ -492,7 +498,13 @@ async function renderReviewsList() {
     container.innerHTML = '';
     
     if (reviews.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:var(--color-text); padding:40px;">Nenhuma review encontrada.</p>';
+        container.innerHTML = `
+            <div class="empty-state-box" role="status">
+                <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
+                <h3>Nenhuma review encontrada.</h3>
+                <p class="hint">Reviews aparecerão aqui após usuários avaliarem livros.</p>
+            </div>
+        `;
         return;
     }
     
@@ -553,14 +565,14 @@ async function renderGenresList() {
     
     if (genreNames.length === 0) {
         container.innerHTML = `
-            <div class="empty-state">
-                <p>Nenhum gênero customizado criado ainda.</p>
-                <p style="font-size:0.9rem;">Crie gêneros adicionando livros com novos gêneros.</p>
+            <div class="empty-state-box" role="status">
+                <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
+                <h3>Nenhum gênero customizado criado ainda.</h3>
+                <p class="hint">Crie gêneros adicionando livros com novos gêneros ou usando o botão acima.</p>
             </div>
         `;
         return;
     }
-    
     genreNames.forEach(genreName => {
         const genre = genrePages[genreName];
         

@@ -451,11 +451,18 @@
 /* Responsividade */
 /* Genres List */
 .genres-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    margin: 10px auto 50px;
+    max-width: 1100px;
 }
+.genre-card {
+    width: 300px;
+    min-height: 160px;
+}
+/* (banner da coruja removido; coruja aparece apenas em estados vazios) */
 
 .genre-card {
     display: flex;
@@ -513,23 +520,7 @@
 }
 
 /* Empty state messages */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--color-text);
-    opacity: 0.7;
-}
-
-.empty-state p {
-    font-size: 1.1rem;
-    margin: 20px 0;
-}
-
-.empty-state img {
-    width: 120px;
-    opacity: 0.3;
-    margin-bottom: 20px;
-}
+/* (legacy .empty-state removido – usar .empty-state-box de home.css) */
 
 /* Responsive */
 @media (max-width: 768px) {

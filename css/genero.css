@@ -1,0 +1,91 @@
+/* Estilos exclusivos para as páginas de gêneros criados pelo admin (genero.html) */
+/* Copiado do padrão oficial dos cards (home.css) para ficar 1:1 */
+
+/* Mantém os estilos globais da home; sem overrides de grid aqui */
+
+/* CARD WRAPPER */
+.book-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* CAPA */
+.book-card {
+  background-color: var(--color-primary);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 18px !important;
+  width: 220px !important;
+  text-align: center;
+  box-shadow: var(--shadow);
+  height: var(--book-card-height) !important;
+  min-height: var(--book-card-height) !important;
+  max-height: var(--book-card-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.book-card img {
+  max-width: var(--book-img-max-width) !important;
+  max-height: var(--book-img-max-height) !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* BLOCO DE TÍTULO + DESCRIÇÃO */
+.book-title {
+  background-color: var(--color-muted) !important;
+  border-radius: 0 0 var(--radius) var(--radius) !important;
+  padding: 12px 14px !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin-top: -6px !important;
+  transform: translateY(4%) !important;
+  box-shadow: var(--shadow) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  height: var(--book-title-min-height) !important;
+  min-height: var(--book-title-min-height) !important;
+  max-height: var(--book-title-min-height) !important;
+}
+
+.book-title p {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  line-height: 1.2;
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+}
+.book-title p:hover { text-decoration: underline; }
+
+/* ÁREA DO BOTÃO */
+.botao-quero-ler {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 6px;
+  width: 100%;
+}
+/* Sem override de .action-btn aqui para respeitar regras da home (inclui modo single) */
+
+/* Veja mais segue os estilos globais da home */
+
+/* Responsividade segue home.css sem overrides */
