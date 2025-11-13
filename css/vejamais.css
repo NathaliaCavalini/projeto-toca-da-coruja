@@ -92,15 +92,29 @@ body {
     background: var(--accent-color);
 }
 
-/* FORM DE BUSCA (sidebar) */
+/* FORM DE BUSCA (nav menu) */
 .search-form {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: var(--primary-color);
+    gap: 8px;
+    background:var(--muted-color);
+    border:1px solid rgba(197,148,108,0.2);
     border-radius: 40px;
     padding: 8px 14px;
-    margin-bottom: 22px;
+    margin-left: 20px; /* espaçamento à esquerda do Reviews */
+    flex-shrink: 0; /* não encolher quando a nav fica pequena */
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    transition:all 0.2s ease;
+}
+
+.search-form:hover{
+    border-color:rgba(197,148,108,0.4);
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.search-form:focus-within{
+    border-color:var(--primary-color);
+    box-shadow:0 4px 12px rgba(197,148,108,0.15);
 }
 
 .search-form input {
@@ -109,12 +123,16 @@ body {
     background: transparent;
     font-size: 14px;
     color: var(--text-color);
+    width: 180px; /* largura fixa para controle */
 }
 
 .search-form input::placeholder {
     color: var(--text-color);
-    opacity: 0.7;
+    opacity: 0.5;
 }
+
+.search-form .search-icon{ opacity:0.6; transition:opacity 0.2s ease; }
+.search-form:hover .search-icon{ opacity:0.9; }
 
 /* MENU LATERAL */
 .menu-section {
@@ -163,7 +181,8 @@ body {
     display: flex;
     align-items: center;
     gap: 14px;
-    background-color: var(--primary-color);
+    flex-wrap: wrap;
+    background-color: var(--color-primary);
     border: 1px solid rgba(139, 105, 77, 0.08);
     border-radius: 40px;
     padding: 10px 18px;
@@ -179,6 +198,7 @@ body {
     padding: 8px 12px;
     border-radius: 10px;
     font-size: 15px;
+    flex-shrink: 0; /* impede que os links encolham demais */
 }
 
 .nav-menu a:hover {
@@ -192,6 +212,7 @@ body {
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-shrink: 0; /* impede que os ícones encolham */
 }
 
 .icon-btn {
@@ -200,6 +221,7 @@ body {
     padding: 6px;
     border-radius: 8px;
     cursor: pointer;
+    flex-shrink: 0; /* impede que os botões encolham */
 }
 
 .icon-btn:hover {

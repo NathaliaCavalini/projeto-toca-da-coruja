@@ -327,3 +327,45 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
 }
 /* Evita que o botão remover herde largura elástica de estilos genéricos */
 .botao-quero-ler .btn-remove{ flex:0 0 auto; width:auto; }
+
+/* Search form in nav menu */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background:var(--c-muted);
+    border:1px solid rgba(197,148,108,0.2);
+    border-radius: 40px;
+    padding: 8px 14px;
+    margin-left: 20px; /* espaçamento à esquerda do Reviews */
+    flex-shrink: 0; /* não encolher quando a nav fica pequena */
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    transition:all 0.2s ease;
+}
+
+.search-form:hover{
+    border-color:rgba(197,148,108,0.4);
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.search-form:focus-within{
+    border-color:var(--c-primary);
+    box-shadow:0 4px 12px rgba(197,148,108,0.15);
+}
+
+.search-form input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: var(--c-text);
+    width: 180px; /* largura fixa para controle */
+}
+
+.search-form input::placeholder {
+    color: var(--c-text);
+    opacity: 0.5;
+}
+
+.search-form .search-icon{ opacity:0.6; transition:opacity 0.2s ease; }
+.search-form:hover .search-icon{ opacity:0.9; }

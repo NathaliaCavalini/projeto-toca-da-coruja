@@ -51,9 +51,19 @@
     </aside>
 
     <main class="main-content">
-        <nav class="nav-menu">
-            <a href="home.html"><img src="../imagens/seta-para-a-esquerda (1).png" width="20">Voltar ao catálogo</a>
-            <div class="nav-actions">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
+            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+            
+            <form class="search-form" role="search" onsubmit="return false;">
+                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+                <input type="search" id="search-input" placeholder="Pesquisar..." />
+            </form>
+
+            <div class="nav-actions" aria-hidden="false">
                 <button class="icon-btn" title="Modo escuro">
                     <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
                 </button>

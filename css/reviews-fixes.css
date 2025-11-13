@@ -1,0 +1,29 @@
+/* Reviews Page - Footer Pointer Events Fix */
+.footer a, 
+.footer a *, 
+.social-icons a, 
+.social-icons a *, 
+.action-btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+.footer { 
+    pointer-events: auto !important;
+    z-index: 1000 !important;
+    position: relative !important;
+}
+
+/* Ensure hero canvas doesn't block footer */
+#hero-particles {
+    pointer-events: none !important;
+}
+
+/* CRITICAL: Make sure hero section doesn't block footer */
+.hero-section {
+    pointer-events: none !important;
+}
+
+.hero-content {
+    pointer-events: auto !important;
+}

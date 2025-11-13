@@ -6,6 +6,8 @@
     <title id="page-title">Gênero - Toca da Coruja</title>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/toast-notifications.css">
+    <link rel="stylesheet" href="/css/floating-info.css">
+    <link rel="stylesheet" href="/css/genre-nav-fix.css">
     <link rel="icon" href="/imagens/favicon.png" type="image/x-icon">
 </head>
 <body data-button-mode="single">
@@ -15,11 +17,6 @@
             <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
             <h1>Toca <br> da Coruja</h1>
         </header>
-
-        <form class="search-form" role="search" onsubmit="return false;">
-            <img src="/imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
-            <input type="search" id="search-input" placeholder="Pesquisar...">
-        </form>
 
         <section class="menu-section">
             <h2>Gêneros</h2>
@@ -42,10 +39,15 @@
         <!-- NAV + AÇÕES -->
         <nav class="nav-menu" aria-label="Navegação principal">
             <a href="home.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="quer_ler.html"><img src="/imagens/quer_ler.png" width="20" height="20" alt="">Quero ler</a>
+            <a href="quer_ler.html"><img src="/imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
             <a href="ja_lidos.html"><img src="/imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
             <a href="favoritos.html"><img src="/imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
             <a href="reviews.html"><img src="/imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+            
+            <form class="search-form" role="search" onsubmit="return false;">
+                <img src="/imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+                <input type="search" id="search-input" placeholder="Pesquisar...">
+            </form>
 
             <!-- ações (ícones) ficam à direita -->
             <div class="nav-actions" aria-hidden="false">
@@ -149,89 +151,6 @@
             <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
         </div>
     </footer>
-
-    <!-- CSS para o card flutuante -->
-    <style>
-        .floating-info-wrapper {
-            position: fixed;
-            right: 24px;
-            bottom: 24px;
-            z-index: 999;
-        }
-
-        .floating-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--color-accent);
-            color: white;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-        }
-
-        .floating-info-card {
-            position: absolute;
-            right: 0;
-            bottom: 70px;
-            width: 320px;
-            max-width: 90vw;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border, rgba(0,0,0,0.1));
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .floating-info-card.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .btn-close-info {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--color-text);
-            opacity: 0.6;
-            transition: opacity 0.2s;
-            line-height: 1;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-        }
-
-        .btn-close-info:hover {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .floating-info-wrapper {
-                right: 16px;
-                bottom: 16px;
-            }
-            .floating-info-card {
-                width: calc(100vw - 32px);
-                bottom: 70px;
-            }
-        }
-    </style>
 
     <!-- Script para controlar o card flutuante -->
     <script>
