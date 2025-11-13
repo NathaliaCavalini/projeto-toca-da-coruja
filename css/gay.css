@@ -210,12 +210,12 @@ body{
 
 /* ==== MODO ESCURO (usa mesmo padrão de variáveis que home/global) ==== */
 body.dark-mode {
-    --primary-color: #C5946C;
-    --secondary-color: #7D5237; /* fundo escuro */
-    --accent-color: #A67C52;
-    --text-color: #F1F1F1;
-    --light-color: #995e40; /* blocos intermediários */
-    --shadow: 0 8px 20px rgba(0,0,0,0.5);
+    --primary-color: #7A5540;
+    --secondary-color: #3D2418; /* fundo escuro */
+    --accent-color: #8B694D;
+    --text-color: rgba(255, 255, 255, 0.90);
+    --light-color: #4A2F20; /* blocos intermediários */
+    --shadow: 0 8px 24px rgba(0,0,0,0.5);
     /* remover button em dark mode - contraste extra */
     --remove-start: #ff6e6e;
     --remove-end: #e54545;

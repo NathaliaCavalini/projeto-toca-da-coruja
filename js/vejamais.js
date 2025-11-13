@@ -14,6 +14,7 @@ export const livros = {
         genero: "Literatura lésbica",
         paginas: 342,
         ano: 2022,
+        descricaoCurta: "Amigos de infância percebem que o amor estava ali o tempo todo.",
         sinopse: "Hanna sempre acreditou que o amor verdadeiro só existia nos livros e filmes, até que descobertas, amizades e paixões inesperadas mostram que o amor pode surgir de formas nada óbvias."
     },
     "jogada-amor": {
@@ -53,6 +54,7 @@ export const livros = {
         genero: "Romance",
         paginas: 280,
         ano: 2022,
+        descricaoCurta: "Uma fábula divertida sobre uma princesa e seu lanche favorito.",
         sinopse: "Clara, uma jovem confeiteira em uma pequena cidade, sonha em abrir sua própria padaria. Quando uma misteriosa cliente, apelidada de 'Princesa' pelos locais, começa a frequentar seu café e pedir sempre o mesmo sanduíche de queijo quente, uma conexão inesperada floresce. Entre receitas secretas e segredos do passado, Clara descobre que o amor pode surgir nos momentos mais simples, mas também trazer desafios dignos de um conto de fadas moderno."
     },
     "um-milhao-de-finais-felizes": {
@@ -62,6 +64,7 @@ export const livros = {
         genero: "Romance",
         paginas: 320,
         ano: 2021,
+        descricaoCurta: "Histórias interativas com múltiplos desfechos românticos.",
         sinopse: "Jonas, um romântico incorrigível, trabalha em uma livraria e acredita que cada pessoa tem direito a incontáveis finais felizes. Quando conhece Ananda, uma artista de rua com um passado complicado, ele se propõe a ajudá-la a reescrever sua história. Entre poesias rabiscadas em guardanapos e noites sob as estrelas, os dois aprendem que o amor verdadeiro exige coragem para enfrentar finais nem tão felizes assim."
     },
     "coisas-obvias-sobre-o-amor": {
@@ -71,6 +74,7 @@ export const livros = {
         genero: "Romance",
         paginas: 264,
         ano: 2024,
+        descricaoCurta: "Crônicas leves e reais sobre relacionamentos do dia a dia.",
         sinopse: "Lívia, uma estudante de psicologia, acha que sabe tudo sobre o amor — até que sua melhor amiga, Sofia, confessa estar apaixonada por ela. Dividida entre o medo de mudar a amizade e a curiosidade sobre seus próprios sentimentos, Lívia embarca em uma jornada de autodescoberta. Com a ajuda de um diário e conversas sinceras, ela percebe que as coisas mais óbvias sobre o amor são, na verdade, as mais difíceis de aceitar."
     },
     "girls-like-girls": {
@@ -80,6 +84,7 @@ export const livros = {
         genero: "Romance",
         paginas: 352,
         ano: 2023,
+        descricaoCurta: "Baseado na música de Hayley Kiyoko: um amor jovem e intenso.",
         sinopse: "Cole, uma adolescente queer recém-chegada a uma cidade pequena, tenta se adaptar após uma mudança abrupta. Quando conhece Eden, uma música talentosa com um estilo rebelde, as duas formam uma conexão instantânea. Entre shows de bandas locais e noites roubadas na praia, Cole descobre que ser fiel a si mesma é o primeiro passo para viver um amor sem medo, mesmo quando o mundo parece estar contra."
     },
     "isso-nao-e-um-conto-de-fadas": {
@@ -89,6 +94,7 @@ export const livros = {
         genero: "Romance",
         paginas: 296,
         ano: 2022,
+        descricaoCurta: "Releitura sombria e realista dos contos clássicos.",
         sinopse: "Beatriz, uma roteirista de comédias românticas, não acredita em finais felizes. Sua vida vira de cabeça para baixo quando ela conhece Luana, uma barista com um sorriso capaz de derreter qualquer ceticismo. Enquanto tentam navegar por um romance cheio de mal-entendidos e momentos cômicos, Beatriz precisa decidir se está pronta para reescrever seu próprio roteiro e dar uma chance ao amor."
     },
     "lembre-se-de-nos": {
@@ -98,6 +104,7 @@ export const livros = {
         genero: "Romance",
         paginas: 304,
         ano: 2021,
+        descricaoCurta: "Um romance sobre memória, perda e o poder do reencontro.",
         sinopse: "Mila retorna à sua cidade natal para resolver assuntos pendentes após anos afastada. Lá, ela reencontra June, sua primeira paixão, agora dona de uma floricultura. Enquanto desenterram memórias de um verão inesquecível, as duas enfrentam as dores do passado e a possibilidade de um futuro juntas. Uma história sobre segundas chances e a força de lembrar quem realmente somos."
     },
     "night-owls-and-summer-skies": {
@@ -107,6 +114,7 @@ export const livros = {
         genero: "Romance",
         paginas: 128,
         ano: 2023,
+        descricaoCurta: "Um verão mágico entre duas corujas da noite.",
         sinopse: "Emma Lane, uma adolescente de 17 anos, é forçada a passar o verão no Acampamento Mapplewood. Planejando ser expulsa, ela se envolve com Vivian, uma misteriosa conselheira. Entre amizades inesperadas e um romance sapphic, Emma descobre que o acampamento pode ser mais do que mosquitos e dramas. Adaptação em webtoon com 50 episódios, cheia de humor e momentos fofos!"
     },
     "vermelho-branco-e-sangue-azul": {
@@ -116,6 +124,7 @@ export const livros = {
         genero: "Romance",
         paginas: 400,
         ano: 2019,
+        descricaoCurta: "O príncipe da Inglaterra e o filho da presidente dos EUA se apaixonam.",
         sinopse: "Alex Claremont-Diaz, o carismático filho da presidenta dos Estados Unidos, e Henry, o príncipe da Inglaterra, têm tudo para serem inimigos. Mas após um incidente diplomático forçar os dois a fingirem uma amizade, algo inesperado acontece: uma conexão genuína. Entre e-mails secretos e encontros furtivos, eles precisam decidir se estão prontos para desafiar as regras do mundo para viver um amor que pode mudar a história."
     },
     "a-arte-da-guerra": {
@@ -125,6 +134,7 @@ export const livros = {
         genero: "Estratégia",
         paginas: 160,
         ano: -500,
+        descricaoCurta: "Clássico chinês de estratégia militar e filosofia.",
         sinopse: "Escrito por Sun Tzu, um lendário estrategista militar chinês, este clássico atemporal oferece lições sobre táticas, planejamento e liderança. Usado não apenas na guerra, mas também em negócios e na vida, o livro explora como vencer conflitos com inteligência, paciência e estratégia, influenciando líderes e pensadores por séculos."
     },
     "a-divina-comedia": {
@@ -134,6 +144,7 @@ export const livros = {
         genero: "Poesia Épica",
         paginas: 624,
         ano: 1320,
+        descricaoCurta: "Jornada de Dante pelo Inferno, Purgatório e Paraíso.",
         sinopse: "Nesta obra-prima da literatura medieval, Dante Alighieri narra sua jornada épica pelos reinos do Inferno, Purgatório e Paraíso. Guiado por Virgílio e Beatriz, ele enfrenta pecadores, almas em redenção e a visão divina, explorando temas de pecado, redenção e a busca pela salvação eterna."
     },
     "fahrenheit-451": {
@@ -143,6 +154,7 @@ export const livros = {
         genero: "Ficção Científica",
         paginas: 256,
         ano: 1953,
+        descricaoCurta: "Distopia onde livros são proibidos e queimados.",
         sinopse: "Em um futuro distópico onde livros são proibidos e queimados por 'bombeiros', Guy Montag, um desses agentes, começa a questionar sua função e a sociedade opressiva em que vive. Movido pela curiosidade e por encontros transformadores, ele embarca em uma jornada perigosa em busca de liberdade e conhecimento."
     },
     "meridiano-de-sangue": {
@@ -152,7 +164,8 @@ export const livros = {
         genero: "Ficção Histórica",
         paginas: 336,
         ano: 1985,
-        sinopse: "Ambientado na violenta fronteira entre Estados Unidos e México no século XIX, o romance segue um jovem conhecido apenas como 'o garoto', que se junta a um grupo de mercenários sanguinários. Liderados pelo enigmático Juiz Holden, eles mergulham em um ciclo brutal de violência, desafiando as noções de moralidade e humanidade."
+        descricaoCurta: "Uma odisseia brutal pelo Velho Oeste americano.",
+        sinopse: "Ambientado na violenta fronteira entre Estados Unidos e México no século XIX, o romance segue um jovem conhecido apenas como 'o garoto', que se junta a um grupo de mercenários sanguínários. Liderados pelo enigmático Juiz Holden, eles mergulham em um ciclo brutal de violência, desafiando as noções de moralidade e humanidade."
     },
     "os-irmaos-karamazov": {
         titulo: "Os Irmãos Karamázov",
@@ -161,6 +174,7 @@ export const livros = {
         genero: "Romance Filosófico",
         paginas: 824,
         ano: 1880,
+        descricaoCurta: "Drama familiar, fé e moral no clássico de Dostoiévski.",
         sinopse: "Nesta obra-prima de Dostoiévski, a história dos irmãos Karamázov — Dmitri, Ivan e Aliocha — explora conflitos familiares, paixão, fé e dúvida. Após o assassinato de seu pai, Fiódor, os irmãos enfrentam um julgamento que revela tensões morais e filosóficas, questionando o sentido da vida, da justiça e da existência de Deus."
     },
     "sql-em-10-minutos": {
@@ -170,6 +184,7 @@ export const livros = {
         genero: "Banco de Dados",
         paginas: 240,
         ano: 2004,
+        descricaoCurta: "Lições rápidas para dominar consultas SQL.",
         sinopse: "Este guia prático e conciso ensina os fundamentos da linguagem SQL de forma rápida e acessível, com lições curtas que cobrem consultas, joins, subconsultas e gerenciamento de dados. Ideal para iniciantes, o livro usa exemplos reais para ajudar programadores e analistas a dominarem bancos de dados relacionais em pouco tempo."
     },
     "use-a-cabeca": {
@@ -179,6 +194,7 @@ export const livros = {
         genero: "Programação",
         paginas: 576,
         ano: 2008,
+        descricaoCurta: "Aprendizado visual e interativo da linguagem Java.",
         sinopse: "Parte da série Head First, este livro adota uma abordagem visual e interativa para ensinar SQL, misturando quebra-cabeças, histórias e exercícios práticos. Ele explora desde conceitos básicos de bancos de dados até consultas avançadas, joins e normalização, tornando o aprendizado divertido e memorável para desenvolvedores novatos."
     },
     "javascript-guia-definitivo": {
@@ -188,6 +204,7 @@ export const livros = {
         genero: "Desenvolvimento Web",
         paginas: 704,
         ano: 2011,
+        descricaoCurta: "Referência completa da linguagem, do básico ao avançado.",
         sinopse: "Uma referência completa e exaustiva sobre JavaScript, cobrindo desde sintaxe básica e objetos até programação assíncrona, APIs do navegador e Node.js. Escrito por um especialista, o livro serve tanto para iniciantes quanto para profissionais avançados, com exemplos práticos e explicações detalhadas sobre o ecossistema ECMAScript."
     },
     "html-e-css": {
@@ -197,6 +214,7 @@ export const livros = {
         genero: "Desenvolvimento Web",
         paginas: 480,
         ano: 2011,
+        descricaoCurta: "Guia prático para criar sites modernos e responsivos.",
         sinopse: "Com design visual atraente e explicações claras, este livro guia o leitor na criação de sites modernos usando HTML5 e CSS3. Ele aborda estrutura de páginas, estilos, layouts responsivos e animações, com projetos práticos que transformam conceitos teóricos em sites funcionais, perfeito para designers e desenvolvedores iniciantes."
     },
     "fluente-python": {
@@ -206,6 +224,7 @@ export const livros = {
         genero: "Programação",
         paginas: 976,
         ano: 2015,
+        descricaoCurta: "Boas práticas e padrões para programar como um profissional.",
         sinopse: "Explorando as nuances da linguagem Python de forma profunda, este livro foca em programação idiomática, estruturas de dados avançadas, metaprogramação e concorrência. Escrito por um expert brasileiro, ele ajuda programadores experientes a escreverem código mais eficiente e 'pythonico', com exemplos reais e insights sobre o CPython."
     },
     "dndE5-livro-do-jogador": {
@@ -215,6 +234,7 @@ export const livros = {
         genero: "RPG de Fantasia",
         paginas: 320,
         ano: 2014,
+        descricaoCurta: "Regras para criar personagens em Dungeons & Dragons 5ª edição.",
         sinopse: "O Livro do Jogador é o guia essencial para jogadores de Dungeons & Dragons 5ª edição, contendo regras completas para criação e avanço de personagens, incluindo raças, classes, magias, equipamentos e mecânicas de combate e exploração. Com foco em imaginação e diversão, ele permite que heróis embarquem em aventuras épicas em mundos de fantasia, combatendo monstros e desvendando mistérios ao lado de aliados improváveis."
     },
     "o-um-anel-livro-do-aventureiro": {
@@ -224,11 +244,13 @@ export const livros = {
         genero: "RPG de Fantasia",
         paginas: 193,
         ano: 2021,
+        descricaoCurta: "RPG oficial na Terra-média de Tolkien: regras narrativas e viagens épicas.",
         sinopse: "Baseado no universo de J.R.R. Tolkien, este livro guia aventureiros pela Terra-média na Terceira Era, antes da Guerra do Anel. Com regras para criação de heróis como bardos, elfos e anões, ele explora jornadas perigosas, combates contra a Sombra crescente e dilemas morais, enfatizando coragem, astúcia e a beleza sombria do mundo de O Hobbit e O Senhor dos Anéis."
     },
     "blades-in-the-dark": {
         titulo: "Blades in the Dark",
         autor: "John Harper",
+        descricaoCurta: "RPG de ladrões em uma cidade gótica e mágica.",
         imagem: "../imagens/blades in the dark.png",
         genero: "RPG de Fantasia Industrial",
         paginas: 328,
@@ -351,7 +373,7 @@ if (!container) {
 // ==================== 3) Monta card de detalhes ====================
 
 if (livro) {
-    // Usa descricaoCurta se existir, senão trunca a sinopse
+    // Usa descricaoCurta (ou descricao do admin); senão trunca a sinopse
     const makeShortDesc = (text, max = 70) => {
         const t = String(text || '').trim();
         if (!t || t.length <= max) return t;
@@ -359,7 +381,7 @@ if (livro) {
         const lastSpace = slice.lastIndexOf(' ');
         return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + '…';
     };
-    const miniDesc = livro.descricaoCurta || makeShortDesc(livro.sinopse);
+    const miniDesc = (livro.descricaoCurta || livro.descricao || makeShortDesc(livro.sinopse || ''));
 
     container.innerHTML = `
     <div class="book-detail-card" data-id="${id}" data-title="${livro.titulo}">

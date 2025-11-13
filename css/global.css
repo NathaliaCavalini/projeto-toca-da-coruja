@@ -31,15 +31,18 @@
     --remove-ring: rgba(214, 69, 69, 0.35);
 }
 
-/* Dark mode - mesma paleta do vejamais.css */
+/* Dark mode - tons quentes equilibrados */
 body.dark-mode {
-    --c-primary: #C5946C;
-    --c-surface: #7D5237;
-    --c-accent: #A67C52;
-    --c-text: #F1F1F1;
-    --c-muted: #995e40;
+    --c-surface: #3D2418;
+    --c-muted: #4A2F20;
+    --c-primary: #7A5540;
+    --c-accent: #8B694D;
+    --c-text: rgba(255, 255, 255, 0.90);
+    --c-secondary: #6D4A38;
+    --c-elevated: #543829;
+    --c-border: #5A3F2E;
     --c-fav: #ff6b6b;
-    --card-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     /* Remover button palette (ajustada para contraste em fundo escuro) */
     --remove-start: #ff6e6e;
     --remove-end: #e54545;

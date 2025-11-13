@@ -33,6 +33,26 @@
   --remove-hover-end: #bf3434;
   --remove-ring: rgba(214, 69, 69, 0.35);
 }
+
+/* Dark mode - tons quentes equilibrados */
+body.dark-mode {
+  --c-surface: #3D2418;
+  --c-muted: #4A2F20;
+  --c-primary: #7A5540;
+  --c-accent: #8B694D;
+  --c-text: rgba(255, 255, 255, 0.90);
+  --c-secondary: #6D4A38;
+  --c-elevated: #543829;
+  --c-border: #5A3F2E;
+  
+  --color-primary: var(--c-primary);
+  --color-surface: var(--c-surface);
+  --color-accent: var(--c-accent);
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  
+  --shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
 /* ===== RESET BÁSICO ===== */
 *{ box-sizing: border-box; margin:0; padding:0; }
 html,body { height:100%; }
@@ -748,23 +768,7 @@ body.dark-mode #hero-particles {
   mix-blend-mode: soft-light;
 }
 
-/* Define variables para todo o documento quando o modo escuro estiver ativo.
-   Isso garante que componentes que usam variáveis (por exemplo cards, sidebar,
-   botões) adotem a paleta escura de forma consistente. */
-body.dark-mode {
-  --color-surface: #7D5237; /* fundo escuro */
-  --color-primary: #C5946C; /* destaque (mantido dourado) */
-  --color-accent: #A67C52;  /* accent para hover */
-  --color-text: #F1F1F1;    /* texto claro */
-  --color-muted: #995e40;   /* tom mais quente para seções */
-  --shadow: 0 8px 20px rgba(0,0,0,0.5);
-  /* Remover button palette em modo escuro (cores levemente mais vivas para contraste) */
-  --remove-start: #ff6e6e;
-  --remove-end: #e54545;
-  --remove-hover-start: #ff5555;
-  --remove-hover-end: #d23232;
-  --remove-ring: rgba(255,110,110,0.45);
-}
+/* Definição de dark-mode removida daqui - já existe no início do arquivo (linha 38) */
 .empty-state-box .owl {
   font-size:3.2rem;
   line-height:1;

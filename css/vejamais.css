@@ -12,7 +12,14 @@
 }
 
 /* ===== MODO ESCURO ===== */
-/* Em dark-mode, os tokens globais já atualizam; aliases acima acompanham. */
+body.dark-mode {
+    --primary-color: #7A5540;
+    --secondary-color: #3D2418;
+    --accent-color: #8B694D;
+    --text-color: rgba(255, 255, 255, 0.90);
+    --light-color: #4A2F20;
+    --shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
 
 /* ===== RESET BÁSICO ===== */
 * {
@@ -233,7 +240,7 @@ body {
     gap: 30px;
     background-color: var(--light-color);
     padding: 30px;
-    border-radius: var(--radius);
+    border-radius: 40px;
     box-shadow: var(--shadow);
     max-width: 800px;
     margin: 0 auto 40px;
@@ -290,15 +297,26 @@ body {
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    outline: none;
 }
 
 .action-btn.active {
-    background-color: var(--active-color);
+    background-color: var(--primary-color);
 }
 
 .action-btn:hover {
     background-color: var(--accent-color);
     transform: translateY(-2px);
+}
+
+.action-btn:active,
+.action-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.action-btn:active {
+    transform: translateY(0);
 }
 
 /* ===== BOTÃO DOWNLOAD ===== */
@@ -368,7 +386,7 @@ body {
     margin: 0 auto 20px;
     padding: 20px;
     background: var(--light-color);
-    border-radius: var(--radius);
+    border-radius: 40px;
     box-shadow: var(--shadow);
 }
 
@@ -407,7 +425,7 @@ body {
     margin: 0 auto;
     padding: 20px;
     background: var(--light-color);
-    border-radius: var(--radius);
+    border-radius: 40px;
     box-shadow: var(--shadow);
 }
 
@@ -419,7 +437,7 @@ body {
 .review-item {
     background: var(--secondary-color);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 20px;
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     transition: transform 0.2s;

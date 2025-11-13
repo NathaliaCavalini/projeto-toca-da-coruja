@@ -26,11 +26,11 @@
 
 /* ===== MODO ESCURO ===== */
 body.dark-mode {
-    --c-primary: #c5946c;
-    --c-surface: #7d5237;
-    --c-accent: #d4a574;
-    --c-text: #f1f1f1;
-    --c-muted: #995e40;
+    --c-primary: #7A5540;
+    --c-surface: #3D2418;
+    --c-accent: #8B694D;
+    --c-text: rgba(255, 255, 255, 0.90);
+    --c-muted: #4A2F20;
 
     --color-primary: var(--c-primary);
     --color-surface: var(--c-surface);
@@ -38,7 +38,7 @@ body.dark-mode {
     --color-text: var(--c-text);
     --color-muted: var(--c-muted);
 
-    --shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== RESET & BASE ===== */
