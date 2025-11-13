@@ -289,6 +289,9 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
   line-clamp: 6;
+  overflow-wrap: anywhere; /* quebra palavras muito longas */
+  word-break: break-word;  /* suporte amplo para quebra */
+  hyphens: auto;           /* hifenização quando possível */
 }
 .book-title p:hover{ text-decoration:underline; }
 

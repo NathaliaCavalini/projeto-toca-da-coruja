@@ -149,6 +149,7 @@
 .book-admin-card {
     display: flex;
     gap: 20px;
+    min-width: 0; /* permite que filhos flex encolham e façam wrap */
 }
 
 .book-admin-card img {
@@ -165,6 +166,7 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 145px;
+    min-width: 0; /* evita overflow de textos longos */
 }
 
 .book-admin-info h3 {
@@ -173,6 +175,9 @@
     color: var(--color-text);
     font-weight: 700;
     line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .book-admin-info p {
@@ -181,6 +186,9 @@
     color: var(--color-text);
     opacity: 0.85;
     line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .book-admin-info p strong {
@@ -231,6 +239,9 @@
     margin: 12px 0;
     color: var(--color-text);
     line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .review-rating {
@@ -350,6 +361,9 @@
 .form-group textarea {
     resize: vertical;
     min-height: 100px;
+    white-space: pre-wrap; /* preserva quebras + permite wrap */
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .radio-group {
@@ -475,6 +489,9 @@
     font-size: 1.2rem;
     color: var(--color-text);
     font-weight: 700;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .genre-info p {
@@ -482,6 +499,9 @@
     font-size: 0.85rem;
     color: var(--color-text);
     opacity: 0.6;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .genre-badge {
