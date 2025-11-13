@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
-    <link rel="stylesheet" href="/css/home.css" />
-    <link rel="stylesheet" href="/css/reviews.css" />
-    <link rel="stylesheet" href="/css/reviews-fixes.css">
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/reviews.css" />
+    <link rel="stylesheet" href="../css/reviews-fixes.css">
     <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
 </head>
 
@@ -15,14 +15,9 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <header class="logo">
-            <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
             <h1>Toca <br> da Coruja</h1>
         </header>
-
-        <form class="search-form" role="search" onsubmit="return false;">
-            <img src="/imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
-            <input type="search" id="search-input" placeholder="Pesquisar..." />
-        </form>
 
         <section class="menu-section">
             <h2>Gêneros</h2>
@@ -50,7 +45,11 @@
             <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
             <a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
             <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
-
+            
+            <form class="search-form" role="search" onsubmit="return false;">
+                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+                <input type="search" id="search-input" placeholder="Pesquisar...">
+            </form>
 
             <!-- ações (ícones) ficam à direita -->
             <div class="nav-actions" aria-hidden="false">
@@ -105,11 +104,11 @@
                 <div class="social-icons" role="navigation" aria-label="Redes sociais">
                     <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
                         rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="/imagens/instagram.png" alt="Instagram">
+                        <img src="../imagens/instagram.png" alt="Instagram">
                     </a>
                     <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
                         aria-label="X Toca da Coruja">
-                        <img src="/imagens/twitter.png" alt="X">
+                        <img src="../imagens/twitter.png" alt="X">
                     </a>
                 </div>
 
@@ -136,9 +135,9 @@
 
     <!-- SIDEBAR -->
 
-    <script type="module" src="/js/theme.js"></script>
-    <script type="module" src="/js/admin-button.js"></script>
-    <script type="module" src="/js/reviews-page.js"></script>
+    <script type="module" src="../js/theme.js"></script>
+    <script type="module" src="../js/admin-button.js"></script>
+    <script type="module" src="../js/reviews-page.js"></script>
 
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
@@ -268,7 +267,8 @@
     
     <!-- (Removed temporary debug logger that printed elementFromPoint info.) -->
     
-    <script src="/js/library-actions-delegated.js"></script>
+    <script src="../js/universal-search.js"></script>
+    <script src="../js/library-actions-delegated.js"></script>
 
 
 </body>

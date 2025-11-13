@@ -23,6 +23,7 @@ export const livros = {
         genero: "Romance LGBTQIA+",
         paginas: 310,
         ano: 2021,
+        descricaoCurta: "Um romance esportivo onde o amor entra em campo entre rivais.",
         sinopse: "Uma história sobre paixão, esportes e a descoberta do amor verdadeiro."
     },
     "ela-fica": {
@@ -32,6 +33,7 @@ export const livros = {
         genero: "Romance",
         paginas: 298,
         ano: 2020,
+        descricaoCurta: "Duas ex-colegas de escola se reencontram e o amor floresce.",
         sinopse: "Ela Fica com a Garota, de Rachel Lippincott e Alyson Derrick, é sobre Alex, uma garota que sabe muito bem como flertar, mas não consegue manter relacionamentos, e Molly, que é desajeitada socialmente, mas está apaixonada pela colega de classe Cora Myers. Alex oferece ajuda a Molly para conquistar Cora, com o objetivo de provar que ela pode se comprometer. No entanto, à medida que as duas trabalham juntas num plano de cinco etapas, elas começam a desenvolver sentimentos uma pela outra, transformando a amizade em um romance com final feliz."
     },
     "algumas-garotas": {
@@ -41,6 +43,7 @@ export const livros = {
         genero: "Romance",
         paginas: 336,
         ano: 2023,
+        descricaoCurta: "Comédia romântica sobre identidade e autodescoberta.",
         sinopse: "Morgan, uma jovem atleta de corrida, é forçada a mudar de escola no meio do semestre do último ano do ensino médio. Isso porque ela descobriu que ser lésbica é contra o código de conduta da conservadora escola católica em que estudava.No novo colégio, ela conhece Ruby, que passa a maior parte dos fins de semana participando de concursos de beleza para satisfazer os sonhos frustrados de sua mãe narcisista. Porém, na verdade, a jovem gosta mesmo é de consertar carros e tem grande fascínio pelo seu Ford Torino azul-bebê dos anos 1970."
     },
     "princesa-e-o-queijo-quente": {
@@ -348,6 +351,16 @@ if (!container) {
 // ==================== 3) Monta card de detalhes ====================
 
 if (livro) {
+    // Usa descricaoCurta se existir, senão trunca a sinopse
+    const makeShortDesc = (text, max = 70) => {
+        const t = String(text || '').trim();
+        if (!t || t.length <= max) return t;
+        const slice = t.slice(0, max);
+        const lastSpace = slice.lastIndexOf(' ');
+        return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + '…';
+    };
+    const miniDesc = livro.descricaoCurta || makeShortDesc(livro.sinopse);
+
     container.innerHTML = `
     <div class="book-detail-card" data-id="${id}" data-title="${livro.titulo}">
       <div class="book-image">
@@ -359,6 +372,8 @@ if (livro) {
         <p><strong>Gênero:</strong> ${livro.genero}</p>
         <p><strong>Páginas:</strong> ${livro.paginas}</p>
         <p><strong>Ano:</strong> ${livro.ano}</p>
+        <!-- Mini-descrição oculta para extração pelo library-actions -->
+        <p class="book-mini-desc" style="display:none;" data-short-desc="${miniDesc.replace(/"/g, '&quot;')}"></p>
         <p class="sinopse"><strong>Sinopse:</strong> ${livro.sinopse}</p>
 
         <!-- Avaliação geral -->

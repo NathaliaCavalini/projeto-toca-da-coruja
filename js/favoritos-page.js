@@ -41,9 +41,18 @@ async function validateAndCleanList() {
     return validItems;
 }
 
+function shortDesc(txt, max=70){
+    const t = String(txt||'').trim();
+    if(!t) return '';
+    if(t.length <= max) return t;
+    const slice = t.slice(0, max);
+    const lastSpace = slice.lastIndexOf(' ');
+    return (lastSpace > 40 ? slice.slice(0,lastSpace) : slice).trim() + '…';
+}
+
 function buildCard(b){
     const img = esc(b.img || 'imagens/sem-capa.png');
-    const desc = esc(b.desc || '');
+    const desc = esc(shortDesc(b.desc || ''));
     return `
 <article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
     <div class="book-card"><img src="${img}" alt="${esc(b.title)}"></div>

@@ -55,23 +55,59 @@ function findTitleFromCard(card){
   if(og && og.content) return og.content.trim();
   return (document.title || '').trim() || '';
 }
+function makeShortDesc(text, max=70){
+  const t = String(text||'').trim();
+  if(!t) return '';
+  if(t.length <= max) return t;
+  // tenta cortar em limite de palavra
+  const slice = t.slice(0, max);
+  const lastSpace = slice.lastIndexOf(' ');
+  return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + '…';
+}
+
 function findDescriptionFromCard(card){
   try {
     if(card){
+      // Prioridade 1: Mini-descrição no vejamais (data-attribute)
+      const miniDescEl = card.querySelector('.book-mini-desc[data-short-desc]');
+      if(miniDescEl){
+        const miniDesc = miniDescEl.getAttribute('data-short-desc');
+        if(miniDesc && miniDesc.trim()){
+          console.log('✅ Mini-descrição extraída do data-attribute:', miniDesc);
+          return miniDesc.trim();
+        }
+      }
+
+      // Prioridade 2: Descrição após <br><br> (catálogo/home)
       const p = card.querySelector('.book-title p');
       if(p && p.innerHTML){
         // Extrai o texto depois de <br><br>
         const html = p.innerHTML;
+        // Regex mais robusto para pegar <br><br> ou <br/><br/> com espaços/quebras
         const parts = html.split(/<br\s*\/?>\s*<br\s*\/?>/i);
+        console.log('📋 HTML do card:', html);
+        console.log('📋 Parts após split:', parts);
         if(parts.length > 1){
           // Remove tags HTML e retorna apenas o texto
           const desc = parts[1].replace(/<[^>]*>/g, '').trim();
+          console.log('✅ Descrição extraída do card:', desc);
           if(desc) return desc;
         }
       }
+      // Fallback: sinopse (não deveria chegar aqui se mini-desc existe)
+      const sinopseInCard = card.querySelector('.book-info .sinopse, .sinopse');
+      if(sinopseInCard && sinopseInCard.textContent){
+        const t = sinopseInCard.textContent.replace(/^\s*Sinopse:\s*/i, '').trim();
+        console.log('⚠️ Usando sinopse como fallback (truncando):', t.substring(0,50) + '...');
+        if(t) return makeShortDesc(t); // Retorna versão curta para salvar no card da lista
+      }
     }
-    const descEl = document.querySelector('.book-description, .book-desc, .description');
-    if(descEl && descEl.textContent) return descEl.textContent.trim();
+    const descEl = document.querySelector('.book-description, .book-desc, .description, .book-info .sinopse, .sinopse');
+    if(descEl && descEl.textContent){
+      const txt = descEl.textContent.replace(/^\s*Sinopse:\s*/i, '').trim();
+      console.log('📖 Descrição encontrada globalmente:', txt);
+      return makeShortDesc(txt); // Retorna versão curta para salvar no card da lista
+    }
   } catch(e){}
   return '';
 }
@@ -146,7 +182,7 @@ function refreshButtonState(card){
   if(f) f.classList.toggle('active', inList('favoritos', id));
 }
 
-function refreshAllButtons(){ document.querySelectorAll('.book-item, .book-detail').forEach(c => refreshButtonState(c)); }
+function refreshAllButtons(){ document.querySelectorAll('.book-item, .book-detail, .book-detail-card').forEach(c => refreshButtonState(c)); }
 window.__libraryActions = window.__libraryActions || {};
 window.__libraryActions.refreshAll = refreshAllButtons;
 

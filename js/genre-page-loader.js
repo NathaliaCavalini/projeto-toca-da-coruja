@@ -53,7 +53,13 @@ function renderBookCard(id, book) {
     // Descrição curta: prioriza campo "descricao" (padronizado nos cards), fallback para sinopse
     let baseDesc = (book.descricao && String(book.descricao).trim()) || (book.sinopse && String(book.sinopse).trim()) || '';
     if (!baseDesc) baseDesc = 'Sem descrição disponível.';
-    const shortDesc = baseDesc.length > 100 ? baseDesc.substring(0, 100) + '...' : baseDesc;
+    const max = 70;
+    let shortDesc = baseDesc;
+    if (shortDesc.length > max) {
+        const slice = shortDesc.slice(0, max);
+        const lastSpace = slice.lastIndexOf(' ');
+        shortDesc = (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + '…';
+    }
     
     article.innerHTML = `
         <div class="book-card">
