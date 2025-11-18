@@ -98,7 +98,7 @@ a:-webkit-any-link {
 body.dark-mode a:-webkit-any-link {
     color: #fff;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* ===== SEARCH (NAV MENU) ===== */

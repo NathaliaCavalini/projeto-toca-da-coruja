@@ -96,7 +96,7 @@ input:focus {
 
 .link a {
     color: var(--text-color);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 @keyframes fadeIn {
