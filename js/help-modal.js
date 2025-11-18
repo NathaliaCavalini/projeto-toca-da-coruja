@@ -259,7 +259,7 @@ function initHelpModal() {
   const helpButtons = document.querySelectorAll('.icon-btn');
   const ajudaButton = Array.from(helpButtons).find(btn => {
     const img = btn.querySelector('img[alt="Ícone ajuda"]');
-    return img && img.src.includes('ajuda.png');
+    return img && (img.src.includes('ajuda.png') || img.src.includes('ajuda-light-mode.png') || img.src.includes('ajuda-dark-mode.png'));
   });
 
   if (!ajudaButton) return;
@@ -315,6 +315,28 @@ function initHelpModal() {
     }
   });
 
+  // Atualizar ícone de ajuda ao trocar de tema
+  function updateHelpIcon() {
+    const ajudaButton = document.querySelector('.icon-btn img[alt="Ícone ajuda"]');
+    if (ajudaButton) {
+      const currentSrc = ajudaButton.src;
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      
+      // Detectar o caminho base
+      let basePath = '../imagens/';
+      if (currentSrc.includes('/imagens/')) {
+        // URL absoluta com /
+        basePath = '/imagens/';
+      } else if (currentSrc.includes('imagens/') && !currentSrc.includes('../')) {
+        // Caminho relativo direto (reviews.html)
+        basePath = 'imagens/';
+      }
+      
+      const newSrc = basePath + (isDarkMode ? 'ajuda-dark-mode.png' : 'ajuda-light-mode.png');
+      ajudaButton.src = newSrc;
+    }
+  }
+
   // Atualizar ícones ao trocar de tema
   const themeToggleBtn = document.querySelector('.icon-btn:first-of-type');
   if (themeToggleBtn) {
@@ -338,9 +360,24 @@ function initHelpModal() {
             }
           }
         });
+        // Atualizar ícone de ajuda também
+        updateHelpIcon();
       }, 100);
     });
   }
+
+  // Atualizar ícone ao inicializar
+  updateHelpIcon();
+
+  // Observar mudanças no tema
+  const observer = new MutationObserver(() => {
+    updateHelpIcon();
+  });
+
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
 }
 
 // Iniciar quando o DOM estiver pronto
