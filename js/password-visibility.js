@@ -33,15 +33,37 @@ export function setupPasswordVisibilityToggle() {
         container.style.position = 'relative';
         container.style.display = 'flex';
         container.style.alignItems = 'center';
+        container.style.width = '100%';
+        container.style.margin = '0.6rem 0';
         
         // Inserir o container antes do input
         input.parentNode.insertBefore(container, input);
+        
+        // Remover margin do input original já que o container possui
+        input.style.margin = '0';
+        input.style.width = '100%';
+        input.style.paddingRight = '45px';
+        
         container.appendChild(input);
         
         // Criar botão de toggle
         const toggleBtn = document.createElement('button');
         toggleBtn.type = 'button';
         toggleBtn.className = 'password-toggle-btn';
+        toggleBtn.style.position = 'absolute';
+        toggleBtn.style.right = '8px';
+        toggleBtn.style.background = 'none';
+        toggleBtn.style.border = 'none';
+        toggleBtn.style.cursor = 'pointer';
+        toggleBtn.style.padding = '0';
+        toggleBtn.style.display = 'flex';
+        toggleBtn.style.alignItems = 'center';
+        toggleBtn.style.justifyContent = 'center';
+        toggleBtn.style.zIndex = '10';
+        toggleBtn.style.top = '50%';
+        toggleBtn.style.transform = 'translateY(-50%)';
+        toggleBtn.style.width = '32px';
+        toggleBtn.style.height = '32px';
         
         // Criar imagem
         const img = document.createElement('img');
@@ -51,23 +73,8 @@ export function setupPasswordVisibilityToggle() {
         img.style.height = '20px';
         img.style.objectFit = 'contain';
         
-        // Estilo do botão
-        toggleBtn.style.position = 'absolute';
-        toggleBtn.style.right = '12px';
-        toggleBtn.style.background = 'none';
-        toggleBtn.style.border = 'none';
-        toggleBtn.style.cursor = 'pointer';
-        toggleBtn.style.padding = '4px 8px';
-        toggleBtn.style.display = 'flex';
-        toggleBtn.style.alignItems = 'center';
-        toggleBtn.style.justifyContent = 'center';
-        toggleBtn.style.zIndex = '10';
-        
         toggleBtn.appendChild(img);
         toggleBtn.setAttribute('title', 'Mostrar Senha');
-        
-        // Adicionar padding direito ao input para não sobrepor texto
-        input.style.paddingRight = '40px';
         
         // Adicionar o botão ao container
         container.appendChild(toggleBtn);
