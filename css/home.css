@@ -25,6 +25,7 @@
   --book-grid-mincol: 220px;
   --book-grid-gap: 36px;
   --book-title-min-height: 150px;
+  --book-title-review-height: 220px;
 
   /* Remove button theme */
   --remove-start: #ef6b6b;
@@ -282,8 +283,8 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   padding:12px 14px !important; 
   width:100% !important; 
   text-align:center !important; 
-  margin-top:-6px !important; 
-  transform:translateY(4%) !important;
+  margin-top:0px !important; 
+  transform:translateY(0%) !important;
   box-shadow:var(--shadow) !important;
   display:flex !important;
   flex-direction:column !important;
@@ -295,25 +296,64 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   min-height: var(--book-title-min-height) !important;
   max-height: var(--book-title-min-height) !important;
 }
-/* Legacy paragraph style (title + <br><br> + description) */
+/* Altura aumentada APENAS para review cards */
+.book-item.review-card .book-title {
+  height: var(--book-title-review-height) !important;
+  min-height: var(--book-title-review-height) !important;
+  max-height: var(--book-title-review-height) !important;
+}
+/* Legacy paragraph style (title only - no comment mixed) */
 .book-title p{ 
   font-size:15px; 
   font-weight:700; 
   margin:0; 
   cursor:pointer; 
   color:var(--color-text); 
-  line-height:1.2; 
-  flex: 1 1 auto;
+  line-height:1.35; 
+  flex: 0 0 auto;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
-  line-clamp: 6;
-  overflow-wrap: anywhere; /* quebra palavras muito longas */
-  word-break: break-word;  /* suporte amplo para quebra */
-  hyphens: auto;           /* hifenização quando possível */
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 .book-title p:hover{ text-decoration:underline; }
+
+/* Comment text below title - APENAS PARA REVIEWS */
+.book-item.review-card .book-comment-text {
+  font-size:0.9em; 
+  font-weight:400; 
+  opacity:0.8; 
+  margin:6px 0 8px 0; 
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height:1.3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  flex: 0 0 38px;
+  height: 38px;
+}
+
+/* Ocultar comentário em outros cards (não-review) */
+.book-comment-text:not(.book-item.review-card .book-comment-text) {
+  display: none;
+}
+
+/* Padronizar elementos filhos do review card */
+.book-item.review-card .book-title > p {
+  flex: 0 0 50px;
+  min-height: 50px;
+}
+
+.book-item.review-card .book-title > div {
+  flex: 0 0 auto !important;
+}
 
 /* BOTÕES DE AÇÃO DA BIBLIOTECA */
 .botao-quero-ler{
@@ -322,6 +362,8 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   margin-top:auto; /* garante que o botão fique colado na base do título */
   padding-top:6px; /* reduz sensação de "vazio" acima do botão */
   width:100%;
+  flex: 0 0 auto;
+  min-height: 30px;
 }
 .botao-quero-ler .action-btn{
   font-size:0.85rem; padding:6px 12px; flex:1; min-width:80px;
@@ -371,6 +413,12 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn{
   text-align: center !important;
   margin: -10px auto 0 !important;
   transform: translateY(60%) !important;
+}
+/* APENAS para review cards - "Leia mais" solto abaixo */
+.book-item.review-card .book-action{
+  width: 100% !important;
+  margin: 12px auto 0 !important;
+  transform: translateY(0%) !important;
 }
 .book-action a{
   display: inline-flex;

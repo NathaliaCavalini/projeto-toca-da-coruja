@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <!-- Botão de Toggle Dark Mode -->
+    <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
+        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+    </button>
+
+    <script type="module" src="/js/theme.js"></script>
+
     <div class="login-container">
         <div class="login-card">
             <h1>Bem-vindo(a) 🌿</h1>
@@ -24,12 +31,19 @@
             <div class="link">
                 <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
             </div>
+
+            <div class="link">
+                <p><a href="#" id="forgot-password-link">Esqueceu sua senha?</a></p>
+            </div>
         </div>
     </div>
 
     <script type="module">
         import { auth } from "/js/firebase-config.js";
         import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { syncUserToAdminControl } from "/js/user-sync.js";
+        import { openPasswordResetModal } from "/js/password-reset.js";
+        import { validateRealEmail } from "/js/email-validator.js";
 
         const form = document.getElementById("login-form");
         form.addEventListener("submit", async (e) => {
@@ -40,12 +54,36 @@
             if (!email || !password) { alert("Preencha todos os campos."); return; }
 
             try {
+                // Validar email real
+                const emailValidation = await validateRealEmail(email);
+                if (!emailValidation.valid) {
+                    alert("❌ " + emailValidation.message);
+                    return;
+                }
+
+                console.log(`🔐 Fazendo login com: ${email}`);
                 await signInWithEmailAndPassword(auth, email, password);
+                
+                console.log(`✅ Login bem-sucedido, sincronizando com admin control...`);
+                // Sincronizar usuário com users-admin-control
+                await syncUserToAdminControl();
+                
+                console.log(`✅ Redirecionando para home...`);
                 // redireciona para home.html (está na mesma pasta html/)
                 window.location.href = "home.html";
             } catch (err) {
                 console.error(err);
                 alert("Erro: " + (err.message || err));
+            }
+        });
+
+        // Lidar com clique no link "Esqueceu sua senha?"
+        document.getElementById("forgot-password-link").addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+                await openPasswordResetModal();
+            } catch (err) {
+                console.error(err);
             }
         });
     </script>

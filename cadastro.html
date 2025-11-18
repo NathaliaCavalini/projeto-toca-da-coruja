@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <!-- Botão de Toggle Dark Mode -->
+    <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
+        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+    </button>
+
+    <script type="module" src="/js/theme.js"></script>
+
     <div class="cadastro-container">
         <h1>Crie sua conta 🌿</h1>
         <form id="cadastro-form">
@@ -25,6 +32,8 @@
         import { auth, db } from "/js/firebase-config.js";
         import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
         import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+        import { updateUserStatus } from "/js/user-sync.js";
+        import { validateRealEmail } from "/js/email-validator.js";
 
         const form = document.getElementById("cadastro-form");
         form.addEventListener("submit", async (e) => {
@@ -34,7 +43,15 @@
             const senha = document.getElementById("senha").value.trim();
 
             if (!nome || !email || !senha) { alert("Preencha todos os campos."); return; }
+            
             try {
+                // Validar email real
+                const emailValidation = await validateRealEmail(email);
+                if (!emailValidation.valid) {
+                    alert("❌ " + emailValidation.message);
+                    return;
+                }
+
                 const userCred = await createUserWithEmailAndPassword(auth, email, senha);
                 const user = userCred.user;
                 await updateProfile(user, { displayName: nome });
@@ -44,6 +61,8 @@
                     photoURL: "",
                     createdAt: serverTimestamp()
                 });
+                // Sincronizar usuário no admin control com status "ativo"
+                await updateUserStatus(email.toLowerCase(), 'ativo');
                 alert("Conta criada com sucesso!");
                 window.location.href = "home.html";
             } catch (err) {

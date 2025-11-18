@@ -101,3 +101,43 @@ input:focus {
         transform: translateY(0);
     }
 }
+
+/* Dark Mode */
+body.dark-mode {
+    background: #3D2418;
+}
+
+body.dark-mode .login-card {
+    background: #4A2F20;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1,
+body.dark-mode p {
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode input {
+    background: #543829;
+    color: rgba(255, 255, 255, 0.90);
+    border-color: #5A3F2E;
+}
+
+body.dark-mode input:focus {
+    background: #5A3F2E;
+    border-color: #8B694D;
+    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
+}
+
+body.dark-mode .btn {
+    background: #7A5540;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode .btn:hover {
+    background: #8B694D;
+}
+
+body.dark-mode .link a {
+    color: #C5946C;
+}

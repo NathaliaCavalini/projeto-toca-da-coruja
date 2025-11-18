@@ -1,9 +1,8 @@
 let auth;
-try {
-    import('./firebase-config.js').then(mod => { auth = mod.auth; }).catch(() => { auth = null; });
-} catch (e) {
-    auth = null;
-}
+import('./firebase-config.js').then(mod => { auth = mod.auth; }).catch(() => { auth = null; });
+
+// Importar verificação de penalidades como módulo
+import { checkUserPenalty, blockActionIfPenalized } from './check-penalties.js';
 
 /* ---------- Helpers de storage por usuário ---------- */
 function getUserKey() {
@@ -93,8 +92,17 @@ function initLibraryActions(root = document) {
 
         // liga listeners nos botões dentro do card
         card.querySelectorAll('.btn-quer-ler, .btn-ja-li, .btn-favorito').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', async (e) => {
                 e.preventDefault();
+                
+                // Verificar penalidades
+                if (blockActionIfPenalized && checkUserPenalty) {
+                    const penalty = await checkUserPenalty();
+                    if (!blockActionIfPenalized(penalty, 'add_favorite')) {
+                        return;
+                    }
+                }
+
                 const book = buildBookObjectFromCard(card);
                 if (btn.classList.contains('btn-quer-ler')) {
                     const added = toggleInList('querLer', book);
@@ -130,8 +138,17 @@ function initLibraryActions(root = document) {
             if (btn.classList.contains('btn-favorito') || btn.id === 'btn-favorito') btn.classList.toggle('active', isInList('favoritos', bookObj.id));
 
             // clique
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', async (e) => {
                 e.preventDefault();
+                
+                // Verificar penalidades
+                if (blockActionIfPenalized && checkUserPenalty) {
+                    const penalty = await checkUserPenalty();
+                    if (!blockActionIfPenalized(penalty, 'add_favorite')) {
+                        return;
+                    }
+                }
+
                 if (btn.classList.contains('btn-quer-ler') || btn.id === 'btn-quer-ler') {
                     const added = toggleInList('querLer', bookObj);
                     btn.classList.toggle('active', added);

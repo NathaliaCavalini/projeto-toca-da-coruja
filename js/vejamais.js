@@ -565,6 +565,49 @@ onAuthStateChanged(auth, () => {
     renderReviews();
 });
 
+// Scroll automático para review específica quando chamado de reviews.html
+setTimeout(() => {
+    const params = new URLSearchParams(window.location.search);
+    const reviewTimestamp = params.get("review");
+    
+    if (reviewTimestamp) {
+        const reviewElement = document.querySelector(`[data-timestamp="${reviewTimestamp}"]`);
+        if (reviewElement) {
+            // Scroll suave com duração maior (2 segundos) para simular scroll natural
+            const targetPosition = reviewElement.offsetTop - window.innerHeight / 2;
+            const startPosition = window.scrollY;
+            const distance = targetPosition - startPosition;
+            const duration = 2000; // 2 segundos
+            let start = null;
+            
+            function ease(t) {
+                // Easing function suave (easeInOutCubic)
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+            
+            function scroll(currentTime) {
+                if (start === null) start = currentTime;
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                window.scrollTo(0, startPosition + distance * ease(progress));
+                
+                if (progress < 1) {
+                    requestAnimationFrame(scroll);
+                } else {
+                    // Quando o scroll terminar, adicionar animação na caixa
+                    reviewElement.classList.add('review-highlight');
+                    setTimeout(() => {
+                        reviewElement.classList.remove('review-highlight');
+                    }, 2000);
+                }
+            }
+            
+            requestAnimationFrame(scroll);
+        }
+    }
+}, 500); // Esperar para garantir renderização
+
 } // Fim do bloco if (container)
 
 // Theme handled by /js/theme.js (import above)

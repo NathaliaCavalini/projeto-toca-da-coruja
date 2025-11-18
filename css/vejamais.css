@@ -504,3 +504,23 @@ body {
         flex-direction: column;
     }
 }
+
+/* ===== ANIMAÇÃO DE DESTAQUE DA REVIEW ===== */
+@keyframes reviewPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(197, 148, 108, 0.2);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(197, 148, 108, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(197, 148, 108, 0.2);
+    }
+}
+
+.review-item.review-highlight {
+    animation: reviewPulse 2s ease-in-out;
+}

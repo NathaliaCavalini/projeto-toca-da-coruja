@@ -25,6 +25,7 @@ h1 {
 }
 
 form input {
+    box-sizing: border-box;
     width: 100%;
     padding: 0.9rem;
     margin: 0.6rem 0;
@@ -33,6 +34,12 @@ form input {
     font-size: 1rem;
     outline: none;
     transition: 0.3s;
+    color: #4b2e23;
+    background: #fff !important;
+}
+
+form input::placeholder {
+    color: #8b7355;
 }
 
 form input:focus {
@@ -41,9 +48,10 @@ form input:focus {
 }
 
 form button {
+    box-sizing: border-box;
     width: 100%;
     padding: 0.9rem;
-    background: #4b2e23;
+    background: #8B694D;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -54,7 +62,7 @@ form button {
 }
 
 form button:hover {
-    background: #3a221a;
+    background: #7A5540;
 }
 
 p {
@@ -78,4 +86,48 @@ p a {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #3D2418;
+}
+
+body.dark-mode .cadastro-container {
+    background: #4A2F20;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1 {
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode form input {
+    background: #543829;
+    color: #000;
+    border-color: #5A3F2E;
+}
+
+body.dark-mode form input::placeholder {
+    color: #000;
+}
+
+body.dark-mode form input:focus {
+    background: #5A3F2E;
+    border-color: #8B694D;
+    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
+}
+
+body.dark-mode form button {
+    background: #7A5540;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode form button:hover {
+    background: #8B694D;
+}
+
+body.dark-mode p,
+body.dark-mode p a {
+    color: rgba(255, 255, 255, 0.90);
 }

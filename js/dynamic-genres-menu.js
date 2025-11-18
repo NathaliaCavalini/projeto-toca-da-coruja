@@ -13,7 +13,20 @@ const FIXED_GENRES = [
 // Obter página atual
 function getCurrentPage() {
     const path = window.location.pathname;
-    return path.split('/').pop() || 'home.html';
+    const parts = path.split('/');
+    return parts[parts.length - 1] || 'home.html';
+}
+
+// Detectar o caminho correto para imagens
+function getImagePath() {
+    const currentPage = getCurrentPage();
+    // Páginas que estão no root do projeto (não em subpasta)
+    const rootPages = ['home.html', 'reviews.html', 'ja_lidos.html', 'quer_ler.html', 'favoritos.html', 'login.html', 'cadastro.html', 'perfil.html', 'contato.html', 'sobre.html', 'vejamais.html', 'programacao.html', 'romance.html', 'classico.html', 'fantasia.html', 'rpg.html', 'gay.html', 'admin.html'];
+    
+    if (rootPages.includes(currentPage)) {
+        return 'imagens/';
+    }
+    return '../imagens/';
 }
 
 // Obter todos os gêneros (fixos + customizados)
@@ -22,12 +35,18 @@ function getAllGenres() {
     // Fixos
     FIXED_GENRES.forEach(g => genres.push({ ...g }));
     // Customizados
-    const genrePages = JSON.parse(localStorage.getItem('genre-pages') || '{}');
-    let order = 7;
-    Object.values(genrePages).forEach(g => {
-        genres.push({ name: g.name, url: g.url, order: order++, isCustom: true });
-    });
-    return genres.sort((a,b)=>a.order-b.order);
+    try {
+        const genrePages = JSON.parse(localStorage.getItem('genre-pages') || '{}');
+        let order = 7;
+        Object.values(genrePages).forEach(g => {
+            if (g && g.name && g.url) {
+                genres.push({ name: g.name, url: g.url, order: order++, isCustom: true });
+            }
+        });
+    } catch (e) {
+        console.warn('Erro ao carregar gêneros customizados:', e);
+    }
+    return genres.sort((a, b) => a.order - b.order);
 }
 
 // Detectar se estamos em uma página de gênero
@@ -47,33 +66,73 @@ function detectCurrentGenre() {
         return params.get('genero');
     }
     
+    // Verificar gêneros customizados
+    try {
+        const genrePages = JSON.parse(localStorage.getItem('genre-pages') || '{}');
+        for (const g of Object.values(genrePages)) {
+            if (g && g.url === currentPage) {
+                return g.name;
+            }
+        }
+    } catch (e) {
+        console.warn('Erro ao detectar gênero customizado:', e);
+    }
+    
     return null;
 }
 
 // Atualizar menu lateral
 function updateGenresMenu() {
     const menuList = document.querySelector('.menu-section .menu-list');
-    if (!menuList) return;
-    const currentGenre = detectCurrentGenre();
-    const currentPage = getCurrentPage();
-    menuList.innerHTML='';
-    getAllGenres().forEach(genre => {
-        const li=document.createElement('li');
-        const a=document.createElement('a');
-        a.href=genre.url;
-        const isCurrent = currentGenre===genre.name || genre.url===currentPage;
-        const icon=isCurrent?'livro_aberto.png':'livro_fechado.png';
-        a.innerHTML=`<img src="../imagens/${icon}" width="20" height="20" alt="">${genre.name}`;
-        if(isCurrent) a.classList.add('genre-selected');
-        li.appendChild(a);
-        menuList.appendChild(li);
-    });
-    console.log('✅ Menu atualizado com fixos + customizados');
+    if (!menuList) {
+        console.warn('❌ .menu-section .menu-list não encontrado');
+        return;
+    }
+    
+    try {
+        const currentGenre = detectCurrentGenre();
+        const currentPage = getCurrentPage();
+        const imagePath = getImagePath();
+        
+        menuList.innerHTML = '';
+        
+        getAllGenres().forEach(genre => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = genre.url;
+            
+            const isCurrent = currentGenre === genre.name || genre.url === currentPage;
+            const icon = isCurrent ? 'livro_aberto.png' : 'livro_fechado.png';
+            
+            a.innerHTML = `<img src="${imagePath}${icon}" width="20" height="20" alt=""> ${genre.name}`;
+            
+            if (isCurrent) {
+                a.classList.add('genre-selected');
+            }
+            
+            li.appendChild(a);
+            menuList.appendChild(li);
+        });
+        
+        console.log('✅ Menu de gêneros atualizado');
+    } catch (err) {
+        console.error('❌ Erro ao atualizar menu de gêneros:', err);
+    }
 }
 
 // Inicializar
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateGenresMenu);
+} else {
+    // DOM já está pronto
     updateGenresMenu();
+}
+
+// Também tenta atualizar quando a página fica visível novamente
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        updateGenresMenu();
+    }
 });
 
 // Exportar para uso em outros módulos

@@ -5,17 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
-    <link rel="stylesheet" href="../css/home.css" />
-    <link rel="stylesheet" href="../css/reviews.css" />
-    <link rel="stylesheet" href="../css/reviews-fixes.css">
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/reviews.css" />
+    <link rel="icon" href="imagens/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
+            <img src="imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
             <h1>Toca <br> da Coruja</h1>
         </header>
 
@@ -40,24 +39,24 @@
     <main class="main-content">
         <!-- NAV + AÇÕES (ícones acoplados à direita) -->
         <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
-            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
-            <a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
-            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
+            <a href="home.html"><img src="imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
+            <a href="quer_ler.html"><img src="imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
+            <a href="ja_lidos.html"><img src="imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
+            <a href="favoritos.html"><img src="imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
+            <a href="reviews.html"><img src="imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
             
             <form class="search-form" role="search" onsubmit="return false;">
-                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
+                <img src="imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
                 <input type="search" id="search-input" placeholder="Pesquisar...">
             </form>
 
             <!-- ações (ícones) ficam à direita -->
             <div class="nav-actions" aria-hidden="false">
                 <button class="icon-btn" title="Modo escuro">
-                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+                    <img src="imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
                 </button>
                 <button class="icon-btn" title="Ajuda">
-                    <img src="../imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
+                    <img src="imagens/ajuda.png" width="20" height="20" alt="Ícone ajuda">
                 </button>
             </div>
         </nav>
@@ -83,7 +82,7 @@
     <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
         <div class="footer-content">
             <div class="footer-logo" aria-hidden="false">
-                <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
+                <img src="imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
                 <div>
                     <h3>Toca da Coruja</h3>
                     <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
@@ -267,9 +266,152 @@
     
     <!-- (Removed temporary debug logger that printed elementFromPoint info.) -->
     
-    <script src="../js/universal-search.js"></script>
+    <script type="module" src="../js/dynamic-genres-menu.js"></script>
+    <script src="../js/reviews-search.js"></script>
     <script src="../js/library-actions-delegated.js"></script>
 
+    <!-- DEBUG: Teste de Penalidades -->
+    <script type="module">
+        import { checkUserPenalty, blockActionIfPenalized } from '../js/check-penalties.js';
+        import { debugFirebase, debugSpecificUser } from '../js/firebase-debug.js';
+        import { testBlockingSystem, testRealAction, testAllActions } from '../js/test-blocking.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+        
+        window.testPenalties = async function() {
+            console.clear();
+            console.log('='.repeat(70));
+            console.log('🧪 TESTE COMPLETO DE PENALIDADES');
+            console.log('='.repeat(70));
+            
+            try {
+                // 1. Verificar autenticação
+                console.log('\n📋 PASSO 1: Verificar Autenticação');
+                console.log('─'.repeat(70));
+                
+                const auth = getAuth();
+                const user = auth.currentUser;
+                
+                if (!user) {
+                    console.error('❌ Nenhum usuário autenticado!');
+                    return;
+                }
+                
+                console.log(`✅ Usuário autenticado:`);
+                console.log(`   ├─ Email: ${user.email}`);
+                console.log(`   ├─ UID: ${user.uid}`);
+                console.log(`   └─ Nome: ${user.displayName || '(não definido)'}`);
+                
+                // 2. Buscar penalidade
+                console.log('\n📋 PASSO 2: Buscar Penalty do Sistema');
+                console.log('─'.repeat(70));
+                
+                const penalty = await checkUserPenalty();
+                
+                console.log(`✅ Penalty obtido:`);
+                console.log(`   ├─ Email: ${penalty.email}`);
+                console.log(`   ├─ Status: "${penalty.status}"`);
+                console.log(`   ├─ isActive: ${penalty.isActive}`);
+                console.log(`   ├─ isSuspended: ${penalty.isSuspended}`);
+                console.log(`   └─ isBanned: ${penalty.isBanned}`);
+                
+                // 3. Verificar Firebase diretamente
+                console.log('\n📋 PASSO 3: Verificar Firebase Diretamente');
+                console.log('─'.repeat(70));
+                
+                const firebaseConfigModule = await import('../js/firebase-config.js');
+                const db = firebaseConfigModule.db;
+                
+                console.log(`📥 Consultando: Firestore > users-admin-control > ${user.email}`);
+                const docRef = doc(db, 'users-admin-control', user.email);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    console.log(`✅ Documento encontrado:`);
+                    const data = docSnap.data();
+                    console.log(`   ├─ status: "${data.status}"`);
+                    console.log(`   ├─ Data completa:`, data);
+                } else {
+                    console.warn(`⚠️ Documento NÃO encontrado em Firebase!`);
+                    console.log(`   → Pode estar usando "ativo" por padrão`);
+                }
+                
+                // 4. Teste de bloqueio
+                console.log('\n📋 PASSO 4: Teste de Bloqueio');
+                console.log('─'.repeat(70));
+                
+                const acoes = ['write_review', 'add_favorite', 'mark_as_read', 'mark_as_want'];
+                acoes.forEach(acao => {
+                    const resultado = blockActionIfPenalized(penalty, acao);
+                    const status = resultado ? '✅ PERMITIDA' : '❌ BLOQUEADA';
+                    console.log(`${status} - ${acao}`);
+                });
+                
+                // 5. Resumo
+                console.log('\n📋 RESUMO FINAL');
+                console.log('='.repeat(70));
+                
+                if (penalty.isBanned) {
+                    console.log('🚫 RESULTADO: Usuário BANIDO - todas ações devem estar bloqueadas');
+                } else if (penalty.isSuspended) {
+                    console.log('⏸️ RESULTADO: Usuário SUSPENSO - algumas ações bloqueadas');
+                } else {
+                    console.log('✅ RESULTADO: Usuário ATIVO - todas ações permitidas');
+                }
+                
+                console.log('\n' + '='.repeat(70));
+                console.log('💡 Se o resultado for diferente do esperado:');
+                console.log('   1. Verifique se o status no Firebase é exatamente: "banido"');
+                console.log('   2. Verifique se o email está correto');
+                console.log('   3. Recarregue a página com F5');
+                console.log('='.repeat(70));
+                
+                return penalty;
+                
+            } catch (err) {
+                console.error('❌ ERRO NO TESTE:', err);
+                console.log(err.stack);
+            }
+        };
+        
+        window.debugPenalties = function() {
+            console.log('\n' + '='.repeat(70));
+            console.log('💡 FUNÇÕES DE DEBUG DISPONÍVEIS:');
+            console.log('='.repeat(70));
+            console.log('\n📊 TESTES:');
+            console.log('  testPenalties()');
+            console.log('    → Teste completo do sistema de penalidades\n');
+            console.log('  testBlockingSystem()');
+            console.log('    → Simula um clique e mostra se seria bloqueado\n');
+            console.log('  testRealAction()');
+            console.log('    → Testa ação real (write_review)\n');
+            console.log('  testAllActions()');
+            console.log('    → Testa TODAS as ações possíveis\n');
+            console.log('🔍 DEBUG FIREBASE:');
+            console.log('  debugFirebase()');
+            console.log('    → Mostra TODOS os bans no Firebase\n');
+            console.log('  debugSpecificUser(email)');
+            console.log('    → Debug de usuário específico\n');
+            console.log('ℹ️ INFO:');
+            console.log('  debugPenalties()');
+            console.log('    → Mostra este menu\n');
+            console.log('='.repeat(70));
+        };
+        
+        // Exportar funções para janela
+        window.debugFirebase = debugFirebase;
+        window.debugSpecificUser = debugSpecificUser;
+        window.testBlockingSystem = testBlockingSystem;
+        window.testRealAction = testRealAction;
+        window.testAllActions = testAllActions;
+        
+        console.log('\n✅ Sistema de penalidades carregado!');
+        console.log('💡 Digite no console: testPenalties()');
+        console.log('💡 Ou: debugFirebase()');
+        console.log('💡 Ou: testBlockingSystem()');
+        console.log('💡 Ou: debugPenalties()\n');
+    </script>
 
 </body>
 

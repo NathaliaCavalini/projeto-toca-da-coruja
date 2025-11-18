@@ -1,168 +1,6 @@
-.reviews-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    margin-top: 6px;
-    padding: 20px;
-}
 
-.review-card,
-.floating-review-card,
-.login-message,
-.empty-reviews {
-    background: var(--color-muted);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    color: var(--color-text);
-    border: 1px solid rgba(0,0,0,0.04);
-    padding: 16px 14px 18px 14px;
-    min-width: 0;
-    overflow: hidden;
-}
 
-.review-card {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: 100%;
-    overflow: hidden !important;
-    max-width: 100%;
-    min-width: 0;
-}
-
-.review-book-info {
-    background: var(--color-muted);
-    border-radius: var(--radius) var(--radius) 0 0;
-    box-shadow: none;
-    padding: 18px 0 0 0;
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.review-book-cover {
-    width: 120px;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin: 0 auto 10px auto;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-}
-
-.review-content {
-    background: transparent;
-    border-radius: 0 0 var(--radius) var(--radius);
-    padding: 12px 0 0 0;
-    box-shadow: none;
-    margin-top: 0;
-    transform: none;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden !important;
-    max-width: 100%;
-    min-width: 0;
-}
-
-.book-details {
-    margin-top: 12px;
-    text-align: center;
-}
-
-.book-details h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0;
-    cursor: pointer;
-    color: var(--color-text);
-    transition: text-decoration 0.2s ease;
-}
-
-.book-details h3:hover {
-    text-decoration: underline;
-}
-
-.book-author {
-    margin: 4px 0;
-    color: var(--color-text);
-    font-size: 0.9em;
-}
-
-.review-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(139, 105, 77, 0.2);
-    min-width: 0;
-    overflow: hidden;
-}
-
-.review-rating {
-    color: var(--color-accent);
-    font-size: 1.2em;
-}
-
-.review-date {
-    color: var(--color-text);
-    font-size: 0.9em;
-}
-
-.review-text {
-    margin: 12px 0;
-    line-height: 1.5;
-    color: var(--color-text);
-    font-size: 14px;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    -webkit-box-orient: vertical;
-    flex: 1;
-    word-break: break-all;
-    overflow-wrap: anywhere;
-    max-width: 100%;
-    min-width: 0;
-}
-
-.delete-review:not(.submit-btn) {
-    background: none;
-    border: none;
-    color: #cc0000;
-    cursor: pointer;
-    padding: 4px 8px;
-    font-size: 0.9em;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-}
-
-.delete-review:not(.submit-btn):hover {
-    background-color: rgba(204, 0, 0, 0.1);
-}
-
-/* Reaplica o mesmo estilo do botão de envio (submit-btn) nesta folha
-   para que a página reviews.html tenha o mesmo visual do vejamais.html */
-.submit-btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: var(--accent-color);
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.submit-btn:hover {
-    background: var(--primary-color);
-}
-
+/* Login and Empty state messages */
 .login-message, .empty-reviews {
     text-align: center;
     padding: 40px 20px;
@@ -172,13 +10,16 @@
     color: var(--color-text);
 }
 
-/* Ensure the empty/login box spans the full width of the book grid
-   and is centered below the hero on pages like reviews.html */
+/* Ocultar elementos (para busca) */
+.hidden {
+    display: none !important;
+}
+
 .book-grid > .login-message,
 .book-grid > .empty-reviews {
-    grid-column: 1 / -1; /* span all columns */
+    grid-column: 1 / -1;
     max-width: 760px;
-    margin: 20px auto; /* center horizontally */
+    margin: 20px auto;
     box-shadow: var(--shadow);
 }
 
@@ -196,28 +37,6 @@
 .login-button:hover, .browse-books:hover {
     background-color: var(--color-accent);
     opacity: 0.9;
-}
-
-.section-title {
-    padding: 20px;
-    margin: 0;
-    color: var(--color-text);
-    font-size: 1.5em;
-    border-bottom: 1px solid rgba(139, 105, 77, 0.1);
-}
-
-/* Responsividade */
-@media (max-width: 900px) {
-    .reviews-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .reviews-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* Floating review card */
@@ -292,6 +111,191 @@
 .floating-review-card .btn-cancel { background:transparent; border:1px solid rgba(0,0,0,0.08); padding:8px 12px; border-radius:8px; cursor:pointer; }
 .floating-review-card .btn-submit { padding:8px 12px; border-radius:8px; border:none; background:var(--color-accent); color:#fff; cursor:pointer; }
 
+/* ANIMAÇÕES DE CAFÉ - PROFISSIONAL */
+
+/* Animação de adição com gotinhas */
+@keyframes coffeeSpread {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    40% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Gotinhas com diferentes velocidades e tamanhos - ADIÇÃO */
+@keyframes coffeDropletBurst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes coffeDropletBurstMedium {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(var(--tx) * 0.75), calc(var(--ty) * 0.75)) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes coffeDropletBurstSlow {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(var(--tx) * 0.5), calc(var(--ty) * 0.5)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Gotinhas voltando ao deletar */
+@keyframes coffeDropletReverse {
+    0% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes coffeDropletReverseMedium {
+    0% {
+        transform: translate(calc(var(--tx) * 0.75), calc(var(--ty) * 0.75)) scale(0);
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes coffeDropletReverseSlow {
+    0% {
+        transform: translate(calc(var(--tx) * 0.5), calc(var(--ty) * 0.5)) scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+.book-item.coffee-add {
+    animation: coffeeSpread 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Gotinhas que saem do card */
+.droplet {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: #A0826D;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    z-index: 10000;
+}
+
+.droplet.size-small {
+    width: 4px;
+    height: 4px;
+    background: #B8956A;
+}
+
+.droplet.size-medium {
+    width: 6px;
+    height: 6px;
+    background: #A0826D;
+}
+
+.droplet.size-large {
+    width: 8px;
+    height: 8px;
+    background: #8B6914;
+}
+
+/* ADIÇÃO - Gotinhas saindo rapidamente */
+.droplet.burst-fast {
+    animation: coffeDropletBurst 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.droplet.burst-medium {
+    animation: coffeDropletBurstMedium 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.droplet.burst-slow {
+    animation: coffeDropletBurstSlow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* DELEÇÃO - Gotinhas voltando */
+.droplet.reverse-fast {
+    animation: coffeDropletReverse 0.4s cubic-bezier(0.64, 0, 0.34, 0) forwards;
+}
+
+.droplet.reverse-medium {
+    animation: coffeDropletReverseMedium 0.6s cubic-bezier(0.64, 0, 0.34, 0) forwards;
+}
+
+.droplet.reverse-slow {
+    animation: coffeDropletReverseSlow 0.8s cubic-bezier(0.64, 0, 0.34, 0) forwards;
+}
+
+/* Animação de deletar - reverse */
+@keyframes coffeeRemove {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.book-item.coffee-delete {
+    animation: coffeeRemove 0.5s cubic-bezier(0.64, 0, 0.34, 0) forwards;
+}
+
+/* Responsividade */
 @media (max-width: 520px) {
     .floating-review-wrapper { right: 12px; bottom: 16px; }
     .floating-review-card { width: 92vw; }

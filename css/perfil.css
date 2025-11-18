@@ -200,7 +200,13 @@ input:disabled {
     font-size: 15px;
     font-weight: 600;
     transition: background 0.3s, transform 0.2s;
-    margin-top: 8px;
+    margin-top: 14px;
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-logout:hover {
@@ -208,7 +214,32 @@ input:disabled {
     transform: translateY(-2px);
 }
 
-.link { margin-top: 8px; }
+.btn-change-password {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 0;
+    height: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-change-password:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.link { margin-top: 0; }
 
 /* Input file estilizado */
 input[type="file"] {
@@ -305,4 +336,93 @@ input[type="file"]::file-selector-button:hover {
     .back-link { padding: 7px 12px; font-size: 14px; border-radius: 10px; }
     .back-icon { width: 40px; height: 40px; border-width: 2.5px; }
     .back-icon svg, .back-icon img { width: 18px; height: 18px; }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #3D2418;
+}
+
+body.dark-mode .perfil-card {
+    background: #4A2F20;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1,
+body.dark-mode p {
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode #user-photo {
+    border-color: #543829;
+}
+
+body.dark-mode input {
+    background: #543829;
+    color: rgba(255, 255, 255, 0.90);
+    border-color: #5A3F2E;
+}
+
+body.dark-mode input::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+body.dark-mode input:focus {
+    background: #5A3F2E;
+    border-color: #8B694D;
+    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
+}
+
+body.dark-mode input:disabled {
+    background: rgba(84, 56, 41, 0.3);
+    color: rgba(255, 255, 255, 0.60);
+}
+
+body.dark-mode .btn {
+    background: #7A5540;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode .btn:hover {
+    background: #8B694D;
+}
+
+body.dark-mode .btn-logout {
+    background: #a63f3f;
+}
+
+body.dark-mode .btn-logout:hover {
+    background: #c0392b;
+}
+
+body.dark-mode .btn-change-password {
+    background: #7A5540;
+}
+
+body.dark-mode .btn-change-password:hover {
+    background: #8B694D;
+}
+
+body.dark-mode .back-box {
+    background: rgba(84, 56, 41, 0.95);
+    border-color: #5A3F2E;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode .back-box:hover {
+    background: #543829;
+}
+
+body.dark-mode .back-box svg {
+    stroke: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode input[type="file"]::file-selector-button {
+    background: rgba(84, 56, 41, 0.95);
+    border-color: #5A3F2E;
+    color: rgba(255, 255, 255, 0.90);
+}
+
+body.dark-mode input[type="file"]::file-selector-button:hover {
+    background: #543829;
 }

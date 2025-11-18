@@ -90,6 +90,7 @@ export function deleteReview(bookId, timestamp) {
 export function createReviewElement(review, showBookInfo = false) {
     const div = document.createElement("div");
     div.classList.add("review-item");
+    div.setAttribute("data-timestamp", review.timestamp);
     
     let bookInfo = '';
     if (showBookInfo && window.livros && window.livros[review.bookId]) {

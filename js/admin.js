@@ -1,5 +1,6 @@
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { renderUsersList } from './admin-users.js';
 
 // Email do administrador
 const ADMIN_EMAIL = 'tatacavalini@gmail.com';
@@ -784,6 +785,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Renderizar lista inicial de livros
     await renderBooksList();
+    
+    // Renderizar lista de usuários se tab existe
+    try {
+        renderUsersList();
+    } catch (err) {
+        console.warn('Erro ao renderizar lista de usuários:', err);
+    }
 });
 
 // Carregar gêneros customizados no select do formulário
