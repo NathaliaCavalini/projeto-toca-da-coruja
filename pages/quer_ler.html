@@ -1,133 +1,248 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quer ler — Toca da Coruja</title>
-  <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/reviews.css">
-  
-  <!-- Dark mode inicial (executa antes de renderizar) -->
-  <script>
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark-mode');
-      document.body.classList.add('dark-mode');
-    }
-  </script>
-  <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-</head>
-<body class="list-page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Quer ler — Toca da Coruja</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/reviews.css" />
+
+    <!-- Dark mode inicial (executa antes de renderizar) -->
+    <script>
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
+    </script>
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+  </head>
+  <body class="list-page">
     <aside class="sidebar">
-        <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca <br> da Coruja</h1>
-        </header>
+      <header class="logo">
+        <img
+          src="../imagens/logo.png"
+          alt="Logo Toca da Coruja"
+          class="logo-img"
+        />
+        <h1>
+          Toca <br />
+          da Coruja
+        </h1>
+      </header>
 
-        <section class="menu-section">
-            <h2>Gêneros</h2>
-            <ul class="menu-list">
-                <!-- Gêneros carregados dinamicamente via dynamic-genres-menu.js -->
-            </ul>
-        </section>
+      <section class="menu-section">
+        <h2>Gêneros</h2>
+        <ul class="menu-list">
+          <!-- Gêneros carregados dinamicamente via dynamic-genres-menu.js -->
+        </ul>
+      </section>
 
-        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
-        <section class="menu-section" id="admin-section" style="display:none;">
-            <h2>Administração</h2>
-            <ul class="menu-list">
-                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;">⚙️ Painel Admin</a></li>
-            </ul>
-        </section>
-        <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
+      <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+      <section class="menu-section" id="admin-section" style="display: none">
+        <h2>Administração</h2>
+        <ul class="menu-list">
+          <li>
+            <a
+              href="admin.html"
+              class="admin-link"
+              style="color: var(--color-accent); font-weight: 600"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--dark"
+              />
+              Painel Admin</a
+            >
+          </li>
+        </ul>
+      </section>
+      <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
     </aside>
-  
+
     <main class="main-content">
-        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
-        <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
-            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
-            <a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
-            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
-            
-            <form class="search-form" role="search" onsubmit="return false;">
-                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
-                <input type="search" id="search-input" placeholder="Pesquisar..." />
-            </form>
+      <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="home.html"
+          ><img
+            src="../imagens/livro_aberto.png"
+            width="20"
+            height="20"
+            alt=""
+          />Catálogo</a
+        >
+        <a href="quer_ler.html"
+          ><img
+            src="../imagens/quer_ler.png"
+            width="20"
+            height="20"
+            alt=""
+          />Quer ler</a
+        >
+        <a href="ja_lidos.html"
+          ><img src="../imagens/ja_lidos.png" width="20" height="20" alt="" />Já
+          lidos</a
+        >
+        <a href="favoritos.html"
+          ><img
+            src="../imagens/favoritos.png"
+            width="20"
+            height="20"
+            alt=""
+          />Favoritos</a
+        >
+        <a href="reviews.html"
+          ><img
+            src="../imagens/reviews.png"
+            width="20"
+            height="20"
+            alt=""
+          />Reviews</a
+        >
 
-            <!-- ações (ícones) ficam à direita -->
-            <div class="nav-actions" aria-hidden="false">
-                <button class="icon-btn" title="Modo escuro">
-                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
-                </button>
-                <button class="icon-btn" title="Ajuda">
-                    <img src="../imagens/ajuda-light-mode.png" width="20" height="20" alt="Ícone ajuda">
-                </button>
+        <form class="search-form" role="search" onsubmit="return false;">
+          <img
+            src="../imagens/lupa.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon"
+          />
+          <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <!-- ações (ícones) ficam à direita -->
+        <div class="nav-actions" aria-hidden="false">
+          <button class="icon-btn" title="Modo escuro">
+            <img
+              src="../imagens/escuro.png"
+              width="20"
+              height="20"
+              alt="Ícone modo escuro"
+            />
+          </button>
+          <button class="icon-btn" title="Ajuda">
+            <img
+              src="../imagens/ajuda-light-mode.png"
+              width="20"
+              height="20"
+              alt="Ícone ajuda"
+            />
+          </button>
+        </div>
+      </nav>
+
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <h2 id="hero-title" class="hero-title">
+            Sua lista <span class="hero-subtitle">Quer ler</span>
+          </h2>
+          <div class="hero-owl">🦉</div>
+          <p class="hero-explore">Livros que você marcou para ler</p>
+        </div>
+        <div class="hero-wave"></div>
+      </section>
+
+      <section id="quer-ler-section">
+        <div id="quer-ler-container" class="book-grid"></div>
+        <p
+          id="empty-msg"
+          style="display: none; text-align: center; margin-top: 24px"
+        >
+          Nenhum livro em "Quer ler".
+        </p>
+      </section>
+    </main>
+
+    <footer
+      class="footer"
+      role="contentinfo"
+      aria-label="Rodapé Toca da Coruja"
+    >
+      <div class="footer-content">
+        <div class="footer-logo" aria-hidden="false">
+          <img
+            src="../imagens/logo.png"
+            alt="Logo Toca da Coruja"
+            class="footer-img"
+          />
+          <div>
+            <h3>Toca da Coruja</h3>
+            <p>
+              Sua biblioteca literária online — livros escolhidos com carinho
+              para todos os leitores.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-links" aria-labelledby="explorar-title">
+          <h4 id="explorar-title">Explorar</h4>
+          <ul>
+            <li><a href="home.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social">
+          <h4>Conecte-se</h4>
+          <div
+            class="social-icons"
+            role="navigation"
+            aria-label="Redes sociais"
+          >
+            <a
+              href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Toca da Coruja"
+            >
+              <img src="../imagens/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="https://x.com/TocaDaCoruja24"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X Toca da Coruja"
+            >
+              <img src="../imagens/twitter.png" alt="X" />
+            </a>
+          </div>
+
+          <div class="footer-quick" style="margin-top: 10px">
+            <div style="font-size: 0.95rem; color: var(--color-text)">
+              Email:
+              <a
+                href="mailto:cavalinilivros@gmail.com"
+                style="text-decoration: none; color: inherit; font-weight: 700"
+                >cavalinilivros@gmail.com</a
+              >
             </div>
-        </nav>
-
-    <section class="hero-section" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <h2 id="hero-title" class="hero-title">Sua lista <span class="hero-subtitle">Quer ler</span></h2>
-        <div class="hero-owl">🦉</div>
-        <p class="hero-explore">Livros que você marcou para ler</p>
+            <div class="footer-cta">
+              <a
+                href="contato.html"
+                class="action-btn"
+                style="display: inline-block; margin-top: 8px"
+                >Fale conosco</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero-wave"></div>
-    </section>
 
-        <section id="quer-ler-section">
-            <div id="quer-ler-container" class="book-grid"></div>
-            <p id="empty-msg" style="display:none; text-align:center; margin-top:24px;">Nenhum livro em "Quer ler".</p>
-        </section>
-  </main>
-
-    <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
-        <div class="footer-content">
-            <div class="footer-logo" aria-hidden="false">
-                <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
-                <div>
-                    <h3>Toca da Coruja</h3>
-                    <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
-                </div>
-            </div>
-
-            <div class="footer-links" aria-labelledby="explorar-title">
-                <h4 id="explorar-title">Explorar</h4>
-                <ul>
-                    <li><a href="home.html">Catálogo</a></li>
-                    <li><a href="sobre.html">Sobre Nós</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-social">
-                <h4>Conecte-se</h4>
-                <div class="social-icons" role="navigation" aria-label="Redes sociais">
-                    <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
-                        rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="../imagens/instagram.png" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
-                        aria-label="X Toca da Coruja">
-                        <img src="../imagens/twitter.png" alt="X">
-                    </a>
-                </div>
-
-                <div class="footer-quick" style="margin-top:10px;">
-                    <div style="font-size:0.95rem; color:var(--color-text)">Email: <a
-                            href="mailto:cavalinilivros@gmail.com"
-                            style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a>
-                    </div>
-                    <div class="footer-cta">
-                        <a href="contato.html" class="action-btn" style="display:inline-block; margin-top:8px;">Fale
-                            conosco</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
-        </div>
+      <div class="footer-bottom">
+        <p>
+          © 2025 Toca da Coruja. Todos os direitos reservados. — Feito com ·
+          livros · café
+        </p>
+      </div>
     </footer>
 
     <script type="module" src="../js/user-info-global.js"></script>
@@ -138,125 +253,141 @@
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
     <script>
-        // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
-        const canvas = document.getElementById('hero-particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animationId;
+      // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
+      const canvas = document.getElementById("hero-particles");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let animationId;
 
-        function resizeCanvas() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.reset();
         }
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + 20;
-                this.size = Math.random() * 4 + 2;
-                this.speedY = -(Math.random() * 2 + 0.5);
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.life = 0;
-                this.maxLife = Math.random() * 100 + 100;
-                this.opacity = 1;
-                this.wingAngle = 0;
-                this.wingSpeed = Math.random() * 0.1 + 0.05;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-                this.life++;
-                this.opacity = 1 - (this.life / this.maxLife);
-                this.wingAngle += this.wingSpeed;
-
-                if (this.life > this.maxLife || this.y < -20) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.translate(this.x, this.y);
-
-                // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
-                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-                gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`);     // #ffd4a3 - brilho quente
-                gradient.addColorStop(0.6, `rgba(197, 148, 108, ${this.opacity * 0.8})`); // #c5946c - núcleo
-                gradient.addColorStop(1, `rgba(197, 148, 108, 0)`);                 // fade suave
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                // ASAS SUTIS (efeito de coruja voando)
-                ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
-                ctx.lineWidth = 1.2;
-                ctx.setLineDash([2, 4]);
-
-                ctx.beginPath();
-                ctx.moveTo(-this.size * 1.8, 0);
-                ctx.quadraticCurveTo(-this.size * 3.5, Math.sin(this.wingAngle) * 6, -this.size * 2.2, -this.size * 0.6);
-                ctx.moveTo(this.size * 1.8, 0);
-                ctx.quadraticCurveTo(this.size * 3.5, Math.sin(-this.wingAngle) * 6, this.size * 2.2, -this.size * 0.6);
-                ctx.stroke();
-                ctx.setLineDash([]);
-
-                ctx.restore();
-            }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.size = Math.random() * 4 + 2;
+          this.speedY = -(Math.random() * 2 + 0.5);
+          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.life = 0;
+          this.maxLife = Math.random() * 100 + 100;
+          this.opacity = 1;
+          this.wingAngle = 0;
+          this.wingSpeed = Math.random() * 0.1 + 0.05;
         }
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(Math.floor(canvas.width / 15), 80);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.life++;
+          this.opacity = 1 - this.life / this.maxLife;
+          this.wingAngle += this.wingSpeed;
+
+          if (this.life > this.maxLife || this.y < -20) {
+            this.reset();
+          }
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            animationId = requestAnimationFrame(animate);
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.translate(this.x, this.y);
+
+          // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
+          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+          gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`); // #ffd4a3 - brilho quente
+          gradient.addColorStop(
+            0.6,
+            `rgba(197, 148, 108, ${this.opacity * 0.8})`
+          ); // #c5946c - núcleo
+          gradient.addColorStop(1, `rgba(197, 148, 108, 0)`); // fade suave
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ASAS SUTIS (efeito de coruja voando)
+          ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([2, 4]);
+
+          ctx.beginPath();
+          ctx.moveTo(-this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            -this.size * 3.5,
+            Math.sin(this.wingAngle) * 6,
+            -this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.moveTo(this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            this.size * 3.5,
+            Math.sin(-this.wingAngle) * 6,
+            this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.restore();
         }
+      }
 
-        // Inicialização
-        window.addEventListener('load', () => {
-            const hero = document.querySelector('.hero-section');
-            if (!hero) return;
+      function initParticles() {
+        particles = [];
+        const count = Math.min(Math.floor(canvas.width / 15), 80);
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
 
-            canvas.style.position = 'absolute';
-            hero.style.position = 'relative';
-            hero.appendChild(canvas);
-
-            resizeCanvas();
-            initParticles();
-            animate();
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
-
-            // Ajuste no dark mode
-            const observer = new MutationObserver(() => {
-                if (document.body.classList.contains('dark-mode')) {
-                    ctx.globalCompositeOperation = 'soft-light';
-                } else {
-                    ctx.globalCompositeOperation = 'screen';
-                }
-            });
-            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
         });
+        animationId = requestAnimationFrame(animate);
+      }
+
+      // Inicialização
+      window.addEventListener("load", () => {
+        const hero = document.querySelector(".hero-section");
+        if (!hero) return;
+
+        canvas.style.position = "absolute";
+        hero.style.position = "relative";
+        hero.appendChild(canvas);
+
+        resizeCanvas();
+        initParticles();
+        animate();
+
+        window.addEventListener("resize", () => {
+          resizeCanvas();
+          initParticles();
+        });
+
+        // Ajuste no dark mode
+        const observer = new MutationObserver(() => {
+          if (document.body.classList.contains("dark-mode")) {
+            ctx.globalCompositeOperation = "soft-light";
+          } else {
+            ctx.globalCompositeOperation = "screen";
+          }
+        });
+        observer.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      });
     </script>
     <script type="module" src="../js/user-info-global.js"></script>
 
@@ -265,5 +396,5 @@
     <script src="/js/universal-search.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
-</body>
+  </body>
 </html>

@@ -1,220 +1,417 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
     <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/toast-notifications.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body data-button-mode="single">
+  <body data-button-mode="single">
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca <br> da Coruja</h1>
-        </header>
+      <header class="logo">
+        <img
+          src="../imagens/logo.png"
+          alt="Logo Toca da Coruja"
+          class="logo-img"
+        />
+        <h1>
+          Toca <br />
+          da Coruja
+        </h1>
+      </header>
 
-        <section class="menu-section">
-            <h2>Gêneros</h2>
-            <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
-                </li>
-                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">LGBTQIAPN+</a></li>
-                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Fantasia</a></li>
-                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Romance</a></li>
-                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Clássicos</a></li>
-                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Programação</a></li>
-                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
-                </li>
-            </ul>
-        </section>
+      <section class="menu-section">
+        <h2>Gêneros</h2>
+        <ul class="menu-list">
+          <li>
+            <a href="rpg.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />RPG</a
+            >
+          </li>
+          <li>
+            <a href="gay.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />LGBTQIAPN+</a
+            >
+          </li>
+          <li>
+            <a href="fantasia.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Fantasia</a
+            >
+          </li>
+          <li>
+            <a href="romance.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Romance</a
+            >
+          </li>
+          <li>
+            <a href="classico.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Clássicos</a
+            >
+          </li>
+          <li>
+            <a href="programacao.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Programação</a
+            >
+          </li>
+          <li>
+            <a href="mais.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />+ Mais</a
+            >
+          </li>
+        </ul>
+      </section>
 
-        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
-        <section class="menu-section" id="admin-section" style="display:none;">
-            <h2>Administração</h2>
-            <ul class="menu-list">
-                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;">⚙️ Painel Admin</a></li>
-            </ul>
-        </section>
-        <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
+      <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+      <section class="menu-section" id="admin-section" style="display: none">
+        <h2>Administração</h2>
+        <ul class="menu-list">
+          <li>
+            <a
+              href="admin.html"
+              class="admin-link"
+              style="color: var(--color-accent); font-weight: 600"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--dark"
+              />
+              Painel Admin</a
+            >
+          </li>
+        </ul>
+      </section>
+      <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
-        <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="/imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="quer_ler.html"><img src="/imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
-            <a href="ja_lidos.html"><img src="/imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
-            <a href="favoritos.html"><img src="/imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
-            <a href="reviews.html"><img src="/imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
-            
-            <form class="search-form" role="search" onsubmit="return false;">
-                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
-                <input type="search" id="search-input" placeholder="Pesquisar..." />
-            </form>
+      <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="home.html"
+          ><img
+            src="/imagens/livro_aberto.png"
+            width="20"
+            height="20"
+            alt=""
+          />Catálogo</a
+        >
+        <a href="quer_ler.html"
+          ><img src="/imagens/quer_ler.png" width="20" height="20" alt="" />Quer
+          ler</a
+        >
+        <a href="ja_lidos.html"
+          ><img src="/imagens/ja_lidos.png" width="20" height="20" alt="" />Já
+          lidos</a
+        >
+        <a href="favoritos.html"
+          ><img
+            src="/imagens/favoritos.png"
+            width="20"
+            height="20"
+            alt=""
+          />Favoritos</a
+        >
+        <a href="reviews.html"
+          ><img
+            src="/imagens/reviews.png"
+            width="20"
+            height="20"
+            alt=""
+          />Reviews</a
+        >
 
-            <!-- ações (ícones) ficam à direita -->
-            <div class="nav-actions" aria-hidden="false">
-                <button class="icon-btn" title="Modo escuro">
-                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
-                </button>
-                <button class="icon-btn" title="Ajuda">
-                    <img src="../imagens/ajuda-light-mode.png" width="20" height="20" alt="Ícone ajuda">
-                </button>
+        <form class="search-form" role="search" onsubmit="return false;">
+          <img
+            src="../imagens/lupa.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon"
+          />
+          <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <!-- ações (ícones) ficam à direita -->
+        <div class="nav-actions" aria-hidden="false">
+          <button class="icon-btn" title="Modo escuro">
+            <img
+              src="../imagens/escuro.png"
+              width="20"
+              height="20"
+              alt="Ícone modo escuro"
+            />
+          </button>
+          <button class="icon-btn" title="Ajuda">
+            <img
+              src="../imagens/ajuda-light-mode.png"
+              width="20"
+              height="20"
+              alt="Ícone ajuda"
+            />
+          </button>
+        </div>
+      </nav>
+
+      <!-- HERO SECTION (padronizada) -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <h2 id="hero-title" class="hero-title">
+            <span>Clássicos</span><br />
+            <span class="hero-subtitle">Explore nossa seleção de livros</span>
+          </h2>
+          <div class="hero-owl">🦉</div>
+          <p class="hero-explore">Descubra nossa coleção de Clássicos</p>
+        </div>
+        <div class="hero-wave"></div>
+      </section>
+
+      <!-- GRID DE LIVROS -->
+      <section class="book-grid" aria-label="Livros em destaque">
+        <article class="book-item" data-title="A arte da guerra">
+          <div class="book-card">
+            <img
+              src="../imagens/a-arte-da-guerra.jpg"
+              alt="Capa do livro A arte da guerra"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A arte da guerra<br /><br />Clássico chinês de estratégia militar
+              e filosofia.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
             </div>
-        </nav>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=a-arte-da-guerra">Veja mais</a>
+          </div>
+        </article>
 
-        <!-- HERO SECTION (padronizada) -->
-        <section class="hero-section" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <h2 id="hero-title" class="hero-title">
-                    <span>Clássicos</span><br>
-                    <span class="hero-subtitle">Explore nossa seleção de livros</span>
-                </h2>
-                <div class="hero-owl">🦉</div>
-                <p class="hero-explore">Descubra nossa coleção de Clássicos</p>
+        <article class="book-item" data-title="A divina comédia">
+          <div class="book-card">
+            <img
+              src="../imagens/a-divina-comedia.jpg"
+              alt="Capa do livro A divina comédia"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A divina comédia<br /><br />Jornada de Dante pelo Inferno,
+              Purgatório e Paraíso.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
             </div>
-            <div class="hero-wave"></div>
-        </section>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=a-divina-comedia">Veja mais</a>
+          </div>
+        </article>
 
-        <!-- GRID DE LIVROS -->
-        <section class="book-grid" aria-label="Livros em destaque">
+        <article class="book-item" data-title="Fahrenheit 451">
+          <div class="book-card">
+            <img
+              src="../imagens/Fahrenheit-451.jpg"
+              alt="Capa do livro Fahrenheit 451"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Fahrenheit 451<br /><br />Distopia onde livros são proibidos e
+              queimados.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=fahrenheit-451">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="A arte da guerra">
-                <div class="book-card">
-                    <img src="../imagens/a-arte-da-guerra.jpg" alt="Capa do livro A arte da guerra">
-                </div>
-                <div class="book-title">
-                    <p>A arte da guerra<br><br>Clássico chinês de estratégia militar e filosofia.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=a-arte-da-guerra">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Meridiano de Sangue">
+          <div class="book-card">
+            <img
+              src="../imagens/meridiano-de-sangue.jpg"
+              alt="Capa do livro Meridiano de Sangue"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Meridiano de Sangue<br /><br />Uma odisseia brutal pelo Velho
+              Oeste americano.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=meridiano-de-sangue">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="A divina comédia">
-                <div class="book-card">
-                    <img src="../imagens/a-divina-comedia.jpg" alt="Capa do livro A divina comédia">
-                </div>
-                <div class="book-title">
-                    <p>A divina comédia<br><br>Jornada de Dante pelo Inferno, Purgatório e Paraíso.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=a-divina-comedia">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="Fahrenheit 451">
-                <div class="book-card">
-                    <img src="../imagens/Fahrenheit-451.jpg" alt="Capa do livro Fahrenheit 451">
-                </div>
-                <div class="book-title">
-                    <p>Fahrenheit 451<br><br>Distopia onde livros são proibidos e queimados.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=fahrenheit-451">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="Meridiano de Sangue">
-                <div class="book-card">
-                    <img src="../imagens/meridiano-de-sangue.jpg" alt="Capa do livro Meridiano de Sangue">
-                </div>
-                <div class="book-title">
-                    <p>Meridiano de Sangue<br><br>Uma odisseia brutal pelo Velho Oeste americano.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=meridiano-de-sangue">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="Os Irmãos Karamázov">
-                <div class="book-card">
-                    <img src="../imagens/os-irmaos-karamazov.jpg" alt="Capa do livro Os Irmãos Karamázov">
-                </div>
-                <div class="book-title">
-                    <p>Os Irmãos Karamázov<br><br>Drama familiar, fé e moral no clássico de Dostoiévski.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=os-irmaos-karamazov">Veja mais</a></div>
-            </article>
-        </section>
+        <article class="book-item" data-title="Os Irmãos Karamázov">
+          <div class="book-card">
+            <img
+              src="../imagens/os-irmaos-karamazov.jpg"
+              alt="Capa do livro Os Irmãos Karamázov"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Os Irmãos Karamázov<br /><br />Drama familiar, fé e moral no
+              clássico de Dostoiévski.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=os-irmaos-karamazov">Veja mais</a>
+          </div>
+        </article>
+      </section>
     </main>
 
-    <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
-        <div class="footer-content">
-            <div class="footer-logo" aria-hidden="false">
-                <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
-                <div>
-                    <h3>Toca da Coruja</h3>
-                    <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
-                </div>
-            </div>
-
-            <div class="footer-links" aria-labelledby="explorar-title">
-                <h4 id="explorar-title">Explorar</h4>
-                <ul>
-                    <li><a href="home.html">Catálogo</a></li>
-                    <li><a href="sobre.html">Sobre Nós</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-social">
-                <h4>Conecte-se</h4>
-                <div class="social-icons" role="navigation" aria-label="Redes sociais">
-                    <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
-                        rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="../imagens/instagram.png" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
-                        aria-label="X Toca da Coruja">
-                        <img src="../imagens/twitter.png" alt="X">
-                    </a>
-                </div>
-
-                <div class="footer-quick" style="margin-top:10px;">
-                    <div style="font-size:0.95rem; color:var(--color-text)">Email: <a
-                            href="mailto:cavalinilivros@gmail.com"
-                            style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a>
-                    </div>
-                    <div class="footer-cta">
-                        <a href="contato.html" class="action-btn"
-                            style="display:inline-block; margin-top:8px;">Fale conosco</a>
-                    </div>
-                </div>
-            </div>
+    <footer
+      class="footer"
+      role="contentinfo"
+      aria-label="Rodapé Toca da Coruja"
+    >
+      <div class="footer-content">
+        <div class="footer-logo" aria-hidden="false">
+          <img
+            src="/imagens/logo.png"
+            alt="Logo Toca da Coruja"
+            class="footer-img"
+          />
+          <div>
+            <h3>Toca da Coruja</h3>
+            <p>
+              Sua biblioteca literária online — livros escolhidos com carinho
+              para todos os leitores.
+            </p>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
+        <div class="footer-links" aria-labelledby="explorar-title">
+          <h4 id="explorar-title">Explorar</h4>
+          <ul>
+            <li><a href="home.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
         </div>
+
+        <div class="footer-social">
+          <h4>Conecte-se</h4>
+          <div
+            class="social-icons"
+            role="navigation"
+            aria-label="Redes sociais"
+          >
+            <a
+              href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Toca da Coruja"
+            >
+              <img src="../imagens/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="https://x.com/TocaDaCoruja24"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X Toca da Coruja"
+            >
+              <img src="../imagens/twitter.png" alt="X" />
+            </a>
+          </div>
+
+          <div class="footer-quick" style="margin-top: 10px">
+            <div style="font-size: 0.95rem; color: var(--color-text)">
+              Email:
+              <a
+                href="mailto:cavalinilivros@gmail.com"
+                style="text-decoration: none; color: inherit; font-weight: 700"
+                >cavalinilivros@gmail.com</a
+              >
+            </div>
+            <div class="footer-cta">
+              <a
+                href="contato.html"
+                class="action-btn"
+                style="display: inline-block; margin-top: 8px"
+                >Fale conosco</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2025 Toca da Coruja. Todos os direitos reservados. — Feito com ·
+          livros · café
+        </p>
+      </div>
     </footer>
-
 
     <script type="module" src="/js/theme.js"></script>
     <script src="../js/home.js"></script>
@@ -229,6 +426,5 @@
     <script src="/js/universal-search.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
-</body>
-
+  </body>
 </html>

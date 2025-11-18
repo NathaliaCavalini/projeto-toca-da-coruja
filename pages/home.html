@@ -1,628 +1,1062 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Sua biblioteca literária</title>
     <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/toast-notifications.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body data-button-mode="single">
+  <body data-button-mode="single">
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca <br> da Coruja</h1>
-        </header>
+      <header class="logo">
+        <img
+          src="../imagens/logo.png"
+          alt="Logo Toca da Coruja"
+          class="logo-img"
+        />
+        <h1>
+          Toca <br />
+          da Coruja
+        </h1>
+      </header>
 
-        <section class="menu-section">
-            <h2>Gêneros</h2>
-            <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
-                </li>
-                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">LGBTQIAPN+</a></li>
-                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Fantasia</a></li>
-                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Romance</a></li>
-                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Clássicos</a></li>
-                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Programação</a></li>
-                <li><a href="mais.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">+ Mais</a>
-                </li>
-            </ul>
-        </section>
+      <section class="menu-section">
+        <h2>Gêneros</h2>
+        <ul class="menu-list">
+          <li>
+            <a href="rpg.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />RPG</a
+            >
+          </li>
+          <li>
+            <a href="gay.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />LGBTQIAPN+</a
+            >
+          </li>
+          <li>
+            <a href="fantasia.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Fantasia</a
+            >
+          </li>
+          <li>
+            <a href="romance.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Romance</a
+            >
+          </li>
+          <li>
+            <a href="classico.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Clássicos</a
+            >
+          </li>
+          <li>
+            <a href="programacao.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />Programação</a
+            >
+          </li>
+          <li>
+            <a href="mais.html"
+              ><img
+                src="../imagens/livro_fechado.png"
+                width="20"
+                height="20"
+                alt=""
+              />+ Mais</a
+            >
+          </li>
+        </ul>
+      </section>
 
-        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
-        <section class="menu-section" id="admin-section" style="display:none;">
-            <h2>Administração</h2>
-            <ul class="menu-list">
-                <li><a href="admin.html" style="color: var(--color-accent); font-weight: 600;">⚙️ Painel Admin</a></li>
-            </ul>
-        </section>
-        <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
+      <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+      <section class="menu-section" id="admin-section" style="display: none">
+        <h2>Administração</h2>
+        <ul class="menu-list">
+          <li>
+            <a
+              href="admin.html"
+              class="admin-link"
+              style="color: var(--color-accent); font-weight: 600"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--dark"
+              />
+              Painel Admin</a
+            >
+          </li>
+        </ul>
+      </section>
+      <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- NAV + AÇÕES (ícones acoplados à direita) -->
-        <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="../imagens/livro_aberto.png" width="20" height="20" alt="">Catálogo</a>
-            <a href="quer_ler.html"><img src="../imagens/quer_ler.png" width="20" height="20" alt="">Quer ler</a>
-            <a href="ja_lidos.html"><img src="../imagens/ja_lidos.png" width="20" height="20" alt="">Já lidos</a>
-            <a href="favoritos.html"><img src="../imagens/favoritos.png" width="20" height="20" alt="">Favoritos</a>
-            <a href="reviews.html"><img src="../imagens/reviews.png" width="20" height="20" alt="">Reviews</a>
-            
-            <form class="search-form" role="search" onsubmit="return false;">
-                <img src="../imagens/lupa.png" width="20" height="20" alt="Buscar" class="search-icon">
-                <input type="search" id="search-input" placeholder="Pesquisar..." />
-            </form>
+      <!-- NAV + AÇÕES (ícones acoplados à direita) -->
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="home.html"
+          ><img
+            src="../imagens/livro_aberto.png"
+            width="20"
+            height="20"
+            alt=""
+          />Catálogo</a
+        >
+        <a href="quer_ler.html"
+          ><img
+            src="../imagens/quer_ler.png"
+            width="20"
+            height="20"
+            alt=""
+          />Quer ler</a
+        >
+        <a href="ja_lidos.html"
+          ><img src="../imagens/ja_lidos.png" width="20" height="20" alt="" />Já
+          lidos</a
+        >
+        <a href="favoritos.html"
+          ><img
+            src="../imagens/favoritos.png"
+            width="20"
+            height="20"
+            alt=""
+          />Favoritos</a
+        >
+        <a href="reviews.html"
+          ><img
+            src="../imagens/reviews.png"
+            width="20"
+            height="20"
+            alt=""
+          />Reviews</a
+        >
 
-            <!-- ações (ícones) ficam à direita -->
-            <div class="nav-actions" aria-hidden="false">
-                <button class="icon-btn" title="Modo escuro">
-                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
-                </button>
-                <button class="icon-btn" title="Ajuda">
-                    <img src="../imagens/ajuda-light-mode.png" width="20" height="20" alt="Ícone ajuda">
-                </button>
+        <form class="search-form" role="search" onsubmit="return false;">
+          <img
+            src="../imagens/lupa.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon"
+          />
+          <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <!-- ações (ícones) ficam à direita -->
+        <div class="nav-actions" aria-hidden="false">
+          <button class="icon-btn" title="Modo escuro">
+            <img
+              src="../imagens/escuro.png"
+              width="20"
+              height="20"
+              alt="Ícone modo escuro"
+            />
+          </button>
+          <button class="icon-btn" title="Ajuda">
+            <img
+              src="../imagens/ajuda-light-mode.png"
+              width="20"
+              height="20"
+              alt="Ícone ajuda"
+            />
+          </button>
+        </div>
+      </nav>
+
+      <!-- HERO SECTION (nova) -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <h2 id="hero-title" class="hero-title">
+            Onde histórias ganham asas<br />
+            <span class="hero-subtitle">e voam até o seu coração.</span>
+          </h2>
+          <div class="hero-owl">🦉</div>
+          <p class="hero-explore">Explore o catálogo e deixe-se levar</p>
+        </div>
+        <div class="hero-wave"></div>
+      </section>
+
+      <!-- GRID DE LIVROS (mantido, mas com novo espaçamento) -->
+      <section class="book-grid" aria-label="Livros em destaque">
+        <article class="book-item" data-title="A jogada do amor">
+          <div class="book-card">
+            <img
+              src="../imagens/a_jogada_do_amor.png"
+              alt="Capa do livro A Jogada do Amor"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A jogada do amor<br /><br />Um romance esportivo onde o amor entra
+              em campo entre rivais.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
             </div>
-        </nav>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=jogada-amor">Veja mais</a>
+          </div>
+        </article>
 
-        <!-- HERO SECTION (nova) -->
-        <section class="hero-section" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <h2 id="hero-title" class="hero-title">
-                    Onde histórias ganham asas<br>
-                    <span class="hero-subtitle">e voam até o seu coração.</span>
-                </h2>
-                <div class="hero-owl">🦉</div>
-                <p class="hero-explore">Explore o catálogo e deixe-se levar</p>
+        <article class="book-item" data-title="Ela fica com a garota">
+          <div class="book-card">
+            <img
+              src="../imagens/ela_fica_com_a_garota.png"
+              alt="Capa do livro Ela Fica Com a Garota"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Ela fica com a garota<br /><br />Duas ex-colegas de escola se
+              reencontram e o amor floresce.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
             </div>
-            <div class="hero-wave"></div>
-        </section>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=ela-fica">Veja mais</a>
+          </div>
+        </article>
 
-        <!-- GRID DE LIVROS (mantido, mas com novo espaçamento) -->
-        <section class="book-grid" aria-label="Livros em destaque">
+        <article class="book-item" data-title="Algumas garotas são assim">
+          <div class="book-card">
+            <img
+              src="../imagens/algumas_garotas_sao_assim.png"
+              alt="Capa do livro Algumas Garotas São Assim"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Algumas garotas são assim<br /><br />Comédia romântica sobre
+              identidade e autodescoberta.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=algumas-garotas">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="A jogada do amor">
-                <div class="book-card">
-                    <img src="../imagens/a_jogada_do_amor.png" alt="Capa do livro A Jogada do Amor">
-                </div>
-                <div class="book-title">
-                    <p>A jogada do amor<br><br>Um romance esportivo onde o amor entra em campo entre rivais.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=jogada-amor">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="A princesa e o queijo quente">
+          <div class="book-card">
+            <img
+              src="../imagens/a_princesa_e_o_queijo_quente.png"
+              alt="Capa do livro A Princesa e o Queijo Quente"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A princesa e o queijo quente<br /><br />Uma fábula divertida sobre
+              uma princesa e seu lanche favorito.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=princesa-e-o-queijo-quente">Veja mais</a>
+          </div>
+        </article>
 
+        <article class="book-item" data-title="Um milhão de finais felizes">
+          <div class="book-card">
+            <img
+              src="../imagens/um_milhao_de_finais_felizes.png"
+              alt="Capa do livro Um Milhão de Finais Felizes"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Um milhão de finais felizes<br /><br />Histórias interativas com
+              múltiplos desfechos românticos.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=um-milhao-de-finais-felizes">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Ela fica com a garota">
-                <div class="book-card">
-                    <img src="../imagens/ela_fica_com_a_garota.png" alt="Capa do livro Ela Fica Com a Garota">
-                </div>
-                <div class="book-title">
-                    <p>Ela fica com a garota<br><br>Duas ex-colegas de escola se reencontram e o amor floresce.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=ela-fica">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="O amor não é óbvio">
+          <div class="book-card">
+            <img
+              src="../imagens/o_amor_nao_e_obvio.png"
+              alt="Capa do livro O Amor Não É Óbvio"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              O amor não é óbvio<br /><br />Amigos de infância percebem que o
+              amor estava ali o tempo todo.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=amor-obvio">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Algumas garotas são assim">
-                <div class="book-card">
-                    <img src="../imagens/algumas_garotas_sao_assim.png" alt="Capa do livro Algumas Garotas São Assim">
-                </div>
-                <div class="book-title">
-                    <p>Algumas garotas são assim<br><br>Comédia romântica sobre identidade e autodescoberta.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=algumas-garotas">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Coisas óbvias sobre o amor">
+          <div class="book-card">
+            <img
+              src="../imagens/coisas_obvias_sobre_o_amor.png"
+              alt="Capa do livro Coisas óbvias sobre o amor"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Coisas óbvias sobre o amor<br /><br />Crônicas leves e reais sobre
+              relacionamentos do dia a dia.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=coisas-obvias-sobre-o-amor">Veja mais</a>
+          </div>
+          <div class="botao-quero-ler"></div>
+        </article>
 
-            <article class="book-item" data-title="A princesa e o queijo quente">
-                <div class="book-card">
-                    <img src="../imagens/a_princesa_e_o_queijo_quente.png"
-                        alt="Capa do livro A Princesa e o Queijo Quente">
-                </div>
-                <div class="book-title">
-                    <p>A princesa e o queijo quente<br><br>Uma fábula divertida sobre uma princesa e seu lanche
-                        favorito.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=princesa-e-o-queijo-quente">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Girls like girls">
+          <div class="book-card">
+            <img
+              src="../imagens/girls_like_girls.jpg"
+              alt="Capa do livro Girls like girls"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Girls like girls<br /><br />Baseado na música de Hayley Kiyoko: um
+              amor jovem e intenso.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=girls-like-girls">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Um milhão de finais felizes">
-                <div class="book-card">
-                    <img src="../imagens/um_milhao_de_finais_felizes.png"
-                        alt="Capa do livro Um Milhão de Finais Felizes">
-                </div>
-                <div class="book-title">
-                    <p>Um milhão de finais felizes<br><br>Histórias interativas com múltiplos desfechos românticos.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=um-milhao-de-finais-felizes">Veja mais</a></div>
-            </article>
+        <article
+          class="book-item"
+          data-title="Isso não é um conto de fadas"
+          data-id="isso-nao-e-um-conto-de-fadas"
+        >
+          <div class="book-card">
+            <img
+              src="../imagens/isso-não-é-um-conto-de-fadas.jpg"
+              alt="Capa do livro Isso não é um conto de fadas"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Isso não é um conto de fadas<br /><br />Releitura sombria e
+              realista dos contos clássicos.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+              <button class="action-btn btn-ja-li">✅ Já Li</button>
+              <button class="action-btn btn-favorito">⭐ Favorito</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=isso-nao-e-um-conto-de-fadas"
+              >Veja mais</a
+            >
+          </div>
+        </article>
 
-            <article class="book-item" data-title="O amor não é óbvio">
-                <div class="book-card">
-                    <img src="../imagens/o_amor_nao_e_obvio.png" alt="Capa do livro O Amor Não É Óbvio">
-                </div>
-                <div class="book-title">
-                    <p>O amor não é óbvio<br><br>Amigos de infância percebem que o amor estava ali o tempo todo.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=amor-obvio">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Lembre-se de nós">
+          <div class="book-card">
+            <img
+              src="../imagens/lembre-se-de-nos.jpg"
+              alt="Capa do livro Lembre-se de nós"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Lembre-se de nós<br /><br />Um romance sobre memória, perda e o
+              poder do reencontro.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=lembre-se-de-nos">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Coisas óbvias sobre o amor">
-                <div class="book-card">
-                    <img src="../imagens/coisas_obvias_sobre_o_amor.png" alt="Capa do livro Coisas óbvias sobre o amor">
-                </div>
-                <div class="book-title">
-                    <p>Coisas óbvias sobre o amor<br><br>Crônicas leves e reais sobre relacionamentos do dia a dia.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=coisas-obvias-sobre-o-amor">Veja mais</a></div>
-                <div class="botao-quero-ler">
-                </div>
-            </article>
+        <article class="book-item" data-title="Night owls and summer skies">
+          <div class="book-card">
+            <img
+              src="../imagens/night-owls-and-summer-skies.jpg"
+              alt="Capa do livro Night owls and summer skies"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Night owls and summer skies<br /><br />Um verão mágico entre duas
+              corujas da noite.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=night-owls-and-summer-skies">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Girls like girls">
-                <div class="book-card">
-                    <img src="../imagens/girls_like_girls.jpg" alt="Capa do livro Girls like girls">
-                </div>
-                <div class="book-title">
-                    <p>Girls like girls<br><br>Baseado na música de Hayley Kiyoko: um amor jovem e intenso.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=girls-like-girls">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Vermelho branco e sangue azul">
+          <div class="book-card">
+            <img
+              src="../imagens/vermelho-branco-e-sangue-azul.jpg"
+              alt="Capa do livro Vermelho branco e sangue azul"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Vermelho branco e sangue azul<br /><br />O príncipe da Inglaterra
+              e o filho da presidente dos EUA se apaixonam.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=vermelho-branco-e-sangue-azul"
+              >Veja mais</a
+            >
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Isso não é um conto de fadas" data-id="isso-nao-e-um-conto-de-fadas">
-                <div class="book-card">
-                    <img src="../imagens/isso-não-é-um-conto-de-fadas.jpg"
-                        alt="Capa do livro Isso não é um conto de fadas">
-                </div>
-                <div class="book-title">
-                    <p>Isso não é um conto de fadas<br><br>Releitura sombria e realista dos contos clássicos.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                        <button class="action-btn btn-ja-li">✅ Já Li</button>
-                        <button class="action-btn btn-favorito">⭐ Favorito</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=isso-nao-e-um-conto-de-fadas">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="A arte da guerra">
+          <div class="book-card">
+            <img
+              src="../imagens/a-arte-da-guerra.jpg"
+              alt="Capa do livro A arte da guerra"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A arte da guerra<br /><br />Clássico chinês de estratégia militar
+              e filosofia.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=a-arte-da-guerra">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Lembre-se de nós">
-                <div class="book-card">
-                    <img src="../imagens/lembre-se-de-nos.jpg" alt="Capa do livro Lembre-se de nós">
-                </div>
-                <div class="book-title">
-                    <p>Lembre-se de nós<br><br>Um romance sobre memória, perda e o poder do reencontro.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=lembre-se-de-nos">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="A divina comédia">
+          <div class="book-card">
+            <img
+              src="../imagens/a-divina-comedia.jpg"
+              alt="Capa do livro A divina comédia"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A divina comédia<br /><br />Jornada de Dante pelo Inferno,
+              Purgatório e Paraíso.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=a-divina-comedia">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Night owls and summer skies">
-                <div class="book-card">
-                    <img src="../imagens/night-owls-and-summer-skies.jpg"
-                        alt="Capa do livro Night owls and summer skies">
-                </div>
-                <div class="book-title">
-                    <p>Night owls and summer skies<br><br>Um verão mágico entre duas corujas da noite.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=night-owls-and-summer-skies">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Fahrenheit 451">
+          <div class="book-card">
+            <img
+              src="../imagens/Fahrenheit-451.jpg"
+              alt="Capa do livro Fahrenheit 451"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Fahrenheit 451<br /><br />Distopia onde livros são proibidos e
+              queimados.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=fahrenheit-451">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Vermelho branco e sangue azul">
-                <div class="book-card">
-                    <img src="../imagens/vermelho-branco-e-sangue-azul.jpg"
-                        alt="Capa do livro Vermelho branco e sangue azul">
-                </div>
-                <div class="book-title">
-                    <p>Vermelho branco e sangue azul<br><br>O príncipe da Inglaterra e o filho da presidente dos EUA se
-                        apaixonam.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=vermelho-branco-e-sangue-azul">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Meridiano de Sangue">
+          <div class="book-card">
+            <img
+              src="../imagens/meridiano-de-sangue.jpg"
+              alt="Capa do livro Meridiano de Sangue"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Meridiano de Sangue<br /><br />Uma odisseia brutal pelo Velho
+              Oeste americano.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=meridiano-de-sangue">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="A arte da guerra">
-                <div class="book-card">
-                    <img src="../imagens/a-arte-da-guerra.jpg" alt="Capa do livro A arte da guerra">
-                </div>
-                <div class="book-title">
-                    <p>A arte da guerra<br><br>Clássico chinês de estratégia militar e filosofia.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=a-arte-da-guerra">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Os Irmãos Karamázov">
+          <div class="book-card">
+            <img
+              src="../imagens/os-irmaos-karamazov.jpg"
+              alt="Capa do livro Os Irmãos Karamázov"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Os Irmãos Karamázov<br /><br />Drama familiar, fé e moral no
+              clássico de Dostoiévski.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=os-irmaos-karamazov">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="A divina comédia">
-                <div class="book-card">
-                    <img src="../imagens/a-divina-comedia.jpg" alt="Capa do livro A divina comédia">
-                </div>
-                <div class="book-title">
-                    <p>A divina comédia<br><br>Jornada de Dante pelo Inferno, Purgatório e Paraíso.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=a-divina-comedia">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Use a cabeça! Java">
+          <div class="book-card">
+            <img
+              src="../imagens/use a cabeça java.jpg"
+              alt="Capa do livro Use a cabeça! Java"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Use a cabeça! Java<br /><br />Aprendizado visual e interativo da
+              linguagem Java.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=use-a-cabeca">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Fahrenheit 451">
-                <div class="book-card">
-                    <img src="../imagens/Fahrenheit-451.jpg" alt="Capa do livro Fahrenheit 451">
-                </div>
-                <div class="book-title">
-                    <p>Fahrenheit 451<br><br>Distopia onde livros são proibidos e queimados.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=fahrenheit-451">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="sql em 10 minutos">
+          <div class="book-card">
+            <img
+              src="../imagens/sql-em-10-minutos.png"
+              alt="Capa do livro SQL em 10 minutos"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              SQL em 10 minutos<br /><br />Lições rápidas para dominar consultas
+              SQL.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=sql-em-10-minutos">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Meridiano de Sangue">
-                <div class="book-card">
-                    <img src="../imagens/meridiano-de-sangue.jpg" alt="Capa do livro Meridiano de Sangue">
-                </div>
-                <div class="book-title">
-                    <p>Meridiano de Sangue<br><br>Uma odisseia brutal pelo Velho Oeste americano.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=meridiano-de-sangue">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Javascript guia definitivo">
+          <div class="book-card">
+            <img
+              src="../imagens/javascript guia definitivo.png"
+              alt="Capa do livro Javascript guia definitivo"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Javascript guia definitivo<br /><br />Referência completa da
+              linguagem, do básico ao avançado.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=javascript-guia-definitivo">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Os Irmãos Karamázov">
-                <div class="book-card">
-                    <img src="../imagens/os-irmaos-karamazov.jpg" alt="Capa do livro Os Irmãos Karamázov">
-                </div>
-                <div class="book-title">
-                    <p>Os Irmãos Karamázov<br><br>Drama familiar, fé e moral no clássico de Dostoiévski.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=os-irmaos-karamazov">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Html e CSS">
+          <div class="book-card">
+            <img
+              src="../imagens/html e css.png"
+              alt="Capa do livro HTML e CSS"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              HTML e CSS<br /><br />Guia prático para criar sites modernos e
+              responsivos.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=html-e-css">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Use a cabeça! Java">
-                <div class="book-card">
-                    <img src="../imagens/use a cabeça java.jpg" alt="Capa do livro Use a cabeça! Java">
-                </div>
-                <div class="book-title">
-                    <p>Use a cabeça! Java<br><br>Aprendizado visual e interativo da linguagem Java.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=use-a-cabeca">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Python fluente">
+          <div class="book-card">
+            <img
+              src="../imagens/fluente python.png"
+              alt="Capa do livro Python fluente"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Python fluente<br /><br />Boas práticas e padrões para programar
+              como um profissional.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=fluente-python">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="sql em 10 minutos">
-                <div class="book-card">
-                    <img src="../imagens/sql-em-10-minutos.png" alt="Capa do livro SQL em 10 minutos">
-                </div>
-                <div class="book-title">
-                    <p>SQL em 10 minutos<br><br>Lições rápidas para dominar consultas SQL.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=sql-em-10-minutos">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="D&D E5 - Livro do jogador">
+          <div class="book-card">
+            <img
+              src="../imagens/dnd e5 livro do jogador.png"
+              alt="Capa do livro D&D E5 Livro do jogador"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              D&D E5 Livro do jogador<br /><br />Regras para criar personagens
+              em Dungeons & Dragons 5ª edição.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=dndE5-livro-do-jogador">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Javascript guia definitivo">
-                <div class="book-card">
-                    <img src="../imagens/javascript guia definitivo.png" alt="Capa do livro Javascript guia definitivo">
-                </div>
-                <div class="book-title">
-                    <p>Javascript guia definitivo<br><br>Referência completa da linguagem, do básico ao avançado.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=javascript-guia-definitivo">Veja mais</a></div>
-            </article>
+        <article
+          class="book-item"
+          data-title="O um anel - livro do aventureiro"
+        >
+          <div class="book-card">
+            <img
+              src="../imagens/um anel o livro do aventureiro.jpg"
+              alt="Capa do livro O um anel - livro do aventureiro"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              O um anel - livro do aventureiro<br /><br />RPG oficial na
+              Terra-média de Tolkien: regras narrativas e viagens épicas.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=o-um-anel-livro-do-aventureiro"
+              >Veja mais</a
+            >
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Html e CSS">
-                <div class="book-card">
-                    <img src="../imagens/html e css.png" alt="Capa do livro HTML e CSS">
-                </div>
-                <div class="book-title">
-                    <p>HTML e CSS<br><br>Guia prático para criar sites modernos e responsivos.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=html-e-css">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Blades in the dark">
+          <div class="book-card">
+            <img
+              src="../imagens/blades in the dark.png"
+              alt="Capa do livro Blades in the dark"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Blades in the dark<br /><br />RPG de ladrões em uma cidade gótica
+              e mágica.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=blades-in-the-dark">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Python fluente">
-                <div class="book-card">
-                    <img src="../imagens/fluente python.png" alt="Capa do livro Python fluente">
-                </div>
-                <div class="book-title">
-                    <p>Python fluente<br><br>Boas práticas e padrões para programar como um profissional.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=fluente-python">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Som das seis">
+          <div class="book-card">
+            <img
+              src="../imagens/o som das seis.png"
+              alt="Capa do livro Som das seis"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Som das seis<br /><br />Suspense que começa quando o relógio marca
+              seis horas.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=som-das-seis">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="D&D E5 - Livro do jogador">
-                <div class="book-card">
-                    <img src="../imagens/dnd e5 livro do jogador.png" alt="Capa do livro D&D E5 Livro do jogador">
-                </div>
-                <div class="book-title">
-                    <p>D&D E5 Livro do jogador<br><br>Regras para criar personagens em Dungeons & Dragons 5ª edição.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=dndE5-livro-do-jogador">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Paranoia">
+          <div class="book-card">
+            <img src="../imagens/paranoia.jpg" alt="Capa do livro Paranoia" />
+          </div>
+          <div class="book-title">
+            <p>
+              Paranoia<br /><br />RPG satírico em um futuro distópico controlado
+              por IA.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=paranoia">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="O um anel - livro do aventureiro">
-                <div class="book-card">
-                    <img src="../imagens/um anel o livro do aventureiro.jpg"
-                        alt="Capa do livro O um anel - livro do aventureiro">
-                </div>
-                <div class="book-title">
-                    <p>O um anel - livro do aventureiro<br><br>RPG oficial na Terra-média de Tolkien: regras narrativas
-                        e viagens épicas.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=o-um-anel-livro-do-aventureiro">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Tormenta">
+          <div class="book-card">
+            <img src="../imagens/tormenta.jpg" alt="Capa do livro Tormenta" />
+          </div>
+          <div class="book-title">
+            <p>
+              Tormenta<br /><br />O maior cenário de RPG brasileiro, com deuses
+              e magia.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=tormenta-modulo-basico">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Blades in the dark">
-                <div class="book-card">
-                    <img src="../imagens/blades in the dark.png" alt="Capa do livro Blades in the dark">
-                </div>
-                <div class="book-title">
-                    <p>Blades in the dark<br><br>RPG de ladrões em uma cidade gótica e mágica.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=blades-in-the-dark">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Lenda dos guardiões">
+          <div class="book-card">
+            <img
+              src="../imagens/lenda dos guardiões.jpg"
+              alt="Capa do livro Lenda dos guardiões"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Lenda dos guardiões<br /><br />Fantasia épica com corujas e reinos
+              em guerra.
+            </p>
+            <div class="botao-quero-ler">
+              <button
+                class="action-btn"
+                id="btn-quer-ler-legend-of-the-guardians-collection"
+              >
+                Quero Ler
+              </button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=legend-of-the-guardians-collection"
+              >Veja mais</a
+            >
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Som das seis">
-                <div class="book-card">
-                    <img src="../imagens/o som das seis.png" alt="Capa do livro Som das seis">
-                </div>
-                <div class="book-title">
-                    <p>Som das seis<br><br>Suspense que começa quando o relógio marca seis horas.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=som-das-seis">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Árvore dos desejos">
+          <div class="book-card">
+            <img
+              src="../imagens/árvore dos desejos.jpg"
+              alt="Capa do livro Árvore dos desejos"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Árvore dos desejos<br /><br />Fábula infantil sobre esperança,
+              amizade e milagres.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=arvore-dos-desejos">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Paranoia">
-                <div class="book-card">
-                    <img src="../imagens/paranoia.jpg" alt="Capa do livro Paranoia">
-                </div>
-                <div class="book-title">
-                    <p>Paranoia<br><br>RPG satírico em um futuro distópico controlado por IA.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=paranoia">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="Flores para Algernon">
+          <div class="book-card">
+            <img
+              src="../imagens/flores para algernon.jpg"
+              alt="Capa do livro Flores para Algernon"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Flores para Algernon<br /><br />Drama sci-fi sobre inteligência
+              artificial e humanidade.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=flores-para-algernon">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Tormenta">
-                <div class="book-card">
-                    <img src="../imagens/tormenta.jpg" alt="Capa do livro Tormenta">
-                </div>
-                <div class="book-title">
-                    <p>Tormenta<br><br>O maior cenário de RPG brasileiro, com deuses e magia.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=tormenta-modulo-basico">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="A biblioteca da meia-noite">
+          <div class="book-card">
+            <img
+              src="../imagens/biblioteca da meia noite.jpg"
+              alt="Capa do livro A biblioteca da meia-noite"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              A biblioteca da meia-noite<br /><br />Romance sobre
+              arrependimentos, escolhas e vidas alternativas.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=a-biblioteca-da-meia-noite">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Lenda dos guardiões">
-                <div class="book-card">
-                    <img src="../imagens/lenda dos guardiões.jpg" alt="Capa do livro Lenda dos guardiões">
-                </div>
-                <div class="book-title">
-                    <p>Lenda dos guardiões<br><br>Fantasia épica com corujas e reinos em guerra.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn" id="btn-quer-ler-legend-of-the-guardians-collection">Quero
-                            Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=legend-of-the-guardians-collection">Veja mais</a>
-                </div>
-            </article>
+        <article class="book-item" data-title="Caninos brancos">
+          <div class="book-card">
+            <img
+              src="../imagens/caninos brancos.jpg"
+              alt="Capa do livro Caninos brancos"
+            />
+          </div>
+          <div class="book-title">
+            <p>
+              Caninos brancos<br /><br />Clássico de aventura sobre um lobo-cão
+              selvagem no Alasca.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=caninos-brancos">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Árvore dos desejos">
-                <div class="book-card">
-                    <img src="../imagens/árvore dos desejos.jpg" alt="Capa do livro Árvore dos desejos">
-                </div>
-                <div class="book-title">
-                    <p>Árvore dos desejos<br><br>Fábula infantil sobre esperança, amizade e milagres.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=arvore-dos-desejos">Veja mais</a></div>
-            </article>
+        <article class="book-item" data-title="O impulso">
+          <div class="book-card">
+            <img src="../imagens/o impulso.jpg" alt="Capa do livro O impulso" />
+          </div>
+          <div class="book-title">
+            <p>
+              O impulso<br /><br />Thriller psicológico sobre controle mental e
+              ética científica.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=o-impulso">Veja mais</a>
+          </div>
+        </article>
 
-            <article class="book-item" data-title="Flores para Algernon">
-                <div class="book-card">
-                    <img src="../imagens/flores para algernon.jpg" alt="Capa do livro Flores para Algernon">
-                </div>
-                <div class="book-title">
-                    <p>Flores para Algernon<br><br>Drama sci-fi sobre inteligência artificial e humanidade.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=flores-para-algernon">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="A biblioteca da meia-noite">
-                <div class="book-card">
-                    <img src="../imagens/biblioteca da meia noite.jpg" alt="Capa do livro A biblioteca da meia-noite">
-                </div>
-                <div class="book-title">
-                    <p>A biblioteca da meia-noite<br><br>Romance sobre arrependimentos, escolhas e vidas alternativas.
-                    </p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=a-biblioteca-da-meia-noite">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="Caninos brancos">
-                <div class="book-card">
-                    <img src="../imagens/caninos brancos.jpg" alt="Capa do livro Caninos brancos">
-                </div>
-                <div class="book-title">
-                    <p>Caninos brancos<br><br>Clássico de aventura sobre um lobo-cão selvagem no Alasca.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=caninos-brancos">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="O impulso">
-                <div class="book-card">
-                    <img src="../imagens/o impulso.jpg" alt="Capa do livro O impulso">
-                </div>
-                <div class="book-title">
-                    <p>O impulso<br><br>Thriller psicológico sobre controle mental e ética científica.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=o-impulso">Veja mais</a></div>
-            </article>
-
-            <article class="book-item" data-title="Walden">
-                <div class="book-card">
-                    <img src="../imagens/walden.jpg" alt="Capa do livro Walden">
-                </div>
-                <div class="book-title">
-                    <p>Walden<br><br>Reflexões sobre vida simples, natureza e autossuficiência.</p>
-                    <div class="botao-quero-ler">
-                        <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
-                    </div>
-                </div>
-                <div class="book-action"><a href="vejamais.html?id=walden">Veja mais</a></div>
-            </article>
-
-        </section>
+        <article class="book-item" data-title="Walden">
+          <div class="book-card">
+            <img src="../imagens/walden.jpg" alt="Capa do livro Walden" />
+          </div>
+          <div class="book-title">
+            <p>
+              Walden<br /><br />Reflexões sobre vida simples, natureza e
+              autossuficiência.
+            </p>
+            <div class="botao-quero-ler">
+              <button class="action-btn btn-quer-ler">📖 Quero Ler</button>
+            </div>
+          </div>
+          <div class="book-action">
+            <a href="vejamais.html?id=walden">Veja mais</a>
+          </div>
+        </article>
+      </section>
     </main>
 
-    <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
-        <div class="footer-content">
-            <div class="footer-logo" aria-hidden="false">
-                <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
-                <div>
-                    <h3>Toca da Coruja</h3>
-                    <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
-                </div>
-            </div>
-
-            <div class="footer-links" aria-labelledby="explorar-title">
-                <h4 id="explorar-title">Explorar</h4>
-                <ul>
-                    <li><a href="home.html">Catálogo</a></li>
-                    <li><a href="sobre.html">Sobre Nós</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-social">
-                <h4>Conecte-se</h4>
-                <div class="social-icons" role="navigation" aria-label="Redes sociais">
-                    <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
-                        rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="../imagens/instagram.png" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
-                        aria-label="X Toca da Coruja">
-                        <img src="../imagens/twitter.png" alt="X">
-                    </a>
-                </div>
-
-                <div class="footer-quick" style="margin-top:10px;">
-                    <div style="font-size:0.95rem; color:var(--color-text)">Email: <a
-                            href="mailto:cavalinilivros@gmail.com"
-                            style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a>
-                    </div>
-                    <div class="footer-cta">
-                        <a href="contato.html" class="action-btn" style="display:inline-block; margin-top:8px;">Fale
-                            conosco</a>
-                    </div>
-                </div>
-            </div>
+    <footer
+      class="footer"
+      role="contentinfo"
+      aria-label="Rodapé Toca da Coruja"
+    >
+      <div class="footer-content">
+        <div class="footer-logo" aria-hidden="false">
+          <img
+            src="../imagens/logo.png"
+            alt="Logo Toca da Coruja"
+            class="footer-img"
+          />
+          <div>
+            <h3>Toca da Coruja</h3>
+            <p>
+              Sua biblioteca literária online — livros escolhidos com carinho
+              para todos os leitores.
+            </p>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
+        <div class="footer-links" aria-labelledby="explorar-title">
+          <h4 id="explorar-title">Explorar</h4>
+          <ul>
+            <li><a href="home.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
         </div>
+
+        <div class="footer-social">
+          <h4>Conecte-se</h4>
+          <div
+            class="social-icons"
+            role="navigation"
+            aria-label="Redes sociais"
+          >
+            <a
+              href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Toca da Coruja"
+            >
+              <img src="../imagens/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="https://x.com/TocaDaCoruja24"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X Toca da Coruja"
+            >
+              <img src="../imagens/twitter.png" alt="X" />
+            </a>
+          </div>
+
+          <div class="footer-quick" style="margin-top: 10px">
+            <div style="font-size: 0.95rem; color: var(--color-text)">
+              Email:
+              <a
+                href="mailto:cavalinilivros@gmail.com"
+                style="text-decoration: none; color: inherit; font-weight: 700"
+                >cavalinilivros@gmail.com</a
+              >
+            </div>
+            <div class="footer-cta">
+              <a
+                href="contato.html"
+                class="action-btn"
+                style="display: inline-block; margin-top: 8px"
+                >Fale conosco</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2025 Toca da Coruja. Todos os direitos reservados. — Feito com ·
+          livros · café
+        </p>
+      </div>
     </footer>
-
 
     <script type="module" src="../js/theme.js"></script>
     <script src="../js/home.js"></script>
@@ -633,127 +1067,143 @@
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
     <script>
-        // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
-        const canvas = document.getElementById('hero-particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animationId;
+      // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
+      const canvas = document.getElementById("hero-particles");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let animationId;
 
-        function resizeCanvas() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.reset();
         }
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + 20;
-                this.size = Math.random() * 4 + 2;
-                this.speedY = -(Math.random() * 2 + 0.5);
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.life = 0;
-                this.maxLife = Math.random() * 100 + 100;
-                this.opacity = 1;
-                this.wingAngle = 0;
-                this.wingSpeed = Math.random() * 0.1 + 0.05;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-                this.life++;
-                this.opacity = 1 - (this.life / this.maxLife);
-                this.wingAngle += this.wingSpeed;
-
-                if (this.life > this.maxLife || this.y < -20) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.translate(this.x, this.y);
-
-                // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
-                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-                gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`);     // #ffd4a3 - brilho quente
-                gradient.addColorStop(0.6, `rgba(197, 148, 108, ${this.opacity * 0.8})`); // #c5946c - núcleo
-                gradient.addColorStop(1, `rgba(197, 148, 108, 0)`);                 // fade suave
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                // ASAS SUTIS (efeito de coruja voando)
-                ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
-                ctx.lineWidth = 1.2;
-                ctx.setLineDash([2, 4]);
-
-                ctx.beginPath();
-                ctx.moveTo(-this.size * 1.8, 0);
-                ctx.quadraticCurveTo(-this.size * 3.5, Math.sin(this.wingAngle) * 6, -this.size * 2.2, -this.size * 0.6);
-                ctx.moveTo(this.size * 1.8, 0);
-                ctx.quadraticCurveTo(this.size * 3.5, Math.sin(-this.wingAngle) * 6, this.size * 2.2, -this.size * 0.6);
-                ctx.stroke();
-                ctx.setLineDash([]);
-
-                ctx.restore();
-            }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.size = Math.random() * 4 + 2;
+          this.speedY = -(Math.random() * 2 + 0.5);
+          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.life = 0;
+          this.maxLife = Math.random() * 100 + 100;
+          this.opacity = 1;
+          this.wingAngle = 0;
+          this.wingSpeed = Math.random() * 0.1 + 0.05;
         }
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(Math.floor(canvas.width / 15), 80);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.life++;
+          this.opacity = 1 - this.life / this.maxLife;
+          this.wingAngle += this.wingSpeed;
+
+          if (this.life > this.maxLife || this.y < -20) {
+            this.reset();
+          }
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            animationId = requestAnimationFrame(animate);
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.translate(this.x, this.y);
+
+          // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
+          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+          gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`); // #ffd4a3 - brilho quente
+          gradient.addColorStop(
+            0.6,
+            `rgba(197, 148, 108, ${this.opacity * 0.8})`
+          ); // #c5946c - núcleo
+          gradient.addColorStop(1, `rgba(197, 148, 108, 0)`); // fade suave
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ASAS SUTIS (efeito de coruja voando)
+          ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([2, 4]);
+
+          ctx.beginPath();
+          ctx.moveTo(-this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            -this.size * 3.5,
+            Math.sin(this.wingAngle) * 6,
+            -this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.moveTo(this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            this.size * 3.5,
+            Math.sin(-this.wingAngle) * 6,
+            this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.restore();
         }
+      }
 
-        // Inicialização
-        window.addEventListener('load', () => {
-            const hero = document.querySelector('.hero-section');
-            if (!hero) return;
+      function initParticles() {
+        particles = [];
+        const count = Math.min(Math.floor(canvas.width / 15), 80);
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
 
-            canvas.style.position = 'absolute';
-            hero.style.position = 'relative';
-            hero.appendChild(canvas);
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        animationId = requestAnimationFrame(animate);
+      }
 
-            resizeCanvas();
-            initParticles();
-            animate();
+      // Inicialização
+      window.addEventListener("load", () => {
+        const hero = document.querySelector(".hero-section");
+        if (!hero) return;
 
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
+        canvas.style.position = "absolute";
+        hero.style.position = "relative";
+        hero.appendChild(canvas);
 
-            // Ajuste no dark mode
-            const observer = new MutationObserver(() => {
-                if (document.body.classList.contains('dark-mode')) {
-                    ctx.globalCompositeOperation = 'soft-light';
-                } else {
-                    ctx.globalCompositeOperation = 'screen';
-                }
-            });
-            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        resizeCanvas();
+        initParticles();
+        animate();
+
+        window.addEventListener("resize", () => {
+          resizeCanvas();
+          initParticles();
         });
 
-        <!-- dark mode icon handler moved to js/home.js -->
+        // Ajuste no dark mode
+        const observer = new MutationObserver(() => {
+          if (document.body.classList.contains("dark-mode")) {
+            ctx.globalCompositeOperation = "soft-light";
+          } else {
+            ctx.globalCompositeOperation = "screen";
+          }
+        });
+        observer.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      });
+
+      <!-- dark mode icon handler moved to js/home.js -->
     </script>
     <script type="module" src="../js/user-sync.js"></script>
     <script type="module" src="../js/user-info-global.js"></script>
@@ -765,6 +1215,5 @@
     <script src="../js/universal-search.js"></script>
     <script src="../js/library-actions-delegated.js"></script>
     <script type="module" src="../js/help-modal.js"></script>
-</body>
-
+  </body>
 </html>
