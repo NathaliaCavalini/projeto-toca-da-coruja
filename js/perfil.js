@@ -4,7 +4,7 @@ import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/
 
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        window.location.href = "pages/login.html";
+        window.location.href = "login.html";
         return;
     }
 
@@ -172,7 +172,7 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
         
         // Redireciona após sucesso
         setTimeout(() => {
-            window.location.href = "pages/home.html";
+            window.location.href = "home.html";
         }, 1000);
 
     } catch (error) {
@@ -188,7 +188,7 @@ document.getElementById("profile-form").addEventListener("submit", async (e) => 
 document.getElementById("logout-btn").addEventListener("click", async () => {
     try {
         await signOut(auth);
-        window.location.href = "pages/login.html";
+        window.location.href = "login.html";
     } catch (error) {
         console.error("Erro ao fazer logout:", error);
         alert("❌ Erro ao fazer logout. Por favor, tente novamente.");

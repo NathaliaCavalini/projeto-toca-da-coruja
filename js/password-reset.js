@@ -1,4 +1,4 @@
-import { auth } from "/js/firebase-config.js";
+import { auth } from "./firebase-config.js";
 import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 /**

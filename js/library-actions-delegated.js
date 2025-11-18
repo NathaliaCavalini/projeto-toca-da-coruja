@@ -187,7 +187,7 @@ window.__libraryActions = window.__libraryActions || {};
 window.__libraryActions.refreshAll = refreshAllButtons;
 
 function goToListPage(action){
-  const map = { querLer: 'quer_ler.html', jaLi: 'ja_lidos.html', favoritos: 'favoritos.html' };
+  const map = { querLer: 'pages/quer_ler.html', jaLi: 'pages/ja_lidos.html', favoritos: 'pages/favoritos.html' };
   const filename = map[action];
   if(!filename) return;
   try {

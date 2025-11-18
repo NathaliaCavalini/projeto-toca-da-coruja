@@ -20,7 +20,7 @@ export const livros = {
     "jogada-amor": {
         titulo: "A jogada do amor",
         autor: "Kelly Quindlen",
-        imagem: "../imagens/a_jogada_do_amor.png",
+        imagem: "/imagens/a_jogada_do_amor.png",
         genero: "Romance LGBTQIA+",
         paginas: 310,
         ano: 2021,
@@ -30,7 +30,7 @@ export const livros = {
     "ela-fica": {
         titulo: "Ela fica com a garota",
         autor: "Rachael Lippincott",
-        imagem: "../imagens/ela_fica_com_a_garota.png",
+        imagem: "/imagens/ela_fica_com_a_garota.png",
         genero: "Romance",
         paginas: 298,
         ano: 2020,
@@ -40,7 +40,7 @@ export const livros = {
     "algumas-garotas": {
         titulo: "Algumas garotas são assim",
         autor: "Jennifer Dugan",
-        imagem: "../imagens/algumas_garotas_sao_assim.png",
+        imagem: "/imagens/algumas_garotas_sao_assim.png",
         genero: "Romance",
         paginas: 336,
         ano: 2023,
@@ -50,7 +50,7 @@ export const livros = {
     "princesa-e-o-queijo-quente": {
         titulo: "Princesa e o Queijo Quente",
         autor: "Laura Pohl",
-        imagem: "../imagens/a_princesa_e_o_queijo_quente.png",
+        imagem: "/imagens/a_princesa_e_o_queijo_quente.png",
         genero: "Romance",
         paginas: 280,
         ano: 2022,
@@ -60,7 +60,7 @@ export const livros = {
     "um-milhao-de-finais-felizes": {
         titulo: "Um Milhão de Finais Felizes",
         autor: "Vitor Martins",
-        imagem: "../imagens/um_milhao_de_finais_felizes.png",
+        imagem: "/imagens/um_milhao_de_finais_felizes.png",
         genero: "Romance",
         paginas: 320,
         ano: 2021,
@@ -70,7 +70,7 @@ export const livros = {
     "coisas-obvias-sobre-o-amor": {
         titulo: "Coisas Óbvias Sobre o Amor",
         autor: "Clara Alves",
-        imagem: "../imagens/coisas_obvias_sobre_o_amor.png",
+        imagem: "/imagens/coisas_obvias_sobre_o_amor.png",
         genero: "Romance",
         paginas: 264,
         ano: 2024,
@@ -80,7 +80,7 @@ export const livros = {
     "girls-like-girls": {
         titulo: "Girls Like Girls",
         autor: "Hayley Kiyoko",
-        imagem: "../imagens/girls_like_girls.jpg",
+        imagem: "/imagens/girls_like_girls.jpg",
         genero: "Romance",
         paginas: 352,
         ano: 2023,
@@ -100,7 +100,7 @@ export const livros = {
     "lembre-se-de-nos": {
         titulo: "Lembre-se de Nós",
         autor: "Nina Lacour",
-        imagem: "../imagens/lembre-se-de-nos.jpg",
+        imagem: "/imagens/lembre-se-de-nos.jpg",
         genero: "Romance",
         paginas: 304,
         ano: 2021,
@@ -110,7 +110,7 @@ export const livros = {
     "night-owls-and-summer-skies": {
         titulo: "Night Owls and Summer Skies (HQ)",
         autor: "Tara Frejas",
-        imagem: "../imagens/night-owls-and-summer-skies.jpg",
+        imagem: "/imagens/night-owls-and-summer-skies.jpg",
         genero: "Romance",
         paginas: 128,
         ano: 2023,
@@ -120,7 +120,7 @@ export const livros = {
     "vermelho-branco-e-sangue-azul": {
         titulo: "Vermelho, Branco e Sangue Azul",
         autor: "Casey McQuiston",
-        imagem: "../imagens/vermelho-branco-e-sangue-azul.jpg",
+        imagem: "/imagens/vermelho-branco-e-sangue-azul.jpg",
         genero: "Romance",
         paginas: 400,
         ano: 2019,
@@ -130,7 +130,7 @@ export const livros = {
     "a-arte-da-guerra": {
         titulo: "A Arte da Guerra",
         autor: "Sun Tzu",
-        imagem: "../imagens/a-arte-da-guerra.jpg",
+        imagem: "/imagens/a-arte-da-guerra.jpg",
         genero: "Estratégia",
         paginas: 160,
         ano: -500,
@@ -140,7 +140,7 @@ export const livros = {
     "a-divina-comedia": {
         titulo: "A Divina Comédia",
         autor: "Dante Alighieri",
-        imagem: "../imagens/a-divina-comedia.jpg",
+        imagem: "/imagens/a-divina-comedia.jpg",
         genero: "Poesia Épica",
         paginas: 624,
         ano: 1320,
@@ -150,7 +150,7 @@ export const livros = {
     "fahrenheit-451": {
         titulo: "Fahrenheit 451",
         autor: "Ray Bradbury",
-        imagem: "../imagens/fahrenheit-451.jpg",
+        imagem: "/imagens/fahrenheit-451.jpg",
         genero: "Ficção Científica",
         paginas: 256,
         ano: 1953,
@@ -160,7 +160,7 @@ export const livros = {
     "meridiano-de-sangue": {
         titulo: "Meridiano de Sangue",
         autor: "Cormac McCarthy",
-        imagem: "../imagens/meridiano-de-sangue.jpg",
+        imagem: "/imagens/meridiano-de-sangue.jpg",
         genero: "Ficção Histórica",
         paginas: 336,
         ano: 1985,
@@ -170,7 +170,7 @@ export const livros = {
     "os-irmaos-karamazov": {
         titulo: "Os Irmãos Karamázov",
         autor: "Fiódor Dostoiévski",
-        imagem: "../imagens/os-irmaos-karamazov.jpg",
+        imagem: "/imagens/os-irmaos-karamazov.jpg",
         genero: "Romance Filosófico",
         paginas: 824,
         ano: 1880,
@@ -180,7 +180,7 @@ export const livros = {
     "sql-em-10-minutos": {
         titulo: "SQL em 10 Minutos, Sams Teach Yourself",
         autor: "Ben Forta",
-        imagem: "../imagens/sql-em-10-minutos.png",
+        imagem: "/imagens/sql-em-10-minutos.png",
         genero: "Banco de Dados",
         paginas: 240,
         ano: 2004,
@@ -269,7 +269,7 @@ export const livros = {
     "paranoia": {
         titulo: "Paranoia",
         autor: "Allen Varney",
-        imagem: "../imagens/paranoia.jpg",
+        imagem: "/imagens/paranoia.jpg",
         genero: "RPG de Ficção Científica Satírica",
         paginas: 256,
         ano: 2017,
@@ -278,7 +278,7 @@ export const livros = {
     "tormenta-modulo-basico": {
         titulo: "Tormenta RPG - Módulo Básico",
         autor: "Jambô Editora",
-        imagem: "../imagens/tormenta.jpg",
+        imagem: "/imagens/tormenta.jpg",
         genero: "RPG de Fantasia Épica",
         paginas: 200,
         ano: 2018,
@@ -314,7 +314,7 @@ export const livros = {
     "walden": {
         titulo: "Walden",
         autor: "Henry David Thoreau",
-        imagem: "../imagens/walden.jpg",
+        imagem: "/imagens/walden.jpg",
         genero: "Romance",
         paginas: 352,
         ano: 1854,

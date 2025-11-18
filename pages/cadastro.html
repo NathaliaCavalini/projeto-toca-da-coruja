@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cadastro – Toca da Coruja</title>
     <link rel="stylesheet" href="/css/cadastro.css" />
-    <link rel="icon" href="/imagens/favicon.png" type="image/png">
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
     
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
@@ -74,7 +74,7 @@
                 // Sincronizar usuário no admin control com status "ativo"
                 await updateUserStatus(email.toLowerCase(), 'ativo');
                 alert("Conta criada com sucesso!");
-                window.location.href = "pages/home.html";
+                window.location.href = "home.html";
             } catch (err) {
                 console.error(err);
                 alert("Erro: " + (err.message || err));

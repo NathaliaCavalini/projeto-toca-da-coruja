@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Perfil – Toca da Coruja</title>
-    <link rel="stylesheet" href="../css/perfil.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/perfil.css" />
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
     
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
@@ -20,10 +20,10 @@
 <body>
     <!-- Botão de Toggle Dark Mode -->
     <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
-        <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
     </button>
 
-    <script type="module" src="../js/theme.js"></script>
+    <script type="module" src="/js/theme.js"></script>
 
     <div class="perfil-container">
         <div class="perfil-card">
@@ -41,7 +41,7 @@
             <h1>Meu Perfil</h1>
             <p>Atualize suas informações na Toca da Coruja</p>
 
-            <img id="user-photo" src="../imagens/user.png" alt="Foto do usuário">
+            <img id="user-photo" src="/imagens/user.png" alt="Foto do usuário">
 
             <form id="profile-form">
                 <input type="text" id="username" placeholder="Nome de usuário" />
@@ -59,11 +59,11 @@
     </div> <!-- .perfil-container -->
 
     <!-- JS -->
-    <script type="module" src="../js/perfil.js"></script>
+    <script type="module" src="/js/perfil.js"></script>
 
     <script type="module">
-        import { openPasswordResetModal } from "../js/password-reset.js";
-        import { auth } from "../js/firebase-config.js";
+        import { openPasswordResetModal } from "/js/password-reset.js";
+        import { auth } from "/js/firebase-config.js";
 
         // Botão de alterar senha
         document.getElementById("change-password-btn").addEventListener("click", async (e) => {

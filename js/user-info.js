@@ -13,7 +13,7 @@ if (!userInfoEl) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const nome = user.displayName || user.email.split("@")[0];
-            const foto = user.photoURL || "../imagens/user.png";
+            const foto = user.photoURL || "/imagens/user.png";
 
             userInfoEl.innerHTML = `
           <img src="${foto}" alt="Foto do usuário" style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:8px;">

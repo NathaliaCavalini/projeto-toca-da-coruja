@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login – Toca da Coruja</title>
     <link rel="stylesheet" href="/css/login.css" />
-    <link rel="icon" href="/imagens/favicon.png" type="image/png">
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
     
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
@@ -80,7 +80,7 @@
                 
                 console.log(`✅ Redirecionando para home...`);
                 // redireciona para home.html (está na mesma pasta html/)
-                window.location.href = "pages/home.html";
+                window.location.href = "home.html";
             } catch (err) {
                 console.error(err);
                 alert("Erro: " + (err.message || err));

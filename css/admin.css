@@ -94,6 +94,7 @@
     box-shadow: 0 4px 12px rgba(220,53,69,.35);
     padding: 8px 16px;
     font-size: 0.9rem;
+    transform: translateY(-4px);
 }
 .btn-danger:hover { 
     transform: translateY(-2px); 
@@ -587,16 +588,20 @@ body.modal-open {
 }
 
 .genre-card .btn-danger {
+    background: linear-gradient(135deg, #dc3545, #a60014);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(220,53,69,.35);
     flex-shrink: 0;
     width: auto;
-    padding: 0 16px;
+    padding: 8px 16px;
     height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-top: 8px;
+    transform: translateY(-4px);
 }
 
 /* Badges para livros */

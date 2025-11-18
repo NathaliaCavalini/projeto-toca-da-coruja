@@ -91,17 +91,17 @@ function createCoffeeDroplets(element, isAdding = true) {
 
 // ========================= Fallback de livros (se import falhar) =========================
 const bookDataFallback = {
-    "amor-obvio": { titulo: "O amor não é óbvio", autor: "Elayne Baeta", imagem: "imagens/o_amor_nao_e_obvio.png" },
-    "ela-fica": { titulo: "Ela fica com a garota", autor: "Rachael Lippincott", imagem: "imagens/ela_fica_com_a_garota.png" },
-    "algumas-garotas": { titulo: "Algumas garotas são assim", autor: "Jennifer Dugan", imagem: "imagens/algumas_garotas_sao_assim.png" },
-    "princesa-e-o-queijo-quente": { titulo: "Princesa e o Queijo Quente", autor: "Laura Pohl", imagem: "imagens/a_princesa_e_o_queijo_quente.png" },
-    "um-milhao-de-finais-felizes": { titulo: "Um Milhão de Finais Felizes", autor: "Vitor Martins", imagem: "imagens/um_milhao_de_finais_felizes.png" },
-    "coisas-obvias-sobre-o-amor": { titulo: "Coisas Óbvias Sobre o Amor", autor: "Clara Alves", imagem: "imagens/coisas_obvias_sobre_o_amor.png" },
-    "girls-like-girls": { titulo: "Girls Like Girls", autor: "Hayley Kiyoko", imagem: "imagens/girls_like_girls.jpg" },
-    "isso-nao-e-um-conto-de-fadas": { titulo: "Isso Não É um Conto de Fadas", autor: "Emeli J. Santos", imagem: "imagens/isso-não-é-um-conto-de-fadas.jpg" },
-    "lembre-se-de-nos": { titulo: "Lembre-se de Nós", autor: "Nina Lacour", imagem: "imagens/lembre-se-de-nos.jpg" },
-    "night-owls-and-summer-skies": { titulo: "Night Owls and Summer Skies (HQ)", autor: "Tara Frejas", imagem: "imagens/night-owls-and-summer-skies.jpg" },
-    "vermelho-branco-e-sangue-azul": { titulo: "Vermelho, Branco e Sangue Azul", autor: "Casey McQuiston", imagem: "imagens/vermelho-branco-e-sangue-azul.jpg" }
+    "amor-obvio": { titulo: "O amor não é óbvio", autor: "Elayne Baeta", imagem: "/imagens/o_amor_nao_e_obvio.png" },
+    "ela-fica": { titulo: "Ela fica com a garota", autor: "Rachael Lippincott", imagem: "/imagens/ela_fica_com_a_garota.png" },
+    "algumas-garotas": { titulo: "Algumas garotas são assim", autor: "Jennifer Dugan", imagem: "/imagens/algumas_garotas_sao_assim.png" },
+    "princesa-e-o-queijo-quente": { titulo: "Princesa e o Queijo Quente", autor: "Laura Pohl", imagem: "/imagens/a_princesa_e_o_queijo_quente.png" },
+    "um-milhao-de-finais-felizes": { titulo: "Um Milhão de Finais Felizes", autor: "Vitor Martins", imagem: "/imagens/um_milhao_de_finais_felizes.png" },
+    "coisas-obvias-sobre-o-amor": { titulo: "Coisas Óbvias Sobre o Amor", autor: "Clara Alves", imagem: "/imagens/coisas_obvias_sobre_o_amor.png" },
+    "girls-like-girls": { titulo: "Girls Like Girls", autor: "Hayley Kiyoko", imagem: "/imagens/girls_like_girls.jpg" },
+    "isso-nao-e-um-conto-de-fadas": { titulo: "Isso Não É um Conto de Fadas", autor: "Emeli J. Santos", imagem: "/imagens/isso-não-é-um-conto-de-fadas.jpg" },
+    "lembre-se-de-nos": { titulo: "Lembre-se de Nós", autor: "Nina Lacour", imagem: "/imagens/lembre-se-de-nos.jpg" },
+    "night-owls-and-summer-skies": { titulo: "Night Owls and Summer Skies (HQ)", autor: "Tara Frejas", imagem: "/imagens/night-owls-and-summer-skies.jpg" },
+    "vermelho-branco-e-sangue-azul": { titulo: "Vermelho, Branco e Sangue Azul", autor: "Casey McQuiston", imagem: "/imagens/vermelho-branco-e-sangue-azul.jpg" }
 };
 
 // Cache dinâmico (livros originais + adicionados pelo admin)
@@ -151,7 +151,7 @@ async function renderUserReviews() {
             <div class="empty-reviews" style="grid-column: 1/-1;">
                 <h2>✍️ Nenhuma review publicada ainda</h2>
                 <p>Compartilhe suas opiniões sobre os livros que leu! Use o botão flutuante ✍️ ou visite as páginas dos livros para deixar suas avaliações.</p>
-                <a href="pages/home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="home.html" class="browse-books">Explorar Catálogo</a>
             </div>
         `;
         return;
@@ -163,14 +163,14 @@ async function renderUserReviews() {
         const bookInfo = bookDataCache[review.bookId] || bookDataFallback[review.bookId];
         const tituloLivro = bookInfo ? bookInfo.titulo : `Livro (ID: ${review.bookId})`;
         const autorLivro = bookInfo ? bookInfo.autor : 'Autor desconhecido';
-        const imgLivro = bookInfo ? bookInfo.imagem : 'imagens/placeholder.svg';
+        const imgLivro = bookInfo ? bookInfo.imagem : '/imagens/placeholder.svg';
         const ratingStars = "★".repeat(Math.floor(review.rating)) + (review.rating % 1 ? "½" : "");
         const reviewDate = new Date(review.timestamp).toLocaleDateString();
         const shortComment = review.text.length > 100 ? review.text.slice(0, 100) + '…' : review.text;
 
         return `
 <article class="book-item review-card" data-id="${esc(review.bookId)}" data-title="${esc(tituloLivro)}">
-    <div class="book-card"><img src="${esc(imgLivro)}" alt="${esc(tituloLivro)}" onerror="this.src='imagens/placeholder.svg'"></div>
+    <div class="book-card"><img src="${esc(imgLivro)}" alt="${esc(tituloLivro)}" onerror="this.src='/imagens/placeholder.svg'"></div>
     <div class="book-title">
         <p>${esc(tituloLivro)}</p>
         <div style="font-size: 0.9em; margin: 0px 0 0 0; text-align: center;">${ratingStars}</div>
@@ -286,7 +286,7 @@ async function createFloatingReviewCard() {
     toggleBtn.addEventListener('click', () => {
         if (!auth.currentUser) {
             if (confirm('Você precisa estar logado para adicionar uma review. Ir para login?')) {
-                window.location.href = 'pages/login.html';
+                window.location.href = 'login.html';
             }
             return;
         }

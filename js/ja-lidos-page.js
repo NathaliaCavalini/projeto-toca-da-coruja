@@ -51,7 +51,7 @@ function shortDesc(txt, max=70){
 }
 
 function buildCard(b){
-    const img = esc(b.img || 'imagens/sem-capa.png');
+    const img = esc(b.img || '/imagens/sem-capa.png');
     const desc = esc(shortDesc(b.desc || ''));
     return `
 <article class="book-item" data-id="${esc(b.id)}" data-title="${esc(b.title)}">
@@ -88,7 +88,7 @@ async function renderJaLidos(){
             <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
                 <h2>✅ Nenhum livro marcado como lido</h2>
                 <p>Clique em "Já Li" nas páginas dos livros para mover suas leituras para esta lista.</p>
-                <a href="pages/home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="home.html" class="browse-books">Explorar Catálogo</a>
             </div>`;
         return;
     }

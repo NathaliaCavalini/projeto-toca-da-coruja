@@ -46,7 +46,7 @@ function renderBookCard(id, book) {
                 <button class="action-btn btn-quer-ler" data-library-action="querLer">📖 Quero Ler</button>
             </div>
         </div>
-        <div class="book-action"><a href="vejamais.html?id=${id}">Veja mais</a></div>
+        <div class="book-action"><a href="pages/vejamais.html?id=${id}">Veja mais</a></div>
     `;
 
     return article;
