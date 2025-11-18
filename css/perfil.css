@@ -172,10 +172,21 @@ input:disabled {
     cursor: not-allowed;
 }
 
+/* Fazer com que o campo de e-mail (que está disabled) tenha a mesma aparência
+   do campo de nome de usuário (fundo claro e texto legível). */
+#email:disabled {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+    opacity: 1;
+    cursor: default; /* não exibir cursor de não permitido */
+}
+
 /* Botões */
 .btn {
-    background: rgba(245, 231, 215, 0.95);
-    color: #000;
+    /* Agora o botão .btn (Salvar Alterações) usa as mesmas cores do
+       botão de Alterar Senha (.btn-change-password) */
+    background: var(--primary-color);
+    color: #fff;
     padding: 14px;
     border: none;
     border-radius: 10px;
@@ -186,7 +197,7 @@ input:disabled {
 }
 
 .btn:hover {
-    background: #b18c6f;
+    background: var(--accent-color);
     transform: translateY(-2px);
 }
 
@@ -254,8 +265,10 @@ input[type="file"]::file-selector-button {
     gap: 10px;
     margin: 0 auto 10px;
     padding: 5px;
-    background: rgba(245, 231, 215, 0.95);
-    border: 2px solid var(--primary-color);
+    /* Ajustado para ficar igual ao botão de alterar senha */
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
     border-radius: 14px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
     text-decoration: none;
@@ -266,7 +279,7 @@ input[type="file"]::file-selector-button {
 }
 
 input[type="file"]::file-selector-button:hover {
-    background: #b18c6f;
+    background: var(--accent-color);
     transform: translateY(-2px);
 }
 
@@ -378,6 +391,15 @@ body.dark-mode input:disabled {
     color: rgba(255, 255, 255, 0.60);
 }
 
+/* Garantir que em dark mode o email mantenha a mesma aparência do input
+   normal (caso desejado: fundo claro como os inputs em dark-mode já definidos). */
+body.dark-mode #email:disabled {
+    background: #fff;
+    color: #000;
+    opacity: 1;
+    cursor: default;
+}
+
 body.dark-mode .btn {
     background: #7A5540;
     color: rgba(255, 255, 255, 0.90);
@@ -418,11 +440,12 @@ body.dark-mode .back-box svg {
 }
 
 body.dark-mode input[type="file"]::file-selector-button {
-    background: rgba(84, 56, 41, 0.95);
-    border-color: #5A3F2E;
+    /* Em dark mode, alinhar o seletor de arquivo ao estilo do botão de alterar senha */
+    background: #7A5540;
+    border-color: #7A5540;
     color: rgba(255, 255, 255, 0.90);
 }
 
 body.dark-mode input[type="file"]::file-selector-button:hover {
-    background: #543829;
+    background: #8B694D;
 }
