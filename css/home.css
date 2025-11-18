@@ -89,6 +89,18 @@ body{
 .btn-login img{ width:22px; height:22px; }
 .btn-login:hover{ background:var(--color-accent); }
 
+a:-webkit-any-link {
+    color: #000;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+body.dark-mode a:-webkit-any-link {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 /* ===== SEARCH (NAV MENU) ===== */
 .search-form{
   display:flex; align-items:center; gap:8px;
@@ -730,6 +742,45 @@ body.dark-mode .footer-links a:focus {
   font-weight: 700;
   transition: all 200ms ease;
   position: relative;
+}
+
+/* Modo claro: emails e contatos em preto */
+.footer-quick > div {
+  color: rgba(0,0,0,0.85) !important;
+}
+
+.footer-quick a {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+/* Links de contato na página contato.html - modo claro */
+aside a {
+  color: #000 !important;
+  text-decoration: underline;
+}
+
+aside a:visited {
+  color: #000 !important;
+}
+
+/* Modo escuro: emails e contatos em branco */
+body.dark-mode .footer-quick > div {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+body.dark-mode .footer-quick a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+body.dark-mode aside a {
+  color: #fff !important;
+  text-decoration: underline;
+}
+
+body.dark-mode aside a:visited {
+  color: #fff !important;
 }
 
 /* bottom */

@@ -139,7 +139,7 @@ function addHelpModalStyles() {
       background: linear-gradient(135deg, rgba(197, 148, 108, 0.1), rgba(139, 105, 77, 0.08));
       border-radius: 8px;
       text-decoration: none;
-      color: var(--color-primary, #c5946c);
+      color: #000 !important;
       font-weight: 600;
       transition: all 0.2s;
       position: relative;
@@ -222,7 +222,7 @@ function addHelpModalStyles() {
 
     body.dark-mode .help-modal-link {
       background: rgba(255, 212, 163, 0.1);
-      color: #FFD4A3;
+      color: #fff !important;
       border: 1px solid rgba(255, 212, 163, 0.2);
     }
 
