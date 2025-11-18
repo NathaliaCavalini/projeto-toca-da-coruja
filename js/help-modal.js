@@ -279,7 +279,7 @@ function initHelpModal() {
           <h2 class="help-modal-title">🔧 Suporte Técnico</h2>
           <p class="help-modal-message">Precisa consertar algum bug ou quer modificar algo no sistema? Entre em contato.</p>
           <div class="help-modal-links">
-            <a href="mailto:cavalini236@gmail.com" class="help-modal-link help-modal-link-email">Email: cavalini236@gmail.com</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=cavalini236@gmail.com&su=Suporte%20Toca%20da%20Coruja" target="_blank" rel="noopener noreferrer" class="help-modal-link help-modal-link-email">Email: cavalini236@gmail.com</a>
             <a href="https://wa.me/5561996052015" target="_blank" rel="noopener noreferrer" class="help-modal-link help-modal-link-whatsapp">WhatsApp: 61 9 9605-2015</a>
           </div>
         `;
@@ -341,12 +341,13 @@ function initHelpModal() {
   const themeToggleBtn = document.querySelector('.icon-btn:first-of-type');
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      setTimeout(() => {
+        setTimeout(() => {
         // Forçar re-render dos ícones
         const links = modal.querySelectorAll('.help-modal-link');
         links.forEach(link => {
           link.style.backgroundImage = 'none';
-          if (link.href.includes('mailto:')) {
+          // usar a classe de email porque agora o link pode não ser mailto:
+          if (link.classList && link.classList.contains('help-modal-link-email')) {
             if (document.body.classList.contains('dark-mode')) {
               link.style.backgroundImage = "url('/imagens/e-mail-dark-mode.png')";
             } else {

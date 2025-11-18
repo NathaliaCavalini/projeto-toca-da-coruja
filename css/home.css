@@ -111,6 +111,7 @@ body.dark-mode a:-webkit-any-link {
   flex-shrink:0; /* não encolher quando a nav fica pequena */
   box-shadow:0 2px 8px rgba(0,0,0,0.06);
   transition:all 0.2s ease;
+  transform: translateX(-20px);
 }
 .search-form:hover{
   border-color:rgba(197,148,108,0.4);

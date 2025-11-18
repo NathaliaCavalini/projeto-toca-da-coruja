@@ -332,18 +332,16 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
 .botao-quero-ler .btn-remove{ flex:0 0 auto; width:auto; }
 
 /* Search form in nav menu */
-.search-form {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.search-form{
+    display:flex; align-items:center; gap:8px;
     background:var(--c-muted);
     border:1px solid rgba(197,148,108,0.2);
-    border-radius: 40px;
-    padding: 8px 14px;
-    margin-left: 20px; /* espaçamento à esquerda do Reviews */
-    flex-shrink: 0; /* não encolher quando a nav fica pequena */
+    border-radius:40px; padding:8px 14px;
+    margin-left:20px; /* revertido para posição original */
+    flex-shrink:0; /* não encolher quando a nav fica pequena */
     box-shadow:0 2px 8px rgba(0,0,0,0.06);
     transition:all 0.2s ease;
+    transform: translateX(-20px);
 }
 
 .search-form:hover{
@@ -384,6 +382,21 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
     align-items: flex-end;
     gap: 10px;
     will-change: bottom;
+}
+
+/* Smooth hide/show for floating review card when interacting with search */
+.floating-review-wrapper,
+.floating-review-card,
+.hero-section {
+    transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+
+/* class applied to hide floating card with a gentle fade/slide */
+.floating-animate-hidden {
+    opacity: 0 !important;
+    transform: translateY(10px) scale(0.98) !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 .floating-btn {

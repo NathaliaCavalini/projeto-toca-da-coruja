@@ -94,18 +94,16 @@ body {
 }
 
 /* FORM DE BUSCA (nav menu) */
-.search-form {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--color-muted);
+.search-form{
+    display:flex; align-items:center; gap:8px;
+    background:var(--color-muted);
     border:1px solid rgba(197,148,108,0.2);
-    border-radius: 40px;
-    padding: 8px 14px;
-    margin-left: 20px; /* espaçamento à esquerda do Reviews */
-    flex-shrink: 0; /* não encolher quando a nav fica pequena */
+    border-radius:40px; padding:8px 14px;
+    margin-left:20px; /* revertido para posição original */
+    flex-shrink:0; /* não encolher quando a nav fica pequena */
     box-shadow:0 2px 8px rgba(0,0,0,0.06);
     transition:all 0.2s ease;
+    transform: translateX(-20px);
 }
 
 .search-form:hover{
