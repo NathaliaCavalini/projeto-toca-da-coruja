@@ -290,7 +290,7 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   flex-direction:column !important;
   align-items:center !important;
   justify-content:flex-start !important; /* conteúdo empilha e botão vai para a base pelo margin-top:auto */
-  gap:8px !important;
+  gap:0px !important;
   /* altura fixa padronizada para todos os cards */
   height: var(--book-title-min-height) !important;
   min-height: var(--book-title-min-height) !important;
@@ -309,7 +309,7 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   margin:0; 
   cursor:pointer; 
   color:var(--color-text); 
-  line-height:1.35; 
+  line-height:1.1; 
   flex: 0 0 auto;
   overflow: hidden;
   display: -webkit-box;
@@ -360,7 +360,7 @@ body.dark-mode .empty-state-box:hover { border-color: rgba(255,255,255,0.38); }
   display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap;
   flex-shrink: 0; /* impede que os botões encolham */
   margin-top:auto; /* garante que o botão fique colado na base do título */
-  padding-top:6px; /* reduz sensação de "vazio" acima do botão */
+  padding-top:0px; /* botão mais para cima */
   width:100%;
   flex: 0 0 auto;
   min-height: 30px;

@@ -109,6 +109,7 @@ document.getElementById('btn-add-book')?.addEventListener('click', () => {
     document.getElementById('book-id').disabled = false;
     document.getElementById('image-preview').innerHTML = '';
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
 });
 
 // Fechar modais (X e Cancelar) de forma genérica para qualquer modal da página
@@ -116,7 +117,10 @@ document.querySelectorAll('.modal .modal-close, .modal .btn-cancel').forEach(btn
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         const m = btn.closest('.modal');
-        if (m) m.classList.remove('active');
+        if (m) {
+            m.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
     });
 });
 
@@ -173,6 +177,7 @@ window.editBook = async function(id) {
     preview.innerHTML = `<img src="${book.imagem}" alt="Preview">`;
     
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
 };
 
 // Deletar livro (apenas livros adicionados pelo admin)
@@ -713,6 +718,7 @@ document.getElementById('btn-add-genre')?.addEventListener('click', () => {
     const modal = document.getElementById('modal-genre');
     document.getElementById('form-genre').reset();
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
 });
 
 // Salvar novo gênero

@@ -267,6 +267,11 @@
     display: flex;
 }
 
+/* Bloqueia scrolling do body quando modal está aberta */
+body.modal-open {
+    overflow: hidden;
+}
+
 .modal-content {
     background: var(--color-muted);
     border-radius: 12px;
@@ -344,6 +349,11 @@
     color: var(--color-text);
     background: white;
     transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group select {
+    height: 46px;
 }
 
 .form-group input:focus,
@@ -404,6 +414,10 @@
     font-weight: 600;
     white-space: nowrap;
     transition: all 0.2s ease;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .new-genre-toggle:hover {
@@ -450,6 +464,10 @@
 .form-actions button {
     flex: 1;
     padding: 12px 22px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Estado foco acessível nos botões */
