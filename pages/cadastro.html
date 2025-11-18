@@ -7,6 +7,14 @@
     <title>Cadastro – Toca da Coruja</title>
     <link rel="stylesheet" href="/css/cadastro.css" />
     <link rel="icon" href="/imagens/favicon.png" type="image/png">
+    
+    <!-- Dark mode inicial (executa antes de renderizar) -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        }
+    </script>
 </head>
 
 <body>

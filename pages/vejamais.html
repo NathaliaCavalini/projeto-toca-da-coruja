@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="../css/vejamais.css">
     <link rel="stylesheet" href="../css/toast-notifications.css">
     <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
+    
+    <!-- Dark mode inicial (executa antes de renderizar) -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        }
+    </script>
 </head>
 
 <body>

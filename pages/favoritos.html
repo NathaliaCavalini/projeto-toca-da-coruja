@@ -4,8 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Quer ler — Toca da Coruja</title>
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="stylesheet" href="css/reviews.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/reviews.css">
+  
+  <!-- Dark mode inicial (executa antes de renderizar) -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
+    }
+  </script>
   <link rel="icon" href="imagens/favicon.png" type="image/png">
 </head>
 <body class="list-page">
@@ -118,10 +126,10 @@
         </div>
     </footer>
 
-    <script type="module" src="js/user-info-global.js"></script>
-    <script type="module" src="js/theme.js"></script>
-    <script type="module" src="js/favoritos-page.js"></script>
-    <script src="js/home.js"></script>
+    <script type="module" src="../js/user-info-global.js"></script>
+    <script type="module" src="../js/theme.js"></script>
+    <script type="module" src="../js/favoritos-page.js"></script>
+    <script src="../js/home.js"></script>
 
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
