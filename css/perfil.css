@@ -358,8 +358,8 @@ body.dark-mode #user-photo {
 }
 
 body.dark-mode input {
-    background: #543829;
-    color: rgba(255, 255, 255, 0.90);
+    background: #fff;
+    color: #000;
     border-color: #5A3F2E;
 }
 

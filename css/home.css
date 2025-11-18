@@ -825,3 +825,24 @@ body.dark-mode #hero-particles {
   animation: owlFloat 5s ease-in-out infinite;
 }
 @keyframes owlFloat { 0%,100% { transform:translateY(0);} 50% { transform:translateY(-10px);} }
+
+/* ===== GLOBAL DARK MODE INPUT FIX ===== */
+/* Ensure ALL inputs/textareas/selects have black text on white background in dark mode */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  color: #000 !important;
+  background: #fff !important;
+  border-color: #ccc !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #999 !important;
+}
+
+/* Exceção: search-form mantém fundo escuro */
+body.dark-mode .search-form input {
+  color: var(--color-text) !important;
+  background: transparent !important;
+}

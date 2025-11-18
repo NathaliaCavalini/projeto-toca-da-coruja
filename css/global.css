@@ -439,6 +439,45 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
 .floating-review-card .btn-cancel { background:transparent; border:1px solid rgba(0,0,0,0.08); padding:8px 12px; border-radius:8px; cursor:pointer; }
 .floating-review-card .btn-submit { padding:8px 12px; border-radius:8px; border:none; background:var(--c-primary); color:#fff; cursor:pointer; }
 
+/* Dark mode for floating review card inputs */
+body.dark-mode .floating-review-card {
+    background: #4A2F20 !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+}
+
+body.dark-mode .floating-review-card h4 {
+    color: rgba(255, 255, 255, 0.90) !important;
+}
+
+body.dark-mode .floating-review-card label {
+    color: rgba(255, 255, 255, 0.90) !important;
+}
+
+body.dark-mode .floating-review-card select,
+body.dark-mode .floating-review-card textarea,
+body.dark-mode .floating-review-card input[type="number"] {
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #ccc !important;
+}
+
+body.dark-mode .floating-review-card select::placeholder,
+body.dark-mode .floating-review-card textarea::placeholder,
+body.dark-mode .floating-review-card input[type="number"]::placeholder {
+    color: #999 !important;
+}
+
+body.dark-mode .floating-review-card .btn-cancel {
+    background: #543829 !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    border-color: #5A3F2E !important;
+}
+
+body.dark-mode .floating-review-card .btn-submit {
+    background: #7A5540 !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+}
+
 @media (max-width: 520px) {
     .floating-review-wrapper { right: 12px; bottom: 16px; }
     .floating-review-card { width: 92vw; }

@@ -28,6 +28,7 @@ form input {
     box-sizing: border-box;
     width: 100%;
     padding: 0.9rem;
+    padding-right: 40px;
     margin: 0.6rem 0;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -36,6 +37,13 @@ form input {
     transition: 0.3s;
     color: #4b2e23;
     background: #fff !important;
+}
+
+form > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0.6rem 0;
 }
 
 form input::placeholder {
@@ -103,7 +111,7 @@ body.dark-mode h1 {
 }
 
 body.dark-mode form input {
-    background: #543829;
+    background: #fff !important;
     color: #000;
     border-color: #5A3F2E;
 }

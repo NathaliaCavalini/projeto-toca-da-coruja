@@ -447,6 +447,11 @@
     border-top: 1px solid rgba(0,0,0,.08);
 }
 
+.form-actions button {
+    flex: 1;
+    padding: 12px 22px;
+}
+
 /* Estado foco acessível nos botões */
 .btn-primary:focus,
 .btn-secondary:focus,

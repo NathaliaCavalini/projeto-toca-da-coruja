@@ -52,12 +52,21 @@ form {
 }
 
 input {
+    box-sizing: border-box;
+    width: 100%;
     padding: 12px;
+    padding-right: 40px;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 16px;
     outline: none;
     transition: 0.3s;
+}
+
+form > div {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 input:focus {
@@ -118,13 +127,13 @@ body.dark-mode p {
 }
 
 body.dark-mode input {
-    background: #543829;
-    color: rgba(255, 255, 255, 0.90);
+    background: #fff;
+    color: #000;
     border-color: #5A3F2E;
 }
 
 body.dark-mode input:focus {
-    background: #5A3F2E;
+    background: #fff;
     border-color: #8B694D;
     box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
 }
