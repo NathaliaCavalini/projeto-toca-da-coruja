@@ -1,12 +1,12 @@
 // Help Modal System
-import { auth } from '../js/firebase-config.js';
-import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
+import { auth } from "../js/firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // Criar elementos do modal
 function createHelpModal() {
-  const modal = document.createElement('div');
-  modal.id = 'help-modal';
-  modal.className = 'help-modal-overlay';
+  const modal = document.createElement("div");
+  modal.id = "help-modal";
+  modal.className = "help-modal-overlay";
   modal.innerHTML = `
     <div class="help-modal-content">
       <button class="help-modal-close" aria-label="Fechar">&times;</button>
@@ -21,10 +21,10 @@ function createHelpModal() {
 
 // Adicionar CSS dinâmico
 function addHelpModalStyles() {
-  if (document.getElementById('help-modal-styles')) return;
-  
-  const style = document.createElement('style');
-  style.id = 'help-modal-styles';
+  if (document.getElementById("help-modal-styles")) return;
+
+  const style = document.createElement("style");
+  style.id = "help-modal-styles";
   style.textContent = `
     .help-modal-overlay {
       display: none;
@@ -254,26 +254,31 @@ function addHelpModalStyles() {
 function initHelpModal() {
   addHelpModalStyles();
   const modal = createHelpModal();
-  
+
   // Encontrar botões de ajuda
-  const helpButtons = document.querySelectorAll('.icon-btn');
-  const ajudaButton = Array.from(helpButtons).find(btn => {
+  const helpButtons = document.querySelectorAll(".icon-btn");
+  const ajudaButton = Array.from(helpButtons).find((btn) => {
     const img = btn.querySelector('img[alt="Ícone ajuda"]');
-    return img && (img.src.includes('ajuda.png') || img.src.includes('ajuda-light-mode.png') || img.src.includes('ajuda-dark-mode.png'));
+    return (
+      img &&
+      (img.src.includes("ajuda.png") ||
+        img.src.includes("ajuda-light-mode.png") ||
+        img.src.includes("ajuda-dark-mode.png"))
+    );
   });
 
   if (!ajudaButton) return;
 
   // Adicionar ID ao botão
-  ajudaButton.id = 'help-button';
+  ajudaButton.id = "help-button";
 
   // Detectar se é admin
   onAuthStateChanged(auth, (user) => {
-    const isAdmin = user && user.email === 'tatacavalini@gmail.com';
-    
-    ajudaButton.addEventListener('click', () => {
-      const body = modal.querySelector('.help-modal-body');
-      
+    const isAdmin = user && user.email === "tatacavalini@gmail.com";
+
+    ajudaButton.addEventListener("click", () => {
+      const body = modal.querySelector(".help-modal-body");
+
       if (isAdmin) {
         body.innerHTML = `
           <h2 class="help-modal-title">🔧 Suporte Técnico</h2>
@@ -290,74 +295,88 @@ function initHelpModal() {
           <a href="pages/contato.html" class="help-modal-button">Entre em Contato</a>
         `;
       }
-      
-      modal.classList.add('active');
+
+      modal.classList.add("active");
     });
   });
 
   // Fechar modal
-  const closeBtn = modal.querySelector('.help-modal-close');
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
+  const closeBtn = modal.querySelector(".help-modal-close");
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
   });
 
   // Fechar ao clicar fora
-  modal.addEventListener('click', (e) => {
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.classList.remove('active');
+      modal.classList.remove("active");
     }
   });
 
   // Fechar com ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-      modal.classList.remove('active');
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      modal.classList.remove("active");
     }
   });
 
   // Atualizar ícone de ajuda ao trocar de tema
   function updateHelpIcon() {
-    const ajudaButton = document.querySelector('.icon-btn img[alt="Ícone ajuda"]');
+    const ajudaButton = document.querySelector(
+      '.icon-btn img[alt="Ícone ajuda"]'
+    );
     if (ajudaButton) {
       const currentSrc = ajudaButton.src;
-      const isDarkMode = document.body.classList.contains('dark-mode');
-      
+      const isDarkMode = document.body.classList.contains("dark-mode");
+
       // Detectar o caminho base
-      let basePath = '../imagens/';
-      if (currentSrc.includes('/imagens/')) {
+      let basePath = "../imagens/";
+      if (currentSrc.includes("/imagens/")) {
         // URL absoluta com /
-        basePath = '/imagens/';
-      } else if (currentSrc.includes('imagens/') && !currentSrc.includes('../')) {
+        basePath = "/imagens/";
+      } else if (
+        currentSrc.includes("imagens/") &&
+        !currentSrc.includes("../")
+      ) {
         // Caminho relativo direto (reviews.html)
-        basePath = 'imagens/';
+        basePath = "imagens/";
       }
-      
-      const newSrc = basePath + (isDarkMode ? 'ajuda-dark-mode.png' : 'ajuda-light-mode.png');
+
+      const newSrc =
+        basePath +
+        (isDarkMode ? "ajuda-dark-mode.png" : "ajuda-light-mode.png");
       ajudaButton.src = newSrc;
     }
   }
 
   // Atualizar ícones ao trocar de tema
-  const themeToggleBtn = document.querySelector('.icon-btn:first-of-type');
+  const themeToggleBtn = document.querySelector(".icon-btn:first-of-type");
   if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-        setTimeout(() => {
+    themeToggleBtn.addEventListener("click", () => {
+      setTimeout(() => {
         // Forçar re-render dos ícones
-        const links = modal.querySelectorAll('.help-modal-link');
-        links.forEach(link => {
-          link.style.backgroundImage = 'none';
+        const links = modal.querySelectorAll(".help-modal-link");
+        links.forEach((link) => {
+          link.style.backgroundImage = "none";
           // usar a classe de email porque agora o link pode não ser mailto:
-          if (link.classList && link.classList.contains('help-modal-link-email')) {
-            if (document.body.classList.contains('dark-mode')) {
-              link.style.backgroundImage = "url('/imagens/e-mail-dark-mode.png')";
+          if (
+            link.classList &&
+            link.classList.contains("help-modal-link-email")
+          ) {
+            if (document.body.classList.contains("dark-mode")) {
+              link.style.backgroundImage =
+                "url('/imagens/e-mail-dark-mode.png')";
             } else {
-              link.style.backgroundImage = "url('/imagens/e-mail-light-mode.png')";
+              link.style.backgroundImage =
+                "url('/imagens/e-mail-light-mode.png')";
             }
-          } else if (link.href.includes('whatsapp')) {
-            if (document.body.classList.contains('dark-mode')) {
-              link.style.backgroundImage = "url('/imagens/whatsapp-dark-mode.png')";
+          } else if (link.href.includes("whatsapp")) {
+            if (document.body.classList.contains("dark-mode")) {
+              link.style.backgroundImage =
+                "url('/imagens/whatsapp-dark-mode.png')";
             } else {
-              link.style.backgroundImage = "url('/imagens/whatsapp-light-mode.png')";
+              link.style.backgroundImage =
+                "url('/imagens/whatsapp-light-mode.png')";
             }
           }
         });
@@ -377,13 +396,13 @@ function initHelpModal() {
 
   observer.observe(document.body, {
     attributes: true,
-    attributeFilter: ['class']
+    attributeFilter: ["class"],
   });
 }
 
 // Iniciar quando o DOM estiver pronto
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHelpModal);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHelpModal);
 } else {
   initHelpModal();
 }
