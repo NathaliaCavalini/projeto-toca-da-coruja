@@ -306,10 +306,11 @@
             <form id="form-genre">
                 <div class="form-group">
                     <label>Nome do Gênero</label>
-                    <input type="text" id="genre-name" required placeholder="ex: Ficção Científica">
-                    <small style="display: block; margin-top: 4px; opacity: 0.7;">
-                        Este nome aparecerá no menu lateral
-                    </small>
+                    <input type="text" id="genre-name" required placeholder="ex: Ficção Científica" maxlength="20">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <small style="opacity:.6;">Este nome aparecerá no menu lateral</small>
+                        <small id="genre-counter" style="opacity:.8; font-weight:600; color:var(--color-accent);">0/20</small>
+                    </div>
                 </div>
                 
                 <div class="form-actions">

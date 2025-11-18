@@ -101,8 +101,48 @@ const modalTitle = document.getElementById('modal-title');
 const form = document.getElementById('form-book');
 let editingBookId = null;
 
+// ==================== ATUALIZAR GÊNEROS NO SELECT ====================
+
+function updateGenreSelect() {
+    const generoSelect = document.getElementById('book-genero-select');
+    if (!generoSelect) return;
+    
+    const fixedGenres = ['RPG', 'LGBTQIAPN+', 'Fantasia', 'Romance', 'Clássicos', 'Programação'];
+    const customGenres = JSON.parse(localStorage.getItem('custom-genres') || '[]');
+    
+    console.log('📋 Atualizando select de gêneros...');
+    console.log('🔧 Gêneros customizados encontrados:', customGenres);
+    
+    // Encontrar a opção "novo"
+    const novoOption = generoSelect.querySelector('option[value="novo"]');
+    
+    // Remover todas as options customizadas (não fixas e não "novo")
+    Array.from(generoSelect.querySelectorAll('option')).forEach(option => {
+        if (!fixedGenres.includes(option.value) && option.value !== 'novo') {
+            option.remove();
+        }
+    });
+    
+    // Adicionar gêneros customizados antes da opção "Criar Novo"
+    customGenres.forEach(genero => {
+        // Verificar se já existe
+        if (!generoSelect.querySelector(`option[value="${genero}"]`)) {
+            const newOption = document.createElement('option');
+            newOption.value = genero;
+            newOption.textContent = genero;
+            if (novoOption) {
+                generoSelect.insertBefore(newOption, novoOption);
+            } else {
+                generoSelect.appendChild(newOption);
+            }
+            console.log(`✅ Adicionado ao select: ${genero}`);
+        }
+    });
+}
+
 // Abrir modal para adicionar livro
 document.getElementById('btn-add-book')?.addEventListener('click', () => {
+    updateGenreSelect(); // Atualizar gêneros antes de abrir
     editingBookId = null;
     modalTitle.textContent = 'Adicionar Novo Livro';
     form.reset();
@@ -176,6 +216,7 @@ window.editBook = async function(id) {
     const preview = document.getElementById('image-preview');
     preview.innerHTML = `<img src="${book.imagem}" alt="Preview">`;
     
+    updateGenreSelect(); // Atualizar gêneros antes de abrir a modal
     modal.classList.add('active');
     document.body.classList.add('modal-open');
 };
@@ -598,9 +639,11 @@ async function renderGenresList() {
                 <h3>${genre.name}</h3>
                 <p>📚 ${bookCount} livro${bookCount !== 1 ? 's' : ''}</p>
                 <p style="font-size:0.8rem; opacity:0.6;">📍 <a href="${genre.url}" target="_blank" style="color:inherit;">Ver página</a></p>
-                <span class="genre-badge">Customizado</span>
+                <div style="display: flex; gap: 8px; align-items: center; margin-top: 8px;">
+                    <span class="genre-badge">Customizado</span>
+                    <button class="btn-danger" onclick="window.deleteGenre('${genreName.replace(/'/g, "\\'")}')">Deletar</button>
+                </div>
             </div>
-            <button class="btn-danger" onclick="window.deleteGenre('${genreName.replace(/'/g, "\\'")}')">Deletar</button>
         `;
         
         container.appendChild(card);
@@ -715,10 +758,19 @@ function createGenrePage(genero) {
 
 // Botão para adicionar gênero
 document.getElementById('btn-add-genre')?.addEventListener('click', () => {
+    updateGenreSelect(); // Atualizar o select de gêneros
     const modal = document.getElementById('modal-genre');
     document.getElementById('form-genre').reset();
+    document.getElementById('genre-counter').textContent = '0/20';
     modal.classList.add('active');
     document.body.classList.add('modal-open');
+});
+
+// Atualizar contador de caracteres do nome do gênero
+document.getElementById('genre-name')?.addEventListener('input', (e) => {
+    const counter = document.getElementById('genre-counter');
+    const length = e.target.value.length;
+    counter.textContent = `${length}/20`;
 });
 
 // Salvar novo gênero
@@ -767,7 +819,9 @@ document.getElementById('form-genre')?.addEventListener('submit', (e) => {
     }
     
     // Fechar modal e atualizar lista
-    document.getElementById('modal-genre').classList.remove('active');
+    const genreModal = document.getElementById('modal-genre');
+    genreModal.classList.remove('active');
+    document.body.classList.remove('modal-open');
     renderGenresList();
     
     alert(`Gênero "${genreName}" criado com sucesso!\n\nAgora você pode adicionar livros neste gênero.`);

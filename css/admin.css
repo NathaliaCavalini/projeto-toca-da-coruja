@@ -498,13 +498,13 @@ body.modal-open {
 .genre-card {
     width: 300px;
     min-height: 160px;
-}
-/* (banner da coruja removido; coruja aparece apenas em estados vazios) */
-
-.genre-card {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+}
+
+.genre-info {
+    flex: 1;
 }
 
 .genre-info h3 {
@@ -528,14 +528,29 @@ body.modal-open {
 }
 
 .genre-badge {
-    display: inline-block;
-    padding: 4px 12px;
+    display: inline-flex;
+    padding: 0 12px;
     background: var(--color-accent);
     color: white;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
-    margin-top: 8px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.genre-card .btn-danger {
+    flex-shrink: 0;
+    width: auto;
+    padding: 0 16px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
 }
 
 /* Badges para livros */
