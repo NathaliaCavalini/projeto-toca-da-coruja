@@ -88,11 +88,11 @@
 
             <div style="display:flex; gap:10px; align-items:center;">
               <button type="submit" class="action-btn" style="font-weight:700;">Enviar mensagem</button>
-              <button type="reset" class="icon-btn" title="Limpar formulário" style="background:transparent; border:1px solid rgba(0,0,0,0.06); padding:8px 12px; border-radius:8px;">Limpar</button>
+              <button type="reset" class="action-btn" style="font-weight:700;">Limpar</button>
             </div>
 
-            <p id="contact-note" style="margin-top:10px; font-size:0.9rem; color:var(--color-text);">
-              Observação: este formulário usa seu cliente de e-mail para enviar a mensagem (mailto). Para envio automático, conecte um back-end.
+            <p id="contact-note" style="margin-top:10px; font-size:0.9rem; color:var(--color-text); display:none;">
+              Observação: este formulário envia mensagens automaticamente para nosso e-mail.
             </p>
           </form>
         </div>
@@ -186,61 +186,90 @@
   <script type="module" src="/js/theme.js"></script>
   <script src="../js/home.js"></script>
 
-  <!-- Script do formulário: abre o cliente de e-mail com os campos preenchidos -->
-<!-- Substitua o script antigo por este -->
+  <!-- Script do formulário: envio automático via FormSubmit -->
 <script>
-  // monta query string simples
-  function qs(params) {
-    return Object.entries(params)
-      .filter(([, v]) => v !== undefined && v !== null && v !== "")
-      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
-      .join('&');
-  }
-
   function handleContactSubmit(event) {
     event.preventDefault();
 
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
-    const assuntoInput = document.getElementById('assunto').value.trim();
-    const assunto = assuntoInput || 'Contato via site - Toca da Coruja';
+    const assunto = document.getElementById('assunto').value.trim() || 'Contato via site - Toca da Coruja';
     const mensagem = document.getElementById('mensagem').value.trim();
 
-    // corpo do e-mail formatado
-    const body = `Nome: ${nome}\nE-mail de contato: ${email}\n\nMensagem:\n${mensagem}`;
-
-    // endereço destino
-    const to = 'cavalinilivros@gmail.com';
-
-    // URL que abre o compose do Gmail no navegador
-    const gmailUrlBase = 'https://mail.google.com/mail/';
-    const gmailParams = {
-      view: 'cm',
-      fs: '1',
-      to: to,
-      su: assunto,
-      body: body
-    };
-    const gmailUrl = `${gmailUrlBase}?${qs(gmailParams)}`;
-
-    // fallback mailto (caso o navegador bloqueie popups ou não tenha sessão no Gmail)
-    const mailtoParams = [];
-    mailtoParams.push(`subject=${encodeURIComponent(assunto)}`);
-    mailtoParams.push(`body=${encodeURIComponent(body)}`);
-    const mailtoUrl = `mailto:${encodeURIComponent(to)}?${mailtoParams.join('&')}`;
-
-    // Tenta abrir em nova aba o compose do Gmail. Se window.open for bloqueado (retorna null),
-    // faz fallback para mailto (abre o cliente padrão).
-    const newWindow = window.open(gmailUrl, '_blank');
-
-    // Se window.open falhar (popup bloqueado), usa mailto (no mesmo tab/janela).
-    if (!newWindow) {
-      // como fallback, navegamos para mailto (bem compatível)
-      window.location.href = mailtoUrl;
-    } else {
-      // foco na nova janela/aba (se possível)
-      try { newWindow.focus(); } catch (_) {}
+    // Validação básica
+    if (!nome || !email || !mensagem) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
     }
+
+    // Mostra loading
+    const btnSubmit = event.target.querySelector('button[type="submit"]');
+    const originalText = btnSubmit.textContent;
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = '⏳ Enviando...';
+
+    // Cria FormData para enviar - formato simples e robusto
+    const formData = new FormData();
+    formData.append('_captcha', 'false');
+    formData.append('_subject', assunto);
+    formData.append('_cc', email); // Envia cópia para o usuário
+    formData.append('nome', nome);
+    formData.append('email', email);
+    formData.append('assunto', assunto);
+    formData.append('mensagem', mensagem);
+
+    // Envia para FormSubmit (serviço gratuito) - sem redirect
+    fetch('https://formsubmit.co/ajax/cavalinilivros@gmail.com', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Sucesso!
+          console.log('Email enviado com sucesso!');
+          
+          // Mostra mensagem de sucesso
+          const note = document.getElementById('contact-note');
+          note.innerHTML = '✅ <strong>Mensagem enviada com sucesso!</strong> Responderemos em breve.';
+          note.style.color = '#28a745';
+          note.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
+          note.style.padding = '12px';
+          note.style.borderRadius = '8px';
+          note.style.marginTop = '12px';
+          
+          // Limpa o formulário
+          event.target.reset();
+          
+          // Remove a mensagem de sucesso após 5 segundos
+          setTimeout(() => {
+            note.innerHTML = 'Observação: este formulário envia mensagens automaticamente para nosso e-mail.';
+            note.style.color = 'var(--color-text)';
+            note.style.backgroundColor = 'transparent';
+            note.style.padding = '0';
+          }, 5000);
+        } else {
+          throw new Error(data.message || 'Erro ao enviar');
+        }
+      })
+      .catch((error) => {
+        // Erro ao enviar
+        console.error('Erro ao enviar email:', error);
+        
+        // Mostra mensagem de erro
+        const note = document.getElementById('contact-note');
+        note.innerHTML = '❌ <strong>Erro ao enviar mensagem.</strong> Tente novamente ou entre em contato conosco diretamente.';
+        note.style.color = '#dc3545';
+        note.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+        note.style.padding = '12px';
+        note.style.borderRadius = '8px';
+        note.style.marginTop = '12px';
+      })
+      .finally(() => {
+        // Restaura o botão
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = originalText;
+      });
   }
 </script>
 
