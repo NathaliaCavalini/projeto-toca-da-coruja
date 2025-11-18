@@ -1,451 +1,483 @@
 :root {
-    --primary-color: #C5946C;     /* cartão + borda foto */
-    --secondary-color: #F5E7D7;   /* fundo da página */
-    --accent-color: #8B694D;      /* botão salvar + hover */
-    --text-color: #3A2D14;        /* texto */
-    --danger-color: #a63f3f;      /* botão sair */
-    --danger-hover: #c0392b;
+  --primary-color: #c5946c; /* cartão + borda foto */
+  --secondary-color: #f5e7d7; /* fundo da página */
+  --accent-color: #8b694d; /* botão salvar + hover */
+  --text-color: #3a2d14; /* texto */
+  --danger-color: #a63f3f; /* botão sair */
+  --danger-hover: #c0392b;
 }
 
 /* Reset / Layout */
 body {
-    background: var(--secondary-color);
-    font-family: 'Segoe UI', Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    color: var(--text-color);
+  background: var(--secondary-color);
+  font-family: "Segoe UI", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text-color);
 }
 
 .perfil-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
 }
 
 /* Card principal */
 .perfil-card {
-    background: #e6c9a8;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-    animation: fadeIn 0.6s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative; /* necessário para o back-btn absoluto */
+  background: #e6c9a8;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative; /* necessário para o back-btn absoluto */
 }
 
 /* Back button (link + circle icon) */
 .back-btn {
-    position: absolute;
-    left: 16px;
-    top: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    z-index: 20;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
 }
 
 /* o link principal estilizado (pílula) */
 .back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 14px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: var(--text-color);
-    background: rgba(245, 231, 215, 0.95);
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
-    font-size: 15px;
-    font-weight: 600;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-color);
+  background: rgba(245, 231, 215, 0.95);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .back-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.16);
-    background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+  background: #fff;
 }
 
 /* círculo com borda contendo o ícone (abaixo do link) */
 .back-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--secondary-color);
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 /* leve movimento do ícone quando o botão é hoverado */
 .back-btn:hover .back-icon {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
 }
 
 /* ícone centralizado */
 .back-icon svg,
 .back-icon img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Títulos e textos */
 h1 {
-    margin: 0 0 8px;
-    color: var(--text-color);
-    font-size: 1.8rem;
-    font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 p {
-    color: var(--text-color);
-    margin: 0 0 20px;
-    font-size: 0.95rem;
-    opacity: 0.9;
+  color: var(--text-color);
+  margin: 0 0 20px;
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
 
 /* Foto do usuário */
 #user-photo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 16px;
-    border: 4px solid var(--secondary-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  border: 4px solid var(--secondary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
 #user-photo:hover {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 /* Formulário */
 #profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 input {
-    padding: 12px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    outline: none;
-    transition: 0.3s;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-color);
+  padding: 12px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
 }
 
-input::placeholder { color: #999; }
+input::placeholder {
+  color: #999;
+}
 
 input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
-    background: #fff;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
+  background: #fff;
 }
 
 input:disabled {
-    background: rgba(139, 105, 77, 0.15);
-    color: var(--text-color);
-    opacity: 0.8;
-    cursor: not-allowed;
+  background: rgba(139, 105, 77, 0.15);
+  color: var(--text-color);
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 /* Fazer com que o campo de e-mail (que está disabled) tenha a mesma aparência
    do campo de nome de usuário (fundo claro e texto legível). */
 #email:disabled {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--text-color);
-    opacity: 1;
-    cursor: default; /* não exibir cursor de não permitido */
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  opacity: 1;
+  cursor: default; /* não exibir cursor de não permitido */
 }
 
 /* Botões */
 .btn {
-    /* Agora o botão .btn (Salvar Alterações) usa as mesmas cores do
+  /* Agora o botão .btn (Salvar Alterações) usa as mesmas cores do
        botão de Alterar Senha (.btn-change-password) */
-    background: var(--primary-color);
-    color: #fff;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .btn:hover {
-    background: var(--accent-color);
-    transform: translateY(-2px);
+  background: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .btn-logout {
-    background: var(--danger-color);
-    color: #fff;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.2s;
-    margin-top: 14px;
-    width: 100%;
-    height: auto;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: var(--danger-color);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 14px;
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-logout:hover {
-    background: var(--danger-hover);
-    transform: translateY(-2px);
+  background: var(--danger-hover);
+  transform: translateY(-2px);
 }
 
 .btn-change-password {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.2s;
-    width: 100%;
-    margin-bottom: 8px;
-    margin-top: 0;
-    height: auto;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+  width: 100%;
+  margin-bottom: 8px;
+  margin-top: 0;
+  height: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-change-password:hover {
-    background: var(--accent-color);
-    transform: translateY(-2px);
+  background: var(--accent-color);
+  transform: translateY(-2px);
 }
 
-.link { margin-top: 0; }
+.link {
+  margin-top: 0;
+}
 
 /* Input file estilizado */
 input[type="file"] {
-    font-size: 14px;
-    padding: 10px 0;
+  font-size: 14px;
+  padding: 10px 0;
 }
 
 input[type="file"]::file-selector-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto 10px;
-    padding: 5px;
-    /* Ajustado para ficar igual ao botão de alterar senha */
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 10px;
+  padding: 5px;
+  /* Ajustado para ficar igual ao botão de alterar senha */
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 input[type="file"]::file-selector-button:hover {
-    background: var(--accent-color);
-    transform: translateY(-2px);
+  background: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 /* ===== BOTÃO VOLTAR ===== */
 .back-box {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto 10px; /* centraliza e dá espaço abaixo */
-    padding: 10px 18px;
-    background: rgba(245, 231, 215, 0.95);
-    border: 2px solid var(--primary-color);
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 15px;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 10px; /* centraliza e dá espaço abaixo */
+  padding: 10px 18px;
+  background: rgba(245, 231, 215, 0.95);
+  border: 2px solid var(--primary-color);
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .back-box:hover {
-    background: #b18c6f;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  background: #b18c6f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .back-box svg {
-    width: 22px;
-    height: 22px;
-    stroke: var(--text-color);
-    transition: transform 0.2s ease;
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-color);
+  transition: transform 0.2s ease;
 }
 
 .back-box:hover svg {
-    transform: translateX(-3px);
+  transform: translateX(-3px);
 }
 
 /* Responsivo */
 @media (max-width: 480px) {
-    .back-box {
-        padding: 8px 14px;
-        font-size: 14px;
-        border-radius: 10px;
-    }
+  .back-box {
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
 
-    .back-box svg {
-        width: 18px;
-        height: 18px;
-    }
+  .back-box svg {
+    width: 18px;
+    height: 18px;
+  }
 }
-
 
 /* Animação */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsivo */
 @media (max-width: 480px) {
-    .perfil-card { padding: 30px 25px; }
-    h1 { font-size: 1.6rem; }
-    #user-photo { width: 80px; height: 80px; }
-    .back-btn { left: 12px; top: 12px; gap: 6px; }
-    .back-link { padding: 7px 12px; font-size: 14px; border-radius: 10px; }
-    .back-icon { width: 40px; height: 40px; border-width: 2.5px; }
-    .back-icon svg, .back-icon img { width: 18px; height: 18px; }
+  .perfil-card {
+    padding: 30px 25px;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  #user-photo {
+    width: 80px;
+    height: 80px;
+  }
+  .back-btn {
+    left: 12px;
+    top: 12px;
+    gap: 6px;
+  }
+  .back-link {
+    padding: 7px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  .back-icon {
+    width: 40px;
+    height: 40px;
+    border-width: 2.5px;
+  }
+  .back-icon svg,
+  .back-icon img {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 /* Dark Mode */
 body.dark-mode {
-    background: #3D2418;
+  background: #3d2418;
 }
 
 body.dark-mode .perfil-card {
-    background: #4A2F20;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background: #4a2f20;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode h1,
 body.dark-mode p {
-    color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-mode #user-photo {
-    border-color: #543829;
+  border-color: #543829;
 }
 
 body.dark-mode input {
-    background: #fff;
-    color: #000;
-    border-color: #5A3F2E;
+  background: #fff;
+  color: #000;
+  border-color: #5a3f2e;
 }
 
 body.dark-mode input::placeholder {
-    color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 body.dark-mode input:focus {
-    background: #5A3F2E;
-    border-color: #8B694D;
-    box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
+  background: #5a3f2e;
+  border-color: #8b694d;
+  box-shadow: 0 0 6px rgba(139, 105, 77, 0.4);
 }
 
 body.dark-mode input:disabled {
-    background: rgba(84, 56, 41, 0.3);
-    color: rgba(255, 255, 255, 0.60);
+  background: rgba(84, 56, 41, 0.3);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Garantir que em dark mode o email mantenha a mesma aparência do input
    normal (caso desejado: fundo claro como os inputs em dark-mode já definidos). */
 body.dark-mode #email:disabled {
-    background: #fff;
-    color: #000;
-    opacity: 1;
-    cursor: default;
+  background: #fff;
+  color: #000;
+  opacity: 1;
+  cursor: default;
 }
 
 body.dark-mode .btn {
-    background: #7A5540;
-    color: rgba(255, 255, 255, 0.90);
+  background: #7a5540;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-mode .btn:hover {
-    background: #8B694D;
+  background: #8b694d;
 }
 
 body.dark-mode .btn-logout {
-    background: #a63f3f;
+  background: #a63f3f;
 }
 
 body.dark-mode .btn-logout:hover {
-    background: #c0392b;
+  background: #c0392b;
 }
 
 body.dark-mode .btn-change-password {
-    background: #7A5540;
+  background: #7a5540;
 }
 
 body.dark-mode .btn-change-password:hover {
-    background: #8B694D;
+  background: #8b694d;
 }
 
 body.dark-mode .back-box {
-    background: rgba(84, 56, 41, 0.95);
-    border-color: #5A3F2E;
-    color: rgba(255, 255, 255, 0.90);
+  background: rgba(84, 56, 41, 0.95);
+  border-color: #5a3f2e;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-mode .back-box:hover {
-    background: #543829;
+  background: #543829;
 }
 
 body.dark-mode .back-box svg {
-    stroke: rgba(255, 255, 255, 0.90);
+  stroke: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-mode input[type="file"]::file-selector-button {
-    /* Em dark mode, alinhar o seletor de arquivo ao estilo do botão de alterar senha */
-    background: #7A5540;
-    border-color: #7A5540;
-    color: rgba(255, 255, 255, 0.90);
+  /* Em dark mode, alinhar o seletor de arquivo ao estilo do botão de alterar senha */
+  background: #7a5540;
+  border-color: #7a5540;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 body.dark-mode input[type="file"]::file-selector-button:hover {
-    background: #8B694D;
+  background: #8b694d;
 }
