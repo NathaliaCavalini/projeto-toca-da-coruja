@@ -88,7 +88,7 @@ async function renderFavoritos(){
             <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
                 <h2>⭐ Nenhum favorito ainda</h2>
                 <p>Marque livros como favoritos nas páginas deles para vê-los aqui mais tarde.</p>
-                <a href="home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="pages/home.html" class="browse-books">Explorar Catálogo</a>
             </div>`;
         return;
     }

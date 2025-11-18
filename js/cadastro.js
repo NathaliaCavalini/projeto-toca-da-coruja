@@ -42,7 +42,7 @@ document.getElementById("cadastro-form").addEventListener("submit", async (e) =>
         console.log(`✅ Usuário sincronizado em 'users-admin-control'`);
 
         alert("✅ Conta criada com sucesso!");
-        window.location.href = "login.html";
+        window.location.href = "pages/login.html";
     } catch (error) {
         console.error(error);
         if (error.code === "auth/email-already-in-use") {

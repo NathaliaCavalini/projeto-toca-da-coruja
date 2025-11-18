@@ -21,7 +21,7 @@ function getCurrentPage() {
 function getImagePath() {
     const currentPage = getCurrentPage();
     // Páginas que estão no root do projeto (não em subpasta)
-    const rootPages = ['home.html', 'reviews.html', 'ja_lidos.html', 'quer_ler.html', 'favoritos.html', 'login.html', 'cadastro.html', 'perfil.html', 'contato.html', 'sobre.html', 'vejamais.html', 'programacao.html', 'romance.html', 'classico.html', 'fantasia.html', 'rpg.html', 'gay.html', 'admin.html'];
+    const rootPages = ['pages/home.html', 'pages/reviews.html', 'pages/ja_lidos.html', 'pages/quer_ler.html', 'pages/favoritos.html', 'pages/login.html', 'pages/cadastro.html', 'pages/perfil.html', 'pages/contato.html', 'pages/sobre.html', 'pages/vejamais.html', 'pages/programacao.html', 'pages/romance.html', 'pages/classico.html', 'pages/fantasia.html', 'pages/rpg.html', 'pages/gay.html', 'pages/admin.html'];
     
     if (rootPages.includes(currentPage)) {
         return 'imagens/';

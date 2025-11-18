@@ -15,7 +15,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
         // Redirecionar para home se não for admin
         alert('Acesso negado. Esta página é apenas para administradores.');
-        window.location.href = '/home.html';
+        window.location.href = '/pages/home.html';
     }
 });
 

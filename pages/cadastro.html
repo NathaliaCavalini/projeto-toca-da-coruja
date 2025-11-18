@@ -66,7 +66,7 @@
                 // Sincronizar usuário no admin control com status "ativo"
                 await updateUserStatus(email.toLowerCase(), 'ativo');
                 alert("Conta criada com sucesso!");
-                window.location.href = "home.html";
+                window.location.href = "pages/home.html";
             } catch (err) {
                 console.error(err);
                 alert("Erro: " + (err.message || err));

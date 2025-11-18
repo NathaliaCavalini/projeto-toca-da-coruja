@@ -287,7 +287,7 @@ function initHelpModal() {
         body.innerHTML = `
           <h2 class="help-modal-title">💬 Precisando de Ajuda?</h2>
           <p class="help-modal-message">Encontrou algum erro ou tem dúvidas? Estamos aqui para ajudar!</p>
-          <a href="contato.html" class="help-modal-button">Entre em Contato</a>
+          <a href="pages/contato.html" class="help-modal-button">Entre em Contato</a>
         `;
       }
       

@@ -91,7 +91,7 @@ async function renderQuerLer(){
             <div class="empty-reviews" style="grid-column:1/-1; text-align:center;">
                 <h2>📖 Nenhum livro na lista "Quero Ler"</h2>
                 <p>Adicione livros clicando em "Quero Ler" nas páginas ou no catálogo principal.</p>
-                <a href="home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="pages/home.html" class="browse-books">Explorar Catálogo</a>
             </div>`;
         return;
     }

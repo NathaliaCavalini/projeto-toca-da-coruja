@@ -15,7 +15,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         alert("✅ Login realizado com sucesso!");
-        window.location.href = "home.html";
+        window.location.href = "pages/home.html";
 
     } catch (error) {
         console.error(error);

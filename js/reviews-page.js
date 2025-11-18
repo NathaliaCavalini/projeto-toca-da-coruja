@@ -151,7 +151,7 @@ async function renderUserReviews() {
             <div class="empty-reviews" style="grid-column: 1/-1;">
                 <h2>✍️ Nenhuma review publicada ainda</h2>
                 <p>Compartilhe suas opiniões sobre os livros que leu! Use o botão flutuante ✍️ ou visite as páginas dos livros para deixar suas avaliações.</p>
-                <a href="home.html" class="browse-books">Explorar Catálogo</a>
+                <a href="pages/home.html" class="browse-books">Explorar Catálogo</a>
             </div>
         `;
         return;
@@ -286,7 +286,7 @@ async function createFloatingReviewCard() {
     toggleBtn.addEventListener('click', () => {
         if (!auth.currentUser) {
             if (confirm('Você precisa estar logado para adicionar uma review. Ir para login?')) {
-                window.location.href = 'login.html';
+                window.location.href = 'pages/login.html';
             }
             return;
         }
