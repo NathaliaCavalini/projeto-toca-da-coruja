@@ -280,19 +280,21 @@ export const livros = {
     "arvore-dos-desejos": {
         titulo: "Árvore dos Desejos",
         autor: "Katherine Applegate",
-    imagem: "imagens/árvore dos desejos.jpg",
+    imagem: "/imagens/árvore dos desejos.jpg",
         genero: "Fantasia",
         paginas: 224,
         ano: 2017,
+        descricao: "Fábula infantil sobre esperança, amizade e milagres.",
         sinopse: "Red, uma árvore centenária, narra esta história comovente sobre uma comunidade e seus desejos mais profundos. Como uma 'árvore dos desejos', Red testemunha esperanças, sonhos e preconceitos dos humanos ao seu redor, enquanto reflete sobre amizade, aceitação e o impacto de pequenas ações, em um conto delicado e poético que encanta leitores de todas as idades."
     },
     "flores-para-algernon": {
         titulo: "Flores para Algernon",
         autor: "Daniel Keyes",
-    imagem: "imagens/flores para algernon.jpg",
+    imagem: "/imagens/flores para algernon.jpg",
         genero: "Fantasia",
         paginas: 336,
         ano: 1966,
+        descricao: "Drama sci-fi sobre inteligência artificial e humanidade.",
         sinopse: "Charlie Gordon, um homem com deficiência intelectual, participa de um experimento que aumenta sua inteligência, assim como a do rato Algernon. Narrado por meio de relatórios de progresso, o livro acompanha sua transformação, revelando alegrias, descobertas e tragédias. Uma história comovente que explora ética científica, humanidade e o desejo de aceitação em um mundo que nem sempre acolhe diferenças."
     },
     "princesa-e-o-queijo-quente": {
@@ -525,4 +527,44 @@ export const livros = {
         descricao: "Fantasia épica com corujas e reinos em guerra.",
         sinopse: "Fantasia épica com corujas e reinos em guerra. Uma saga envolvente sobre coragem, lealdade e o preço de lutar pela liberdade em um mundo onde corujas navegam política e destino."
     },
+    "a-biblioteca-da-meia-noite": {
+        titulo: "A biblioteca da meia-noite",
+        autor: "Matt Haig",
+        imagem: "/imagens/biblioteca da meia noite.jpg",
+        genero: "Fantasia",
+        paginas: 368,
+        ano: 2020,
+        descricao: "Romance sobre arrependimentos, escolhas e vidas alternativas.",
+        sinopse: "Romance sobre arrependimentos, escolhas e vidas alternativas. Nora Seed, uma mulher infeliz, descobre uma biblioteca mágica que contém as vidas que ela poderia ter vivido. Uma jornada profunda sobre redenção e aceitação da própria vida."
+    },
+    "caninos-brancos": {
+        titulo: "Caninos brancos",
+        autor: "Jack London",
+        imagem: "/imagens/caninos brancos.jpg",
+        genero: "Aventura",
+        paginas: 320,
+        ano: 1906,
+        descricao: "Clássico de aventura sobre um lobo-cão selvagem no Alasca.",
+        sinopse: "Clássico de aventura sobre um lobo-cão selvagem no Alasca. A história acompanha a vida de White Fang desde seu nascimento na natureza selvagem até sua domesticação, explorando temas de sobrevivência e redenção."
+    },
+    "o-impulso": {
+        titulo: "O impulso",
+        autor: "Steven Johnson",
+        imagem: "/imagens/o impulso.jpg",
+        genero: "Ficção",
+        paginas: 384,
+        ano: 2014,
+        descricao: "Thriller psicológico sobre controle mental e ética científica.",
+        sinopse: "Thriller psicológico que explora a mente humana, os impulsos inconscientes e como nossas decisões são influenciadas. Uma narrativa envolvente que questiona a liberdade de vontade e o controle."
+    },
+    "walden": {
+        titulo: "Walden",
+        autor: "Henry David Thoreau",
+        imagem: "/imagens/walden.jpg",
+        genero: "Filosofia",
+        paginas: 384,
+        ano: 1854,
+        descricao: "Reflexões sobre vida simples, natureza e autossuficiência.",
+        sinopse: "Reflexões profundas sobre vida simples, natureza e autossuficiência. Thoreau relata sua experiência vivendo isolado na floresta de Walden, oferecendo uma crítica à sociedade de consumo e um apelo para a vida deliberada."
+    }
 };

@@ -669,6 +669,26 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
   margin: -10px auto 0 !important;
   transform: translateY(60%) !important;
 }
+/* APENAS para review cards - imagens padronizadas */
+.book-item.review-card .book-card {
+  padding: 18px !important;
+  width: 100% !important;
+  height: 220px !important;
+  min-height: 220px !important;
+  max-height: 220px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.book-item.review-card .book-card img {
+  max-width: 130px !important;
+  max-height: 180px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: cover;
+}
+
 /* APENAS para review cards - "Leia mais" solto abaixo */
 .book-item.review-card .book-action {
   width: 100% !important;
@@ -1433,6 +1453,12 @@ body.dark-mode .search-form input {
   border: none;
 }
 
+/* Ajuste específico para "Som das seis" - redimensiona imagem apenas */
+.book-preview-card[data-book-id="som-das-seis"] .book-preview-image img {
+  height: 140px !important;
+  width: auto !important;
+}
+
 .book-preview-image {
   display: flex;
   justify-content: center;
@@ -1535,6 +1561,11 @@ body.dark-mode .search-form input {
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
 
 .book-preview-action-buttons {
@@ -1588,8 +1619,9 @@ body.dark-mode .search-form input {
   font-size: 0.85rem;
   font-family: 'Poppins', sans-serif;
   width: fit-content;
-  margin: 8px 0 0 auto;
-  margin-right: calc(185px);
+  margin: 8px 0 0 0;
+  margin-left: 55px;
+  transform: translateX(47px);
   cursor: pointer;
 }
 

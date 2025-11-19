@@ -200,12 +200,12 @@
                 
                 <div class="form-group">
                     <label>Páginas</label>
-                    <input type="number" id="book-paginas" required>
+                    <input type="text" id="book-paginas" inputmode="numeric" required placeholder="ex: 250">
                 </div>
                 
                 <div class="form-group">
                     <label>Ano</label>
-                    <input type="number" id="book-ano" required>
+                    <input type="text" id="book-ano" inputmode="numeric" required placeholder="ex: 2024">
                 </div>
                 
                 <div class="form-group">
@@ -458,6 +458,45 @@
     <script type="module" src="/js/help-modal.js"></script>
     <script type="module" src="/js/admin.js"></script>
     <script src="/js/universal-search.js"></script>
+    
+    <!-- Validação de campos numéricos - sem letra 'e' -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const numericInputs = ['book-paginas', 'book-ano'];
+            
+            numericInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                
+                // Bloqueia entrada de caracteres não-numéricos
+                input.addEventListener('keypress', (e) => {
+                    const char = e.key;
+                    // Permite apenas dígitos (0-9)
+                    if (!/[0-9]/.test(char)) {
+                        e.preventDefault();
+                    }
+                });
+                
+                // Remove qualquer caractere não-numérico que conseguir entrar (ex: copiar/colar)
+                input.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                });
+                
+                // Validação ao enviar o formulário
+                const form = document.getElementById('form-book');
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        const value = input.value.trim();
+                        if (value === '' || !/^\d+$/.test(value)) {
+                            e.preventDefault();
+                            alert(`${input.previousElementSibling.textContent} deve conter apenas números!`);
+                            input.focus();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

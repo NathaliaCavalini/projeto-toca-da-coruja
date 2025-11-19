@@ -1,6 +1,22 @@
 // Importar dados dos livros
 import { livros } from './livros-data.js';
 
+// Função para obter todos os livros (originais + adicionados pelo admin)
+function getAllBooks() {
+    // Livros originais
+    let allBooks = { ...livros };
+    
+    // Livros adicionados pelo admin
+    try {
+        const adminBooks = JSON.parse(localStorage.getItem('admin-books') || '{}');
+        allBooks = { ...allBooks, ...adminBooks };
+    } catch (e) {
+        // Ignorar erro se localStorage tiver problema
+    }
+    
+    return allBooks;
+}
+
 // Função para extrair o ID do livro do link "veja mais"
 function getBookIdFromElement(element) {
     // Tenta pegar do link "veja mais" primeiro (mais confiável)
@@ -90,9 +106,10 @@ function getAverageRating(bookId) {
 
 // Função para criar e exibir o modal
 function showBookPreview(bookId) {
-    const book = livros[bookId];
+    const allBooks = getAllBooks();
+    const book = allBooks[bookId];
     if (!book) {
-        console.warn(`Livro com ID "${bookId}" não encontrado em livros-data.js`);
+        console.warn(`Livro com ID "${bookId}" não encontrado em livros-data.js ou admin-books`);
         return;
     }
 
@@ -106,19 +123,24 @@ function showBookPreview(bookId) {
     // Cria container do modal
     const modal = document.createElement('div');
     modal.className = 'book-preview-modal';
+    
+    // Adiciona classe específica se for "Som das seis"
+    if (bookId === 'som-das-seis') {
+        modal.setAttribute('data-book-id', 'som-das-seis');
+    }
 
     modal.innerHTML = `
         <div class="book-preview-overlay"></div>
-        <div class="book-preview-card">
+        <div class="book-preview-card" ${bookId === 'som-das-seis' ? 'data-book-id="som-das-seis"' : ''}>
             <button class="book-preview-close" aria-label="Fechar">&times;</button>
             <div class="book-preview-image">
                 <img src="${escapeHtml(book.imagem)}" alt="Capa do livro ${escapeHtml(book.titulo)}" />
             </div>
             <div class="book-preview-content">
                 <h3 class="book-preview-title">${escapeHtml(book.titulo)}</h3>
-                <p class="book-preview-description">${escapeHtml(book.descricao)}</p>
+                <p class="book-preview-description">${escapeHtml(book.descricao || book.sinopse || 'Descrição não disponível')}</p>
                 <div class="book-preview-meta">
-                    <p class="book-preview-author">Autora: ${escapeHtml(book.autor)}</p>
+                    <p class="book-preview-author">Autor(a): ${escapeHtml(book.autor)}</p>
                     ${avgRating > 0 ? `<p class="book-preview-rating">★ ${avgRating} estrelas</p>` : `<p class="book-preview-no-rating">Seja o primeiro a avaliar</p>`}
                 </div>
                 <div class="book-preview-action-buttons">

@@ -1,22 +1,11 @@
-/* Estilos exclusivos para as páginas de gêneros criados pelo admin (genero.html) */
-/* Copiado do padrão oficial dos cards (home.css) para ficar 1:1 */
+/* Estilos dos cards de livro para páginas de gêneros criados pelo admin (genero.html) */
+/* Idêntico ao padrão oficial da home.css para garantir consistência visual */
 
-/* Mantém os estilos globais da home; sem overrides de grid aqui */
-
-/* CARD WRAPPER */
-.book-card {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  width: 100% !important;
-}
-
-/* CAPA */
 .book-card {
   background-color: var(--color-primary);
   border-radius: var(--radius) var(--radius) 0 0;
   padding: 18px !important;
-  width: 220px !important;
+  width: 100% !important;
   text-align: center;
   box-shadow: var(--shadow);
   height: var(--book-card-height) !important;
@@ -33,24 +22,23 @@
   width: auto !important;
   height: auto !important;
   object-fit: cover;
-  display: block;
 }
 
-/* BLOCO DE TÍTULO + DESCRIÇÃO */
+/* TITULO DO LIVRO */
 .book-title {
   background-color: var(--color-muted) !important;
   border-radius: 0 0 var(--radius) var(--radius) !important;
   padding: 12px 14px !important;
   width: 100% !important;
   text-align: center !important;
-  margin-top: -6px !important;
-  transform: translateY(4%) !important;
+  margin-top: 0px !important;
+  transform: translateY(0%) !important;
   box-shadow: var(--shadow) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 8px !important;
+  gap: 0px !important;
   height: var(--book-title-min-height) !important;
   min-height: var(--book-title-min-height) !important;
   max-height: var(--book-title-min-height) !important;
@@ -62,20 +50,26 @@
   margin: 0;
   cursor: pointer;
   color: var(--color-text);
-  line-height: 1.2;
-  flex: 1 1 auto;
+  line-height: 1.1;
+  flex: 0 0 auto;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
-  line-clamp: 6;
-  overflow-wrap: anywhere;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
+  user-select: none;
+  transition: opacity 0.2s ease;
 }
-.book-title p:hover { text-decoration: underline; }
 
-/* ÁREA DO BOTÃO */
+.book-title p:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* BOTÕES DE AÇÃO DA BIBLIOTECA */
 .botao-quero-ler {
   display: flex;
   gap: 8px;
@@ -84,11 +78,64 @@
   flex-wrap: wrap;
   flex-shrink: 0;
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 0px;
   width: 100%;
+  flex: 0 0 auto;
+  min-height: 30px;
 }
-/* Sem override de .action-btn aqui para respeitar regras da home (inclui modo single) */
 
-/* Veja mais segue os estilos globais da home */
+.botao-quero-ler .action-btn {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  flex: 1;
+  min-width: 80px;
+}
 
-/* Responsividade segue home.css sem overrides */
+.botao-quero-ler .btn-remove {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+body[data-button-mode="single"] .botao-quero-ler .action-btn {
+  flex: 0 1 auto;
+}
+
+/* VEJA MAIS */
+.book-action {
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  text-align: center !important;
+  margin: -10px auto 0 !important;
+  transform: translateY(60%) !important;
+}
+
+.book-action a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(139, 105, 77, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, filter 0.18s ease;
+}
+
+.book-action a:hover {
+  transform: translateY(-2px);
+  background: var(--color-accent);
+  box-shadow: 0 8px 16px rgba(139, 105, 77, 0.26);
+}
+
+.book-action a:active {
+  transform: translateY(0);
+}
+
+.book-action a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(197, 148, 108, 0.35), 0 8px 16px rgba(139, 105, 77, 0.22);
+}
