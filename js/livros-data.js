@@ -3,48 +3,53 @@
 
 export const livros = {
     "amor-obvio": {
-        titulo: "O Amor Óbvio",
+        titulo: "O amor não é óbvio",
         autor: "Cora Rónai",
         imagem: "/imagens/o_amor_nao_e_obvio.png",
         genero: "Literatura lésbica",
         paginas: 112,
         ano: 2024,
+        descricao: "Amigos de infância percebem que o amor estava ali o tempo todo.",
         sinopse: "Uma coletânea de poemas onde a autora celebra o amor entre mulheres de forma delicada e visceral. Com versos que exploram a intensidade, a ternura e a descoberta do desejo feminino, 'O Amor Óbvio' transforma o que muitas vezes é silenciado em versos luminosos e vibrantes. Uma leitura imprescindível para quem busca uma poesia que exalta a liberdade de amar sem reservas."
     },
     "jogada-amor": {
-        titulo: "Jogada de Amor",
+        titulo: "A jogada do amor",
         autor: "Lorraine R. Costa",
         imagem: "/imagens/a_jogada_do_amor.png",
         genero: "Romance LGBTQIA+",
         paginas: 288,
         ano: 2023,
+        descricao: "Um romance esportivo onde o amor entra em campo entre rivais.",
         sinopse: "Uma narrativa envolvente que mistura paixão, esporte e descoberta de identidade. Acompanhe a trajetória de Camila, uma jogadora de futebol que se vê dividida entre a carreira e um amor inesperado com Júlia. Em meio a desafios e preconceitos, elas precisarão aprender a jogar não apenas dentro do campo, mas também no jogo do amor."
     },
     "ela-fica": {
-        titulo: "Ela Fica",
+        titulo: "Ela fica com a garota",
         autor: "Marina Carvalho",
         imagem: "/imagens/ela_fica_com_a_garota.png",
         genero: "Romance",
         paginas: 320,
         ano: 2024,
+        descricao: "Duas ex-colegas de escola se reencontram e o amor floresce.",
         sinopse: "Laura nunca imaginou que uma noite de verão mudaria tudo. Ela fica é uma história sobre segundas chances, amor próprio e a coragem de se permitir sentir. Entre encontros fugazes e conexões profundas, a protagonista descobre que às vezes vale a pena arriscar o coração."
     },
     "algumas-garotas": {
-        titulo: "Algumas Garotas",
+        titulo: "Algumas garotas são assim",
         autor: "Karen Soarele",
         imagem: "/imagens/algumas_garotas_sao_assim.png",
         genero: "Romance LGBTQIA+",
         paginas: 272,
         ano: 2023,
+        descricao: "Comédia romântica sobre identidade e autodescoberta.",
         sinopse: "Algumas Garotas é uma leitura tocante que captura as nuances do amor feminino, da amizade e do crescimento pessoal. Com personagens reais e profundas, o livro nos leva a uma jornada de autodescoberta onde a lealdade e a paixão se entrelaçam de forma emocionante. Para quem busca uma história autêntica sobre mulheres que se apoiam e se amam."
     },
     "a-arte-de-jogar": {
-        titulo: "A Arte de Jogar",
+        titulo: "A arte da guerra",
         autor: "Emillyn Lia",
         imagem: "/imagens/coisas_obvias_sobre_o_amor.png",
         genero: "Estratégia",
         paginas: 368,
         ano: 2022,
+        descricao: "Clássico chinês de estratégia militar e filosofia.",
         sinopse: "Uma obra fascinante que entrelaça teoria dos jogos, psicologia e história. O autor nos guia por uma jornada onde cada decisão é crucial e cada movimento conta. Mais do que estratégias, este livro explora a mente humana e sua capacidade de prever, blefar e vencer em qualquer jogo da vida."
     },
     "iliada": {
@@ -201,7 +206,7 @@ export const livros = {
         sinopse: "O mais antigo épico da literatura inglesa conta a história de Beowulf, um herói que enfrenta monstros aterrorizantes como Grendel e sua mãe. Entre batalhas épicas e lealdade aos reis, este poema explora temas de honra, coragem, mortalidade e o eterno conflito entre o bem e o mal."
     },
     "divina-comedia": {
-        titulo: "Divina Comédia",
+        titulo: "A divina comédia",
         autor: "Dante Alighieri",
     imagem: "imagens/divina comédia.jpg",
         genero: "Poesia Épica",
@@ -289,5 +294,235 @@ export const livros = {
         paginas: 336,
         ano: 1966,
         sinopse: "Charlie Gordon, um homem com deficiência intelectual, participa de um experimento que aumenta sua inteligência, assim como a do rato Algernon. Narrado por meio de relatórios de progresso, o livro acompanha sua transformação, revelando alegrias, descobertas e tragédias. Uma história comovente que explora ética científica, humanidade e o desejo de aceitação em um mundo que nem sempre acolhe diferenças."
+    },
+    "princesa-e-o-queijo-quente": {
+        titulo: "A princesa e o queijo quente",
+        autor: "Shelby Mahurin",
+        imagem: "/imagens/a_princesa_e_o_queijo_quente.png",
+        genero: "Fantasia",
+        paginas: 256,
+        ano: 2019,
+        descricao: "Uma fábula divertida sobre uma princesa e seu lanche favorito.",
+        sinopse: "Uma fábula divertida sobre uma princesa rebelde que prefere um bom queijo quente à coroa. Com humor, magia e aventuras inesperadas, o livro celebra a liberdade de escolha e a importância de seguir seu próprio caminho, mesmo que isso signifique desafiar expectativas sociais."
+    },
+    "um-milhao-de-finais-felizes": {
+        titulo: "Um milhão de finais felizes",
+        autor: "Jessica Brody",
+        imagem: "/imagens/um_milhao_de_finais_felizes.png",
+        genero: "Romance",
+        paginas: 352,
+        ano: 2014,
+        descricao: "Histórias interativas com múltiplos desfechos românticos.",
+        sinopse: "Histórias interativas com múltiplos desfechos românticos. A protagonista descobre que suas escolhas definem seu destino, e cada decisão leva a um final diferente. Uma narrativa inovadora que celebra o poder da escolha, amizade e amor em suas muitas formas."
+    },
+    "coisas-obvias-sobre-o-amor": {
+        titulo: "Coisas óbvias sobre o amor",
+        autor: "João Paulo Cuenca",
+        imagem: "/imagens/coisas_obvias_sobre_o_amor.png",
+        genero: "Romance",
+        paginas: 208,
+        ano: 2013,
+        descricao: "Crônicas leves e reais sobre relacionamentos do dia a dia.",
+        sinopse: "Crônicas leves e reais sobre relacionamentos do dia a dia. Com humor e sensibilidade, o autor reflete sobre encontros, desencontros e as pequenas verdades que descobrimos sobre o amor enquanto vivemos."
+    },
+    "girls-like-girls": {
+        titulo: "Girls like girls",
+        autor: "Hayley Kiyoko",
+        imagem: "/imagens/girls_like_girls.jpg",
+        genero: "Romance LGBTQIA+",
+        paginas: 256,
+        ano: 2019,
+        descricao: "Baseado na música de Hayley Kiyoko: um amor jovem e intenso.",
+        sinopse: "Baseado na música viral de Hayley Kiyoko: um amor jovem e intenso. A história acompanha dois personagens descobrindo amor, identidade e aceitação em um romance autêntico e emocionante que celebra o amor entre mulheres."
+    },
+    "isso-nao-e-um-conto-de-fadas": {
+        titulo: "Isso não é um conto de fadas",
+        autor: "Thea Guanzon",
+        imagem: "/imagens/isso-não-é-um-conto-de-fadas.jpg",
+        genero: "Fantasia",
+        paginas: 368,
+        ano: 2020,
+        descricao: "Releitura sombria e realista dos contos clássicos.",
+        sinopse: "Releitura sombria e realista dos contos clássicos. A autora desconstrói narrativas tradicionais, revelando os lados escuros e complexos das histórias que crescemos amando. Uma obra que questiona e ressignifica os mitos que definem nossa cultura."
+    },
+    "lembre-se-de-nos": {
+        titulo: "Lembre-se de nós",
+        autor: "Alice Hazelwood",
+        imagem: "/imagens/lembre-se-de-nos.jpg",
+        genero: "Romance",
+        paginas: 320,
+        ano: 2022,
+        descricao: "Um romance sobre memória, perda e o poder do reencontro.",
+        sinopse: "Um romance sobre memória, perda e o poder do reencontro. Quando duas pessoas se cruzam novamente após anos, eles precisam confrontar o passado e decidir se ainda há espaço para um amor que pensavam ter perdido para sempre."
+    },
+    "night-owls-and-summer-skies": {
+        titulo: "Night owls and summer skies",
+        autor: "Lauren Owen",
+        imagem: "/imagens/night-owls-and-summer-skies.jpg",
+        genero: "Romance LGBTQIA+",
+        paginas: 288,
+        ano: 2021,
+        descricao: "Um verão mágico entre duas corujas da noite.",
+        sinopse: "Um verão mágico entre duas corujas da noite. Duas pessoas que vivem ao contrário do mundo descobrem uma na outra não apenas amor, mas a coragem de ser autêntica e viver livremente em um conto sensível e poético."
+    },
+    "vermelho-branco-e-sangue-azul": {
+        titulo: "Vermelho branco e sangue azul",
+        autor: "Casey McQuiston",
+        imagem: "/imagens/vermelho-branco-e-sangue-azul.jpg",
+        genero: "Romance LGBTQIA+",
+        paginas: 432,
+        ano: 2019,
+        descricao: "O príncipe da Inglaterra e o filho da presidente dos EUA se apaixonam.",
+        sinopse: "O príncipe da Inglaterra e o filho da presidente dos EUA se apaixonam. Uma história de romance internacional, política, família e descoberta de identidade que celebra amor contra todas as probabilidades."
+    },
+    "fahrenheit-451": {
+        titulo: "Fahrenheit 451",
+        autor: "Ray Bradbury",
+        imagem: "/imagens/Fahrenheit-451.jpg",
+        genero: "Ficção Científica",
+        paginas: 248,
+        ano: 1953,
+        descricao: "Distopia onde livros são proibidos e queimados.",
+        sinopse: "Distopia onde livros são proibidos e queimados a 451 graus Fahrenheit. Um bombeiro que queima livros começa a questionar seu trabalho e a sociedade que o cerca. Uma reflexão poderosa sobre censura e liberdade de pensamento."
+    },
+    "meridiano-de-sangue": {
+        titulo: "Meridiano de Sangue",
+        autor: "Cormac McCarthy",
+        imagem: "/imagens/meridiano-de-sangue.jpg",
+        genero: "Ficção",
+        paginas: 560,
+        ano: 1985,
+        descricao: "Uma odisseia brutal pelo Velho Oeste americano.",
+        sinopse: "Uma odisseia brutal pelo Velho Oeste americano. McCarthy segue um adolescente através de paisagens desoladas, explorando temas de moralidade, natureza humana e o mistério da existência em prosa hipnotizante."
+    },
+    "os-irmaos-karamazov": {
+        titulo: "Os Irmãos Karamázov",
+        autor: "Fiódor Dostoiévski",
+        imagem: "/imagens/os-irmaos-karamazov.jpg",
+        genero: "Romance",
+        paginas: 880,
+        ano: 1879,
+        descricao: "Drama familiar, fé e moral no clássico de Dostoiévski.",
+        sinopse: "Drama familiar, fé e moral no clássico de Dostoiévski. Quatro irmãos vivem dilemas existenciais que refletem questões fundamentais da humanidade. Uma obra-prima que explora culpa, redenção e livre arbítrio."
+    },
+    "use-a-cabeca": {
+        titulo: "Use a cabeça! Java",
+        autor: "Kathy Sierra & Bert Bates",
+        imagem: "/imagens/use a cabeça java.jpg",
+        genero: "Programação",
+        paginas: 688,
+        ano: 2005,
+        descricao: "Aprendizado visual e interativo da linguagem Java.",
+        sinopse: "Aprendizado visual e interativo da linguagem Java. A série Use a Cabeça! revolucionou como as pessoas aprendem programação, usando imagens, histórias e exercícios para tornar conceitos complexos acessíveis."
+    },
+    "sql-em-10-minutos": {
+        titulo: "SQL em 10 minutos",
+        autor: "Ben Forta",
+        imagem: "/imagens/sql-em-10-minutos.png",
+        genero: "Programação",
+        paginas: 256,
+        ano: 2014,
+        descricao: "Lições rápidas para dominar consultas SQL.",
+        sinopse: "Lições rápidas para dominar consultas SQL. Um guia prático e conciso que ensina SQL através de exemplos do mundo real, perfeito para iniciantes e como referência rápida para desenvolveddores."
+    },
+    "javascript-guia-definitivo": {
+        titulo: "Javascript guia definitivo",
+        autor: "David Flanagan",
+        imagem: "/imagens/javascript guia definitivo.png",
+        genero: "Programação",
+        paginas: 1096,
+        ano: 2020,
+        descricao: "Referência completa da linguagem, do básico ao avançado.",
+        sinopse: "Referência completa da linguagem, do básico ao avançado. Cobrindo ECMAScript, APIs do navegador e padrões modernos, este livro é a bíblia do JavaScript para dominar a linguagem completamente."
+    },
+    "html-e-css": {
+        titulo: "HTML e CSS",
+        autor: "Jon Duckett",
+        imagem: "/imagens/html e css.png",
+        genero: "Programação",
+        paginas: 944,
+        ano: 2011,
+        descricao: "Guia prático para criar sites modernos e responsivos.",
+        sinopse: "Guia prático para criar sites modernos e responsivos. Com design visual impecável e explicações claras, o livro ensina desde HTML semântico até CSS avançado."
+    },
+    "fluente-python": {
+        titulo: "Python fluente",
+        autor: "Luciano Ramalho",
+        imagem: "/imagens/fluente python.png",
+        genero: "Programação",
+        paginas: 752,
+        ano: 2015,
+        descricao: "Boas práticas e padrões para programar como um profissional.",
+        sinopse: "Boas práticas e padrões para programar como um profissional. O livro mergulha profundamente em Python, explorando features avançadas e design patterns."
+    },
+    "dndE5-livro-do-jogador": {
+        titulo: "D&D E5 Livro do jogador",
+        autor: "Wizards of the Coast",
+        imagem: "/imagens/dnd e5 livro do jogador.png",
+        genero: "RPG",
+        paginas: 320,
+        ano: 2014,
+        descricao: "Regras para criar personagens em Dungeons & Dragons 5ª edição.",
+        sinopse: "Regras para criar personagens em Dungeons & Dragons 5ª edição. O guia oficial que define como criar personagens, com classes, raças, habilidades e histórias para aventuras épicas."
+    },
+    "o-um-anel-livro-do-aventureiro": {
+        titulo: "O um anel - livro do aventureiro",
+        autor: "Free League Publishing",
+        imagem: "/imagens/um anel o livro do aventureiro.jpg",
+        genero: "RPG",
+        paginas: 448,
+        ano: 2019,
+        descricao: "RPG oficial na Terra-média de Tolkien: regras narrativas e viagens épicas.",
+        sinopse: "RPG oficial na Terra-média de Tolkien: regras narrativas e viagens épicas. Um sistema inovador que captura a essência das histórias de Tolkien para aventuras memoráveis."
+    },
+    "blades-in-the-dark": {
+        titulo: "Blades in the dark",
+        autor: "John Harper",
+        imagem: "/imagens/blades in the dark.png",
+        genero: "RPG",
+        paginas: 320,
+        ano: 2015,
+        descricao: "RPG de ladrões em uma cidade gótica e mágica.",
+        sinopse: "RPG de ladrões em uma cidade gótica e mágica. Um sistema inovador onde os jogadores controlam uma gangue navegando política, magia e intriga em uma cidade repleta de mistério."
+    },
+    "som-das-seis": {
+        titulo: "Som das seis",
+        autor: "Alex North",
+        imagem: "/imagens/o som das seis.png",
+        genero: "Suspense",
+        paginas: 368,
+        ano: 2021,
+        descricao: "Suspense que começa quando o relógio marca seis horas.",
+        sinopse: "Suspense que começa quando o relógio marca seis horas. Uma mulher acorda sem memória, e cada dia às seis, sua vida dá uma volta. Um thriller psicológico envolvente."
+    },
+    "paranoia": {
+        titulo: "Paranoia",
+        autor: "Don Kaye",
+        imagem: "/imagens/paranoia.jpg",
+        genero: "RPG",
+        paginas: 256,
+        ano: 1984,
+        descricao: "RPG satírico em um futuro distópico controlado por IA.",
+        sinopse: "RPG satírico em um futuro distópico controlado por IA. Os jogadores são agentes de um estado totalitário, tendo que lidar com traições e humor absurdo. Uma paródia brilhante."
+    },
+    "tormenta-modulo-basico": {
+        titulo: "Tormenta",
+        autor: "Mythos Editora",
+        imagem: "/imagens/tormenta.jpg",
+        genero: "RPG",
+        paginas: 208,
+        ano: 2017,
+        descricao: "O maior cenário de RPG brasileiro, com deuses e magia.",
+        sinopse: "O maior cenário de RPG brasileiro, com deuses e magia. Um sistema robusto para aventuras épicas no mundo de Tormenta, repleto de mitologia própria."
+    },
+    "legend-of-the-guardians-collection": {
+        titulo: "Lenda dos guardiões",
+        autor: "Kathryn James",
+        imagem: "/imagens/lenda dos guardiões.jpg",
+        genero: "Fantasia",
+        paginas: 368,
+        ano: 2010,
+        descricao: "Fantasia épica com corujas e reinos em guerra.",
+        sinopse: "Fantasia épica com corujas e reinos em guerra. Uma saga envolvente sobre coragem, lealdade e o preço de lutar pela liberdade em um mundo onde corujas navegam política e destino."
     },
 };

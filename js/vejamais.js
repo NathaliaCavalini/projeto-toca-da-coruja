@@ -25,7 +25,7 @@ export const livros = {
         paginas: 310,
         ano: 2021,
         descricaoCurta: "Um romance esportivo onde o amor entra em campo entre rivais.",
-        sinopse: "Uma história sobre paixão, esportes e a descoberta do amor verdadeiro."
+        sinopse: "é um romance sobre Alex, que não tem problemas em paquerar, e Molly, que tem dificuldades sociais mas é apaixonada por Cora. Alex decide ajudar Molly a conquistar Cora, com o objetivo de provar à sua ex que consegue se comprometer e construir vínculos. No entanto, ao longo do plano de cinco passos, ambas percebem que podem estar se apaixonando uma pela outra. "
     },
     "ela-fica": {
         titulo: "Ela fica com a garota",

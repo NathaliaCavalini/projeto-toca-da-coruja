@@ -129,7 +129,7 @@ body {
 a:-webkit-any-link {
   color: #000;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 body.dark-mode a:-webkit-any-link {
@@ -546,9 +546,12 @@ body.dark-mode .empty-state-box:hover {
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
+  user-select: none;
+  transition: opacity 0.2s ease;
 }
 .book-title p:hover {
   text-decoration: underline;
+  opacity: 0.8;
 }
 
 /* Comment text below title - APENAS PARA REVIEWS */
@@ -1386,4 +1389,219 @@ body.dark-mode textarea::placeholder {
 body.dark-mode .search-form input {
   color: var(--color-text) !important;
   background: transparent !important;
+}
+
+/* ===== BOOK PREVIEW MODAL ===== */
+.book-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.book-preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.book-preview-card {
+  position: relative;
+  z-index: 2001;
+  background: var(--color-primary);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  max-height: 75vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.book-preview-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(58, 45, 20, 0.1);
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.book-preview-close:hover {
+  background: rgba(58, 45, 20, 0.2);
+  transform: rotate(90deg);
+}
+
+.book-preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book-preview-title {
+  font-size: 1.6rem;
+  color: var(--color-text);
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.book-preview-author {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.book-preview-genre {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.book-preview-description {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 8px 0;
+  opacity: 0.85;
+  text-align: justify;
+}
+
+.book-preview-info {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin: 4px 0;
+  padding-top: 4px;
+  border-top: 1px solid rgba(58, 45, 20, 0.1);
+}
+
+.book-preview-button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 20px;
+  background: var(--color-accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.book-preview-button:hover {
+  background: #6d4a38;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 105, 77, 0.3);
+}
+
+.book-preview-button:active {
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode */
+body.dark-mode .book-preview-card {
+  background: #4a2f20;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .book-preview-close {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .book-preview-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .book-preview-title,
+body.dark-mode .book-preview-author,
+body.dark-mode .book-preview-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .book-preview-genre {
+  color: #C5946C;
+}
+
+body.dark-mode .book-preview-info {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .book-preview-button {
+  background: #7a5540;
+}
+
+body.dark-mode .book-preview-button:hover {
+  background: #8b694d;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .book-preview-card {
+    padding: 24px;
+    max-width: 95%;
+    border-radius: 16px;
+  }
+
+  .book-preview-title {
+    font-size: 1.4rem;
+  }
+
+  .book-preview-description {
+    font-size: 0.9rem;
+  }
+
+  .book-preview-button {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
 }

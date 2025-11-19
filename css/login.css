@@ -84,10 +84,16 @@ input:focus {
     font-size: 16px;
     font-weight: bold;
     transition: background 0.3s;
+    outline: none;
 }
 
 .btn:hover {
     background: #714f34;
+}
+
+.btn:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .link {
@@ -145,6 +151,11 @@ body.dark-mode .btn {
 
 body.dark-mode .btn:hover {
     background: #8B694D;
+}
+
+body.dark-mode .btn:focus {
+    outline: 2px solid #C5946C;
+    outline-offset: 2px;
 }
 
 body.dark-mode .link a {
