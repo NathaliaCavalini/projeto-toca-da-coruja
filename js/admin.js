@@ -89,7 +89,7 @@ async function renderBooksList() {
                     } | <strong>Páginas:</strong> ${book.paginas}</p>
                 </div>
                 <div class="book-admin-actions">
-                    <a href="vejamais.html?id=${id}" target="_blank" class="btn-edit">Ver Página</a>
+                    <a href="vejamais.html?id=${id}" target="_blank" class="btn-view-page">Ver Página</a>
                     ${
                       isAdminBook
                         ? `
@@ -134,11 +134,27 @@ function updateGenreSelect() {
 
   // Encontrar a opção "novo"
   const novoOption = generoSelect.querySelector('option[value="novo"]');
+  const emptyOption = generoSelect.querySelector('option[value=""]');
 
-  // Remover todas as options customizadas (não fixas e não "novo")
+  // Remover todas as options customizadas (não fixas, não "novo" e não vazia)
   Array.from(generoSelect.querySelectorAll("option")).forEach((option) => {
-    if (!fixedGenres.includes(option.value) && option.value !== "novo") {
+    if (!fixedGenres.includes(option.value) && option.value !== "novo" && option.value !== "") {
       option.remove();
+    }
+  });
+
+  // Garantir que todas as opções fixas existam
+  fixedGenres.forEach((genre) => {
+    if (!generoSelect.querySelector(`option[value="${genre}"]`)) {
+      const newOption = document.createElement("option");
+      newOption.value = genre;
+      newOption.textContent = genre;
+      if (novoOption) {
+        generoSelect.insertBefore(newOption, novoOption);
+      } else {
+        generoSelect.appendChild(newOption);
+      }
+      console.log(`✅ Adicionado ao select (gênero fixo): ${genre}`);
     }
   });
 
