@@ -798,6 +798,25 @@ document.querySelectorAll(".admin-tab").forEach((tab) => {
     e.preventDefault();
     const tabName = e.currentTarget.dataset.tab;
 
+    // Remover classe active de todos os tabs
+    document.querySelectorAll(".admin-tab").forEach((t) => {
+      t.classList.remove("active");
+    });
+
+    // Adicionar classe active ao tab clicado
+    e.currentTarget.classList.add("active");
+
+    // Esconder hero section e mostrar container
+    const heroAdmin = document.querySelector(".hero-admin");
+    const adminContainer = document.querySelector(".admin-container");
+    
+    if (heroAdmin) {
+      heroAdmin.classList.add("hidden");
+    }
+    if (adminContainer) {
+      adminContainer.classList.add("show");
+    }
+
     // Esconder todas as tabs
     document.querySelectorAll(".admin-tab-content").forEach((content) => {
       content.classList.add("hidden");

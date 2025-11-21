@@ -106,10 +106,10 @@ function updateGenresMenu() {
             // Criar as imagens com suporte a modo claro/escuro
             if (isCurrent) {
                 // Livro aberto
-                a.innerHTML = `<img src="${imagePath}livro-aberto-modo-claro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--light"><img src="${imagePath}livro-aberto-modo-escuro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--dark"> ${genre.name}`;
+                a.innerHTML = `<img src="${imagePath}livro-aberto-modo-claro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--light fade-in"><img src="${imagePath}livro-aberto-modo-escuro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--dark fade-in"> ${genre.name}`;
             } else {
                 // Livro fechado
-                a.innerHTML = `<img src="${imagePath}livro-fechado-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="${imagePath}livro-fechado-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark"> ${genre.name}`;
+                a.innerHTML = `<img src="${imagePath}livro-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="${imagePath}livro-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark"> ${genre.name}`;
             }
             
             if (isCurrent) {

@@ -331,6 +331,42 @@ body.dark-mode .livro-fechado--light {
   display: none;
 }
 
+/* Ícone livro (menu) com modo claro/escuro */
+.livro-menu--light {
+  display: inline-block;
+}
+.livro-menu--dark {
+  display: none;
+}
+body.dark-mode .livro-menu--dark {
+  display: inline-block;
+}
+body.dark-mode .livro-menu--light {
+  display: none;
+}
+
+/* Animação de flip 90º */
+.fade-in {
+  animation: flipIn .4s ease forwards;
+}
+
+@keyframes flipIn {
+  from { 
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  to { 
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+.livro-aberto,
+.livro-menu {
+  transition: transform 0.3s ease-in-out;
+  perspective: 1000px;
+}
+
 /* ===== GRID DE LIVROS ===== */
 .book-grid {
   display: grid;

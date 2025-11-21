@@ -1,10 +1,102 @@
 /* Admin-specific styles - extends home.css */
 
+/* Esconder container inicialmente, mostrar apenas hero */
 .admin-container {
     padding: 40px 40px 80px;
     max-width: 1400px;
     margin: 0 auto;
     min-height: calc(100vh - 500px);
+    display: none !important;
+}
+
+.admin-container.show {
+    display: block !important;
+}
+
+/* Hero section admin - mostrar inicialmente */
+.hero-admin {
+    display: block;
+}
+
+.hero-admin.hidden {
+    display: none;
+}
+
+/* Menu section Admin */
+.admin-menu-section {
+    padding-bottom: 0;
+    margin-bottom: 56px;
+}
+
+.admin-menu-section .menu-list li {
+    padding-bottom: 0;
+    margin-bottom: 8px;
+}
+
+.admin-menu-section .menu-list li a.admin-tab,
+.admin-menu-section .menu-list li a.admin-link {
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: background-color 0.3s ease;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-menu-section .menu-list li a.admin-tab::after,
+.admin-menu-section .menu-list li a.admin-link::after {
+    content: "- - - - - - -";
+    position: absolute;
+    bottom: -6px;
+    left: -100%;
+    color: var(--color-text);
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: left 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.admin-menu-section .menu-list li a.admin-tab:hover::after,
+.admin-menu-section .menu-list li a.admin-link:hover::after {
+    left: 0;
+    opacity: 1;
+}
+
+.admin-menu-section .menu-list li a.admin-tab:hover,
+.admin-menu-section .menu-list li a.admin-link:hover {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .admin-menu-section .menu-list li a.admin-tab:hover,
+body.dark-mode .admin-menu-section .menu-list li a.admin-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.admin-menu-section .menu-list li a.admin-tab.active {
+    background-color: rgba(0, 0, 0, 0.1);
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.admin-menu-section .menu-list li a.admin-tab.active::after {
+    display: none !important;
+}
+
+.admin-menu-section .menu-list li a.admin-tab.active:hover {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.admin-menu-section .menu-list li a.admin-tab.active:hover::after {
+    display: none !important;
+}
+
+body.dark-mode .admin-menu-section .menu-list li a.admin-tab.active {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .admin-header {
@@ -708,6 +800,7 @@ body.modal-open {
             width: 100%;
         }
 
+
         .modal-content {
             width: 95%;
         }
@@ -717,3 +810,4 @@ body.modal-open {
         }
     }
 }
+
