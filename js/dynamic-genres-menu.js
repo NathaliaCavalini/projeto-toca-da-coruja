@@ -102,9 +102,15 @@ function updateGenresMenu() {
             a.href = genre.url;
             
             const isCurrent = currentGenre === genre.name || genre.url === currentPage;
-            const icon = isCurrent ? 'livro_aberto.png' : 'livro_fechado.png';
             
-            a.innerHTML = `<img src="${imagePath}${icon}" width="20" height="20" alt=""> ${genre.name}`;
+            // Criar as imagens com suporte a modo claro/escuro
+            if (isCurrent) {
+                // Livro aberto
+                a.innerHTML = `<img src="${imagePath}livro-aberto-modo-claro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--light"><img src="${imagePath}livro-aberto-modo-escuro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--dark"> ${genre.name}`;
+            } else {
+                // Livro fechado
+                a.innerHTML = `<img src="${imagePath}livro-fechado-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="${imagePath}livro-fechado-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark"> ${genre.name}`;
+            }
             
             if (isCurrent) {
                 a.classList.add('genre-selected');

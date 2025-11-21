@@ -309,6 +309,28 @@ body.dark-mode .admin-icon--light {
   display: none;
 }
 
+/* Ícone livro aberto com modo claro/escuro */
+.livro-aberto--dark {
+  display: none;
+}
+body.dark-mode .livro-aberto--dark {
+  display: inline-block;
+}
+body.dark-mode .livro-aberto--light {
+  display: none;
+}
+
+/* Ícone livro fechado com modo claro/escuro */
+.livro-fechado--dark {
+  display: none;
+}
+body.dark-mode .livro-fechado--dark {
+  display: inline-block;
+}
+body.dark-mode .livro-fechado--light {
+  display: none;
+}
+
 /* ===== GRID DE LIVROS ===== */
 .book-grid {
   display: grid;
