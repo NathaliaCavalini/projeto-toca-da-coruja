@@ -338,6 +338,76 @@ body.dark-mode .livro-fechado--light {
 .livro-menu--dark {
   display: none;
 }
+
+/* Ícone quer ler com modo claro/escuro */
+.quer-ler--light {
+  display: inline-block;
+}
+.quer-ler--dark {
+  display: none;
+}
+body.dark-mode .quer-ler--light {
+  display: none;
+}
+body.dark-mode .quer-ler--dark {
+  display: inline-block;
+}
+
+/* Ícone já lido com modo claro/escuro */
+.ja-lido--light {
+  display: inline-block;
+}
+.ja-lido--dark {
+  display: none;
+}
+body.dark-mode .ja-lido--light {
+  display: none;
+}
+body.dark-mode .ja-lido--dark {
+  display: inline-block;
+}
+
+/* Ícone favoritos com modo claro/escuro */
+.favoritos--light {
+  display: inline-block;
+}
+.favoritos--dark {
+  display: none;
+}
+body.dark-mode .favoritos--light {
+  display: none;
+}
+body.dark-mode .favoritos--dark {
+  display: inline-block;
+}
+
+/* Ícone reviews com modo claro/escuro */
+.reviews--light {
+  display: inline-block;
+}
+.reviews--dark {
+  display: none;
+}
+body.dark-mode .reviews--light {
+  display: none;
+}
+body.dark-mode .reviews--dark {
+  display: inline-block;
+}
+
+/* Ícone lupa com modo claro/escuro */
+.lupa--light {
+  display: inline-block;
+}
+.lupa--dark {
+  display: none;
+}
+body.dark-mode .lupa--light {
+  display: none;
+}
+body.dark-mode .lupa--dark {
+  display: inline-block;
+}
 body.dark-mode .livro-menu--dark {
   display: inline-block;
 }
@@ -1467,6 +1537,11 @@ body.dark-mode textarea::placeholder {
 body.dark-mode .search-form input {
   color: var(--color-text) !important;
   background: transparent !important;
+}
+
+body.dark-mode .search-form input::placeholder {
+  color: #999999 !important;
+  opacity: 1 !important;
 }
 
 /* ===== BOOK PREVIEW MODAL ===== */
