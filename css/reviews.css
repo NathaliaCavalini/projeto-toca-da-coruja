@@ -112,18 +112,19 @@
 .floating-review-card .btn-submit { padding:8px 12px; border-radius:8px; border:none; background:var(--color-accent); color:#fff; cursor:pointer; }
 
 /* ANIMAÇÕES DE CAFÉ - PROFISSIONAL */
-
-/* Animação de adição com gotinhas */
-@keyframes coffeeSpread {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    40% {
-        transform: scale(1.05);
-        opacity: 1;
-    }
-    100% {
+/* Estética cortada só nos cards de review já postados */
+.book-item.review-card .star.half {
+    color: transparent;
+    position: relative;
+}
+.book-item.review-card .star.half::before {
+    content: "★";
+    color: var(--primary-color, #ffb400);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+}
         transform: scale(1);
         opacity: 1;
     }
@@ -295,7 +296,31 @@
     animation: coffeeRemove 0.5s cubic-bezier(0.64, 0, 0.34, 0) forwards;
 }
 
-/* Responsividade */
+/* ===== ESTRELAS NOS CARDS DE REVIEW ===== */
+.book-item.review-card .star {
+    font-size: 16px;
+    color: var(--c-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.book-item.review-card .star.full {
+    color: var(--c-accent);
+}
+
+.book-item.review-card .star.half {
+  color: transparent;
+}
+
+.book-item.review-card .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--c-accent);
+  width: 50%;
+  overflow: hidden;
+}/* Responsividade */
 @media (max-width: 520px) {
     .floating-review-wrapper { right: 12px; bottom: 16px; }
     .floating-review-card { width: 92vw; }

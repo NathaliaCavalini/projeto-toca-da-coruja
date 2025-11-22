@@ -1,3 +1,63 @@
+/* ============================
+   ⭐ Estrelas com meia estrela
+   ============================ */
+
+.star-rating {
+  direction: rtl; /* Permite clicar da direita para a esquerda */
+  display: inline-flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-rating span {
+  font-size: 32px;
+  color: #b9b9b9;
+  padding: 0 3px;
+  position: relative;
+}
+
+.star-rating span::before {
+  content: "★";
+}
+
+/* ⭐ Estrela cheia */
+.star-rating span.full::before {
+  color: #e49b0f;
+}
+
+/* ⭐ Meia estrela */
+.star-rating span.half::before {
+  background: linear-gradient(90deg, #e49b0f 50%, #b9b9b9 50%);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ⭐ Hover (pré-visualização da nota) */
+.star-rating span:hover,
+.star-rating span:hover ~ span {
+  color: #e49b0f !important;
+}
+/* Meia estrela tradicional (não cortada) só no formulário de avaliação, inclusive no hover */
+.review-section .review-stars .star.half {
+  color: transparent;
+  position: relative;
+}
+.review-section .review-stars .star.half::before {
+  content: "★";
+  color: var(--primary-color, #ffb400);
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+/* Meia estrela tradicional (não cortada) só no formulário de avaliação */
+.review-section .review-stars .star.half {
+  color: var(--primary-color, #ffb400);
+  position: relative;
+}
+.review-section .review-stars .star.half::before {
+  content: none;
+}
 /* ===== VARIÁVEIS ===== */
 :root {
   /* Aliases para tokens globais de home.css (mantém visual idêntico) */
@@ -98,7 +158,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--color-muted);
+  background: var(--light-color);
   border: 1px solid rgba(197, 148, 108, 0.2);
   border-radius: 40px;
   padding: 8px 14px;
@@ -189,7 +249,7 @@ body {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
-  background-color: var(--color-primary);
+  background-color: var(--primary-color);
   border: 1px solid rgba(139, 105, 77, 0.08);
   border-radius: 40px;
   padding: 10px 18px;
@@ -237,6 +297,12 @@ body {
 
 .nav-menu img {
   width: 20px;
+  display: block;
+}
+
+/* Remove underline effect from icon-only links */
+.nav-menu a img {
+  vertical-align: middle;
 }
 
 /* ===== CARD DO LIVRO ===== */
@@ -345,55 +411,73 @@ body {
 }
 
 /* ===== RATING ESTRELAS ===== */
-.rating-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-top: 10px;
-}
+/* ============================
+   ESTRELAS PROFISSIONAIS
+   ============================ */
 
-.rating-average {
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--accent-color);
-}
-
-.rating-stars,
-.review-stars,
-.review-rating-stars {
-  display: flex;
-  gap: 5px;
-}
-
+/* Cor base (vazia) — sempre um tom mais claro da paleta */
 .star {
   font-size: 28px;
-  color: var(--primary-color);
+  color: color-mix(in srgb, var(--accent-color) 30%, transparent);
+  opacity: 0.8;
+  cursor: default;
   position: relative;
   display: inline-block;
 }
 
+/* Cor quando preenchida */
 .star.full {
   color: var(--accent-color);
 }
 
+/* Meia estrela universal — elegante e limpa */
 .star.half {
-  background: linear-gradient(
-    to right,
-    var(--accent-color) 50%,
-    var(--primary-color) 50%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-/* Para estrelas em reviews (menores) */
+.star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: var(--accent-color);
+}
+
+/* Para estrelas menores (reviews já postadas) */
 .review-rating-stars .star {
   font-size: 20px;
+  opacity: 0.9;
 }
 
+/* Estrelas no formulário */
+.review-section .review-stars .star {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Hover apenas no formulário de avaliação */
+.review-section .review-stars .star:hover {
+  transform: scale(1.15);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Estrelas ao selecionar no formulário (JS aplica .active, mas aqui garantimos visual) */
+.review-section .review-stars .star.active {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Remover qualquer regra antiga que apagava estrelas seguintes após a meia */
+#book-detail .review-list .star.half ~ .star {
+  color: color-mix(in srgb, var(--accent-color) 30%, transparent) !important;
+  opacity: 0.8;
+}
+
+
 /* ===== SEÇÃO DE NOVA AVALIAÇÃO ===== */
-.review-section {
+#book-detail .review-section {
   max-width: 800px;
   margin: 0 auto 20px;
   padding: 20px;
@@ -402,21 +486,24 @@ body {
   box-shadow: var(--shadow);
 }
 
-.review-section h2 {
+#book-detail .review-section h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
+  color: var(--text-color);
 }
 
-.review-section textarea {
+#book-detail .review-section textarea {
   width: 100%;
   min-height: 100px;
   padding: 10px;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
   resize: vertical;
+  color: #000;
+  background: #fff;
 }
 
-.submit-btn {
+#book-detail .submit-btn {
   margin-top: 10px;
   padding: 10px 20px;
   background: var(--accent-color);
@@ -427,12 +514,12 @@ body {
   transition: background 0.3s;
 }
 
-.submit-btn:hover {
+#book-detail .submit-btn:hover {
   background: var(--primary-color);
 }
 
 /* ===== LISTA DE AVALIAÇÕES ===== */
-.reviews {
+#book-detail .reviews {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -441,12 +528,13 @@ body {
   box-shadow: var(--shadow);
 }
 
-.reviews h2 {
+#book-detail .reviews h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
+  color: var(--text-color);
 }
 
-.review-item {
+#book-detail .review-item {
   background: var(--secondary-color);
   padding: 15px;
   border-radius: 20px;
@@ -457,25 +545,56 @@ body {
   min-width: 0;
 }
 
-.review-item:hover {
+#book-detail .review-item:hover {
   transform: translateY(-3px);
 }
 
-.review-meta {
+#book-detail .review-meta {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   min-width: 0;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 
-.review-date {
+#book-detail .review-rating {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+#book-detail .review-rating .star {
+  font-size: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+#book-detail .review-rating .star.full {
+  color: var(--accent-color);
+}
+
+#book-detail .review-rating .star.half {
+  color: transparent;
+}
+
+#book-detail .review-rating .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  width: 50%;
+  overflow: hidden;
+}
+
+#book-detail .review-date {
   font-size: 0.8rem;
   color: gray;
 }
 
-.review-text {
+#book-detail .review-text {
   font-size: 1rem;
   color: var(--text-color);
   overflow: hidden;
@@ -483,6 +602,20 @@ body {
   overflow-wrap: anywhere;
   max-width: 100%;
   line-height: 1.5;
+}
+
+/* Empty state para reviews */
+#book-detail .review-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+#book-detail .review-empty-state p {
+  margin: 8px 0;
+  font-size: 1.1rem;
 }
 
 /* ===== ANIMAÇÃO ===== */

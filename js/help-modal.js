@@ -255,6 +255,11 @@ function initHelpModal() {
   addHelpModalStyles();
   const modal = createHelpModal();
 
+  if (!modal) {
+    console.warn('Falha ao criar help modal');
+    return;
+  }
+
   // Encontrar botões de ajuda
   const helpButtons = document.querySelectorAll(".icon-btn");
   const ajudaButton = Array.from(helpButtons).find((btn) => {
@@ -278,6 +283,7 @@ function initHelpModal() {
 
     ajudaButton.addEventListener("click", () => {
       const body = modal.querySelector(".help-modal-body");
+      if (!body) return;
 
       if (isAdmin) {
         body.innerHTML = `
@@ -296,15 +302,19 @@ function initHelpModal() {
         `;
       }
 
-      modal.classList.add("active");
+      if (modal && modal.classList) {
+        modal.classList.add("active");
+      }
     });
   });
 
   // Fechar modal
   const closeBtn = modal.querySelector(".help-modal-close");
-  closeBtn.addEventListener("click", () => {
-    modal.classList.remove("active");
-  });
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+  }
 
   // Fechar ao clicar fora
   modal.addEventListener("click", (e) => {
@@ -315,7 +325,7 @@ function initHelpModal() {
 
   // Fechar com ESC
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
+    if (e.key === "Escape" && modal && modal.classList.contains("active")) {
       modal.classList.remove("active");
     }
   });

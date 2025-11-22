@@ -164,7 +164,20 @@ async function renderUserReviews() {
         const tituloLivro = bookInfo ? bookInfo.titulo : `Livro (ID: ${review.bookId})`;
         const autorLivro = bookInfo ? bookInfo.autor : 'Autor desconhecido';
         const imgLivro = bookInfo ? bookInfo.imagem : '/imagens/placeholder.svg';
-        const ratingStars = "★".repeat(Math.floor(review.rating)) + (review.rating % 1 ? "½" : "");
+        
+        // Gerar estrelas com classes CSS
+        const ratingStars = [...Array(5)].map((_, i) => {
+            const val = i + 1;
+            const rating = review.rating;
+            if (rating >= val) {
+                return '<span class="star full">★</span>';
+            } else if (rating >= val - 0.5) {
+                return '<span class="star half">★</span>';
+            } else {
+                return '<span class="star">★</span>';
+            }
+        }).join('');
+        
         const reviewDate = new Date(review.timestamp).toLocaleDateString();
         const shortComment = review.text.length > 100 ? review.text.slice(0, 100) + '…' : review.text;
 
@@ -173,7 +186,7 @@ async function renderUserReviews() {
     <div class="book-card"><img src="${esc(imgLivro)}" alt="${esc(tituloLivro)}" onerror="this.src='/imagens/placeholder.svg'"></div>
     <div class="book-title">
         <p>${esc(tituloLivro)}</p>
-        <div style="font-size: 0.9em; margin: 0px 0 0 0; text-align: center;">${ratingStars}</div>
+        <div style="font-size: 0.9em; margin: 0px 0 0 0; text-align: center; display: flex; gap: 2px; justify-content: center;">${ratingStars}</div>
         <div style="font-size: 0.85em; opacity: 0.7; margin-bottom: 4px; text-align: center;">${reviewDate}</div>
         <div class="book-comment-text">${esc(shortComment)}</div>
         <div class="botao-quero-ler">

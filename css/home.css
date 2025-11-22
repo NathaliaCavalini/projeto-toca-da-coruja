@@ -265,6 +265,12 @@ body.dark-mode a:-webkit-any-link {
   border-radius: 2px;
   transition: all 0.3s ease;
 }
+
+/* Remove underline from icon-only links (all nav links with images) */
+.nav-menu a:has(> img)::after {
+  display: none !important;
+}
+
 .nav-menu a:hover::after,
 .nav-menu a.active::after,
 .menu-list a:hover::after,

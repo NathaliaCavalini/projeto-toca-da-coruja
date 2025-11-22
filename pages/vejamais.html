@@ -19,7 +19,7 @@
     </script>
 </head>
 
-<body>
+<body data-button-mode="single">
     <aside class="sidebar">
         <header class="logo">
             <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
@@ -30,18 +30,13 @@
         <section class="menu-section">
             <h2>Gêneros</h2>
             <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro_fechado.png" width="20" height="20" alt="">RPG</a>
+                <li><a href="rpg.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">RPG</a>
                 </li>
-                <li><a href="gay.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">LGBTQIAPN+</a></li>
-                <li><a href="fantasia.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Fantasia</a></li>
-                <li><a href="romance.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Romance</a></li>
-                <li><a href="classico.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Clássicos</a></li>
-                <li><a href="programacao.html"><img src="../imagens/livro_fechado.png" width="20" height="20"
-                            alt="">Programação</a></li>
+                <li><a href="gay.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">LGBTQIAPN+</a></li>
+                <li><a href="fantasia.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Fantasia</a></li>
+                <li><a href="romance.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Romance</a></li>
+                <li><a href="classico.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Clássicos</a></li>
+                <li><a href="programacao.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Programação</a></li>
             </ul>
         </section>
 
@@ -57,25 +52,107 @@
 
     <main class="main-content">
         <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark">Catálogo</a>
-            <a href="quer_ler.html"><img src="../imagens/quer-ler-modo-claro.png" width="20" height="20" alt="" class="quer-ler quer-ler--light"><img src="../imagens/quer-ler-modo-escuro.png" width="20" height="20" alt="" class="quer-ler quer-ler--dark">Quer ler</a>
-            <a href="ja_lidos.html"><img src="../imagens/ja-lido-modo-claro.png" width="20" height="20" alt="" class="ja-lido ja-lido--light"><img src="../imagens/ja-lido-modo-escuro.png" width="20" height="20" alt="" class="ja-lido ja-lido--dark">Já lidos</a>
-            <a href="favoritos.html"><img src="../imagens/favoritos-modo-claro.png" width="20" height="20" alt="" class="favoritos favoritos--light"><img src="../imagens/favoritos-modo-escuro.png" width="20" height="20" alt="" class="favoritos favoritos--dark">Favoritos</a>
-            <a href="reviews.html"><img src="../imagens/reviews-modo-claro.png" width="20" height="20" alt="" class="reviews reviews--light"><img src="../imagens/reviews-modo-escuro.png" width="20" height="20" alt="" class="reviews reviews--dark">Reviews</a>
-            
-            <form class="search-form" role="search" onsubmit="return false;">
-                <img src="../imagens/lupa-modo-claro.png" width="20" height="20" alt="Buscar" class="search-icon lupa lupa--light"><img src="../imagens/lupa-modo-escuro.png" width="20" height="20" alt="Buscar" class="search-icon lupa lupa--dark">
-                <input type="search" id="search-input" placeholder="Pesquisar..." />
-            </form>
+            <a href="home.html"
+          ><img
+            src="../imagens/livro-aberto-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="livro-aberto livro-aberto--light fade-in"
+          /><img
+            src="../imagens/livro-aberto-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="livro-aberto livro-aberto--dark fade-in"
+          />Catálogo</a
+        >
+        <a href="quer_ler.html"
+          ><img
+            src="../imagens/quer-ler-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="quer-ler quer-ler--light"
+          /><img
+            src="../imagens/quer-ler-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="quer-ler quer-ler--dark"
+          />Quer ler</a
+        >
+        <a href="ja_lidos.html"
+          ><img src="../imagens/ja-lido-modo-claro.png" width="20" height="20" alt="" class="ja-lido ja-lido--light" /><img src="../imagens/ja-lido-modo-escuro.png" width="20" height="20" alt="" class="ja-lido ja-lido--dark" />Já
+          lidos</a
+        >
+        <a href="favoritos.html"
+          ><img
+            src="../imagens/favoritos-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="favoritos favoritos--light"
+          /><img
+            src="../imagens/favoritos-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="favoritos favoritos--dark"
+          />Favoritos</a
+        >
+        <a href="reviews.html"
+          ><img
+            src="../imagens/reviews-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="reviews reviews--light"
+          /><img
+            src="../imagens/reviews-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="reviews reviews--dark"
+          />Reviews</a
+        >
 
-            <div class="nav-actions" aria-hidden="false">
-                <button class="icon-btn" title="Modo escuro">
-                    <img src="../imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
-                </button>
-                <button class="icon-btn" title="Ajuda">
-                    <img src="../imagens/ajuda-light-mode.png" width="20" height="20" alt="Ícone ajuda">
-                </button>
-            </div>
+        <form class="search-form" role="search" onsubmit="return false;">
+          <img
+            src="../imagens/lupa-modo-claro.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon lupa lupa--light"
+          /><img
+            src="../imagens/lupa-modo-escuro.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon lupa lupa--dark"
+          />
+          <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <!-- ações (ícones) ficam à direita -->
+        <div class="nav-actions" aria-hidden="false">
+          <button class="icon-btn" title="Modo escuro">
+            <img
+              src="../imagens/escuro.png"
+              width="20"
+              height="20"
+              alt="Ícone modo escuro"
+            />
+          </button>
+          <button class="icon-btn" title="Ajuda">
+            <img
+              src="../imagens/ajuda-light-mode.png"
+              width="20"
+              height="20"
+              alt="Ícone ajuda"
+            />
+          </button>
+        </div>
         </nav>
 
         <section id="book-detail">
@@ -86,48 +163,12 @@
     <script type="module" src="../js/theme.js"></script>
     <script type="module" src="../js/vejamais.js"></script>
     <script type="module" src="../js/admin-button.js"></script>
-
-
-    <!-- Firebase: mostrar nome do usuário -->
-    <script type="module">
-        import { auth } from "../js/firebase-config.js";
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-
-        const userInfo = document.getElementById("user-info");
-        
-        // Verifica se elemento existe antes de tentar modificar
-        if (!userInfo) {
-            console.warn("Elemento #user-info não encontrado na página vejamais.html");
-        } else {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const nome = user.displayName || user.email.split("@")[0];
-                    const foto = user.photoURL || "../imagens/user.png";
-
-                    userInfo.innerHTML = `
-                        <img src="${foto}" alt="Foto do usuário" style="width:30px; height:30px; border-radius:50%;" />
-                        <span>${nome}</span>
-                    `;
-                    userInfo.setAttribute("href", "perfil.html");
-                } else {
-                    userInfo.innerHTML = `
-                        <img src="../imagens/user.png" alt="Ícone de usuário" />
-                        <span>Cadastre-se</span>
-                    `;
-                    userInfo.setAttribute("href", "login.html");
-                }
-            });
-        }
-    </script>
     <script type="module" src="../js/user-info-global.js"></script>
     <script type="module" src="../js/dynamic-genres-menu.js"></script>
     <script src="../js/toast-notifications.js"></script>
     <script src="../js/universal-search.js"></script>
-        <script src="/js/library-actions-delegated.js"></script>
+    <script src="/js/library-actions-delegated.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
-</body>
-
-</html>
 </body>
 
 </html>

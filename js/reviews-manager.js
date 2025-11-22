@@ -110,7 +110,19 @@ export function createReviewElement(review, showBookInfo = false) {
         ${bookInfo}
         <div class="review-meta">
             <strong class="review-user">${review.username}</strong>
-            <span class="review-rating">${"★".repeat(Math.floor(review.rating))}${review.rating % 1 ? "½" : ""}</span>
+            <span class="review-rating">
+                ${[...Array(5)].map((_, i) => {
+                    const val = i + 1;
+                    const rating = review.rating;
+                    if (rating >= val) {
+                        return '<span class="star full">★</span>';
+                    } else if (rating >= val - 0.5) {
+                        return '<span class="star half">★</span>';
+                    } else {
+                        return '<span class="star">★</span>';
+                    }
+                }).join('')}
+            </span>
             <span class="review-date">${new Date(review.timestamp).toLocaleDateString()}</span>
         </div>
         <p class="review-text">${review.text}</p>

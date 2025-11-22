@@ -529,6 +529,17 @@ let reviewStars = initStarRating(reviewStarsEl, 0, (rating) => {
 function renderReviews() {
     reviewList.innerHTML = "";
     const reviews = getBookReviews(id);
+    
+    if (reviews.length === 0) {
+        reviewList.innerHTML = `
+            <div class="review-empty-state">
+                <p>Nenhuma review foi feita ainda.</p>
+                <p>Seja o(a) primeiro(a)!</p>
+            </div>
+        `;
+        return;
+    }
+    
     reviews.forEach((review) => {
         const reviewElement = createReviewElement(review);
         reviewList.appendChild(reviewElement);

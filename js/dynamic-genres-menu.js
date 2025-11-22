@@ -108,8 +108,8 @@ function updateGenresMenu() {
                 // Livro aberto
                 a.innerHTML = `<img src="${imagePath}livro-aberto-modo-claro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--light fade-in"><img src="${imagePath}livro-aberto-modo-escuro.png" width="20" height="20" alt="" class="livro-aberto livro-aberto--dark fade-in"> ${genre.name}`;
             } else {
-                // Livro fechado
-                a.innerHTML = `<img src="${imagePath}livro-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="${imagePath}livro-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark"> ${genre.name}`;
+                // Livro menu (fechado)
+                a.innerHTML = `<img src="${imagePath}livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="${imagePath}livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark"> ${genre.name}`;
             }
             
             if (isCurrent) {
