@@ -1765,13 +1765,12 @@ body.dark-mode .search-form input::placeholder {
 }
 
 .book-preview-button:hover {
-  transform: translateY(-2px);
   background: var(--color-accent);
-  box-shadow: 0 8px 16px rgba(139, 105, 77, 0.26);
+  /* Sem animação de hover */
 }
 
 .book-preview-button:active {
-  transform: translateY(0);
+  /* Sem animação de pressionar */
 }
 
 .book-preview-button:focus-visible {

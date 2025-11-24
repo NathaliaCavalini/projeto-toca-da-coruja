@@ -493,8 +493,14 @@ const ratingContainer = document.querySelector(".rating-stars");
 const averageEl = document.querySelector(".rating-average");
 const userId = "user-123"; // simulação de login
 
-let ratings = JSON.parse(localStorage.getItem(`bookRating-${id}`)) || {};
-let currentRating = ratings[userId] || 0;
+let ratings = JSON.parse(localStorage.getItem(`bookRating-${id}`));
+if (!ratings) {
+    ratings = {};
+}
+let currentRating = 0;
+if (ratings[userId] !== undefined) {
+    currentRating = ratings[userId];
+}
 
 const mainStars = initStarRating(ratingContainer, currentRating, (newRating) => {
     ratings[userId] = newRating;

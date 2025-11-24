@@ -1,6 +1,26 @@
-/* ============================
-   ⭐ Estrelas com meia estrela
-   ============================ */
+body.dark-mode .nav-menu img.livro-aberto--dark.fade-in {
+  display: inline-block !important;
+}
+body.dark-mode .nav-menu img.livro-aberto--light.fade-in {
+  display: none !important;
+}
+.nav-menu img.livro-aberto--dark.fade-in {
+  display: none !important;
+}
+/* Força o comportamento correto dos ícones de navegação (light/dark) */
+.nav-menu img[class$="--light"] {
+  display: inline-block !important;
+}
+.nav-menu img[class$="--dark"] {
+  display: none !important;
+}
+body.dark-mode .nav-menu img[class$="--light"] {
+  display: none !important;
+}
+body.dark-mode .nav-menu img[class$="--dark"] {
+  display: inline-block !important;
+}
+
 
 .star-rating {
   direction: rtl; /* Permite clicar da direita para a esquerda */
@@ -44,19 +64,14 @@
 }
 .review-section .review-stars .star.half::before {
   content: "★";
-  color: var(--primary-color, #ffb400);
+  background: linear-gradient(90deg, var(--accent-color) 50%, var(--primary-color) 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   position: absolute;
   left: 0;
-  width: 50%;
+  width: 100%;
   overflow: hidden;
-}
-/* Meia estrela tradicional (não cortada) só no formulário de avaliação */
-.review-section .review-stars .star.half {
-  color: var(--primary-color, #ffb400);
-  position: relative;
-}
-.review-section .review-stars .star.half::before {
-  content: none;
 }
 /* ===== VARIÁVEIS ===== */
 :root {
@@ -432,7 +447,7 @@ body {
 
 /* Meia estrela universal — elegante e limpa */
 .star.half {
-  color: transparent;
+  color: var(--primary-color );
 }
 
 .star.half::before {
