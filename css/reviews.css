@@ -108,7 +108,29 @@
 .floating-review-card textarea { min-height: 84px; resize: vertical; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word; }
 .floating-review-card .row { display:flex; gap:8px; align-items:center; }
 .floating-review-card .actions { display:flex; gap:8px; justify-content:flex-end; margin-top:10px; }
-.floating-review-card .btn-cancel { background:transparent; border:1px solid rgba(0,0,0,0.08); padding:8px 12px; border-radius:8px; cursor:pointer; }
+.floating-review-card .btn-cancel {
+    background: #b71c1c;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s ease, transform .06s ease;
+}
+.floating-review-card .btn-cancel:hover {
+    background: #e53935;
+}
+.floating-review-card .btn-cancel:active {
+    transform: translateY(1px);
+}
+
+/* Stars widget for floating review card (supports half-stars) */
+.floating-review-card #fr-rating-stars { display:flex; gap:6px; align-items:center; }
+.floating-review-card #fr-rating-stars .star { font-size:20px; color: var(--color-primary, var(--primary-color, #cfcfcf)); cursor:pointer; position:relative; user-select:none; transition: transform .08s ease; }
+.floating-review-card #fr-rating-stars .star:hover { transform: scale(1.08); }
+.floating-review-card #fr-rating-stars .star.full { color: var(--color-accent, #ffb400); }
+.floating-review-card #fr-rating-stars .star.half { color: var(--color-primary, var(--primary-color, #cfcfcf)); }
+.floating-review-card #fr-rating-stars .star.half::before { content: "★"; position: absolute; left: 0; top: 0; color: var(--color-accent, #ffb400); width: 50%; overflow: hidden; }
 .floating-review-card .btn-submit { padding:8px 12px; border-radius:8px; border:none; background:var(--color-accent); color:#fff; cursor:pointer; }
 
 /* ANIMAÇÕES DE CAFÉ - PROFISSIONAL */
