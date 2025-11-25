@@ -239,6 +239,26 @@ body.dark-mode .admin-menu-section .menu-list li a.admin-tab.active {
   color: #fff;
 }
 
+/* Botão Cancelar apenas no modal de Adicionar Livro: vermelho + hover mais claro */
+#modal-book .btn-cancel {
+  background: linear-gradient(135deg, #dc3545 0%, #a60014 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 14px rgba(220, 53, 69, 0.18);
+}
+
+#modal-book .btn-cancel:hover {
+  background: linear-gradient(135deg, #e6686e 0%, #c0392b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.26);
+  color: #fff;
+}
+
+#modal-book .btn-cancel:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.14);
+}
+
 /* Books List - Grid responsivo */
 .books-list {
   display: grid;
