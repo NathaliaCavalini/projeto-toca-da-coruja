@@ -1,58 +1,178 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toca da Coruja - Detalhes do Livro</title>
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/vejamais.css">
-    <link rel="stylesheet" href="../css/toast-notifications.css">
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/vejamais.css" />
+    <link rel="stylesheet" href="../css/toast-notifications.css" />
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body data-button-mode="single">
+  <body data-button-mode="single">
     <aside class="sidebar">
-        <header class="logo">
-            <img src="../imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca <br> da Coruja</h1>
-        </header>
-        
+      <header class="logo">
+        <img
+          src="../imagens/logo.png"
+          alt="Logo Toca da Coruja"
+          class="logo-img"
+        />
+        <h1>
+          Toca <br />
+          da Coruja
+        </h1>
+      </header>
 
-        <section class="menu-section">
-            <h2>Gêneros</h2>
-            <ul class="menu-list">
-                <li><a href="rpg.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">RPG</a>
-                </li>
-                <li><a href="gay.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">LGBTQIAPN+</a></li>
-                <li><a href="fantasia.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Fantasia</a></li>
-                <li><a href="romance.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Romance</a></li>
-                <li><a href="classico.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Clássicos</a></li>
-                <li><a href="programacao.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-menu livro-menu--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-menu livro-menu--dark">Programação</a></li>
-            </ul>
-        </section>
+      <section class="menu-section">
+        <h2>Gêneros</h2>
+        <ul class="menu-list">
+          <li>
+            <a href="rpg.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />RPG</a
+            >
+          </li>
+          <li>
+            <a href="gay.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />LGBTQIAPN+</a
+            >
+          </li>
+          <li>
+            <a href="fantasia.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />Fantasia</a
+            >
+          </li>
+          <li>
+            <a href="romance.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />Romance</a
+            >
+          </li>
+          <li>
+            <a href="classico.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />Clássicos</a
+            >
+          </li>
+          <li>
+            <a href="programacao.html"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-menu livro-menu--dark"
+              />Programação</a
+            >
+          </li>
+        </ul>
+      </section>
 
-        <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
-        <section class="menu-section" id="admin-section" style="display:none;">
-            <h2>Administração</h2>
-            <ul class="menu-list">
-                <li><a href="admin.html" class="admin-link" style="color: var(--color-accent); font-weight: 600;"><img src="../imagens/administrador-light-mode.png" width="20" height="20" alt="Administrador" class="admin-icon admin-icon--light"><img src="../imagens/administrador-dark-mode.png" width="20" height="20" alt="Administrador" class="admin-icon admin-icon--dark"> Painel Admin</a></li>
-            </ul>
-        </section>
-        <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
+      <!-- Botão Admin (aparece apenas para tatacavalini@gmail.com) -->
+      <section class="menu-section" id="admin-section" style="display: none">
+        <h2>Administração</h2>
+        <ul class="menu-list">
+          <li>
+            <a
+              href="admin.html"
+              class="admin-link"
+              style="color: var(--color-accent); font-weight: 600"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt="Administrador"
+                class="admin-icon admin-icon--dark"
+              />
+              Painel Admin</a
+            >
+          </li>
+        </ul>
+      </section>
+      <!-- Minha Biblioteca removida (Favoritos foi movido para a nav superior) -->
     </aside>
 
     <main class="main-content">
-        <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="home.html"
           ><img
             src="../imagens/livro-aberto-modo-claro.png"
             width="20"
@@ -83,8 +203,19 @@
           />Quer ler</a
         >
         <a href="ja_lidos.html"
-          ><img src="../imagens/ja-lido-modo-claro.png" width="20" height="20" alt="" class="ja-lido ja-lido--light" /><img src="../imagens/ja-lido-modo-escuro.png" width="20" height="20" alt="" class="ja-lido ja-lido--dark" />Já
-          lidos</a
+          ><img
+            src="../imagens/ja-lido-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--light"
+          /><img
+            src="../imagens/ja-lido-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--dark"
+          />Já lidos</a
         >
         <a href="favoritos.html"
           ><img
@@ -153,11 +284,11 @@
             />
           </button>
         </div>
-        </nav>
+      </nav>
 
-        <section id="book-detail">
-            <!-- Conteúdo gerado dinamicamente pelo JS -->
-        </section>
+      <section id="book-detail">
+        <!-- Conteúdo gerado dinamicamente pelo JS -->
+      </section>
     </main>
 
     <script type="module" src="../js/theme.js"></script>
@@ -169,6 +300,6 @@
     <script src="../js/universal-search.js"></script>
     <script src="/js/library-actions-delegated.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
-</body>
-
+    <script src="/js/perf.js" defer></script>
+  </body>
 </html>

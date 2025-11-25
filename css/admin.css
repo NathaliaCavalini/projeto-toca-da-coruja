@@ -2,7 +2,7 @@
 
 /* Esconder container inicialmente, mostrar apenas hero */
 .admin-container {
-  padding: 40px 40px 80px;
+  padding: 40px 40px 85px;
   max-width: 1400px;
   margin: 0 auto;
   min-height: calc(100vh - 500px);

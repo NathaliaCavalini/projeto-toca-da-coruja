@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A Toca da Coruja</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
-            <link rel="icon" href="imagens/favicon.png" type="image/x-icon">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Georgia&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="imagens/favicon.png" type="image/x-icon" />
+  </head>
 
-<body>
+  <body>
     <!-- Botão de Toggle Dark Mode -->
-    <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
-        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+    <button
+      class="icon-btn"
+      title="Modo escuro"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba(139, 105, 77, 0.08);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+      "
+    >
+      <img
+        src="/imagens/escuro.png"
+        width="20"
+        height="20"
+        alt="Ícone modo escuro"
+      />
     </button>
 
     <script type="module" src="/js/theme.js"></script>
+    <script src="/js/perf.js" defer></script>
 
     <div class="intro-container">
-        <div class="intro-box">
-            <h1>Bem-vindo à Toca da Coruja</h1>
-            <p>Bem-vindo à Toca da Coruja, uma biblioteca encantada repleta de livros mágicos, conhecimentos ancestrais
-                e aventuras literárias que despertam a sabedoria interior.</p>
-            <p class="beautiful-phrase">
-                “Como uma coruja noturna, mergulhe nas sombras do saber e voe alto com asas da imaginação.”
-            </p>
+      <div class="intro-box">
+        <h1>Bem-vindo à Toca da Coruja</h1>
+        <p>
+          Bem-vindo à Toca da Coruja, uma biblioteca encantada repleta de livros
+          mágicos, conhecimentos ancestrais e aventuras literárias que despertam
+          a sabedoria interior.
+        </p>
+        <p class="beautiful-phrase">
+          “Como uma coruja noturna, mergulhe nas sombras do saber e voe alto com
+          asas da imaginação.”
+        </p>
 
-            <!-- BOTÃO COM LOGO E ESTILO DO SITE -->
-            <a href="pages/home.html" class="main-page-btn">
-                <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="btn-logo">
-                Venha ver a página principal
-            </a>
-        </div>
+        <!-- BOTÃO COM LOGO E ESTILO DO SITE -->
+        <a href="pages/home.html" class="main-page-btn">
+          <img
+            src="/imagens/logo.png"
+            alt="Logo Toca da Coruja"
+            class="btn-logo"
+          />
+          Venha ver a página principal
+        </a>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

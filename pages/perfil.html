@@ -1,85 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Perfil – Toca da Coruja</title>
     <link rel="stylesheet" href="/css/perfil.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Botão de Toggle Dark Mode -->
-    <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
-        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+    <button
+      class="icon-btn"
+      title="Modo escuro"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba(139, 105, 77, 0.08);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+      "
+    >
+      <img
+        src="/imagens/escuro.png"
+        width="20"
+        height="20"
+        alt="Ícone modo escuro"
+      />
     </button>
 
     <script type="module" src="/js/theme.js"></script>
 
     <div class="perfil-container">
-        <div class="perfil-card">
+      <div class="perfil-card">
+        <!-- Botão voltar (caixa única com seta + texto) -->
+        <a
+          href="home.html"
+          class="back-box"
+          aria-label="Voltar para a página inicial"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-hidden="true"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+          </svg>
+          <span>Voltar à home</span>
+        </a>
 
-            <!-- Botão voltar (caixa única com seta + texto) -->
-            <a href="home.html" class="back-box" aria-label="Voltar para a página inicial">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" fill="none" />
-                </svg>
-                <span>Voltar à home</span>
-            </a>
+        <!-- Conteúdo do card (apenas 1 vez) -->
+        <h1>Meu Perfil</h1>
+        <p>Atualize suas informações na Toca da Coruja</p>
 
-            <!-- Conteúdo do card (apenas 1 vez) -->
-            <h1>Meu Perfil</h1>
-            <p>Atualize suas informações na Toca da Coruja</p>
+        <img id="user-photo" src="/imagens/user.png" alt="Foto do usuário" />
 
-            <img id="user-photo" src="/imagens/user.png" alt="Foto do usuário">
+        <form id="profile-form">
+          <input type="text" id="username" placeholder="Nome de usuário" />
+          <input type="email" id="email" placeholder="E-mail" disabled />
+          <input type="file" id="photo-file" accept="image/*" />
+          <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
 
-            <form id="profile-form">
-                <input type="text" id="username" placeholder="Nome de usuário" />
-                <input type="email" id="email" placeholder="E-mail" disabled />
-                <input type="file" id="photo-file" accept="image/*" />
-                <button type="submit" class="btn">Salvar Alterações</button>
-            </form>
-
-            <div class="link">
-                <button id="change-password-btn" class="btn-change-password">Alterar Senha</button>
-                <button id="logout-btn" class="btn-logout">Sair da Conta</button>
-            </div>
-
-        </div> <!-- .perfil-card -->
-    </div> <!-- .perfil-container -->
+        <div class="link">
+          <button id="change-password-btn" class="btn-change-password">
+            Alterar Senha
+          </button>
+          <button id="logout-btn" class="btn-logout">Sair da Conta</button>
+        </div>
+      </div>
+      <!-- .perfil-card -->
+    </div>
+    <!-- .perfil-container -->
 
     <!-- JS -->
     <script type="module" src="/js/perfil.js"></script>
 
     <script type="module">
-        import { openPasswordResetModal } from "/js/password-reset.js";
-        import { auth } from "/js/firebase-config.js";
+      import { openPasswordResetModal } from "/js/password-reset.js";
+      import { auth } from "/js/firebase-config.js";
 
-        // Botão de alterar senha
-        document.getElementById("change-password-btn").addEventListener("click", async (e) => {
-            e.preventDefault();
-            try {
-                const user = auth.currentUser;
-                if (!user || !user.email) {
-                    alert("Você precisa estar logado para alterar a senha");
-                    return;
-                }
-                await openPasswordResetModal();
-            } catch (err) {
-                console.error(err);
+      // Botão de alterar senha
+      document
+        .getElementById("change-password-btn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          try {
+            const user = auth.currentUser;
+            if (!user || !user.email) {
+              alert("Você precisa estar logado para alterar a senha");
+              return;
             }
+            await openPasswordResetModal();
+          } catch (err) {
+            console.error(err);
+          }
         });
     </script>
-</body>
-
+    <script src="/js/perf.js" defer></script>
+  </body>
 </html>

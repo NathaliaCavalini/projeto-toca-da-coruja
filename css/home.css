@@ -423,15 +423,15 @@ body.dark-mode .livro-menu--light {
 
 /* Animação de flip 90º */
 .fade-in {
-  animation: flipIn .4s ease forwards;
+  animation: flipIn 0.4s ease forwards;
 }
 
 @keyframes flipIn {
-  from { 
+  from {
     transform: rotateY(-90deg);
     opacity: 0;
   }
-  to { 
+  to {
     transform: rotateY(0deg);
     opacity: 1;
   }
@@ -893,6 +893,7 @@ body[data-button-mode="single"] .botao-quero-ler .action-btn {
   width: 100vw; /* full-bleed */
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+  margin-top: 10px; /* small gap between page content/buttons and the footer */
 
   /* visual */
   background: linear-gradient(135deg, #c5946c 0%, #d4a87d 50%, #c5946c 100%);
@@ -1756,7 +1757,7 @@ body.dark-mode .search-form input::placeholder {
     background-color 0.18s ease, filter 0.18s ease;
   border: none;
   font-size: 0.85rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   width: fit-content;
   margin: 8px 0 0 0;
   margin-left: 55px;

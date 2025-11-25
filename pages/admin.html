@@ -713,7 +713,7 @@
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
     <script>
-      // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
+      // PARTÍCULAS MÁGICAS - otimizações para performance
       const canvas = document.getElementById("hero-particles");
       const ctx = canvas.getContext("2d");
       let particles = [];
@@ -724,6 +724,35 @@
         canvas.height = canvas.parentElement.offsetHeight;
       }
 
+      // Marcar imagens não essenciais com lazy loading em runtime
+      function setLazyLoadingForImages() {
+        try {
+          const imgs = document.querySelectorAll("img:not([loading])");
+          const skipClasses = new Set([
+            "logo-img",
+            "livro-fechado",
+            "lupa",
+            "search-icon",
+            "quer-ler",
+            "ja-lido",
+            "favoritos",
+            "reviews",
+            "admin-icon",
+          ]);
+
+          imgs.forEach((img) => {
+            // Não aplicar lazy em ícones/brand pequenos
+            const classes = img.className ? img.className.split(/\s+/) : [];
+            if (classes.some((c) => skipClasses.has(c))) return;
+            // Só aplicar se imagem provavelmente for abaixo da dobra
+            img.setAttribute("loading", "lazy");
+          });
+        } catch (e) {
+          // Não bloquear a página por erro aqui
+          console.warn("lazy init failed", e);
+        }
+      }
+
       class Particle {
         constructor() {
           this.reset();
@@ -732,14 +761,14 @@
         reset() {
           this.x = Math.random() * canvas.width;
           this.y = canvas.height + 20;
-          this.size = Math.random() * 4 + 2;
-          this.speedY = -(Math.random() * 2 + 0.5);
-          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.size = Math.random() * 3 + 1.5; // ligeiramente menor
+          this.speedY = -(Math.random() * 1.2 + 0.4); // menos velocidade
+          this.speedX = (Math.random() - 0.5) * 0.6;
           this.life = 0;
-          this.maxLife = Math.random() * 100 + 100;
+          this.maxLife = Math.random() * 100 + 80;
           this.opacity = 1;
           this.wingAngle = 0;
-          this.wingSpeed = Math.random() * 0.1 + 0.05;
+          this.wingSpeed = Math.random() * 0.08 + 0.03;
         }
 
         update() {
@@ -759,23 +788,21 @@
           ctx.globalAlpha = this.opacity;
           ctx.translate(this.x, this.y);
 
-          // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
           const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-          gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`); // #ffd4a3 - brilho quente
+          gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`);
           gradient.addColorStop(
             0.6,
             `rgba(197, 148, 108, ${this.opacity * 0.8})`
-          ); // #c5946c - núcleo
-          gradient.addColorStop(1, `rgba(197, 148, 108, 0)`); // fade suave
+          );
+          gradient.addColorStop(1, `rgba(197, 148, 108, 0)`);
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
           ctx.arc(0, 0, this.size, 0, Math.PI * 2);
           ctx.fill();
 
-          // ASAS SUTIS (efeito de coruja voando)
           ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
-          ctx.lineWidth = 1.2;
+          ctx.lineWidth = 1;
           ctx.setLineDash([2, 4]);
 
           ctx.beginPath();
@@ -802,13 +829,29 @@
 
       function initParticles() {
         particles = [];
-        const count = Math.min(Math.floor(canvas.width / 15), 80);
+
+        // Respeitar preferências do usuário / condições de economia de dados
+        const prefersReducedMotion =
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const connection =
+          navigator.connection ||
+          navigator.mozConnection ||
+          navigator.webkitConnection;
+        const saveData = connection && connection.saveData;
+        if (prefersReducedMotion || saveData || window.innerWidth < 700) {
+          // Não inicializar partículas em condições restritivas
+          return;
+        }
+
+        const count = Math.min(Math.floor(canvas.width / 20), 40); // limite máximo menor
         for (let i = 0; i < count; i++) {
           particles.push(new Particle());
         }
       }
 
       function animate() {
+        if (!particles.length) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach((p) => {
           p.update();
@@ -816,6 +859,17 @@
         });
         animationId = requestAnimationFrame(animate);
       }
+
+      // Pausar animação quando a aba perder foco
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          if (animationId) cancelAnimationFrame(animationId);
+          animationId = null;
+        } else {
+          if (!animationId && particles.length)
+            animationId = requestAnimationFrame(animate);
+        }
+      });
 
       // Inicialização
       window.addEventListener("load", () => {
@@ -826,6 +880,9 @@
         canvas.style.pointerEvents = "none";
         hero.style.position = "relative";
         hero.appendChild(canvas);
+
+        // aplicar lazy-loading em imagens não essenciais
+        setLazyLoadingForImages();
 
         resizeCanvas();
         initParticles();
@@ -896,5 +953,6 @@
         });
       });
     </script>
+    <script src="/js/perf.js" defer></script>
   </body>
 </html>

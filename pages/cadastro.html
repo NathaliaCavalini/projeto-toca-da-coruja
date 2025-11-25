@@ -1,87 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cadastro – Toca da Coruja</title>
     <link rel="stylesheet" href="/css/cadastro.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Botão de Toggle Dark Mode -->
-    <button class="icon-btn" title="Modo escuro" style="position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; border: none; background-color: rgba(139, 105, 77, 0.08); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s ease;">
-        <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
+    <button
+      class="icon-btn"
+      title="Modo escuro"
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba(139, 105, 77, 0.08);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+      "
+    >
+      <img
+        src="/imagens/escuro.png"
+        width="20"
+        height="20"
+        alt="Ícone modo escuro"
+      />
     </button>
 
     <script type="module" src="/js/theme.js"></script>
 
     <div class="cadastro-container">
-        <h1>Crie sua conta 🌿</h1>
-        <form id="cadastro-form">
-            <input type="text" id="nome" placeholder="Nome de exibição" required />
-            <input type="email" id="email" placeholder="E-mail" required />
-            <input type="password" id="senha" placeholder="Senha (mín. 6 caracteres)" required />
-            <button type="submit">Cadastrar</button>
-        </form>
-        <p>Já tem conta? <a href="login.html">Entrar</a></p>
+      <h1>Crie sua conta 🌿</h1>
+      <form id="cadastro-form">
+        <input type="text" id="nome" placeholder="Nome de exibição" required />
+        <input type="email" id="email" placeholder="E-mail" required />
+        <input
+          type="password"
+          id="senha"
+          placeholder="Senha (mín. 6 caracteres)"
+          required
+        />
+        <button type="submit">Cadastrar</button>
+      </form>
+      <p>Já tem conta? <a href="login.html">Entrar</a></p>
     </div>
 
     <script type="module" src="/js/password-visibility.js"></script>
 
     <script type="module">
-        import { auth, db } from "/js/firebase-config.js";
-        import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-        import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-        import { updateUserStatus } from "/js/user-sync.js";
-        import { validateRealEmail } from "/js/email-validator.js";
+      import { auth, db } from "/js/firebase-config.js";
+      import {
+        createUserWithEmailAndPassword,
+        updateProfile,
+      } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+      import {
+        doc,
+        setDoc,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+      import { updateUserStatus } from "/js/user-sync.js";
+      import { validateRealEmail } from "/js/email-validator.js";
 
-        const form = document.getElementById("cadastro-form");
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const nome = document.getElementById("nome").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const senha = document.getElementById("senha").value.trim();
+      const form = document.getElementById("cadastro-form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const senha = document.getElementById("senha").value.trim();
 
-            if (!nome || !email || !senha) { alert("Preencha todos os campos."); return; }
-            
-            try {
-                // Validar email real
-                const emailValidation = await validateRealEmail(email);
-                if (!emailValidation.valid) {
-                    alert("❌ " + emailValidation.message);
-                    return;
-                }
+        if (!nome || !email || !senha) {
+          alert("Preencha todos os campos.");
+          return;
+        }
 
-                const userCred = await createUserWithEmailAndPassword(auth, email, senha);
-                const user = userCred.user;
-                await updateProfile(user, { displayName: nome });
-                await setDoc(doc(db, "usuarios", user.uid), {
-                    displayName: nome,
-                    email: user.email,
-                    photoURL: "",
-                    createdAt: serverTimestamp()
-                });
-                // Sincronizar usuário no admin control com status "ativo"
-                await updateUserStatus(email.toLowerCase(), 'ativo');
-                alert("Conta criada com sucesso!");
-                window.location.href = "home.html";
-            } catch (err) {
-                console.error(err);
-                alert("Erro: " + (err.message || err));
-            }
-        });
+        try {
+          // Validar email real
+          const emailValidation = await validateRealEmail(email);
+          if (!emailValidation.valid) {
+            alert("❌ " + emailValidation.message);
+            return;
+          }
+
+          const userCred = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            senha
+          );
+          const user = userCred.user;
+          await updateProfile(user, { displayName: nome });
+          await setDoc(doc(db, "usuarios", user.uid), {
+            displayName: nome,
+            email: user.email,
+            photoURL: "",
+            createdAt: serverTimestamp(),
+          });
+          // Sincronizar usuário no admin control com status "ativo"
+          await updateUserStatus(email.toLowerCase(), "ativo");
+          alert("Conta criada com sucesso!");
+          window.location.href = "home.html";
+        } catch (err) {
+          console.error(err);
+          alert("Erro: " + (err.message || err));
+        }
+      });
     </script>
     <script src="/js/library-actions-delegated.js"></script>
-</body>
-
+    <script src="/js/perf.js" defer></script>
+  </body>
 </html>
