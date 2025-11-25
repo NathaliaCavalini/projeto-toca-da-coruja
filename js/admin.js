@@ -138,7 +138,11 @@ function updateGenreSelect() {
 
   // Remover todas as options customizadas (não fixas, não "novo" e não vazia)
   Array.from(generoSelect.querySelectorAll("option")).forEach((option) => {
-    if (!fixedGenres.includes(option.value) && option.value !== "novo" && option.value !== "") {
+    if (
+      !fixedGenres.includes(option.value) &&
+      option.value !== "novo" &&
+      option.value !== ""
+    ) {
       option.remove();
     }
   });
@@ -372,15 +376,18 @@ document.getElementById("book-genero-novo")?.addEventListener("input", (e) => {
 document.querySelectorAll('input[name="image-type"]').forEach((radio) => {
   radio.addEventListener("change", (e) => {
     const urlInput = document.getElementById("book-imagem-url");
+    const fileWrapper = document.getElementById("book-imagem-file-wrapper");
     const fileInput = document.getElementById("book-imagem-file");
 
     if (e.target.value === "url") {
       urlInput.classList.remove("hidden");
-      fileInput.classList.add("hidden");
-      fileInput.value = "";
+      if (fileWrapper) fileWrapper.classList.add("hidden");
+      if (fileInput) fileInput.value = "";
+      const fileName = document.getElementById("book-imagem-file-name");
+      if (fileName) fileName.textContent = "Nenhum arquivo escolhido";
     } else {
       urlInput.classList.add("hidden");
-      fileInput.classList.remove("hidden");
+      if (fileWrapper) fileWrapper.classList.remove("hidden");
     }
   });
 });
@@ -399,7 +406,6 @@ document.getElementById("book-imagem-url")?.addEventListener("input", (e) => {
 document.getElementById("book-imagem-file")?.addEventListener("change", (e) => {
   const file = e.target.files[0];
   const preview = document.getElementById("image-preview");
-
   if (file) {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -409,6 +415,10 @@ document.getElementById("book-imagem-file")?.addEventListener("change", (e) => {
   } else {
     preview.innerHTML = "";
   }
+  // Atualizar nome do arquivo ao selecionar
+  const fileNameEl = document.getElementById("book-imagem-file-name");
+  if (fileNameEl)
+    fileNameEl.textContent = file ? file.name : "Nenhum arquivo escolhido";
 });
 
 // ==================== CONTADOR DE DESCRIÇÃO ====================
@@ -809,7 +819,7 @@ document.querySelectorAll(".admin-tab").forEach((tab) => {
     // Esconder hero section e mostrar container
     const heroAdmin = document.querySelector(".hero-admin");
     const adminContainer = document.querySelector(".admin-container");
-    
+
     if (heroAdmin) {
       heroAdmin.classList.add("hidden");
     }

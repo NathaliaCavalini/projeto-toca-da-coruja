@@ -1,503 +1,900 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Toca da Coruja</title>
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/admin.css" />
-    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon">
-    
+    <link rel="icon" href="../imagens/favicon.png" type="image/x-icon" />
+
     <!-- Dark mode inicial (executa antes de renderizar) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark-mode');
-            document.body.classList.add('dark-mode');
-        }
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        document.body.classList.add("dark-mode");
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <header class="logo">
-            <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="logo-img">
-            <h1>Toca <br> da Coruja</h1>
-        </header>
+      <header class="logo">
+        <img
+          src="/imagens/logo.png"
+          alt="Logo Toca da Coruja"
+          class="logo-img"
+        />
+        <h1>
+          Toca <br />
+          da Coruja
+        </h1>
+      </header>
 
-        <section class="menu-section admin-menu-section">
-            <h2>Admin</h2>
-            <ul class="menu-list">
-                <li><a href="home.html" class="admin-link"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark">Voltar ao Catálogo</a></li>
-                <li><a href="#" class="admin-tab" data-tab="books"><img src="../imagens/administrador-light-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--light"><img src="../imagens/administrador-dark-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--dark">Gerenciar Livros</a></li>
-                <li><a href="#" class="admin-tab" data-tab="reviews"><img src="../imagens/administrador-light-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--light"><img src="../imagens/administrador-dark-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--dark">Gerenciar Reviews</a></li>
-                <li><a href="#" class="admin-tab" data-tab="genres"><img src="../imagens/administrador-light-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--light"><img src="../imagens/administrador-dark-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--dark">Gerenciar Gêneros</a></li>
-                <li><a href="#" class="admin-tab" data-tab="users"><img src="../imagens/administrador-light-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--light"><img src="../imagens/administrador-dark-mode.png" width="20" height="20" alt="" class="admin-icon admin-icon--dark">Gerenciar Usuários</a></li>
-            </ul>
-        </section>
+      <section class="menu-section admin-menu-section">
+        <h2>Admin</h2>
+        <ul class="menu-list">
+          <li>
+            <a href="home.html" class="admin-link"
+              ><img
+                src="../imagens/livro-modo-claro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-fechado livro-fechado--light"
+              /><img
+                src="../imagens/livro-modo-escuro.png"
+                width="20"
+                height="20"
+                alt=""
+                class="livro-fechado livro-fechado--dark"
+              />Voltar ao Catálogo</a
+            >
+          </li>
+          <li>
+            <a href="#" class="admin-tab" data-tab="books"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--dark"
+              />Gerenciar Livros</a
+            >
+          </li>
+          <li>
+            <a href="#" class="admin-tab" data-tab="reviews"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--dark"
+              />Gerenciar Reviews</a
+            >
+          </li>
+          <li>
+            <a href="#" class="admin-tab" data-tab="genres"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--dark"
+              />Gerenciar Gêneros</a
+            >
+          </li>
+          <li>
+            <a href="#" class="admin-tab" data-tab="users"
+              ><img
+                src="../imagens/administrador-light-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--light"
+              /><img
+                src="../imagens/administrador-dark-mode.png"
+                width="20"
+                height="20"
+                alt=""
+                class="admin-icon admin-icon--dark"
+              />Gerenciar Usuários</a
+            >
+          </li>
+        </ul>
+      </section>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- NAV + AÇÕES -->
-        <nav class="nav-menu" aria-label="Navegação principal">
-            <a href="home.html"><img src="../imagens/livro-modo-claro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--light"><img src="../imagens/livro-modo-escuro.png" width="20" height="20" alt="" class="livro-fechado livro-fechado--dark">Catálogo</a>
-            <a href="quer_ler.html"><img src="/imagens/quer-ler-modo-claro.png" width="20" height="20" alt="" class="quer-ler quer-ler--light"><img src="/imagens/quer-ler-modo-escuro.png" width="20" height="20" alt="" class="quer-ler quer-ler--dark">Quer ler</a>
-            <a href="ja_lidos.html"><img src="/imagens/ja-lido-modo-claro.png" width="20" height="20" alt="" class="ja-lido ja-lido--light"><img src="/imagens/ja-lido-modo-escuro.png" width="20" height="20" alt="" class="ja-lido ja-lido--dark">Já lidos</a>
-            <a href="favoritos.html"><img src="/imagens/favoritos-modo-claro.png" width="20" height="20" alt="" class="favoritos favoritos--light"><img src="/imagens/favoritos-modo-escuro.png" width="20" height="20" alt="" class="favoritos favoritos--dark">Favoritos</a>
-            <a href="reviews.html"><img src="/imagens/reviews-modo-claro.png" width="20" height="20" alt="" class="reviews reviews--light"><img src="/imagens/reviews-modo-escuro.png" width="20" height="20" alt="" class="reviews reviews--dark">Reviews</a>
-            
-            <form class="search-form" role="search" onsubmit="return false;">
-                <img src="/imagens/lupa-modo-claro.png" width="20" height="20" alt="Buscar" class="search-icon lupa lupa--light"><img src="/imagens/lupa-modo-escuro.png" width="20" height="20" alt="Buscar" class="search-icon lupa lupa--dark">
-                <input type="search" id="search-input" placeholder="Pesquisar..." />
-            </form>
+      <!-- NAV + AÇÕES -->
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="home.html"
+          ><img
+            src="../imagens/livro-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="livro-fechado livro-fechado--light"
+          /><img
+            src="../imagens/livro-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="livro-fechado livro-fechado--dark"
+          />Catálogo</a
+        >
+        <a href="quer_ler.html"
+          ><img
+            src="/imagens/quer-ler-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="quer-ler quer-ler--light"
+          /><img
+            src="/imagens/quer-ler-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="quer-ler quer-ler--dark"
+          />Quer ler</a
+        >
+        <a href="ja_lidos.html"
+          ><img
+            src="/imagens/ja-lido-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--light"
+          /><img
+            src="/imagens/ja-lido-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--dark"
+          />Já lidos</a
+        >
+        <a href="favoritos.html"
+          ><img
+            src="/imagens/favoritos-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="favoritos favoritos--light"
+          /><img
+            src="/imagens/favoritos-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="favoritos favoritos--dark"
+          />Favoritos</a
+        >
+        <a href="reviews.html"
+          ><img
+            src="/imagens/reviews-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="reviews reviews--light"
+          /><img
+            src="/imagens/reviews-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="reviews reviews--dark"
+          />Reviews</a
+        >
 
-            <!-- ações (ícones) ficam à direita -->
-            <div class="nav-actions" aria-hidden="false">
-                <button class="icon-btn" title="Modo escuro">
-                    <img src="/imagens/escuro.png" width="20" height="20" alt="Ícone modo escuro">
-                </button>
-                <button class="icon-btn" title="Ajuda">
-                    <img src="/imagens/ajuda-light-mode.png" width="20" height="20" alt="Ícone ajuda">
-                </button>
+        <form class="search-form" role="search" onsubmit="return false;">
+          <img
+            src="/imagens/lupa-modo-claro.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon lupa lupa--light"
+          /><img
+            src="/imagens/lupa-modo-escuro.png"
+            width="20"
+            height="20"
+            alt="Buscar"
+            class="search-icon lupa lupa--dark"
+          />
+          <input type="search" id="search-input" placeholder="Pesquisar..." />
+        </form>
+
+        <!-- ações (ícones) ficam à direita -->
+        <div class="nav-actions" aria-hidden="false">
+          <button class="icon-btn" title="Modo escuro">
+            <img
+              src="/imagens/escuro.png"
+              width="20"
+              height="20"
+              alt="Ícone modo escuro"
+            />
+          </button>
+          <button class="icon-btn" title="Ajuda">
+            <img
+              src="/imagens/ajuda-light-mode.png"
+              width="20"
+              height="20"
+              alt="Ícone ajuda"
+            />
+          </button>
+        </div>
+      </nav>
+
+      <!-- HERO SECTION -->
+      <section class="hero-section hero-admin" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <h2 id="hero-title" class="hero-title">
+            Painel de Administração<br />
+            <span class="hero-subtitle"
+              >Gerencie a biblioteca Toca da Coruja</span
+            >
+          </h2>
+          <div class="hero-owl">🦉</div>
+          <p class="hero-explore">Adicione, edite ou remova livros e reviews</p>
+        </div>
+        <div class="hero-wave"></div>
+      </section>
+
+      <!-- ADMIN CONTENT -->
+      <section class="admin-container">
+        <!-- TAB: Gerenciar Livros -->
+        <div class="admin-tab-content" id="tab-books">
+          <div class="admin-header">
+            <h2>Gerenciar Livros</h2>
+            <div>
+              <button class="btn-primary" id="btn-add-book">
+                + Adicionar Livro
+              </button>
+              <p
+                style="
+                  color: var(--color-text);
+                  opacity: 0.7;
+                  font-size: 0.9rem;
+                  margin-top: 8px;
+                "
+              >
+                📚 Livros originais (vejamais.js) + Adicionados pelo admin
+              </p>
             </div>
-        </nav>
+          </div>
 
-        <!-- HERO SECTION -->
-        <section class="hero-section hero-admin" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <h2 id="hero-title" class="hero-title">
-                    Painel de Administração<br>
-                    <span class="hero-subtitle">Gerencie a biblioteca Toca da Coruja</span>
-                </h2>
-                <div class="hero-owl">🦉</div>
-                <p class="hero-explore">Adicione, edite ou remova livros e reviews</p>
+          <!-- Lista de livros -->
+          <div class="books-list" id="books-list">
+            <!-- Livros serão inseridos aqui via JS -->
+          </div>
+        </div>
+
+        <!-- TAB: Gerenciar Reviews -->
+        <div class="admin-tab-content hidden" id="tab-reviews">
+          <div class="admin-header">
+            <h2>Gerenciar Reviews</h2>
+          </div>
+
+          <!-- Lista de reviews -->
+          <div class="reviews-list" id="reviews-list">
+            <!-- Reviews serão inseridas aqui via JS -->
+          </div>
+        </div>
+
+        <!-- TAB: Gerenciar Gêneros -->
+        <div class="admin-tab-content hidden" id="tab-genres">
+          <div class="admin-header">
+            <h2>Gerenciar Gêneros Customizados</h2>
+            <div>
+              <button class="btn-primary" id="btn-add-genre">
+                + Adicionar Gênero
+              </button>
+              <p
+                style="
+                  color: var(--color-text);
+                  opacity: 0.7;
+                  font-size: 0.9rem;
+                  margin-top: 8px;
+                "
+              >
+                🏷️ Gêneros extras além dos 6 fixos
+              </p>
             </div>
-            <div class="hero-wave"></div>
-        </section>
+          </div>
 
-        <!-- ADMIN CONTENT -->
-        <section class="admin-container">
-            <!-- TAB: Gerenciar Livros -->
-            <div class="admin-tab-content" id="tab-books">
-                <div class="admin-header">
-                    <h2>Gerenciar Livros</h2>
-                    <div>
-                        <button class="btn-primary" id="btn-add-book">+ Adicionar Livro</button>
-                        <p style="color: var(--color-text); opacity: 0.7; font-size: 0.9rem; margin-top: 8px;">
-                            📚 Livros originais (vejamais.js) + Adicionados pelo admin
-                        </p>
-                    </div>
-                </div>
+          <!-- Lista de gêneros customizados -->
+          <div class="genres-list" id="genres-list">
+            <!-- Gêneros serão inseridos aqui via JS -->
+          </div>
+        </div>
 
-                <!-- Lista de livros -->
-                <div class="books-list" id="books-list">
-                    <!-- Livros serão inseridos aqui via JS -->
-                </div>
+        <!-- TAB: Gerenciar Usuários -->
+        <div class="admin-tab-content hidden" id="tab-users">
+          <div class="admin-header">
+            <h2>Gerenciar Usuários</h2>
+            <div>
+              <p
+                style="
+                  color: var(--color-text);
+                  opacity: 0.7;
+                  font-size: 0.9rem;
+                  margin-top: 8px;
+                "
+              >
+                👥 Controle de acesso e gerenciamento de contas
+              </p>
             </div>
+          </div>
 
-            <!-- TAB: Gerenciar Reviews -->
-            <div class="admin-tab-content hidden" id="tab-reviews">
-                <div class="admin-header">
-                    <h2>Gerenciar Reviews</h2>
-                </div>
+          <!-- Filtros e busca -->
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              margin-bottom: 20px;
+              flex-wrap: wrap;
+            "
+          >
+            <input
+              type="search"
+              id="user-search"
+              placeholder="Buscar por email ou nome..."
+              style="
+                padding: 8px 12px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 6px;
+                flex: 1;
+                min-width: 200px;
+              "
+            />
+            <select
+              id="user-filter"
+              style="
+                padding: 8px 12px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 6px;
+              "
+            >
+              <option value="">Todos</option>
+              <option value="ativo">Ativos</option>
+              <option value="suspenso">Suspensos</option>
+              <option value="banido">Banidos</option>
+            </select>
+          </div>
 
-                <!-- Lista de reviews -->
-                <div class="reviews-list" id="reviews-list">
-                    <!-- Reviews serão inseridas aqui via JS -->
-                </div>
-            </div>
-
-            <!-- TAB: Gerenciar Gêneros -->
-            <div class="admin-tab-content hidden" id="tab-genres">
-                <div class="admin-header">
-                    <h2>Gerenciar Gêneros Customizados</h2>
-                    <div>
-                        <button class="btn-primary" id="btn-add-genre">+ Adicionar Gênero</button>
-                        <p style="color: var(--color-text); opacity: 0.7; font-size: 0.9rem; margin-top: 8px;">
-                            🏷️ Gêneros extras além dos 6 fixos
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Lista de gêneros customizados -->
-                <div class="genres-list" id="genres-list">
-                    <!-- Gêneros serão inseridos aqui via JS -->
-                </div>
-            </div>
-
-            <!-- TAB: Gerenciar Usuários -->
-            <div class="admin-tab-content hidden" id="tab-users">
-                <div class="admin-header">
-                    <h2>Gerenciar Usuários</h2>
-                    <div>
-                        <p style="color: var(--color-text); opacity: 0.7; font-size: 0.9rem; margin-top: 8px;">
-                            👥 Controle de acesso e gerenciamento de contas
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Filtros e busca -->
-                <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-                    <input type="search" id="user-search" placeholder="Buscar por email ou nome..." style="padding: 8px 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px; flex: 1; min-width: 200px;">
-                    <select id="user-filter" style="padding: 8px 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px;">
-                        <option value="">Todos</option>
-                        <option value="ativo">Ativos</option>
-                        <option value="suspenso">Suspensos</option>
-                        <option value="banido">Banidos</option>
-                    </select>
-                </div>
-
-                <!-- Lista de usuários -->
-                <div class="users-list" id="users-list">
-                    <!-- Usuários serão inseridos aqui via JS -->
-                </div>
-            </div>
-        </section>
+          <!-- Lista de usuários -->
+          <div class="users-list" id="users-list">
+            <!-- Usuários serão inseridos aqui via JS -->
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- MODAL: Adicionar/Editar Livro -->
     <div class="modal" id="modal-book">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Adicionar Livro</h3>
-                <button class="modal-close" aria-label="Fechar">&times;</button>
-            </div>
-            <form id="form-book">
-                <div class="form-group">
-                    <label>ID do Livro (usado na URL)</label>
-                    <input type="text" id="book-id" required placeholder="ex: jogada-amor">
-                </div>
-                
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" id="book-titulo" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Autor</label>
-                    <input type="text" id="book-autor" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Gênero</label>
-                    <div class="genre-selector-wrapper">
-                        <select id="book-genero-select" required>
-                            <option value="">Escolha o gênero</option>
-                            <option value="RPG">RPG</option>
-                            <option value="LGBTQIAPN+">LGBTQIAPN+</option>
-                            <option value="Fantasia">Fantasia</option>
-                            <option value="Romance">Romance</option>
-                            <option value="Clássicos">Clássicos</option>
-                            <option value="Programação">Programação</option>
-                            <option value="novo">+ Criar Novo Gênero</option>
-                        </select>
-                        <button type="button" class="new-genre-toggle" id="new-genre-btn">+ Novo Gênero</button>
-                    </div>
-                    <input type="text" id="book-genero-novo" class="hidden new-genre-input" placeholder="Digite o nome do novo gênero">
-                    <input type="hidden" id="book-genero" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Páginas</label>
-                    <input type="text" id="book-paginas" inputmode="numeric" required placeholder="ex: 250">
-                </div>
-                
-                <div class="form-group">
-                    <label>Ano</label>
-                    <input type="text" id="book-ano" inputmode="numeric" required placeholder="ex: 2024">
-                </div>
-                
-                <div class="form-group">
-                    <label>Sinopse</label>
-                    <textarea id="book-sinopse" rows="4" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Descrição curta (aparece no card) <span style="color:#d32f2f; font-weight:600;">*</span></label>
-                    <textarea id="book-descricao" rows="3" maxlength="150" placeholder="Ex.: Duas ex-colegas se reencontram e o amor floresce." required></textarea>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                        <small style="opacity:.6;">Máximo de 70 caracteres para manter o visual padronizado.</small>
-                        <small id="desc-counter" style="opacity:.8; font-weight:600; color:var(--color-accent);">0/70</small>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Imagem</label>
-                    <div class="image-input-wrapper">
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="image-type" value="url" checked>
-                                URL da Imagem
-                            </label>
-                            <label>
-                                <input type="radio" name="image-type" value="file">
-                                Upload de Arquivo
-                            </label>
-                        </div>
-                        
-                        <input type="text" id="book-imagem-url" placeholder="/imagens/nome-do-livro.png">
-                        <input type="file" id="book-imagem-file" accept="image/*" class="hidden">
-                        
-                        <div class="image-preview" id="image-preview">
-                            <!-- Preview da imagem -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary btn-cancel">Cancelar</button>
-                    <button type="submit" class="btn-primary">Salvar</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="modal-title">Adicionar Livro</h3>
+          <button class="modal-close" aria-label="Fechar">&times;</button>
         </div>
+        <form id="form-book">
+          <div class="form-group">
+            <label>ID do Livro (usado na URL)</label>
+            <input
+              type="text"
+              id="book-id"
+              required
+              placeholder="ex: jogada-amor"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" id="book-titulo" required />
+          </div>
+
+          <div class="form-group">
+            <label>Autor</label>
+            <input type="text" id="book-autor" required />
+          </div>
+
+          <div class="form-group">
+            <label>Gênero</label>
+            <div class="genre-selector-wrapper">
+              <select id="book-genero-select" required>
+                <option value="">Escolha o gênero</option>
+                <option value="RPG">RPG</option>
+                <option value="LGBTQIAPN+">LGBTQIAPN+</option>
+                <option value="Fantasia">Fantasia</option>
+                <option value="Romance">Romance</option>
+                <option value="Clássicos">Clássicos</option>
+                <option value="Programação">Programação</option>
+                <option value="novo">+ Criar Novo Gênero</option>
+              </select>
+              <button type="button" class="new-genre-toggle" id="new-genre-btn">
+                + Novo Gênero
+              </button>
+            </div>
+            <input
+              type="text"
+              id="book-genero-novo"
+              class="hidden new-genre-input"
+              placeholder="Digite o nome do novo gênero"
+            />
+            <input type="hidden" id="book-genero" required />
+          </div>
+
+          <div class="form-group">
+            <label>Páginas</label>
+            <input
+              type="text"
+              id="book-paginas"
+              inputmode="numeric"
+              required
+              placeholder="ex: 250"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Ano</label>
+            <input
+              type="text"
+              id="book-ano"
+              inputmode="numeric"
+              required
+              placeholder="ex: 2024"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Sinopse</label>
+            <textarea id="book-sinopse" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label
+              >Descrição curta (aparece no card)
+              <span style="color: #d32f2f; font-weight: 600">*</span></label
+            >
+            <textarea
+              id="book-descricao"
+              rows="3"
+              maxlength="150"
+              placeholder="Ex.: Duas ex-colegas se reencontram e o amor floresce."
+              required
+            ></textarea>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 4px;
+              "
+            >
+              <small style="opacity: 0.6"
+                >Máximo de 70 caracteres para manter o visual
+                padronizado.</small
+              >
+              <small
+                id="desc-counter"
+                style="
+                  opacity: 0.8;
+                  font-weight: 600;
+                  color: var(--color-accent);
+                "
+                >0/70</small
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Imagem</label>
+            <div class="image-input-wrapper">
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="image-type" value="url" checked />
+                  URL da Imagem
+                </label>
+                <label>
+                  <input type="radio" name="image-type" value="file" />
+                  Upload de Arquivo
+                </label>
+              </div>
+
+              <input
+                type="text"
+                id="book-imagem-url"
+                placeholder="/imagens/nome-do-livro.png"
+              />
+
+              <!-- File input customizado: wrapper com label (botão) e nome do arquivo -->
+              <div
+                id="book-imagem-file-wrapper"
+                class="hidden"
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-top: 8px;
+                "
+              >
+                <input
+                  type="file"
+                  id="book-imagem-file"
+                  accept="image/*"
+                  class="file-input-visually-hidden"
+                />
+                <label
+                  for="book-imagem-file"
+                  class="btn-primary file-btn"
+                  style="margin: 0; padding: 8px 14px; font-size: 0.95rem"
+                  >Escolher arquivo</label
+                >
+                <span
+                  id="book-imagem-file-name"
+                  class="file-name"
+                  style="
+                    color: var(--color-text);
+                    opacity: 0.9;
+                    font-size: 0.95rem;
+                  "
+                  >Nenhum arquivo escolhido</span
+                >
+              </div>
+
+              <div class="image-preview" id="image-preview">
+                <!-- Preview da imagem -->
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary btn-cancel">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer" role="contentinfo" aria-label="Rodapé Toca da Coruja">
-        <div class="footer-content">
-            <div class="footer-logo" aria-hidden="false">
-                <img src="/imagens/logo.png" alt="Logo Toca da Coruja" class="footer-img">
-                <div>
-                    <h3>Toca da Coruja</h3>
-                    <p>Sua biblioteca literária online — livros escolhidos com carinho para todos os leitores.</p>
-                </div>
-            </div>
-
-            <div class="footer-links" aria-labelledby="explorar-title">
-                <h4 id="explorar-title">Explorar</h4>
-                <ul>
-                    <li><a href="home.html">Catálogo</a></li>
-                    <li><a href="sobre.html">Sobre Nós</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-social">
-                <h4>Conecte-se</h4>
-                <div class="social-icons" role="navigation" aria-label="Redes sociais">
-                    <a href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My" target="_blank"
-                        rel="noopener noreferrer" aria-label="Instagram Toca da Coruja">
-                        <img src="/imagens/instagram.png" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/TocaDaCoruja24" target="_blank" rel="noopener noreferrer"
-                        aria-label="X Toca da Coruja">
-                        <img src="/imagens/twitter.png" alt="X">
-                    </a>
-                </div>
-
-                <div class="footer-quick" style="margin-top:10px;">
-                    <div style="font-size:0.95rem; color:var(--color-text)">Email: <a
-                            href="mailto:cavalinilivros@gmail.com"
-                            style="text-decoration:none; color:inherit; font-weight:700;">cavalinilivros@gmail.com</a>
-                    </div>
-                    <div class="footer-cta">
-                        <a href="contato.html" class="action-btn" style="display:inline-block; margin-top:8px;">Fale
-                            conosco</a>
-                    </div>
-                </div>
-            </div>
+    <footer
+      class="footer"
+      role="contentinfo"
+      aria-label="Rodapé Toca da Coruja"
+    >
+      <div class="footer-content">
+        <div class="footer-logo" aria-hidden="false">
+          <img
+            src="/imagens/logo.png"
+            alt="Logo Toca da Coruja"
+            class="footer-img"
+          />
+          <div>
+            <h3>Toca da Coruja</h3>
+            <p>
+              Sua biblioteca literária online — livros escolhidos com carinho
+              para todos os leitores.
+            </p>
+          </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>© 2025 Toca da Coruja. Todos os direitos reservados. — Feito com · livros · café</p>
+        <div class="footer-links" aria-labelledby="explorar-title">
+          <h4 id="explorar-title">Explorar</h4>
+          <ul>
+            <li><a href="home.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
         </div>
+
+        <div class="footer-social">
+          <h4>Conecte-se</h4>
+          <div
+            class="social-icons"
+            role="navigation"
+            aria-label="Redes sociais"
+          >
+            <a
+              href="https://www.instagram.com/tocadacoruja24?igsh=OWRqaGM0eW53b3My"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram Toca da Coruja"
+            >
+              <img src="/imagens/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="https://x.com/TocaDaCoruja24"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X Toca da Coruja"
+            >
+              <img src="/imagens/twitter.png" alt="X" />
+            </a>
+          </div>
+
+          <div class="footer-quick" style="margin-top: 10px">
+            <div style="font-size: 0.95rem; color: var(--color-text)">
+              Email:
+              <a
+                href="mailto:cavalinilivros@gmail.com"
+                style="text-decoration: none; color: inherit; font-weight: 700"
+                >cavalinilivros@gmail.com</a
+              >
+            </div>
+            <div class="footer-cta">
+              <a
+                href="contato.html"
+                class="action-btn"
+                style="display: inline-block; margin-top: 8px"
+                >Fale conosco</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © 2025 Toca da Coruja. Todos os direitos reservados. — Feito com ·
+          livros · café
+        </p>
+      </div>
     </footer>
 
     <!-- MODAL: Adicionar Gênero -->
     <div class="modal" id="modal-genre">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Adicionar Novo Gênero</h3>
-                <button class="modal-close" aria-label="Fechar">&times;</button>
-            </div>
-            <form id="form-genre">
-                <div class="form-group">
-                    <label>Nome do Gênero</label>
-                    <input type="text" id="genre-name" required placeholder="ex: Ficção Científica" maxlength="20">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                        <small style="opacity:.6;">Este nome aparecerá no menu lateral</small>
-                        <small id="genre-counter" style="opacity:.8; font-weight:600; color:var(--color-accent);">0/20</small>
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary btn-cancel">Cancelar</button>
-                    <button type="submit" class="btn-primary">Criar Gênero</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Adicionar Novo Gênero</h3>
+          <button class="modal-close" aria-label="Fechar">&times;</button>
         </div>
+        <form id="form-genre">
+          <div class="form-group">
+            <label>Nome do Gênero</label>
+            <input
+              type="text"
+              id="genre-name"
+              required
+              placeholder="ex: Ficção Científica"
+              maxlength="20"
+            />
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 4px;
+              "
+            >
+              <small style="opacity: 0.6"
+                >Este nome aparecerá no menu lateral</small
+              >
+              <small
+                id="genre-counter"
+                style="
+                  opacity: 0.8;
+                  font-weight: 600;
+                  color: var(--color-accent);
+                "
+                >0/20</small
+              >
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary btn-cancel">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Criar Gênero</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- PARTÍCULAS MÁGICAS NO HERO -->
     <canvas id="hero-particles"></canvas>
     <script>
-        // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
-        const canvas = document.getElementById('hero-particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let animationId;
+      // PARTÍCULAS MÁGICAS - TOCA DA CORUJA
+      const canvas = document.getElementById("hero-particles");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+      let animationId;
 
-        function resizeCanvas() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.reset();
         }
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + 20;
-                this.size = Math.random() * 4 + 2;
-                this.speedY = -(Math.random() * 2 + 0.5);
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.life = 0;
-                this.maxLife = Math.random() * 100 + 100;
-                this.opacity = 1;
-                this.wingAngle = 0;
-                this.wingSpeed = Math.random() * 0.1 + 0.05;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-                this.life++;
-                this.opacity = 1 - (this.life / this.maxLife);
-                this.wingAngle += this.wingSpeed;
-
-                if (this.life > this.maxLife || this.y < -20) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.translate(this.x, this.y);
-
-                // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
-                const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-                gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`);     // #ffd4a3 - brilho quente
-                gradient.addColorStop(0.6, `rgba(197, 148, 108, ${this.opacity * 0.8})`); // #c5946c - núcleo
-                gradient.addColorStop(1, `rgba(197, 148, 108, 0)`);                 // fade suave
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                ctx.fill();
-
-                // ASAS SUTIS (efeito de coruja voando)
-                ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
-                ctx.lineWidth = 1.2;
-                ctx.setLineDash([2, 4]);
-
-                ctx.beginPath();
-                ctx.moveTo(-this.size * 1.8, 0);
-                ctx.quadraticCurveTo(-this.size * 3.5, Math.sin(this.wingAngle) * 6, -this.size * 2.2, -this.size * 0.6);
-                ctx.moveTo(this.size * 1.8, 0);
-                ctx.quadraticCurveTo(this.size * 3.5, Math.sin(-this.wingAngle) * 6, this.size * 2.2, -this.size * 0.6);
-                ctx.stroke();
-                ctx.setLineDash([]);
-
-                ctx.restore();
-            }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+          this.size = Math.random() * 4 + 2;
+          this.speedY = -(Math.random() * 2 + 0.5);
+          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.life = 0;
+          this.maxLife = Math.random() * 100 + 100;
+          this.opacity = 1;
+          this.wingAngle = 0;
+          this.wingSpeed = Math.random() * 0.1 + 0.05;
         }
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(Math.floor(canvas.width / 15), 80);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.life++;
+          this.opacity = 1 - this.life / this.maxLife;
+          this.wingAngle += this.wingSpeed;
+
+          if (this.life > this.maxLife || this.y < -20) {
+            this.reset();
+          }
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            animationId = requestAnimationFrame(animate);
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.translate(this.x, this.y);
+
+          // GRADIENTE DOURADO PERFEITO (Toca da Coruja)
+          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+          gradient.addColorStop(0, `rgba(255, 212, 163, ${this.opacity})`); // #ffd4a3 - brilho quente
+          gradient.addColorStop(
+            0.6,
+            `rgba(197, 148, 108, ${this.opacity * 0.8})`
+          ); // #c5946c - núcleo
+          gradient.addColorStop(1, `rgba(197, 148, 108, 0)`); // fade suave
+
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ASAS SUTIS (efeito de coruja voando)
+          ctx.strokeStyle = `rgba(197, 148, 108, ${this.opacity * 0.5})`;
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([2, 4]);
+
+          ctx.beginPath();
+          ctx.moveTo(-this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            -this.size * 3.5,
+            Math.sin(this.wingAngle) * 6,
+            -this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.moveTo(this.size * 1.8, 0);
+          ctx.quadraticCurveTo(
+            this.size * 3.5,
+            Math.sin(-this.wingAngle) * 6,
+            this.size * 2.2,
+            -this.size * 0.6
+          );
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.restore();
         }
+      }
 
-        // Inicialização
-        window.addEventListener('load', () => {
-            const hero = document.querySelector('.hero-section');
-            if (!hero) return;
+      function initParticles() {
+        particles = [];
+        const count = Math.min(Math.floor(canvas.width / 15), 80);
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
 
-            canvas.style.position = 'absolute';
-            canvas.style.pointerEvents = 'none';
-            hero.style.position = 'relative';
-            hero.appendChild(canvas);
-
-            resizeCanvas();
-            initParticles();
-            animate();
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
-
-            // Ajuste no dark mode
-            const observer = new MutationObserver(() => {
-                if (document.body.classList.contains('dark-mode')) {
-                    ctx.globalCompositeOperation = 'soft-light';
-                } else {
-                    ctx.globalCompositeOperation = 'screen';
-                }
-            });
-            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
         });
+        animationId = requestAnimationFrame(animate);
+      }
+
+      // Inicialização
+      window.addEventListener("load", () => {
+        const hero = document.querySelector(".hero-section");
+        if (!hero) return;
+
+        canvas.style.position = "absolute";
+        canvas.style.pointerEvents = "none";
+        hero.style.position = "relative";
+        hero.appendChild(canvas);
+
+        resizeCanvas();
+        initParticles();
+        animate();
+
+        window.addEventListener("resize", () => {
+          resizeCanvas();
+          initParticles();
+        });
+
+        // Ajuste no dark mode
+        const observer = new MutationObserver(() => {
+          if (document.body.classList.contains("dark-mode")) {
+            ctx.globalCompositeOperation = "soft-light";
+          } else {
+            ctx.globalCompositeOperation = "screen";
+          }
+        });
+        observer.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      });
     </script>
 
     <script type="module" src="/js/theme.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
     <script type="module" src="/js/admin.js"></script>
     <script src="/js/universal-search.js"></script>
-    
+
     <!-- Validação de campos numéricos - sem letra 'e' -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const numericInputs = ['book-paginas', 'book-ano'];
-            
-            numericInputs.forEach(inputId => {
-                const input = document.getElementById(inputId);
-                if (!input) return;
-                
-                // Bloqueia entrada de caracteres não-numéricos
-                input.addEventListener('keypress', (e) => {
-                    const char = e.key;
-                    // Permite apenas dígitos (0-9)
-                    if (!/[0-9]/.test(char)) {
-                        e.preventDefault();
-                    }
-                });
-                
-                // Remove qualquer caractere não-numérico que conseguir entrar (ex: copiar/colar)
-                input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                });
-                
-                // Validação ao enviar o formulário
-                const form = document.getElementById('form-book');
-                if (form) {
-                    form.addEventListener('submit', (e) => {
-                        const value = input.value.trim();
-                        if (value === '' || !/^\d+$/.test(value)) {
-                            e.preventDefault();
-                            alert(`${input.previousElementSibling.textContent} deve conter apenas números!`);
-                            input.focus();
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-</body>
+      document.addEventListener("DOMContentLoaded", () => {
+        const numericInputs = ["book-paginas", "book-ano"];
 
+        numericInputs.forEach((inputId) => {
+          const input = document.getElementById(inputId);
+          if (!input) return;
+
+          // Bloqueia entrada de caracteres não-numéricos
+          input.addEventListener("keypress", (e) => {
+            const char = e.key;
+            // Permite apenas dígitos (0-9)
+            if (!/[0-9]/.test(char)) {
+              e.preventDefault();
+            }
+          });
+
+          // Remove qualquer caractere não-numérico que conseguir entrar (ex: copiar/colar)
+          input.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, "");
+          });
+
+          // Validação ao enviar o formulário
+          const form = document.getElementById("form-book");
+          if (form) {
+            form.addEventListener("submit", (e) => {
+              const value = input.value.trim();
+              if (value === "" || !/^\d+$/.test(value)) {
+                e.preventDefault();
+                alert(
+                  `${input.previousElementSibling.textContent} deve conter apenas números!`
+                );
+                input.focus();
+              }
+            });
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
