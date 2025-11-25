@@ -105,8 +105,19 @@
           />Quer ler</a
         >
         <a href="ja_lidos.html"
-          ><img src="../imagens/ja-lido-modo-claro.png" width="20" height="20" alt="" class="ja-lido ja-lido--light" /><img src="../imagens/ja-lido-modo-escuro.png" width="20" height="20" alt="" class="ja-lido ja-lido--dark" />Já
-          lidos</a
+          ><img
+            src="../imagens/ja-lido-modo-claro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--light"
+          /><img
+            src="../imagens/ja-lido-modo-escuro.png"
+            width="20"
+            height="20"
+            alt=""
+            class="ja-lido ja-lido--dark"
+          />Já lidos</a
         >
         <a href="favoritos.html"
           ><img
@@ -346,6 +357,56 @@
         const infoCard = document.getElementById("info-card");
         const closeBtn = document.querySelector(".btn-close-info");
 
+        // Determinar gênero atual (parâmetro de URL `genero`)
+        const params = new URLSearchParams(window.location.search);
+        const currentGenre = (params.get("genero") || "").trim();
+
+        // Detectar se o gênero foi adicionado pelo admin
+        let isAdminAdded = false;
+        try {
+          const genrePages = JSON.parse(
+            localStorage.getItem("genre-pages") || "{}"
+          );
+          for (const g of Object.values(genrePages)) {
+            if (g && g.name && g.name.trim() === currentGenre) {
+              isAdminAdded = true;
+              break;
+            }
+          }
+        } catch (e) {
+          // ignore parse errors
+        }
+
+        // Também verificar admin-books (caso livros do admin definam o gênero)
+        if (!isAdminAdded) {
+          try {
+            const adminBooks = JSON.parse(
+              localStorage.getItem("admin-books") || "{}"
+            );
+            for (const k of Object.keys(adminBooks || {})) {
+              const b = adminBooks[k];
+              if (
+                b &&
+                (b.genero || "").trim().toLowerCase() ===
+                  currentGenre.toLowerCase()
+              ) {
+                isAdminAdded = true;
+                break;
+              }
+            }
+          } catch (e) {
+            // ignore
+          }
+        }
+
+        // Se for um gênero adicionado pelo admin, esconder o botão/ cartão de informação
+        if (isAdminAdded) {
+          if (infoBtn) infoBtn.style.display = "none";
+          if (infoCard) infoCard.style.display = "none";
+          return;
+        }
+
+        // Caso contrário, comportamento normal do card flutuante
         if (infoBtn && infoCard) {
           infoBtn.addEventListener("click", () => {
             infoCard.classList.toggle("open");

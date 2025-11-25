@@ -256,7 +256,7 @@ function initHelpModal() {
   const modal = createHelpModal();
 
   if (!modal) {
-    console.warn('Falha ao criar help modal');
+    console.warn("Falha ao criar help modal");
     return;
   }
 
@@ -295,10 +295,20 @@ function initHelpModal() {
           </div>
         `;
       } else {
+        // Determinar caminho correto para a página de contato dependendo da URL atual
+        const path = window.location.pathname || window.location.href;
+        const inPagesFolder =
+          path.includes("/pages/") ||
+          path.startsWith("/pages/") ||
+          path.match(/\/pages\//);
+        const contactHref = inPagesFolder
+          ? "contato.html"
+          : "pages/contato.html";
+
         body.innerHTML = `
           <h2 class="help-modal-title">💬 Precisando de Ajuda?</h2>
           <p class="help-modal-message">Encontrou algum erro ou tem dúvidas? Estamos aqui para ajudar!</p>
-          <a href="pages/contato.html" class="help-modal-button">Entre em Contato</a>
+          <a href="${contactHref}" class="help-modal-button">Entre em Contato</a>
         `;
       }
 
