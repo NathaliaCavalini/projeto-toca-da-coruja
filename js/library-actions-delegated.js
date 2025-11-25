@@ -11,277 +11,491 @@ function getAuth() {
     // Fallback para window.auth direto
     if (window.auth) return window.auth;
     // Último fallback: firebase global
-    if (typeof firebase !== 'undefined' && firebase.auth) return firebase.auth();
-  } catch(e) {}
+    if (typeof firebase !== "undefined" && firebase.auth)
+      return firebase.auth();
+  } catch (e) {}
   return null;
 }
 
-function getUserKey(){
-  try { 
+function getUserKey() {
+  try {
     const auth = getAuth();
-    if(auth && auth.currentUser && auth.currentUser.uid) return `user-${auth.currentUser.uid}`; 
-  } catch(e){}
-  return 'guest';
+    if (auth && auth.currentUser && auth.currentUser.uid)
+      return `user-${auth.currentUser.uid}`;
+  } catch (e) {}
+  return "guest";
 }
-function sKey(listName){ return `${getUserKey()}::${listName}`; }
-function load(listName){ const raw = localStorage.getItem(sKey(listName)); return raw ? JSON.parse(raw) : []; }
-function save(listName, arr){ localStorage.setItem(sKey(listName), JSON.stringify(arr)); }
-function inList(listName, id){ return load(listName).some(i => i.id === id); }
+function sKey(listName) {
+  return `${getUserKey()}::${listName}`;
+}
+function load(listName) {
+  const raw = localStorage.getItem(sKey(listName));
+  return raw ? JSON.parse(raw) : [];
+}
+function save(listName, arr) {
+  localStorage.setItem(sKey(listName), JSON.stringify(arr));
+}
+function inList(listName, id) {
+  return load(listName).some((i) => i.id === id);
+}
 
-function normalizeToId(v){
-  return String(v||'').trim().toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'').replace(/\-+/g,'-').replace(/^\-+|\-+$/g,'');
+function normalizeToId(v) {
+  return String(v || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9\-]/g, "")
+    .replace(/\-+/g, "-")
+    .replace(/^\-+|\-+$/g, "");
 }
-function absoluteUrl(url){
-  if(!url) return '';
-  try { return new URL(url, window.location.origin).href; } catch(e){ return url; }
+function absoluteUrl(url) {
+  if (!url) return "";
+  try {
+    return new URL(url, window.location.origin).href;
+  } catch (e) {
+    return url;
+  }
 }
 
 // heurísticas para extrair título e imagem
-function findClosestBookCard(el){
-  return el.closest('.book-item') || el.closest('[data-id]') || el.closest('.book-detail') || el.closest('.book-detail-card') || null;
+function findClosestBookCard(el) {
+  return (
+    el.closest(".book-item") ||
+    el.closest("[data-id]") ||
+    el.closest(".book-detail") ||
+    el.closest(".book-detail-card") ||
+    null
+  );
 }
-function findTitleFromCard(card){
-  if(!card) return '';
-  if(card.dataset && card.dataset.title) return card.dataset.title.trim();
-  const p = card.querySelector && card.querySelector('.book-title p');
-  if(p && p.textContent.trim()) return p.textContent.trim();
-  const h1 = card.querySelector && card.querySelector('.book-info h1');
-  if(h1 && h1.textContent.trim()) return h1.textContent.trim();
-  const pageH1 = document.querySelector('.book-info h1') || document.querySelector('h1');
-  if(pageH1 && pageH1.textContent.trim()) return pageH1.textContent.trim();
+function findTitleFromCard(card) {
+  if (!card) return "";
+  if (card.dataset && card.dataset.title) return card.dataset.title.trim();
+  const p = card.querySelector && card.querySelector(".book-title p");
+  if (p && p.textContent.trim()) return p.textContent.trim();
+  const h1 = card.querySelector && card.querySelector(".book-info h1");
+  if (h1 && h1.textContent.trim()) return h1.textContent.trim();
+  const pageH1 =
+    document.querySelector(".book-info h1") || document.querySelector("h1");
+  if (pageH1 && pageH1.textContent.trim()) return pageH1.textContent.trim();
   const og = document.querySelector('meta[property="og:title"]');
-  if(og && og.content) return og.content.trim();
-  return (document.title || '').trim() || '';
+  if (og && og.content) return og.content.trim();
+  return (document.title || "").trim() || "";
 }
-function makeShortDesc(text, max=70){
-  const t = String(text||'').trim();
-  if(!t) return '';
-  if(t.length <= max) return t;
+function makeShortDesc(text, max = 70) {
+  const t = String(text || "").trim();
+  if (!t) return "";
+  if (t.length <= max) return t;
   // tenta cortar em limite de palavra
   const slice = t.slice(0, max);
-  const lastSpace = slice.lastIndexOf(' ');
-  return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + '…';
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).trim() + "…";
 }
 
-function findDescriptionFromCard(card){
+function findDescriptionFromCard(card) {
   try {
-    if(card){
+    if (card) {
       // Prioridade 1: Mini-descrição no vejamais (data-attribute)
-      const miniDescEl = card.querySelector('.book-mini-desc[data-short-desc]');
-      if(miniDescEl){
-        const miniDesc = miniDescEl.getAttribute('data-short-desc');
-        if(miniDesc && miniDesc.trim()){
-          console.log('✅ Mini-descrição extraída do data-attribute:', miniDesc);
+      const miniDescEl = card.querySelector(".book-mini-desc[data-short-desc]");
+      if (miniDescEl) {
+        const miniDesc = miniDescEl.getAttribute("data-short-desc");
+        if (miniDesc && miniDesc.trim()) {
+          console.log(
+            "✅ Mini-descrição extraída do data-attribute:",
+            miniDesc
+          );
           return miniDesc.trim();
         }
       }
 
       // Prioridade 2: Descrição após <br><br> (catálogo/home)
-      const p = card.querySelector('.book-title p');
-      if(p && p.innerHTML){
+      const p = card.querySelector(".book-title p");
+      if (p && p.innerHTML) {
         // Extrai o texto depois de <br><br>
         const html = p.innerHTML;
         // Regex mais robusto para pegar <br><br> ou <br/><br/> com espaços/quebras
         const parts = html.split(/<br\s*\/?>\s*<br\s*\/?>/i);
-        console.log('📋 HTML do card:', html);
-        console.log('📋 Parts após split:', parts);
-        if(parts.length > 1){
+        console.log("📋 HTML do card:", html);
+        console.log("📋 Parts após split:", parts);
+        if (parts.length > 1) {
           // Remove tags HTML e retorna apenas o texto
-          const desc = parts[1].replace(/<[^>]*>/g, '').trim();
-          console.log('✅ Descrição extraída do card:', desc);
-          if(desc) return desc;
+          const desc = parts[1].replace(/<[^>]*>/g, "").trim();
+          console.log("✅ Descrição extraída do card:", desc);
+          if (desc) return desc;
         }
       }
       // Fallback: sinopse (não deveria chegar aqui se mini-desc existe)
-      const sinopseInCard = card.querySelector('.book-info .sinopse, .sinopse');
-      if(sinopseInCard && sinopseInCard.textContent){
-        const t = sinopseInCard.textContent.replace(/^\s*Sinopse:\s*/i, '').trim();
-        console.log('⚠️ Usando sinopse como fallback (truncando):', t.substring(0,50) + '...');
-        if(t) return makeShortDesc(t); // Retorna versão curta para salvar no card da lista
+      const sinopseInCard = card.querySelector(".book-info .sinopse, .sinopse");
+      if (sinopseInCard && sinopseInCard.textContent) {
+        const t = sinopseInCard.textContent
+          .replace(/^\s*Sinopse:\s*/i, "")
+          .trim();
+        console.log(
+          "⚠️ Usando sinopse como fallback (truncando):",
+          t.substring(0, 50) + "..."
+        );
+        if (t) return makeShortDesc(t); // Retorna versão curta para salvar no card da lista
       }
     }
-    const descEl = document.querySelector('.book-description, .book-desc, .description, .book-info .sinopse, .sinopse');
-    if(descEl && descEl.textContent){
-      const txt = descEl.textContent.replace(/^\s*Sinopse:\s*/i, '').trim();
-      console.log('📖 Descrição encontrada globalmente:', txt);
+    const descEl = document.querySelector(
+      ".book-description, .book-desc, .description, .book-info .sinopse, .sinopse"
+    );
+    if (descEl && descEl.textContent) {
+      const txt = descEl.textContent.replace(/^\s*Sinopse:\s*/i, "").trim();
+      console.log("📖 Descrição encontrada globalmente:", txt);
       return makeShortDesc(txt); // Retorna versão curta para salvar no card da lista
     }
-  } catch(e){}
-  return '';
+  } catch (e) {}
+  return "";
 }
-function findImageFromCard(card){
+function findImageFromCard(card) {
   try {
-    if(card){
-      const candidate = card.querySelector && (card.querySelector('img[data-src], img[src], img'));
-      if(candidate){
-        const s = candidate.getAttribute('src') || candidate.getAttribute('data-src') || candidate.src;
-        if(s) return absoluteUrl(s);
+    if (card) {
+      const candidate =
+        card.querySelector &&
+        card.querySelector("img[data-src], img[src], img");
+      if (candidate) {
+        const s =
+          candidate.getAttribute("src") ||
+          candidate.getAttribute("data-src") ||
+          candidate.src;
+        if (s) return absoluteUrl(s);
       }
-      const fig = card.querySelector && card.querySelector('figure img');
-      if(fig){
-        const s = fig.getAttribute('src') || fig.src;
-        if(s) return absoluteUrl(s);
+      const fig = card.querySelector && card.querySelector("figure img");
+      if (fig) {
+        const s = fig.getAttribute("src") || fig.src;
+        if (s) return absoluteUrl(s);
       }
     }
-    const detailImg = document.querySelector('.book-info img, .book-detail img, #book-detail img');
-    if(detailImg){
-      const s = detailImg.getAttribute('src') || detailImg.src;
-      if(s) return absoluteUrl(s);
+    const detailImg = document.querySelector(
+      ".book-info img, .book-detail img, #book-detail img"
+    );
+    if (detailImg) {
+      const s = detailImg.getAttribute("src") || detailImg.src;
+      if (s) return absoluteUrl(s);
     }
     const og = document.querySelector('meta[property="og:image"]');
-    if(og && og.content) return absoluteUrl(og.content);
+    if (og && og.content) return absoluteUrl(og.content);
     const imgs = Array.from(document.images || []);
-    if(imgs.length){
+    if (imgs.length) {
       let best = imgs[0];
-      imgs.forEach(i => {
+      imgs.forEach((i) => {
         try {
-          const area = (i.naturalWidth||0)*(i.naturalHeight||0);
-          const bestArea = (best.naturalWidth||0)*(best.naturalHeight||0);
-          if(area > bestArea) best = i;
-        } catch(e){}
+          const area = (i.naturalWidth || 0) * (i.naturalHeight || 0);
+          const bestArea = (best.naturalWidth || 0) * (best.naturalHeight || 0);
+          if (area > bestArea) best = i;
+        } catch (e) {}
       });
-      const s = best.getAttribute('src') || best.src;
-      if(s) return absoluteUrl(s);
+      const s = best.getAttribute("src") || best.src;
+      if (s) return absoluteUrl(s);
     }
-  } catch(e){}
-  return '';
+  } catch (e) {}
+  return "";
 }
 
-function buildBookFromEl(el){
+function buildBookFromEl(el) {
   const card = findClosestBookCard(el);
-  const rawTitle = findTitleFromCard(card) || 'Sem título';
-  let id = (card && (card.dataset && card.dataset.id)) || (card && card.getAttribute && card.getAttribute('data-id')) || '';
-  if(!id) id = normalizeToId(rawTitle);
-  const img = findImageFromCard(card) || '';
-  const desc = findDescriptionFromCard(card) || '';
-  return { id: normalizeToId(id), title: rawTitle.trim(), img: img, desc: desc, when: new Date().toISOString() };
+  const rawTitle = findTitleFromCard(card) || "Sem título";
+  let id =
+    (card && card.dataset && card.dataset.id) ||
+    (card && card.getAttribute && card.getAttribute("data-id")) ||
+    "";
+  if (!id) id = normalizeToId(rawTitle);
+  const img = findImageFromCard(card) || "";
+  const desc = findDescriptionFromCard(card) || "";
+  return {
+    id: normalizeToId(id),
+    title: rawTitle.trim(),
+    img: img,
+    desc: desc,
+    when: new Date().toISOString(),
+  };
 }
 
-function toggle(listName, book){
+// Simple in-place delete animation that reuses `.droplet` and `.book-item.coffee-delete` CSS.
+function animateCardRemoval(card) {
+  if (!card) return Promise.resolve();
+  return new Promise((resolve) => {
+    try {
+      // Create a few droplets that converge back to the card (reverse animation)
+      const rect = card.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const droplets = [];
+      const configs = [
+        { count: 6, cls: "reverse-fast" },
+        { count: 8, cls: "reverse-medium" },
+        { count: 10, cls: "reverse-slow" },
+      ];
+
+      configs.forEach((cfg) => {
+        for (let i = 0; i < cfg.count; i++) {
+          const d = document.createElement("div");
+          d.className = `droplet ${cfg.cls}`;
+          // distribute angles
+          const angle =
+            (i / cfg.count) * Math.PI * 2 + (Math.random() - 0.5) * 0.6;
+          const dist = 80 + Math.random() * 60;
+          const tx = Math.cos(angle) * dist;
+          const ty = Math.sin(angle) * dist;
+          d.style.left = `${centerX - 3}px`;
+          d.style.top = `${centerY - 3}px`;
+          d.style.setProperty("--tx", `${tx}px`);
+          d.style.setProperty("--ty", `${ty}px`);
+          document.body.appendChild(d);
+          droplets.push(d);
+          // ensure cleanup after animation
+          d.addEventListener(
+            "animationend",
+            () => {
+              d.remove();
+            },
+            { once: true }
+          );
+        }
+      });
+
+      // Add the class that triggers card remove animation
+      card.classList.add("coffee-delete");
+
+      // Resolve after animation (fallback 700ms)
+      const onEnd = () => {
+        try {
+          card.remove();
+        } catch (e) {}
+        resolve();
+      };
+
+      card.addEventListener("animationend", onEnd, { once: true });
+      setTimeout(() => {
+        if (document.body.contains(card)) onEnd();
+      }, 800);
+    } catch (e) {
+      resolve();
+    }
+  });
+}
+
+function toggle(listName, book) {
   book.id = normalizeToId(book.id || book.title);
   const arr = load(listName);
-  const idx = arr.findIndex(i => i.id === book.id);
-  if(idx > -1){ arr.splice(idx,1); save(listName, arr); return false; }
-  const toSave = { id: book.id, title: book.title, img: book.img || '', desc: book.desc || '', when: book.when || new Date().toISOString() };
+  const idx = arr.findIndex((i) => i.id === book.id);
+  if (idx > -1) {
+    arr.splice(idx, 1);
+    save(listName, arr);
+    return false;
+  }
+  const toSave = {
+    id: book.id,
+    title: book.title,
+    img: book.img || "",
+    desc: book.desc || "",
+    when: book.when || new Date().toISOString(),
+  };
   arr.push(toSave);
   save(listName, arr);
   return true;
 }
 
-function refreshButtonState(card){
-  if(!card) return;
-  const id = normalizeToId(card.dataset?.id || card.dataset?.title || card.querySelector?.('.book-title p')?.textContent || '');
-  if(!id) return;
-  const q = card.querySelector('.btn-quer-ler, #btn-quer-ler, .action-btn.btn-quer-ler') || card.querySelector('[id^="btn-quer-ler-"]');
-  const j = card.querySelector('.btn-ja-li, #btn-ja-li, .action-btn.btn-ja-li') || card.querySelector('[id^="btn-ja-li-"]');
-  const f = card.querySelector('.btn-favorito, #btn-favorito, .action-btn.btn-favorito') || card.querySelector('[id^="btn-favorito-"], [id^="btn-favoritos-"]');
-  if(q) q.classList.toggle('active', inList('querLer', id));
-  if(j) j.classList.toggle('active', inList('jaLi', id));
-  if(f) f.classList.toggle('active', inList('favoritos', id));
+function refreshButtonState(card) {
+  if (!card) return;
+  const id = normalizeToId(
+    card.dataset?.id ||
+      card.dataset?.title ||
+      card.querySelector?.(".book-title p")?.textContent ||
+      ""
+  );
+  if (!id) return;
+  const q =
+    card.querySelector(
+      ".btn-quer-ler, #btn-quer-ler, .action-btn.btn-quer-ler"
+    ) || card.querySelector('[id^="btn-quer-ler-"]');
+  const j =
+    card.querySelector(".btn-ja-li, #btn-ja-li, .action-btn.btn-ja-li") ||
+    card.querySelector('[id^="btn-ja-li-"]');
+  const f =
+    card.querySelector(
+      ".btn-favorito, #btn-favorito, .action-btn.btn-favorito"
+    ) || card.querySelector('[id^="btn-favorito-"], [id^="btn-favoritos-"]');
+  if (q) q.classList.toggle("active", inList("querLer", id));
+  if (j) j.classList.toggle("active", inList("jaLi", id));
+  if (f) f.classList.toggle("active", inList("favoritos", id));
 }
 
-function refreshAllButtons(){ document.querySelectorAll('.book-item, .book-detail, .book-detail-card').forEach(c => refreshButtonState(c)); }
+function refreshAllButtons() {
+  document
+    .querySelectorAll(".book-item, .book-detail, .book-detail-card")
+    .forEach((c) => refreshButtonState(c));
+}
 window.__libraryActions = window.__libraryActions || {};
 window.__libraryActions.refreshAll = refreshAllButtons;
 
-function goToListPage(action){
-  const map = { querLer: 'pages/quer_ler.html', jaLi: 'pages/ja_lidos.html', favoritos: 'pages/favoritos.html' };
+function goToListPage(action) {
+  const map = {
+    querLer: "pages/quer_ler.html",
+    jaLi: "pages/ja_lidos.html",
+    favoritos: "pages/favoritos.html",
+  };
   const filename = map[action];
-  if(!filename) return;
+  if (!filename) return;
   try {
-    const url = new URL(filename, window.location.origin + '/');
-    setTimeout(()=> { window.location.href = url.href; }, 140);
-  } catch(e){
-    setTimeout(()=> { window.location.href = filename.replace(/^\/+/, ''); }, 140);
+    const url = new URL(filename, window.location.origin + "/");
+    setTimeout(() => {
+      window.location.href = url.href;
+    }, 140);
+  } catch (e) {
+    setTimeout(() => {
+      window.location.href = filename.replace(/^\/+/, "");
+    }, 140);
   }
 }
 
 const delegateSelector = [
-  '.btn-quer-ler',
-  '#btn-quer-ler',
-  '.btn-ja-li',
-  '#btn-ja-li',
-  '.btn-favorito',
-  '#btn-favorito',
-  '.action-btn.btn-quer-ler',
-  '.action-btn.btn-ja-li',
-  '.action-btn.btn-favorito'
-].join(',');
+  ".btn-quer-ler",
+  "#btn-quer-ler",
+  ".btn-ja-li",
+  "#btn-ja-li",
+  ".btn-favorito",
+  "#btn-favorito",
+  ".action-btn.btn-quer-ler",
+  ".action-btn.btn-ja-li",
+  ".action-btn.btn-favorito",
+].join(",");
 
 // Previne múltiplos event listeners
 if (!window.__libraryActionsListenerAdded) {
   window.__libraryActionsListenerAdded = true;
-  
-document.addEventListener('click', (e) => {
-  // Ignore clicks that happen inside the site footer (social / contact links)
-  const inFooter = e.target && e.target.closest && e.target.closest('.footer');
-  if (inFooter) {
-    return;
-  }
 
-  let btn = e.target.closest && e.target.closest(delegateSelector);
-
-  if(!btn){
-    let p = e.target;
-    while(p && p !== document){
-      if(p.id && (p.id.startsWith('btn-quer-ler-') || p.id.startsWith('btn-querler-') || p.id.startsWith('btn-ja-li-') || p.id.startsWith('btn-jali-') || p.id.startsWith('btn-favorito-') || p.id.startsWith('btn-fav-'))){
-        btn = p; break;
-      }
-      p = p.parentElement;
+  document.addEventListener("click", (e) => {
+    // Ignore clicks that happen inside the site footer (social / contact links)
+    const inFooter =
+      e.target && e.target.closest && e.target.closest(".footer");
+    if (inFooter) {
+      return;
     }
-  }
-  
-  if(!btn) return;
 
-  e.preventDefault();
+    let btn = e.target.closest && e.target.closest(delegateSelector);
 
-  const idLower = (btn.id || '').toLowerCase();
-  let action = null;
-  if(btn.classList.contains('btn-quer-ler') || btn.id === 'btn-quer-ler' || idLower.startsWith('btn-quer-ler-') || idLower.startsWith('btn-querler-') || (btn.classList.contains('action-btn') && btn.classList.contains('btn-quer-ler'))){
-    action = 'querLer';
-  } else if(btn.classList.contains('btn-ja-li') || btn.id === 'btn-ja-li' || idLower.startsWith('btn-ja-li-') || idLower.startsWith('btn-jali-') || (btn.classList.contains('action-btn') && btn.classList.contains('btn-ja-li'))){
-    action = 'jaLi';
-  } else {
-    action = 'favoritos';
-  }
+    if (!btn) {
+      let p = e.target;
+      while (p && p !== document) {
+        if (
+          p.id &&
+          (p.id.startsWith("btn-quer-ler-") ||
+            p.id.startsWith("btn-querler-") ||
+            p.id.startsWith("btn-ja-li-") ||
+            p.id.startsWith("btn-jali-") ||
+            p.id.startsWith("btn-favorito-") ||
+            p.id.startsWith("btn-fav-"))
+        ) {
+          btn = p;
+          break;
+        }
+        p = p.parentElement;
+      }
+    }
 
-  const book = buildBookFromEl(btn);
-  console.log('📚 Livro extraído:', { id: book.id, title: book.title, img: book.img?.substring(0, 50) + '...' });
-  
-  const added = toggle(action, book);
-  
-  // Debug: verificar o que foi salvo
-  const storageKey = sKey(action);
-  const savedData = load(action);
-  console.log('💾 Chave de storage:', storageKey);
-  console.log('💾 Dados salvos agora:', savedData);
-  
-  const card = findClosestBookCard(btn);
-  refreshButtonState(card);
+    if (!btn) return;
 
-  console.log(`[Library] ${added ? 'ADICIONADO' : 'REMOVIDO'} "${book.title}" -> ${action}`);
+    e.preventDefault();
 
-  // Mostra notificação toast com nome do livro
-  const actionNames = { querLer: 'Quero Ler', jaLi: 'Já Li', favoritos: 'Favoritos' };
-  const actionName = actionNames[action] || action;
-  if (typeof window.showToast === 'function') {
-    const message = added 
-      ? `"${book.title}" adicionado a ${actionName}` 
-      : `"${book.title}" removido de ${actionName}`;
-    window.showToast(message, 'success', 2500);
-  }
+    const idLower = (btn.id || "").toLowerCase();
+    let action = null;
+    if (
+      btn.classList.contains("btn-quer-ler") ||
+      btn.id === "btn-quer-ler" ||
+      idLower.startsWith("btn-quer-ler-") ||
+      idLower.startsWith("btn-querler-") ||
+      (btn.classList.contains("action-btn") &&
+        btn.classList.contains("btn-quer-ler"))
+    ) {
+      action = "querLer";
+    } else if (
+      btn.classList.contains("btn-ja-li") ||
+      btn.id === "btn-ja-li" ||
+      idLower.startsWith("btn-ja-li-") ||
+      idLower.startsWith("btn-jali-") ||
+      (btn.classList.contains("action-btn") &&
+        btn.classList.contains("btn-ja-li"))
+    ) {
+      action = "jaLi";
+    } else {
+      action = "favoritos";
+    }
 
-  const isInsideListPage = !!btn.closest('#quer-ler-container, #ja-li-container, #favoritos-container');
-  if(isInsideListPage){
-    setTimeout(()=> { try{ window.__libraryActions.refreshAll(); }catch(e){} }, 120);
-    return;
-  }
+    const book = buildBookFromEl(btn);
+    console.log("📚 Livro extraído:", {
+      id: book.id,
+      title: book.title,
+      img: book.img?.substring(0, 50) + "...",
+    });
 
-  goToListPage(action);
-});
+    const added = toggle(action, book);
 
+    // Debug: verificar o que foi salvo
+    const storageKey = sKey(action);
+    const savedData = load(action);
+    console.log("💾 Chave de storage:", storageKey);
+    console.log("💾 Dados salvos agora:", savedData);
+
+    const card = findClosestBookCard(btn);
+    refreshButtonState(card);
+
+    console.log(
+      `[Library] ${added ? "ADICIONADO" : "REMOVIDO"} "${
+        book.title
+      }" -> ${action}`
+    );
+
+    // Mostra notificação toast com nome do livro
+    const actionNames = {
+      querLer: "Quero Ler",
+      jaLi: "Já Li",
+      favoritos: "Favoritos",
+    };
+    const actionName = actionNames[action] || action;
+    if (typeof window.showToast === "function") {
+      const message = added
+        ? `"${book.title}" adicionado a ${actionName}`
+        : `"${book.title}" removido de ${actionName}`;
+      window.showToast(message, "success", 2500);
+    }
+
+    const isInsideListPage = !!btn.closest(
+      "#quer-ler-container, #ja-li-container, #favoritos-container"
+    );
+    if (isInsideListPage) {
+      // If the item was removed, animate the card removal in-place, otherwise just refresh states
+      if (!added) {
+        // animate removal and then refresh buttons
+        try {
+          animateCardRemoval(card).then(() => {
+            try {
+              window.__libraryActions.refreshAll();
+            } catch (e) {}
+          });
+        } catch (e) {
+          try {
+            window.__libraryActions.refreshAll();
+          } catch (ee) {}
+        }
+        return;
+      }
+
+      setTimeout(() => {
+        try {
+          window.__libraryActions.refreshAll();
+        } catch (e) {}
+      }, 120);
+      return;
+    }
+
+    goToListPage(action);
+  });
 } // Fim do if que previne múltiplos listeners
 
-document.addEventListener('DOMContentLoaded', () => { refreshAllButtons(); });
+document.addEventListener("DOMContentLoaded", () => {
+  refreshAllButtons();
+});
