@@ -42,22 +42,34 @@ function saveAdminBooks(books) {
 }
 
 // Renderizar lista de livros
-async function renderBooksList() {
+async function renderBooksList(filter = "") {
   const books = await loadBooks();
   const container = document.getElementById("books-list");
-
   if (!container) return;
-
   container.innerHTML = "";
+  let bookIds = Object.keys(books);
 
-  const bookIds = Object.keys(books);
+  // Filtro de busca
+  if (filter && filter.trim().length > 0) {
+    const f = filter.trim().toLowerCase();
+    bookIds = bookIds.filter((id) => {
+      const book = books[id];
+      return (
+        id.toLowerCase().includes(f) ||
+        (book.titulo && book.titulo.toLowerCase().includes(f)) ||
+        (book.autor && book.autor.toLowerCase().includes(f)) ||
+        (book.genero && book.genero.toLowerCase().includes(f)) ||
+        (book.sinopse && book.sinopse.toLowerCase().includes(f))
+      );
+    });
+  }
 
   if (bookIds.length === 0) {
     container.innerHTML = `
             <div class="empty-state-box" role="status">
                 <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
-                <h3>Nenhum livro cadastrado ainda.</h3>
-                <p class="hint">Adicione livros usando o botão \"Adicionar Livro\" acima.</p>
+                <h3>Nenhum livro encontrado.</h3>
+                <p class="hint">Tente outro termo de busca ou adicione livros usando o botão "Adicionar Livro" acima.</p>
             </div>
         `;
     return;
@@ -75,18 +87,14 @@ async function renderBooksList() {
     const card = document.createElement("div");
     card.className = "book-admin-card";
     card.innerHTML = `
-            <img src="${book.imagem}" alt="${
-      book.titulo
-    }" onerror="this.onerror=null;this.src='/imagens/placeholder.svg'">
+            <img src="${book.imagem}" alt="${book.titulo}" onerror="this.onerror=null;this.src='/imagens/placeholder.svg'">
             <div class="book-admin-info">
                 <div>
                     <h3>${book.titulo} ${badge}</h3>
                     <p><strong>ID:</strong> <code>${id}</code></p>
                     <p><strong>Autor:</strong> ${book.autor}</p>
                     <p><strong>Gênero:</strong> ${book.genero}</p>
-                    <p><strong>Ano:</strong> ${
-                      book.ano
-                    } | <strong>Páginas:</strong> ${book.paginas}</p>
+                    <p><strong>Ano:</strong> ${book.ano} | <strong>Páginas:</strong> ${book.paginas}</p>
                 </div>
                 <div class="book-admin-actions">
                     <a href="vejamais.html?id=${id}" target="_blank" class="btn-view-page">Ver Página</a>
@@ -104,6 +112,35 @@ async function renderBooksList() {
     container.appendChild(card);
   });
 }
+
+// Vincular busca do campo principal da navbar (`#search-input`) à aba de livros
+document.addEventListener("DOMContentLoaded", () => {
+  const navbarSearch = document.getElementById("search-input");
+  if (!navbarSearch) return;
+
+  navbarSearch.addEventListener("input", (e) => {
+    const term = e.target?.value || "";
+    const booksTab = document.getElementById("tab-books");
+    const reviewsTab = document.getElementById("tab-reviews");
+
+    if (booksTab && !booksTab.classList.contains("hidden")) {
+      renderBooksList(term);
+    } else if (reviewsTab && !reviewsTab.classList.contains("hidden")) {
+      renderReviewsList(term);
+    }
+  });
+
+  // Tecla Escape limpa a busca e re-renderiza caso esteja na aba de livros
+  navbarSearch.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      navbarSearch.value = "";
+      const booksTab = document.getElementById("tab-books");
+      if (booksTab && !booksTab.classList.contains("hidden")) {
+        renderBooksList("");
+      }
+    }
+  });
+});
 
 // Modal
 const modal = document.getElementById("modal-book");
@@ -621,17 +658,30 @@ function loadAllReviews() {
   return JSON.parse(localStorage.getItem("all_reviews") || "[]");
 }
 
-// Renderizar lista de reviews
-async function renderReviewsList() {
+// Helper: renderiza estrelas com spans (full / half) igual ao layout da página pública
+function renderStarsHTML(rating) {
+  return [...Array(5)].map((_, i) => {
+    const val = i + 1;
+    if (rating >= val) {
+      return '<span class="star full">★</span>';
+    } else if (rating >= val - 0.5) {
+      return '<span class="star half">★</span>';
+    } else {
+      return '<span class="star">★</span>';
+    }
+  }).join("");
+}
+
+// Renderizar lista de reviews (aceita um filtro opcional)
+async function renderReviewsList(filter = "") {
   const reviews = loadAllReviews();
   const books = await loadBooks();
   const container = document.getElementById("reviews-list");
-
   if (!container) return;
 
   container.innerHTML = "";
 
-  if (reviews.length === 0) {
+  if (!Array.isArray(reviews) || reviews.length === 0) {
     container.innerHTML = `
             <div class="empty-state-box" role="status">
                 <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
@@ -642,10 +692,43 @@ async function renderReviewsList() {
     return;
   }
 
-  // Ordenar por data (mais recentes primeiro)
-  reviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  // Aplicar filtro de texto (id do livro, título, autor, usuário, email, texto da review)
+  let filtered = reviews;
+  const q = (filter || "").toString().trim().toLowerCase();
+  if (q.length > 0) {
+    filtered = reviews.filter((r) => {
+      const book = books[r.bookId] || {};
+      const bookTitle = (book.titulo || "").toLowerCase();
+      const bookId = (r.bookId || "").toLowerCase();
+      const username = (r.username || "").toLowerCase();
+      const userEmail = (r.userEmail || "").toLowerCase();
+      const text = (r.text || "").toLowerCase();
 
-  reviews.forEach((review) => {
+      return (
+        bookTitle.includes(q) ||
+        bookId.includes(q) ||
+        username.includes(q) ||
+        userEmail.includes(q) ||
+        text.includes(q)
+      );
+    });
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+            <div class="empty-state-box" role="status">
+                <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
+                <h3>Nenhuma review encontrada.</h3>
+                <p class="hint">Tente outro termo de busca.</p>
+            </div>
+        `;
+    return;
+  }
+
+  // Ordenar por data (mais recentes primeiro)
+  filtered.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+  filtered.forEach((review) => {
     const card = document.createElement("div");
     card.className = "review-admin-card";
 
@@ -662,9 +745,7 @@ async function renderReviewsList() {
                   book ? `Livro: ${book.titulo}` : `Livro ID: ${review.bookId}`
                 }</h4>
                 <div class="review-admin-meta">
-                    <span class="review-rating">${"★".repeat(
-                      Math.floor(review.rating)
-                    )}${review.rating % 1 ? "½" : ""}</span>
+                    <span class="review-rating">${renderStarsHTML(review.rating)}</span>
                     <span class="review-user" title="${
                       review.userEmail || ""
                     }">Usuário: ${userLabel}</span>
@@ -836,10 +917,12 @@ document.querySelectorAll(".admin-tab").forEach((tab) => {
     document.getElementById(`tab-${tabName}`).classList.remove("hidden");
 
     // Renderizar conteúdo
+    const mainSearch = document.getElementById("search-input");
+    const q = mainSearch ? mainSearch.value : "";
     if (tabName === "books") {
-      renderBooksList();
+      renderBooksList(q);
     } else if (tabName === "reviews") {
-      renderReviewsList();
+      renderReviewsList(q);
     } else if (tabName === "genres") {
       renderGenresList();
     }
@@ -908,9 +991,9 @@ document.getElementById("btn-add-genre")?.addEventListener("click", () => {
 });
 
 // Atualizar contador de caracteres do nome do gênero
-document.getElementById("genre-name")?.addEventListener("input", (e) => {
+document.getElementById("genre-name")?.addEventListener("input", ({ target: { value = "" } = {} }) => {
   const counter = document.getElementById("genre-counter");
-  const length = e.target.value.length;
+  const length = value.length;
   counter.textContent = `${length}/20`;
 });
 

@@ -397,6 +397,33 @@ body.dark-mode .admin-menu-section .menu-list li a.admin-tab.active {
   font-weight: 600;
 }
 
+/* Garantir meia-estrela visual no admin (mesmo estilo das páginas públicas) */
+.review-admin-card .star {
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+.review-admin-card .star.full {
+  color: var(--color-accent);
+}
+
+.review-admin-card .star.half {
+  /* esconder a camada base para que o pseudo-elemento mostre a metade correta */
+  color: transparent;
+}
+
+.review-admin-card .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: var(--color-accent);
+}
+
 /* Modal */
 .modal {
   display: none;

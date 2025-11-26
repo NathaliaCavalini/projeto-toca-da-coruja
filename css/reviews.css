@@ -133,6 +133,32 @@
 .floating-review-card #fr-rating-stars .star.half::before { content: "★"; position: absolute; left: 0; top: 0; color: var(--color-accent, #ffb400); width: 50%; overflow: hidden; }
 .floating-review-card .btn-submit { padding:8px 12px; border-radius:8px; border:none; background:var(--color-accent); color:#fff; cursor:pointer; }
 
+/* Botão de deletar review na página pública (book detail) */
+#book-detail .review-item .delete-review {
+    background: linear-gradient(135deg, #dc3545 0%, #a60014 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.18s ease, transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+#book-detail .review-item .delete-review:hover {
+    background: linear-gradient(135deg, #e6686e 0%, #c0392b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(220,53,69,0.18);
+}
+
+#book-detail .review-item .delete-review:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(220,53,69,0.12);
+}
+
 /* ANIMAÇÕES DE CAFÉ - PROFISSIONAL */
 /* Estética cortada só nos cards de review já postados */
 .book-item.review-card .star.half {

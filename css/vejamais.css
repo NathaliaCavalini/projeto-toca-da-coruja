@@ -521,16 +521,24 @@ body {
 #book-detail .submit-btn {
   margin-top: 10px;
   padding: 10px 20px;
-  background: var(--accent-color);
+  background-color: var(--primary-color);
   color: #fff;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.12s;
+  outline: none;
 }
 
 #book-detail .submit-btn:hover {
-  background: var(--primary-color);
+  background-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+#book-detail .submit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* ===== LISTA DE AVALIAÇÕES ===== */
