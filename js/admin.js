@@ -12,12 +12,35 @@ onAuthStateChanged(auth, (user) => {
   if (user && user.email === ADMIN_EMAIL) {
     isAdmin = true;
     console.log("✅ Admin autenticado:", user.email);
+    // Zerar médias de avaliação para todos os livros (apenas no painel admin)
+    try {
+      zeroAllRatings();
+    } catch (err) {
+      console.warn('Não foi possível zerar ratings automaticamente:', err);
+    }
   } else {
     // Redirecionar para home se não for admin
     alert("Acesso negado. Esta página é apenas para administradores.");
     window.location.href = "/pages/home.html";
   }
 });
+
+// Zerar todas as entradas de rating no localStorage (chaves que começam com `bookRating-`)
+function zeroAllRatings() {
+  const keys = Object.keys(localStorage);
+  let cleared = 0;
+  keys.forEach((k) => {
+    if (k.startsWith('bookRating-')) {
+      try {
+        localStorage.setItem(k, JSON.stringify({}));
+        cleared++;
+      } catch (e) {
+        console.warn('Falha ao zerar', k, e);
+      }
+    }
+  });
+  console.log(`🔄 Ratings zerados para ${cleared} livro(es)`);
+}
 
 // ==================== GERENCIAMENTO DE LIVROS ====================
 
@@ -691,6 +714,12 @@ form?.addEventListener("submit", async (e) => {
   // Salvar no localStorage do admin
   adminBooks[id] = book;
   saveAdminBooks(adminBooks);
+  // Garantir que livro salvo não tenha ratings pré-existentes (zera média)
+  try {
+    localStorage.setItem(`bookRating-${id}`, JSON.stringify({}));
+  } catch (err) {
+    console.warn('Não foi possível zerar rating do livro salvo:', id, err);
+  }
 
   console.log(`📚 Livro "${titulo}" salvo com gênero "${genero}"`);
 
@@ -1293,6 +1322,12 @@ window.addExistingBookToGenre = async function (bookId) {
   const override = { ...(adminBooks[bookId] || book), genero: genre };
   adminBooks[bookId] = override;
   saveAdminBooks(adminBooks);
+  // Zerar rating do livro caso existisse
+  try {
+    localStorage.setItem(`bookRating-${bookId}`, JSON.stringify({}));
+  } catch (err) {
+    console.warn('Não foi possível zerar rating ao adicionar livro ao gênero:', bookId, err);
+  }
 
   await renderBooksList();
   alert("Livro adicionado ao gênero com sucesso.");

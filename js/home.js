@@ -80,4 +80,156 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ===== Mobile portrait: move .search-form into the hero as first child =====
+(() => {
+    const SEARCH_MEDIA = '(orientation: portrait) and (max-width: 430px)';
+    const mq = window.matchMedia ? window.matchMedia(SEARCH_MEDIA) : null;
+    const searchForm = document.querySelector('.search-form');
+    const hero = document.querySelector('.hero-section');
+    if (!searchForm || !mq || !hero) return;
+
+    let originalParent = null;
+    let originalNext = null;
+    let moved = false;
+
+    function positionOutside() {
+        // place the search centered horizontally and slightly above the hero's top
+        const heroRect = hero.getBoundingClientRect();
+        const heroTopAbs = heroRect.top + window.scrollY;
+        const desiredTop = heroTopAbs - 35; // additional gap so search is detached from card
+        // apply inline top so it's absolute relative to document
+        searchForm.style.position = 'absolute';
+        searchForm.style.top = desiredTop + 'px';
+        searchForm.style.left = '50%';
+        searchForm.style.transform = 'translateX(-50%)';
+    }
+
+    function moveOutsideBody() {
+        if (moved) return;
+        originalParent = searchForm.parentNode;
+        originalNext = searchForm.nextSibling;
+        document.body.appendChild(searchForm);
+        searchForm.classList.add('mobile-search-outside');
+        // compute position
+        positionOutside();
+        moved = true;
+    }
+
+    function restoreOriginal() {
+        if (!moved) return;
+        if (originalParent) {
+            if (originalNext) originalParent.insertBefore(searchForm, originalNext);
+            else originalParent.appendChild(searchForm);
+        }
+        searchForm.classList.remove('mobile-search-outside');
+        // clear inline styles we set
+        searchForm.style.position = '';
+        searchForm.style.top = '';
+        searchForm.style.left = '';
+        searchForm.style.transform = '';
+        moved = false;
+    }
+
+    function update() {
+        try {
+            if (mq.matches) moveOutsideBody();
+            else restoreOriginal();
+        } catch (e) {
+            console.warn('Erro ao reposicionar search-form dentro do hero:', e);
+        }
+    }
+
+    update();
+    try {
+        mq.addEventListener ? mq.addEventListener('change', update) : mq.addListener(update);
+    } catch (e) {
+        mq.addListener(update);
+    }
+    window.addEventListener('resize', () => { if (moved) positionOutside(); else update(); });
+    window.addEventListener('orientationchange', () => { if (moved) positionOutside(); else update(); });
+    window.addEventListener('scroll', () => { if (moved) positionOutside(); });
+})();
+
 // Theme visuals are initialized by /js/theme.js (imported in HTML)
+
+// ===== Mobile menu open/close (centralized) =====
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const panel = document.getElementById('mobileMenu');
+    const closeBtn = document.querySelector('.mobile-menu-close');
+    if (!toggle || !panel) return;
+
+    const openMenu = () => {
+        panel.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+
+    toggle.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    panel.addEventListener('click', (e) => { if (e.target === panel) closeMenu(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) closeMenu(); });
+
+    // "Voltar home" buttons inside the mobile panel should close the panel and navigate home
+    try {
+        const voltarButtons = Array.from(document.querySelectorAll('.voltar-home'));
+        voltarButtons.forEach(btn => {
+            btn.addEventListener('click', (ev) => {
+                try { closeMenu(); } catch (e) { /* ignore */ }
+                // navigate to home (relative path used across pages)
+                window.location.href = 'home.html';
+            });
+        });
+    } catch (e) {
+        console.warn('Erro ao inicializar botão voltar-home no painel móvel', e);
+    }
+});
+
+// ===== Mobile portrait: transfer `header.logo` into the top mobile header =====
+(() => {
+    const LOGO_MEDIA = '(orientation: portrait) and (max-width: 430px)';
+    const mq = window.matchMedia ? window.matchMedia(LOGO_MEDIA) : null;
+    const logoEl = document.querySelector('aside.sidebar header.logo') || document.querySelector('header.logo');
+    const headerContainer = document.querySelector('.header');
+    const toggleBtn = headerContainer && headerContainer.querySelector('.mobile-menu-toggle');
+    if (!mq || !logoEl || !headerContainer || !toggleBtn) return;
+
+    let originalParent = logoEl.parentNode;
+    let originalNext = logoEl.nextSibling;
+    let moved = false;
+
+    function moveToHeader() {
+        if (moved) return;
+        headerContainer.insertBefore(logoEl, toggleBtn);
+        moved = true;
+    }
+
+    function restoreLogo() {
+        if (!moved) return;
+        if (originalParent) {
+            if (originalNext) originalParent.insertBefore(logoEl, originalNext);
+            else originalParent.appendChild(logoEl);
+        }
+        moved = false;
+    }
+
+    function update() {
+        try {
+            if (mq.matches) moveToHeader();
+            else restoreLogo();
+        } catch (e) {
+            console.warn('Erro ao transferir header.logo para header mobile:', e);
+        }
+    }
+
+    update();
+    try { mq.addEventListener ? mq.addEventListener('change', update) : mq.addListener(update); } catch (e) { mq.addListener(update); }
+    window.addEventListener('resize', update);
+    window.addEventListener('orientationchange', update);
+})();

@@ -1333,6 +1333,42 @@ body.dark-mode .footer-bottom {
     gap: 30px;
   }
 }
+/* ===== HEADER - MOBILE ONLY ===== */
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: var(--color-surface);
+  z-index: 1000;
+}
+
+.header .header-logo { display:flex; align-items:center; gap:12px }
+.header .header-logo .logo-img { width:40px }
+.header .header-logo h1 { font-size:1.1rem; margin:0 }
+
+.mobile-menu-toggle { background:none; border:none; padding:8px; cursor:pointer; display:none }
+.mobile-menu-toggle img{ width:28px; height:28px }
+
+.mobile-menu-panel { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--color-surface); transform:translateX(-100%); transition:transform .35s cubic-bezier(.25,.8,.25,1); display:flex; flex-direction:column; z-index:2000; overflow-y:auto }
+.mobile-menu-panel.open{ transform:translateX(0) }
+.mobile-menu-header { display:flex; justify-content:space-between; align-items:center; padding:20px; background:var(--color-primary); color:var(--color-text); border-radius:0 0 16px 16px }
+.mobile-menu-close{ background:none; border:none; font-size:1.6rem; cursor:pointer }
+.mobile-menu-list{ padding:18px; display:flex; flex-direction:column; gap:10px; flex:1 }
+.menu-item{ display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--color-primary); border-radius:12px; color:var(--color-text); text-decoration:none }
+.menu-item:hover{ transform:translateX(6px) }
+.mobile-menu-footer{ padding:18px; background:var(--color-surface) }
+.voltar-home{ width:100%; padding:12px; background:var(--color-primary); color:var(--color-text); border:none; border-radius:12px }
+
+@media (max-width:900px){
+  .nav-menu, .nav-actions, .search-form { display:none !important }
+  .mobile-menu-toggle { display:block }
+  body { grid-template-rows: auto 1fr auto }
+  .main-content{ padding-top:0 }
+}
+
+@media (min-width:901px){ .header{ display:none } }
 @media (max-width: 480px) {
   .book-grid {
     grid-template-columns: 1fr;
@@ -1999,6 +2035,34 @@ body.dark-mode .book-preview-no-rating {
     border-radius: 10px !important;
   }
 
+  /* Mobile portrait: coloque a search-form sobre o hero (absoluta dentro do hero) */
+  .hero-section {
+    /* já é relative por padrão, reforçamos para garantir posicionamento absoluto interno */
+    position: relative;
+    padding: 20px 12px 32px !important;
+  }
+
+  /* search positioned absolutely but OUTSIDE hero (moved to body by JS) */
+  .search-form.mobile-search-outside {
+    position: absolute !important;
+    /* top is set by JS to align with hero (allows it to be outside hero's box) */
+    left: 50%;
+    transform: translateX(-50%) !important;
+    width: min(92%, 420px) !important;
+    max-width: 420px;
+    z-index: 2200 !important;
+    margin: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    background: var(--color-muted) !important;
+    border-radius: 40px !important;
+    padding: 8px 14px !important;
+  }
+
+  /* Garantir que o input ocupe o espaço disponível dentro da search-form */
+  .search-form input {
+    width: calc(100% - 36px) !important;
+  }
+
   .book-title p {
     font-size: 0.9rem !important;
     margin-top: 8px !important;
@@ -2009,10 +2073,6 @@ body.dark-mode .book-preview-no-rating {
     padding: 6px 12px !important;
     font-size: 0.78rem !important;
     border-radius: 18px !important;
-  }
-
-  .hero-section {
-    padding: 20px 12px 32px !important;
   }
 
   /* fallback to single column on very narrow devices */

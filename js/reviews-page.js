@@ -309,12 +309,9 @@ async function renderUserReviews() {
 
   reviewsSection.innerHTML = cardsHTML;
 
-  // Delegação de eventos para deletar
-  reviewsSection.addEventListener("click", async (e) => {
-    const deleteBtn = e.target.closest(".btn-remove");
+  // Delegação de eventos para deletar (refatorada para reuso em handlers mobile)
+  async function handleDeleteButton(deleteBtn) {
     if (!deleteBtn) return;
-
-    // Prevenir múltiplos cliques
     if (deleteBtn.disabled) return;
     deleteBtn.disabled = true;
 
@@ -327,15 +324,11 @@ async function renderUserReviews() {
     }
 
     try {
-      // Adiciona animação de delete
       createCoffeeDroplets(cardElement, false);
       cardElement.classList.add("coffee-delete");
 
-      // Aguarda a animação terminar com timeout de segurança
-      let animationFinished = false;
       const animationPromise = new Promise((resolve) => {
         const handler = () => {
-          animationFinished = true;
           cardElement.removeEventListener("animationend", handler);
           resolve();
         };
@@ -343,19 +336,59 @@ async function renderUserReviews() {
       });
 
       const timeoutPromise = new Promise((resolve) => {
-        setTimeout(() => resolve(), 1000); // Timeout de 1 segundo
+        setTimeout(() => resolve(), 1000);
       });
 
       await Promise.race([animationPromise, timeoutPromise]);
 
       cardElement.classList.remove("coffee-delete");
       const module = await import("./reviews-manager.js");
-      module.deleteReview(bookId, timestamp);
+      await module.deleteReview(bookId, timestamp);
       await renderUserReviews();
     } catch (err) {
       console.error("Erro ao deletar review:", err);
       alert(err.message || "Erro ao deletar a review.");
       deleteBtn.disabled = false;
+    }
+  }
+
+  // Click delegated on the reviewsSection (desktop & desktop-like)
+  reviewsSection.addEventListener("click", (e) => {
+    const deleteBtn = e.target.closest(".btn-remove");
+    if (deleteBtn) {
+      // fire-and-forget (async handled inside)
+      handleDeleteButton(deleteBtn);
+      return;
+    }
+    // links: ensure anchors with .review-link navigate even if other listeners interfere
+    const link = e.target.closest(".review-link");
+    if (link) return; // let native navigation occur
+  });
+
+  // Mobile/touch fallback: some mobile browsers stop propagation or have touch handling
+  // Add document-level listeners to ensure taps are handled
+  document.addEventListener(
+    "touchend",
+    (ev) => {
+      const btn = ev.target.closest && ev.target.closest(".btn-remove");
+      if (btn) {
+        ev.preventDefault();
+        handleDeleteButton(btn);
+      }
+      const link = ev.target.closest && ev.target.closest(".review-link");
+      if (link) {
+        // force navigation in case click is blocked
+        window.location.href = link.href;
+      }
+    },
+    { passive: false }
+  );
+  // Also support pointerdown as a fallback
+  document.addEventListener("pointerdown", (ev) => {
+    const btn = ev.target.closest && ev.target.closest(".btn-remove");
+    if (btn) {
+      // allow the click handler path to run
+      // no-op here intentionally
     }
   });
 }
