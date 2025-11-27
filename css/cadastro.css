@@ -139,3 +139,10 @@ body.dark-mode p,
 body.dark-mode p a {
     color: rgba(255, 255, 255, 0.90);
 }
+
+/* Hide the mobile floating header on desktop-width pages (prevent duplicate header) */
+@media (min-width: 901px) {
+    .header {
+        display: none !important;
+    }
+}

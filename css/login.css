@@ -161,3 +161,10 @@ body.dark-mode .btn:focus {
 body.dark-mode .link a {
     color: #C5946C;
 }
+
+/* Hide the mobile floating header on desktop-width pages (prevent duplicate header) */
+@media (min-width: 901px) {
+    .header {
+        display: none !important;
+    }
+}

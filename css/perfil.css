@@ -481,3 +481,8 @@ body.dark-mode input[type="file"]::file-selector-button {
 body.dark-mode input[type="file"]::file-selector-button:hover {
   background: #8b694d;
 }
+
+/* Hide mobile header on desktop widths (perfil.html uses its own CSS) */
+@media (min-width: 901px) {
+  .header { display: none !important; }
+}

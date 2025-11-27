@@ -189,6 +189,59 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.warn('Erro ao inicializar botão voltar-home no painel móvel', e);
     }
+
+    // Initialize mobile "Gêneros" drawer inside the mobile menu (clones sidebar genres)
+    (function initMobileGenresDrawer() {
+        try {
+            const panel = document.getElementById('mobileMenu');
+            const mobileList = panel && panel.querySelector('.mobile-menu-list');
+            if (!panel || !mobileList) return;
+
+            // Find the sidebar genres list (menu-list) and clone links
+            const sidebarGenres = document.querySelector('.sidebar .menu-section .menu-list');
+            if (!sidebarGenres) return;
+
+            // Create the drawer header/button
+            const drawerHeader = document.createElement('button');
+            drawerHeader.type = 'button';
+            drawerHeader.className = 'mobile-genre-toggle';
+            drawerHeader.setAttribute('aria-expanded', 'false');
+            drawerHeader.innerHTML = '<span>Gêneros</span> <span class="chev">▸</span>';
+
+            // Create container for genre links
+            const drawerList = document.createElement('div');
+            drawerList.className = 'mobile-genre-list';
+
+            // Clone each genre link into the drawerList
+            Array.from(sidebarGenres.querySelectorAll('a')).forEach(a => {
+                const link = a.cloneNode(true);
+                link.classList.add('menu-item');
+                drawerList.appendChild(link);
+            });
+
+            // Insert at the top of the mobile menu list
+            mobileList.insertBefore(drawerHeader, mobileList.firstChild);
+            mobileList.insertBefore(drawerList, drawerHeader.nextSibling);
+
+            // Toggle behavior
+            drawerHeader.addEventListener('click', () => {
+                const open = drawerHeader.getAttribute('aria-expanded') === 'true';
+                drawerHeader.setAttribute('aria-expanded', String(!open));
+                drawerList.classList.toggle('open', !open);
+                const chev = drawerHeader.querySelector('.chev');
+                if (chev) chev.textContent = !open ? '▾' : '▸';
+            });
+
+            // Close drawer when navigating via link
+            drawerList.addEventListener('click', (ev) => {
+                const target = ev.target.closest('a');
+                if (!target) return;
+                try { closeMenu(); } catch (e) {}
+            });
+        } catch (e) {
+            console.warn('Erro ao inicializar gaveta de gêneros no menu móvel', e);
+        }
+    })();
 });
 
 // ===== Mobile portrait: transfer `header.logo` into the top mobile header =====

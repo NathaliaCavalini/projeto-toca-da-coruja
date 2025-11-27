@@ -1361,6 +1361,33 @@ body.dark-mode .footer-bottom {
 .mobile-menu-footer{ padding:18px; background:var(--color-surface) }
 .voltar-home{ width:100%; padding:12px; background:var(--color-primary); color:var(--color-text); border:none; border-radius:12px }
 
+/* Mobile genres drawer inside mobile panel */
+.mobile-genre-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+.mobile-genre-toggle .chev { margin-left: 8px; }
+.mobile-genre-list {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 280ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px;
+}
+.mobile-genre-list.open { max-height: 800px; padding-top: 10px; padding-bottom: 10px; }
+.mobile-genre-list .menu-item { padding: 10px 12px; border-radius: 10px; }
+
 @media (max-width:900px){
   .nav-menu, .nav-actions, .search-form { display:none !important }
   .mobile-menu-toggle { display:block }
