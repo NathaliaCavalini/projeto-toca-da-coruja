@@ -96,7 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // place the search centered horizontally and slightly above the hero's top
         const heroRect = hero.getBoundingClientRect();
         const heroTopAbs = heroRect.top + window.scrollY;
-        const desiredTop = heroTopAbs - 35; // additional gap so search is detached from card
+        // place the bottom of the search-form 10px above the hero top
+        // compute search height (fallback to 35px if not available)
+        const searchRect = searchForm.getBoundingClientRect();
+        const searchHeight = (searchRect && searchRect.height) ? searchRect.height : 35;
+        const desiredTop = heroTopAbs - searchHeight - 13; // 13px gap above the card (increased by 3px)
         // apply inline top so it's absolute relative to document
         searchForm.style.position = 'absolute';
         searchForm.style.top = desiredTop + 'px';
@@ -108,10 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (moved) return;
         originalParent = searchForm.parentNode;
         originalNext = searchForm.nextSibling;
+        // hide while we move & compute position to avoid flicker/overlay on load
+        searchForm.style.visibility = 'hidden';
         document.body.appendChild(searchForm);
         searchForm.classList.add('mobile-search-outside');
         // compute position
         positionOutside();
+        // reveal after positioned
+        searchForm.style.visibility = '';
         moved = true;
     }
 
@@ -127,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchForm.style.top = '';
         searchForm.style.left = '';
         searchForm.style.transform = '';
+        searchForm.style.visibility = '';
         moved = false;
     }
 
@@ -266,12 +275,15 @@ function initMobileMenu() {
         panel.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
+        // mark body so moved search can be hidden via CSS while the menu is open
+        document.body.classList.add('mobile-menu-open');
     };
 
     const closeMenu = () => {
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        document.body.classList.remove('mobile-menu-open');
     };
 
     toggle.addEventListener('click', openMenu);

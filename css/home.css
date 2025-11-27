@@ -1324,6 +1324,10 @@ body.dark-mode .footer-bottom {
   }
   /* Hide sidebar genre links on mobile — accessible only via the mobile menu toggle */
   .sidebar .menu-list { display: none !important; }
+  /* If JS moved the search out, keep it visible on mobile */
+  .search-form.mobile-search-outside { display: flex !important; z-index: 2200 !important; }
+  /* When the mobile panel is open, hide the moved search so it doesn't remain visible */
+  body.mobile-menu-open .search-form.mobile-search-outside { display: none !important; }
   /* Hide the sidebar user-info (login/profile pill) on mobile — avatar is shown in the header */
   .sidebar #user-info { display: none !important; }
   .main-content {
