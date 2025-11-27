@@ -1614,6 +1614,14 @@ body.dark-mode .hero-wave {
 .mobile-toggle-box .header-avatar { cursor: pointer; display: inline-flex; align-items: center }
 .mobile-toggle-box .header-avatar img { margin-right: 0 }
 
+/* Ensure cloned mobile icons follow desktop light/dark classes and sizing */
+.mobile-icon-wrap { margin-right: 10px; display: inline-flex; align-items: center; }
+.mobile-icon-wrap img {
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle !important;
+}
+
 
 .hero-content {
   position: relative;

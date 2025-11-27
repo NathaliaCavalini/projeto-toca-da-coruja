@@ -328,7 +328,97 @@ function initMobileMenu() {
         } catch (e) { console.warn('avatar init failed', e); }
     })();
 
+    // Copy desktop sidebar icons into the main mobile menu items (so mobile shows same icons)
+    // Expose a function that clones sidebar/admin icons into mobile menu items.
+    // We call it immediately and again when opening the panel to handle timing races
+    // (admin panel scripts may attach icons later or sidebar could be hidden at init).
+    function cloneMobileIcons() {
+        try {
+            const panel = document.getElementById('mobileMenu');
+            const mobileItemsNodeList = panel && panel.querySelectorAll('.mobile-menu-list .menu-item');
+            if (!mobileItemsNodeList || mobileItemsNodeList.length === 0) return false;
+            const mobileItems = Array.from(mobileItemsNodeList);
+
+            let inserted = 0;
+
+            mobileItems.forEach(item => {
+                try {
+                    // avoid inserting twice or when the item already contains an image
+                    // (genre links are cloned including their <img>, so skip to prevent duplication)
+                    if (item.querySelector('.mobile-icon-wrap') || item.querySelector('img')) return;
+
+                    const href = item.getAttribute('href') || item.dataset?.href || '';
+                    if (!href) return;
+
+                    // try to find matching anchors inside the sidebar, admin-section or top nav
+                    let sourceAnchor = document.querySelector(`.sidebar .menu-list a[href="${href}"]`);
+                    if (!sourceAnchor) sourceAnchor = document.querySelector(`.sidebar .menu-list a[href$="${href}"]`);
+                    // fallback: look inside #admin-section (some admin pages render icons there)
+                    if (!sourceAnchor) sourceAnchor = document.querySelector(`#admin-section .menu-list a[href="${href}"]`);
+                    if (!sourceAnchor) sourceAnchor = document.querySelector(`#admin-section .menu-list a[href$="${href}"]`);
+                    // also check top navigation (nav-menu) where the main action icons live
+                    if (!sourceAnchor) sourceAnchor = document.querySelector(`.nav-menu a[href="${href}"]`);
+                    if (!sourceAnchor) sourceAnchor = document.querySelector(`.nav-menu a[href$="${href}"]`);
+                    if (!sourceAnchor) return;
+
+                    const imgs = Array.from(sourceAnchor.querySelectorAll('img'));
+                    if (imgs.length === 0) return;
+
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'mobile-icon-wrap';
+                    wrapper.style.display = 'inline-flex';
+                    wrapper.style.alignItems = 'center';
+                    wrapper.style.marginRight = '10px';
+
+                    imgs.forEach(srcImg => {
+                        const imgClone = srcImg.cloneNode(true);
+                        imgClone.removeAttribute('width');
+                        imgClone.removeAttribute('height');
+                        imgClone.style.width = imgClone.style.width || '20px';
+                        imgClone.style.height = imgClone.style.height || '20px';
+                        // Do NOT force display — let existing .--light / .--dark rules control visibility.
+                        // Invert the light/dark suffix on the cloned image classes so the mobile
+                        // menu shows the opposite variant per your request.
+                        try {
+                            // Keep the clone's classes unchanged (do not invert suffixes).
+                            // The previous implementation inverted `--light`/`--dark` but
+                            // you requested to invert that behavior — so we preserve
+                            // original classes here to match desktop variants.
+                        } catch (e) { /* ignore class manipulation errors */ }
+                        wrapper.appendChild(imgClone);
+                    });
+
+                    item.insertBefore(wrapper, item.firstChild);
+                    inserted += 1;
+                } catch (e) { /* ignore per-item errors */ }
+            });
+
+            return inserted > 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // initial attempt
+    cloneMobileIcons();
+    // retry after load and a small delay in case admin scripts run later
+    window.addEventListener('load', () => { cloneMobileIcons(); });
+    setTimeout(() => { cloneMobileIcons(); }, 300);
+
+    // Keep mobile icons in sync with theme changes (body class changes).
+    try {
+        const bodyObserver = new MutationObserver((mutations) => {
+            for (const m of mutations) {
+                if (m.attributeName === 'class') {
+                    try { if (typeof cloneMobileIcons === 'function') cloneMobileIcons(); } catch (e) { /* ignore */ }
+                }
+            }
+        });
+        bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    } catch (e) { /* ignore observer failures on older browsers */ }
+
     const openMenu = () => {
+        try { if (typeof cloneMobileIcons === 'function') cloneMobileIcons(); } catch (e) { /* ignore */ }
         panel.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
