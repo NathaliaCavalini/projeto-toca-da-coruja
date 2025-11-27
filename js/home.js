@@ -236,14 +236,43 @@ function initMobileMenu() {
             if (!avatarWrap) {
                 avatarWrap = document.createElement('div');
                 avatarWrap.className = 'header-avatar';
+
                 const img = document.createElement('img');
-                img.src = 'https://i.ibb.co/HDBGSKfn/299d78e67b07.jpg';
                 img.alt = 'Avatar';
                 img.width = 30;
                 img.height = 30;
                 img.style.borderRadius = '50%';
                 img.style.display = 'block';
                 img.style.objectFit = 'cover';
+
+                // Helper: set avatar src from #user-info if present, otherwise use default
+                function updateAvatarFromUserInfo() {
+                    try {
+                        const ui = document.getElementById('user-info');
+                        if (ui) {
+                            const innerImg = ui.querySelector('img');
+                            if (innerImg && innerImg.src) {
+                                img.src = innerImg.src;
+                                return;
+                            }
+                        }
+                    } catch (e) { /* ignore */ }
+                    // fallback default image when no profile photo / not logged in
+                    img.src = '/imagens/user.png';
+                }
+
+                updateAvatarFromUserInfo();
+
+                // Observe #user-info so changes (login/logout or profile photo update)
+                // are reflected in the header avatar automatically.
+                try {
+                    const target = document.getElementById('user-info');
+                    if (target) {
+                        const mo = new MutationObserver(() => { updateAvatarFromUserInfo(); });
+                        mo.observe(target, { childList: true, subtree: true, attributes: true });
+                    }
+                } catch (e) { /* ignore observer errors */ }
+
                 avatarWrap.appendChild(img);
             }
 
@@ -405,6 +434,37 @@ function initMobileMenu() {
     window.addEventListener('load', () => { cloneMobileIcons(); });
     setTimeout(() => { cloneMobileIcons(); }, 300);
 
+    // Hide admin-related menu items on mobile for non-admin users
+    function isCurrentUserAdmin() {
+        try {
+            const fb = window.__fb;
+            if (!fb || !fb.auth) return false;
+            const user = fb.auth.currentUser;
+            if (!user || !user.email) return false;
+            return user.email === 'tatacavalini@gmail.com';
+        } catch (e) { return false; }
+    }
+
+    function hideAdminItemsIfNotAdmin() {
+        try {
+            const admin = isCurrentUserAdmin();
+            // find admin links inside the mobile panel and hide them if user is not admin
+            const panel = document.getElementById('mobileMenu');
+            if (!panel) return;
+            const selectors = ['.admin-tab', '.admin-link', 'a[href*="admin.html"]', 'a[href*="/admin"]'];
+            selectors.forEach(sel => {
+                const els = panel.querySelectorAll(sel);
+                els.forEach(el => {
+                    if (!admin) el.style.display = 'none';
+                    else el.style.display = '';
+                });
+            });
+        } catch (e) { /* ignore */ }
+    }
+
+    // run check now and also when menu opens
+    try { hideAdminItemsIfNotAdmin(); } catch (e) {}
+
     // Keep mobile icons in sync with theme changes (body class changes).
     try {
         const bodyObserver = new MutationObserver((mutations) => {
@@ -419,6 +479,7 @@ function initMobileMenu() {
 
     const openMenu = () => {
         try { if (typeof cloneMobileIcons === 'function') cloneMobileIcons(); } catch (e) { /* ignore */ }
+        try { if (typeof hideAdminItemsIfNotAdmin === 'function') hideAdminItemsIfNotAdmin(); } catch (e) { /* ignore */ }
         panel.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
