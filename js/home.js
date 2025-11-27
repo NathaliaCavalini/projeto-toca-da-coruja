@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Theme visuals are initialized by /js/theme.js (imported in HTML)
 
 // ===== Mobile menu open/close (centralized) =====
-document.addEventListener('DOMContentLoaded', () => {
+function initMobileMenu() {
     const toggle = document.querySelector('.mobile-menu-toggle');
     const panel = document.getElementById('mobileMenu');
     const closeBtn = document.querySelector('.mobile-menu-close');
@@ -212,10 +212,51 @@ document.addEventListener('DOMContentLoaded', () => {
             const drawerList = document.createElement('div');
             drawerList.className = 'mobile-genre-list';
 
-            // Clone each genre link into the drawerList
+            // Clone each link into the drawerList
             Array.from(sidebarGenres.querySelectorAll('a')).forEach(a => {
+                // For admin-tab links (tabs inside the admin sidebar) the original
+                // elements have event listeners attached by `js/admin.js`.
+                // Cloning them would not copy those listeners, so we wire the
+                // cloned element to trigger the original tab's click instead.
+                const isAdminTab = a.classList.contains('admin-tab') || a.classList.contains('admin-link');
                 const link = a.cloneNode(true);
                 link.classList.add('menu-item');
+
+                if (isAdminTab) {
+                    link.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+                        const tabName = a.dataset?.tab;
+
+                        if (tabName) {
+                            // Deactivate existing admin tabs visually
+                            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+
+                            // Try to activate the original tab element (visual state)
+                            const original = document.querySelector(`.admin-tab[data-tab="${tabName}"]`);
+                            if (original) original.classList.add('active');
+
+                            // Hide hero and ensure admin container is shown (same behavior as admin.js)
+                            const heroAdmin = document.querySelector('.hero-admin');
+                            const adminContainer = document.querySelector('.admin-container');
+                            if (heroAdmin) heroAdmin.classList.add('hidden');
+                            if (adminContainer) adminContainer.classList.add('show');
+
+                            // Hide all admin tab content panes and show the requested one
+                            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+                            const pane = document.getElementById(`tab-${tabName}`);
+                            if (pane) pane.classList.remove('hidden');
+
+                            // Close mobile menu
+                            try { closeMenu(); } catch (e) { /* ignore */ }
+                            return;
+                        }
+
+                        // Fallback: navigate/call original click if no data-tab
+                        try { a.click(); } catch (e) { if (a.href) window.location.href = a.href; }
+                        try { closeMenu(); } catch (e) { /* ignore */ }
+                    });
+                }
+
                 drawerList.appendChild(link);
             });
 
@@ -242,7 +283,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn('Erro ao inicializar gaveta de gêneros no menu móvel', e);
         }
     })();
-});
+}
+
+// Ensure initialization runs even if this script is loaded after DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+} else {
+    initMobileMenu();
+}
 
 // ===== Mobile portrait: transfer `header.logo` into the top mobile header =====
 (() => {

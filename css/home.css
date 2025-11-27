@@ -1322,6 +1322,8 @@ body.dark-mode .footer-bottom {
     grid-column: 1/-1;
     border-bottom: 1px solid rgba(139, 105, 77, 0.08);
   }
+  /* Hide sidebar genre links on mobile — accessible only via the mobile menu toggle */
+  .sidebar .menu-list { display: none !important; }
   .main-content {
     grid-column: 1/-1;
   }

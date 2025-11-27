@@ -936,6 +936,7 @@
 
     <script type="module" src="/js/theme.js"></script>
     <script type="module" src="/js/help-modal.js"></script>
+    <script src="/js/home.js"></script>
     <script type="module" src="/js/admin.js"></script>
     <script src="/js/universal-search.js"></script>
 
@@ -980,5 +981,41 @@
       });
     </script>
     <script src="/js/perf.js" defer></script>
+    <script>
+      // Move the admin menu section ABOVE the admin content on mobile only
+      (function(){
+        try {
+          const mq = window.matchMedia('(max-width: 900px)');
+          const adminSection = document.querySelector('.menu-section.admin-menu-section');
+          const adminContainer = document.querySelector('.admin-container');
+          if (!adminSection || !adminContainer) return;
+
+          const originalParent = adminSection.parentNode;
+          const originalNext = adminSection.nextSibling;
+          let moved = false;
+
+          function moveAboveAdmin(){
+            if (moved) return;
+            // insert adminSection before the admin container so it appears above the manage panes
+            adminContainer.parentNode.insertBefore(adminSection, adminContainer);
+            moved = true;
+          }
+
+          function restore(){
+            if (!moved) return;
+            if (originalNext) originalParent.insertBefore(adminSection, originalNext);
+            else originalParent.appendChild(adminSection);
+            moved = false;
+          }
+
+          function update(){ if (mq.matches) moveAboveAdmin(); else restore(); }
+
+          update();
+          if (mq.addEventListener) mq.addEventListener('change', update); else mq.addListener(update);
+          window.addEventListener('orientationchange', update);
+          window.addEventListener('resize', update);
+        } catch (e) { console.warn('admin mobile reflow failed', e); }
+      })();
+    </script>
   </body>
 </html>
