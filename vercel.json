@@ -1,18 +1,10 @@
 {
-  "buildCommand": "",
   "outputDirectory": ".",
-  "devCommand": "",
   "env": {},
   "regions": ["sfo1"],
-  "functions": {},
-  "rewrites": [
-    {
-      "source": "/pages/:page",
-      "destination": "/pages/:page"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 10
     }
-  ]
+  }
 }
