@@ -490,7 +490,6 @@ body {
   opacity: 0.8;
 }
 
-
 /* ===== SEÇÃO DE NOVA AVALIAÇÃO ===== */
 #book-detail .review-section {
   max-width: 800px;
@@ -499,6 +498,72 @@ body {
   background: var(--light-color);
   border-radius: 40px;
   box-shadow: var(--shadow);
+}
+
+/* Aplicar mesma animação de hover das estrelas do formulário às estrelas do card do livro */
+.rating-stars .star {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rating-stars .star:hover {
+  transform: scale(1.15);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Normalizar cores e comportamento das estrelas do card
+   - garante que stars vazias usem `var(--primary-color)`
+   - meia-estrela fica com a metade colorida via ::before
+   - override específico para o contexto #book-detail evita regras conflitantes
+*/
+.rating-stars .star {
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+.rating-stars .star.full {
+  color: var(--accent-color);
+}
+.rating-stars .star.half {
+  color: transparent;
+  position: relative;
+}
+.rating-stars .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  width: 50%;
+  overflow: hidden;
+}
+/* Override para garantir que regras com seletor mais específico não alterem as estrelas seguintes */
+#book-detail .rating-stars .star.half ~ .star {
+  color: var(--primary-color) !important;
+  opacity: 0.8 !important;
+}
+
+/* Corrige o comportamento da meia-estrela no hover para os cards
+   - mantém a cor base transparente e apenas o ::before fica colorido na metade
+   - evita que o hover pinte a estrela inteira */
+.rating-stars .star.half {
+  color: transparent;
+  position: relative;
+}
+.rating-stars .star.half::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  width: 50%;
+  overflow: hidden;
+}
+.rating-stars .star.half:hover {
+  color: transparent; /* garante que o elemento base não fique colorido no hover */
+}
+.rating-stars .star.half:hover::before {
+  color: var(--accent-color);
 }
 
 #book-detail .review-section h2 {

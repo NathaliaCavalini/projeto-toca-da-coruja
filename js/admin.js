@@ -46,8 +46,38 @@ async function renderBooksList(filter = "") {
   const books = await loadBooks();
   const container = document.getElementById("books-list");
   if (!container) return;
+  // Mostrar/ocultar botão "Adicionar livro existente" quando estivermos gerenciando um gênero
+  const addBookBtn = document.getElementById("btn-add-book");
+  if (addBookBtn) {
+    let existingBtn = document.getElementById("btn-add-existing-to-genre");
+    if ((window.currentManagedGenre || "").toString().length > 0) {
+      if (!existingBtn) {
+        existingBtn = document.createElement("button");
+        existingBtn.id = "btn-add-existing-to-genre";
+        existingBtn.className = "btn-secondary";
+        existingBtn.style.marginLeft = "8px";
+        existingBtn.textContent = "+ Adicionar Existente";
+        existingBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.openAddExistingToGenreModal();
+        });
+        addBookBtn.parentNode.insertBefore(existingBtn, addBookBtn.nextSibling);
+      }
+    } else {
+      if (existingBtn) existingBtn.remove();
+    }
+  }
   container.innerHTML = "";
   let bookIds = Object.keys(books);
+
+  // Se estamos gerenciando um gênero específico (via botão "Gerenciar Livros"), aplicar filtro por gênero
+  const managed = (window.currentManagedGenre || "").toString();
+  if (managed.length > 0) {
+    bookIds = bookIds.filter((id) => {
+      const b = books[id] || {};
+      return (b.genero || "") === managed;
+    });
+  }
 
   // Filtro de busca
   if (filter && filter.trim().length > 0) {
@@ -106,11 +136,46 @@ async function renderBooksList(filter = "") {
                     `
                         : ""
                     }
+            ${managed.length > 0 ? `<button class="btn-secondary" onclick="window.removeBookFromGenre('${id}')">Remover do Gênero</button>` : ""}
                 </div>
             </div>
         `;
     container.appendChild(card);
   });
+
+  // Se estivermos gerenciando um gênero, mostrar uma pequena indicação (opcional)
+  if ((window.currentManagedGenre || "").toString().length > 0) {
+    const bannerId = "managed-genre-banner";
+    let banner = document.getElementById(bannerId);
+    if (!banner) {
+      banner = document.createElement("div");
+      banner.id = bannerId;
+      banner.style.margin = "12px 0";
+      banner.style.padding = "10px 14px";
+      banner.style.background = "rgba(197,148,108,0.06)";
+      banner.style.border = "1px solid rgba(197,148,108,0.12)";
+      banner.style.borderRadius = "10px";
+      banner.style.display = "flex";
+      banner.style.alignItems = "center";
+      banner.style.justifyContent = "space-between";
+      banner.innerHTML = `<div>Gerenciando gênero: <strong>${window.currentManagedGenre}</strong></div><div><button id=\"btn-exit-managed-mode\" class=\"btn-secondary\">Sair do modo gerenciar</button></div>`;
+      container.parentNode.insertBefore(banner, container);
+      document
+        .getElementById("btn-exit-managed-mode")
+        .addEventListener("click", () => {
+          window.currentManagedGenre = "";
+          banner.remove();
+          const exBtn = document.getElementById("btn-add-existing-to-genre");
+          if (exBtn) exBtn.remove();
+          renderBooksList();
+        });
+    } else {
+      banner.querySelector("strong").textContent = window.currentManagedGenre;
+    }
+  } else {
+    const existingBanner = document.getElementById("managed-genre-banner");
+    if (existingBanner) existingBanner.remove();
+  }
 }
 
 // Vincular busca do campo principal da navbar (`#search-input`) à aba de livros
@@ -122,11 +187,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const term = e.target?.value || "";
     const booksTab = document.getElementById("tab-books");
     const reviewsTab = document.getElementById("tab-reviews");
+    const genresTab = document.getElementById("tab-genres");
 
     if (booksTab && !booksTab.classList.contains("hidden")) {
       renderBooksList(term);
     } else if (reviewsTab && !reviewsTab.classList.contains("hidden")) {
       renderReviewsList(term);
+    } else if (genresTab && !genresTab.classList.contains("hidden")) {
+      renderGenresList(term);
     }
   });
 
@@ -135,8 +203,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") {
       navbarSearch.value = "";
       const booksTab = document.getElementById("tab-books");
+      const reviewsTab = document.getElementById("tab-reviews");
+      const genresTab = document.getElementById("tab-genres");
       if (booksTab && !booksTab.classList.contains("hidden")) {
         renderBooksList("");
+      } else if (reviewsTab && !reviewsTab.classList.contains("hidden")) {
+        renderReviewsList("");
+      } else if (genresTab && !genresTab.classList.contains("hidden")) {
+        renderGenresList("");
       }
     }
   });
@@ -147,6 +221,8 @@ const modal = document.getElementById("modal-book");
 const modalTitle = document.getElementById("modal-title");
 const form = document.getElementById("form-book");
 let editingBookId = null;
+// Quando aberto a partir de um gênero, guarda o nome do gênero sendo gerenciado
+window.currentManagedGenre = "";
 
 // ==================== ATUALIZAR GÊNEROS NO SELECT ====================
 
@@ -544,6 +620,16 @@ form?.addEventListener("submit", async (e) => {
     return;
   }
 
+  // Helper para ler arquivo como dataURL (Promise)
+  function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => resolve(ev.target.result);
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(file);
+    });
+  }
+
   // Pegar imagem (URL ou arquivo)
   const imageType = document.querySelector(
     'input[name="image-type"]:checked'
@@ -553,9 +639,22 @@ form?.addEventListener("submit", async (e) => {
   if (imageType === "url") {
     imagem = document.getElementById("book-imagem-url").value.trim();
   } else {
-    const previewImg = document.querySelector("#image-preview img");
-    if (previewImg) {
-      imagem = previewImg.src;
+    // Tentar ler diretamente do input file (garante que o arquivo será processado mesmo
+    // se o preview ainda não tiver sido populado pelo FileReader anterior)
+    const fileInput = document.getElementById("book-imagem-file");
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+      try {
+        imagem = await readFileAsDataURL(fileInput.files[0]);
+      } catch (err) {
+        console.warn("Erro ao ler arquivo de imagem:", err);
+        imagem = "";
+      }
+    }
+
+    // Fallback: se por algum motivo não houver file selecionado, usar preview (se presente)
+    if (!imagem) {
+      const previewImg = document.querySelector("#image-preview img");
+      if (previewImg) imagem = previewImg.src;
     }
   }
 
@@ -781,8 +880,8 @@ window.deleteReviewAdmin = function (bookId, timestamp) {
 
 // ==================== GERENCIAMENTO DE GÊNEROS ====================
 
-// Renderizar lista de gêneros customizados
-async function renderGenresList() {
+// Renderizar lista de gêneros customizados (aceita filtro opcional)
+async function renderGenresList(filter = "") {
   const genrePages = JSON.parse(localStorage.getItem("genre-pages") || "{}");
   const books = await loadBooks();
   const container = document.getElementById("genres-list");
@@ -790,19 +889,25 @@ async function renderGenresList() {
   if (!container) return;
 
   container.innerHTML = "";
+  let genreNames = Object.keys(genrePages);
 
-  const genreNames = Object.keys(genrePages);
+  // Aplicar filtro por nome do gênero (case-insensitive)
+  const q = (filter || "").toString().trim().toLowerCase();
+  if (q.length > 0) {
+    genreNames = genreNames.filter((name) => name.toLowerCase().includes(q));
+  }
 
   if (genreNames.length === 0) {
     container.innerHTML = `
             <div class="empty-state-box" role="status">
                 <div class="owl" aria-hidden="true" style="font-size:3rem; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.15));">🦉</div>
-                <h3>Nenhum gênero customizado criado ainda.</h3>
-                <p class="hint">Crie gêneros adicionando livros com novos gêneros ou usando o botão acima.</p>
+                <h3>Nenhum gênero encontrado.</h3>
+                <p class="hint">Tente outro termo de busca ou adicione novos gêneros usando o botão acima.</p>
             </div>
         `;
     return;
   }
+
   genreNames.forEach((genreName) => {
     const genre = genrePages[genreName];
 
@@ -818,21 +923,21 @@ async function renderGenresList() {
     card.className = "genre-card";
 
     card.innerHTML = `
-            <div class="genre-info">
-                <h3>${genre.name}</h3>
-                <p>📚 ${bookCount} livro${bookCount !== 1 ? "s" : ""}</p>
-                <p style="font-size:0.8rem; opacity:0.6;">📍 <a href="${
-                  genre.url
-                }" target="_blank" style="color:inherit;">Ver página</a></p>
-                <div style="display: flex; gap: 8px; align-items: center; margin-top: 8px;">
-                    <span class="genre-badge">Customizado</span>
-                    <button class="btn-danger" onclick="window.deleteGenre('${genreName.replace(
-                      /'/g,
-                      "\\'"
-                    )}')">Deletar</button>
-                </div>
-            </div>
-        `;
+        <div class="genre-info">
+          <h3>${genre.name}</h3>
+          <p>📚 ${bookCount} livro${bookCount !== 1 ? "s" : ""}</p>
+          <p style="font-size:0.8rem; opacity:0.6;">📍 <a href="${
+            genre.url
+          }" target="_blank" style="color:inherit;">Ver página</a></p>
+          <div style="display: flex; gap: 8px; align-items: center; margin-top: 8px;">
+            <span class="genre-badge">Customizado</span>
+            <button class="btn-danger" onclick="window.deleteGenre('${genreName.replace(/'/g, "\\'")}')">Deletar</button>
+          </div>
+          <div style="margin-top:8px;">
+            <button class="btn-secondary" onclick="window.manageGenreBooks('${genreName.replace(/'/g, "\\'")}')">Gerenciar Livros</button>
+          </div>
+        </div>
+      `;
 
     container.appendChild(card);
   });
@@ -916,6 +1021,11 @@ document.querySelectorAll(".admin-tab").forEach((tab) => {
     // Mostrar a tab selecionada
     document.getElementById(`tab-${tabName}`).classList.remove("hidden");
 
+    // Limpar modo de gerenciamento por gênero se não estivermos na aba de livros
+    if (tabName !== "books") {
+      window.currentManagedGenre = "";
+    }
+
     // Renderizar conteúdo
     const mainSearch = document.getElementById("search-input");
     const q = mainSearch ? mainSearch.value : "";
@@ -924,7 +1034,7 @@ document.querySelectorAll(".admin-tab").forEach((tab) => {
     } else if (tabName === "reviews") {
       renderReviewsList(q);
     } else if (tabName === "genres") {
-      renderGenresList();
+      renderGenresList(q);
     }
   });
 });
@@ -1064,6 +1174,136 @@ document.getElementById("form-genre")?.addEventListener("submit", (e) => {
   );
   console.log(`✅ Novo gênero criado: "${genreName}"`);
 });
+
+// Abrir modo de gerenciamento de livros para um gênero específico
+window.manageGenreBooks = function (genreName) {
+  if (!genreName) return;
+  // Definir estado e abrir a aba de livros
+  window.currentManagedGenre = genreName;
+  // Limpar campo de busca principal para evitar confusão (mantemos o comportamento claro)
+  const mainSearch = document.getElementById("search-input");
+  if (mainSearch) mainSearch.value = "";
+
+  // Tentar ativar o tab de livros via click (para executar o fluxo padrão de render)
+  const booksTab = document.querySelector('.admin-tab[data-tab="books"]');
+  if (booksTab) {
+    booksTab.click();
+  } else {
+    // Fallback: renderizar diretamente
+    renderBooksList();
+  }
+};
+
+// Abrir modal dinâmico para escolher um livro existente e adicionar ao gênero atual
+window.openAddExistingToGenreModal = async function () {
+  const genre = (window.currentManagedGenre || "").toString();
+  if (!genre) return alert("Nenhum gênero selecionado para gerenciar.");
+
+  // Criar modal se não existir
+  let modal = document.getElementById("modal-add-existing");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "modal-add-existing";
+    modal.className = "modal";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Adicionar livro existente ao gênero: <span id="modal-genre-name"></span></h3>
+          <button class="modal-close" aria-label="Fechar">&times;</button>
+        </div>
+        <form style="padding:24px;">
+          <div class="form-group">
+            <label for="select-existing-books">Escolha o livro</label>
+            <select id="select-existing-books" required>
+              <option value="">— Selecione um livro —</option>
+            </select>
+          </div>
+          <div class="form-actions" style="justify-content:flex-end;margin-top:12px;">
+            <button type="button" id="btn-cancel-add-existing" class="btn-secondary btn-cancel">Cancelar</button>
+            <button type="button" id="btn-confirm-add-existing" class="btn-primary">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Eventos de fechar
+    modal.querySelector(".modal-close").addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+    modal.querySelector("#btn-cancel-add-existing").addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+  }
+
+  // Popular select com livros que NÃO estão no gênero atual
+  const allBooks = await loadBooks();
+  const options = [];
+  Object.entries(allBooks).forEach(([id, b]) => {
+    if ((b.genero || "") !== genre) {
+      options.push({ id, label: `${b.titulo} — ${id}` });
+    }
+  });
+
+  const select = modal.querySelector("#select-existing-books");
+  select.innerHTML = "";
+  options.forEach((o) => {
+    const opt = document.createElement("option");
+    opt.value = o.id;
+    opt.textContent = o.label;
+    select.appendChild(opt);
+  });
+
+  modal.querySelector("#modal-genre-name").textContent = genre;
+
+  modal.classList.add("active");
+
+  modal.querySelector("#btn-confirm-add-existing").onclick = async () => {
+    const chosen = select.value;
+    if (!chosen) return alert("Escolha um livro.");
+    await window.addExistingBookToGenre(chosen);
+    modal.classList.remove("active");
+  };
+};
+
+// Adicionar um livro existente ao gênero atual (salva override em admin-books)
+window.addExistingBookToGenre = async function (bookId) {
+  const genre = (window.currentManagedGenre || "").toString();
+  if (!genre) return alert("Nenhum gênero selecionado.");
+  const allBooks = await loadBooks();
+  const adminBooks = loadAdminBooks();
+  const book = allBooks[bookId];
+  if (!book) return alert("Livro não encontrado.");
+
+  // Criar override (mantém demais campos)
+  const override = { ...(adminBooks[bookId] || book), genero: genre };
+  adminBooks[bookId] = override;
+  saveAdminBooks(adminBooks);
+
+  await renderBooksList();
+  alert("Livro adicionado ao gênero com sucesso.");
+};
+
+// Remover um livro do gênero gerenciado sem deletar o livro do site
+window.removeBookFromGenre = async function (bookId) {
+  if (!confirm("Remover este livro do gênero atual? Isso não irá deletar o livro do site.")) return;
+  const adminBooks = loadAdminBooks();
+  const allBooks = await loadBooks();
+  const book = allBooks[bookId];
+  if (!book) {
+    alert("Livro não encontrado.");
+    return;
+  }
+
+  // Criar ou atualizar override no admin-books com genero vazio
+  const override = { ...(adminBooks[bookId] || book), genero: "" };
+  adminBooks[bookId] = override;
+  saveAdminBooks(adminBooks);
+
+  // Re-renderizar a lista (permite que o livro desapareça do filtro de gênero atual)
+  await renderBooksList();
+  alert("Livro removido do gênero com sucesso.");
+};
 
 // ==================== INICIALIZAÇÃO ====================
 
