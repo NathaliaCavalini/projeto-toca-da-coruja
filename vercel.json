@@ -1,10 +1,5 @@
 {
   "outputDirectory": ".",
   "env": {},
-  "regions": ["sfo1"],
-  "functions": {
-    "api/index.js": {
-      "maxDuration": 10
-    }
-  }
+  "regions": ["sfo1"]
 }
