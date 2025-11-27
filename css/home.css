@@ -2058,6 +2058,12 @@ body.dark-mode .book-preview-no-rating {
     padding: 8px 14px !important;
   }
 
+  /* Aumentar levemente a largura dos cards no mobile-portrait (+4px) */
+  @media (orientation: portrait) and (max-width: 430px) {
+    .book-grid { grid-template-columns: 1fr; }
+    .book-item { box-sizing: border-box; width: calc(100% + 4px); margin-left: -2px; margin-right: -2px; }
+  }
+
   /* Garantir que o input ocupe o espaço disponível dentro da search-form */
   .search-form input {
     width: calc(100% - 36px) !important;
