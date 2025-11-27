@@ -2058,10 +2058,15 @@ body.dark-mode .book-preview-no-rating {
     padding: 8px 14px !important;
   }
 
-  /* Aumentar levemente a largura dos cards no mobile-portrait (+4px) */
+  /* Aumentar espaço útil dos cards no mobile-portrait reduzindo padding interno (evita margens negativas) */
   @media (orientation: portrait) and (max-width: 430px) {
     .book-grid { grid-template-columns: 1fr; }
-    .book-item { box-sizing: border-box; width: calc(100% + 4px); margin-left: -2px; margin-right: -2px; }
+    /* Reverte a largura forçada e em vez disso reduz o padding lateral dos cards para ganhar espaço visual */
+    .book-item { box-sizing: border-box; width: 100%; margin-left: 0; margin-right: 0; }
+    .book-card { padding: 18px 13px !important; }
+    .book-title { padding: 12px 9px !important; }
+    /* Ajuste do conteúdo do preview/button para compensar o menor padding */
+    .book-preview-button { margin-left: 52px; transform: translateX(44px); }
   }
 
   /* Garantir que o input ocupe o espaço disponível dentro da search-form */
