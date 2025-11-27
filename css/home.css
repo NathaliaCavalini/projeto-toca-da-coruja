@@ -1324,6 +1324,8 @@ body.dark-mode .footer-bottom {
   }
   /* Hide sidebar genre links on mobile — accessible only via the mobile menu toggle */
   .sidebar .menu-list { display: none !important; }
+  /* Hide the sidebar user-info (login/profile pill) on mobile — avatar is shown in the header */
+  .sidebar #user-info { display: none !important; }
   .main-content {
     grid-column: 1/-1;
   }
@@ -1376,6 +1378,7 @@ body.dark-mode .footer-bottom {
   color: var(--color-text);
   cursor: pointer;
   text-align: left;
+  transition: transform 180ms ease, background-color 180ms ease;
 }
 .mobile-genre-toggle .chev { margin-left: 8px; }
 .mobile-genre-list {
@@ -1389,6 +1392,29 @@ body.dark-mode .footer-bottom {
 }
 .mobile-genre-list.open { max-height: 800px; padding-top: 10px; padding-bottom: 10px; }
 .mobile-genre-list .menu-item { padding: 10px 12px; border-radius: 10px; }
+
+@media (max-width: 900px) {
+  /* Make the genres toggle match the visual style of the other mobile menu items */
+  .mobile-genre-toggle {
+    background: var(--color-primary);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* align content to the left like .menu-item */
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    align-self: stretch; /* ensure it stretches across the column */
+    text-decoration: none;
+  }
+  .mobile-genre-toggle:hover {
+    transform: translateX(6px);
+  }
+  .mobile-genre-toggle .chev { margin-left: auto; }
+}
 
 @media (max-width:900px){
   .nav-menu, .nav-actions, .search-form { display:none !important }
@@ -1519,6 +1545,32 @@ body.dark-mode .hero-wave {
     font-size: 0.98rem;
   }
 }
+
+/* MOBILE: hide sidebar menu-section boxes across the site (genres/menu blocks)
+   Admin page will re-enable its admin menu via `css/admin.css` so it remains visible there */
+@media (max-width: 900px) {
+  .menu-section { display: none !important; }
+}
+
+/* Header avatar next to mobile toggle */
+.header-avatar { display: none; align-items: center; margin-left: 8px }
+.header-avatar img { width: 30px; height: 30px; border-radius: 50%; margin-right: 8px; display: block }
+
+/* Small box around the toggle + avatar on mobile */
+.mobile-toggle-box { display: none; align-items: center; gap: 5px; padding: 6px 8px; border-radius: 10px; background: transparent }
+.mobile-toggle-box .mobile-menu-toggle { background: transparent; border: none; padding: 6px }
+.mobile-toggle-box .icon-btn img { width: 20px; height: 20px; display: block }
+
+@media (max-width: 900px) {
+  .mobile-toggle-box { display: inline-flex; background: var(--color-primary); border-radius: 10px; padding: 8px 10px; gap: 4px }
+  /* ensure images inside the box don't add extra margins so the gap controls spacing precisely */
+  .mobile-toggle-box img { margin: 0 !important; }
+  .mobile-toggle-box .header-avatar { margin: 0; }
+}
+
+/* make avatar clickable pointer + small spacing in the box */
+.mobile-toggle-box .header-avatar { cursor: pointer; display: inline-flex; align-items: center }
+.mobile-toggle-box .header-avatar img { margin-right: 0 }
 
 
 .hero-content {

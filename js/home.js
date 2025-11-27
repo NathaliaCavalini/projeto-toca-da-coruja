@@ -159,6 +159,109 @@ function initMobileMenu() {
     const closeBtn = document.querySelector('.mobile-menu-close');
     if (!toggle || !panel) return;
 
+    // Insert avatar and wrap toggle + avatar in a small box on mobile
+    (function ensureHeaderAvatar(){
+        try {
+            const header = document.querySelector('.header');
+            if (!header) return;
+
+            // ensure avatar element
+            let avatarWrap = header.querySelector('.header-avatar');
+            if (!avatarWrap) {
+                avatarWrap = document.createElement('div');
+                avatarWrap.className = 'header-avatar';
+                const img = document.createElement('img');
+                img.src = 'https://i.ibb.co/HDBGSKfn/299d78e67b07.jpg';
+                img.alt = 'Avatar';
+                img.width = 30;
+                img.height = 30;
+                img.style.borderRadius = '50%';
+                img.style.display = 'block';
+                img.style.objectFit = 'cover';
+                avatarWrap.appendChild(img);
+            }
+
+            // Make avatar clickable: trigger sidebar #user-info click or navigate to login/profile
+            try {
+                avatarWrap.style.cursor = 'pointer';
+                avatarWrap.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    const userLink = document.getElementById('user-info');
+                    if (userLink) {
+                        try { userLink.click(); } catch (e) { if (userLink.href) window.location.href = userLink.href; }
+                    } else {
+                        // fallback: navigate to login/profile
+                        window.location.href = 'login.html';
+                    }
+                });
+            } catch (e) { /* ignore */ }
+
+            // create wrapper box that will contain toggle + avatar
+            let box = header.querySelector('.mobile-toggle-box');
+            if (!box) {
+                box = document.createElement('div');
+                box.className = 'mobile-toggle-box';
+                // append the box to the end of the header so it remains on the right
+                // This avoids order flipping when scripts run in different orders.
+                header.appendChild(box);
+            }
+
+            // move toggle and avatar into the box
+            if (toggle.parentNode !== box) box.appendChild(toggle);
+            if (avatarWrap.parentNode !== box) box.appendChild(avatarWrap);
+
+            // Add theme toggle button inside the box (so toggle + avatar + theme fit together)
+            let themeBtn = box.querySelector('.icon-btn[title="Modo escuro"]');
+            function updateThemeIcons(dark){
+                // Keep all theme icon buttons in sync
+                const iconBtns = document.querySelectorAll('.icon-btn[title="Modo escuro"]');
+                iconBtns.forEach(b => {
+                    const img = b.querySelector('img');
+                    if (!img) return;
+                    img.src = dark ? '/imagens/claro.png' : '/imagens/escuro.png';
+                    img.alt = dark ? 'Ícone modo claro' : 'Ícone modo escuro';
+                });
+            }
+
+            if (!themeBtn) {
+                themeBtn = document.createElement('button');
+                themeBtn.type = 'button';
+                themeBtn.className = 'icon-btn';
+                themeBtn.title = 'Modo escuro';
+                const img = document.createElement('img');
+                img.width = 20;
+                img.height = 20;
+                // initial icon depends on current theme
+                const isDark = document.body.classList.contains('dark-mode') || localStorage.getItem('theme') === 'dark';
+                img.src = isDark ? '/imagens/claro.png' : '/imagens/escuro.png';
+                img.alt = isDark ? 'Ícone modo claro' : 'Ícone modo escuro';
+                themeBtn.appendChild(img);
+                box.appendChild(themeBtn);
+
+                // Toggle theme when clicked — keep storage and all icons in sync
+                themeBtn.addEventListener('click', () => {
+                    const nowDark = document.body.classList.toggle('dark-mode');
+                    try { localStorage.setItem('theme', nowDark ? 'dark' : 'light'); } catch(e){}
+                    updateThemeIcons(nowDark);
+                });
+            }
+
+            // control visibility via matchMedia (CSS shows box only on mobile, but keep inline fallback)
+            const mq = window.matchMedia('(max-width: 900px)');
+            function update() {
+                if (mq.matches) {
+                    box.style.display = 'flex';
+                    avatarWrap.style.display = 'flex';
+                } else {
+                    box.style.display = '';
+                    avatarWrap.style.display = '';
+                }
+            }
+            update();
+            try { mq.addEventListener ? mq.addEventListener('change', update) : mq.addListener(update); } catch(e){}
+        } catch (e) { console.warn('avatar init failed', e); }
+    })();
+
     const openMenu = () => {
         panel.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
@@ -307,7 +410,14 @@ if (document.readyState === 'loading') {
 
     function moveToHeader() {
         if (moved) return;
-        headerContainer.insertBefore(logoEl, toggleBtn);
+        // If we have the boxed toggle, insert the logo AFTER the box so they swap places
+        const box = headerContainer.querySelector('.mobile-toggle-box');
+        if (box && box.parentNode === headerContainer) {
+            // insert BEFORE the box so the logo appears to the left of the toggle box
+            headerContainer.insertBefore(logoEl, box);
+        } else {
+            headerContainer.insertBefore(logoEl, toggleBtn);
+        }
         moved = true;
     }
 
