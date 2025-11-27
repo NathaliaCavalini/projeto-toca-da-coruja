@@ -1362,6 +1362,99 @@ body.dark-mode .footer-bottom {
   border-radius: 0 0 32px 32px;
   box-shadow: 0 12px 32px rgba(139, 105, 77, 0.1);
 }
+  
+/* ANIMAÇÃO DA CORUJA */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+  
+/* Gêneros: destaque do ícone selecionado e animação breve ao clicar */
+menu-list a.genre-selected img {
+  transform: scale(1.06);
+  transition: transform 160ms ease;
+}
+  
+menu-list img.icon-animate {
+  animation: iconPop 140ms ease;
+}
+  
+@keyframes iconPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.28);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+  
+/* ===== MODO ESCURO ===== */
+body.dark-mode .hero-section {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 165, 116, 0.08) 0%,
+    rgba(125, 82, 55, 0.12) 50%,
+    rgba(139, 105, 77, 0.06) 100%
+  );
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+  
+body.dark-mode .hero-title {
+  color: #f1f1f1;
+}
+  
+body.dark-mode .hero-subtitle {
+  color: var(--color-accent);
+}
+  
+body.dark-mode .hero-explore {
+  color: rgba(255, 255, 255, 0.85);
+}
+  
+body.dark-mode .hero-wave {
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"><path fill="%23d4a574" fill-opacity="0.18" d="M0,60 C360,20 1080,100 1440,60 L1440,120 L0,120 Z"/></svg>');
+}
+  
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  .hero-subtitle {
+    font-size: 1.6rem;
+  }
+  .hero-owl {
+    font-size: 3rem;
+  }
+  .hero-section {
+    padding: 50px 16px 70px;
+  }
+}
+  
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+  .hero-subtitle {
+    font-size: 1.45rem;
+  }
+  .hero-owl {
+    font-size: 2.6rem;
+    margin: 16px 0;
+  }
+  .hero-explore {
+    font-size: 0.98rem;
+  }
+}
+
 
 .hero-content {
   position: relative;
@@ -1794,7 +1887,7 @@ body.dark-mode .search-form input::placeholder {
 }
 
 .book-preview-button:active {
-  /* Sem animação de pressionar */
+  transform: translateY(0);
 }
 
 .book-preview-button:focus-visible {
@@ -1802,6 +1895,8 @@ body.dark-mode .search-form input::placeholder {
   box-shadow: 0 0 0 3px rgba(197, 148, 108, 0.35),
     0 8px 16px rgba(139, 105, 77, 0.22);
 }
+
+
 
 @keyframes slideUp {
   from {
@@ -1879,5 +1974,50 @@ body.dark-mode .book-preview-no-rating {
     width: 28px;
     height: 28px;
     font-size: 20px;
+  }
+}
+
+/* Portrait override for small phones: match provided mockups (2-column compact grid) */
+@media (orientation: portrait) and (max-width: 430px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+    padding: 12px !important;
+  }
+
+  .book-item {
+    padding: 12px !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+  }
+
+  .book-card img {
+    width: 100% !important;
+    height: 140px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+  }
+
+  .book-title p {
+    font-size: 0.9rem !important;
+    margin-top: 8px !important;
+  }
+
+  .book-action a,
+  .btn-quer-ler {
+    padding: 6px 12px !important;
+    font-size: 0.78rem !important;
+    border-radius: 18px !important;
+  }
+
+  .hero-section {
+    padding: 20px 12px 32px !important;
+  }
+
+  /* fallback to single column on very narrow devices */
+  @media (max-width: 360px) {
+    .book-grid {
+      grid-template-columns: 1fr !important;
+    }
   }
 }
