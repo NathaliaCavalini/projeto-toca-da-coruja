@@ -116,11 +116,37 @@ document.addEventListener('DOMContentLoaded', () => {
         searchForm.style.visibility = 'hidden';
         document.body.appendChild(searchForm);
         searchForm.classList.add('mobile-search-outside');
-        // compute position
-        positionOutside();
-        // reveal after positioned
-        searchForm.style.visibility = '';
-        moved = true;
+
+        // Try to compute position several times (layout may change while images/fonts load).
+        let attempts = 0;
+        const maxAttempts = 8;
+
+        function tryPosition() {
+            attempts += 1;
+            try {
+                positionOutside();
+            } catch (e) {
+                // swallow and retry
+            }
+
+            // Verify that the computed top looks reasonable: the element should have a top value
+            // and it should not overlap the hero (we check that search's bottom is above hero top).
+            const sfRect = searchForm.getBoundingClientRect();
+            const heroRectNow = hero.getBoundingClientRect();
+            const good = sfRect.height > 0 && (sfRect.bottom <= heroRectNow.top + 6);
+
+            if (good || attempts >= maxAttempts) {
+                // reveal after positioned (even if not ideal after max attempts)
+                searchForm.style.visibility = '';
+                moved = true;
+            } else {
+                // try again on next frame
+                requestAnimationFrame(tryPosition);
+            }
+        }
+
+        // start attempts on next frame to give the browser a moment to layout
+        requestAnimationFrame(tryPosition);
     }
 
     function restoreOriginal() {
@@ -157,16 +183,47 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => { if (moved) positionOutside(); else update(); });
     window.addEventListener('orientationchange', () => { if (moved) positionOutside(); else update(); });
     window.addEventListener('scroll', () => { if (moved) positionOutside(); });
+    // When the page fully loads (images/fonts), re-run positioning to ensure correctness
+    window.addEventListener('load', () => { if (mq.matches) { if (moved) positionOutside(); else moveOutsideBody(); } });
 })();
 
 // Theme visuals are initialized by /js/theme.js (imported in HTML)
 
 // ===== Mobile menu open/close (centralized) =====
 function initMobileMenu() {
+    // Early guard: do not initialize or show the mobile toggle on auth/profile pages.
+    // This runs before any checks for `#mobileMenu` so it covers pages that may
+    // include the toggle markup but not the mobile panel.
+    try {
+        const currentFile = window.location.pathname.split('/').filter(Boolean).pop() || '';
+        const pageBase = currentFile.split('.')[0];
+        const hidePages = ['login', 'cadastro', 'perfil'];
+        if (hidePages.includes(pageBase)) {
+            // hide possible toggle elements if present and exit early
+            const candidates = document.querySelectorAll('.mobile-menu-toggle, .mobile-toggle-box');
+            candidates.forEach(el => { try { el.style.display = 'none'; } catch (e) {} });
+            return;
+        }
+    } catch (e) { /* ignore */ }
     const toggle = document.querySelector('.mobile-menu-toggle');
     const panel = document.getElementById('mobileMenu');
     const closeBtn = document.querySelector('.mobile-menu-close');
     if (!toggle || !panel) return;
+
+    // Do not show or initialize the mobile toggle on auth/profile pages
+    // (these pages have their own simplified headers and should not show the site menu)
+    try {
+        const currentFile = window.location.pathname.split('/').filter(Boolean).pop() || '';
+        const pageBase = currentFile.split('.')[0]; // handles both 'login' and 'login.html'
+        const hidePages = ['login', 'cadastro', 'perfil'];
+        if (hidePages.includes(pageBase)) {
+            // ensure the toggle element is hidden and any existing mobile toggle box is hidden
+            try { toggle.style.display = 'none'; } catch (e) {}
+            const existingBox = document.querySelector('.mobile-toggle-box');
+            if (existingBox) existingBox.style.display = 'none';
+            return;
+        }
+    } catch (e) { /* ignore errors here and continue initialization */ }
 
     // Insert avatar and wrap toggle + avatar in a small box on mobile
     (function ensureHeaderAvatar(){

@@ -1340,6 +1340,33 @@ body.dark-mode .footer-bottom {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 30px;
   }
+
+  /* Pages that should not show the mobile menu/panel on mobile */
+  .perfil-page .mobile-menu-header,
+  .perfil-page .mobile-menu-footer,
+  .perfil-page nav.mobile-menu-list,
+  .login-page .mobile-menu-header,
+  .login-page .mobile-menu-footer,
+  .login-page nav.mobile-menu-list,
+  .cadastro-page .mobile-menu-header,
+  .cadastro-page .mobile-menu-footer,
+  .cadastro-page nav.mobile-menu-list {
+    display: none !important;
+  }
+
+  /* hide the quer-ler icons and toggle button itself on those pages (mobile) */
+  .perfil-page .mobile-menu-toggle .quer-ler--light,
+  .perfil-page .mobile-menu-toggle .quer-ler--dark,
+  .login-page .mobile-menu-toggle .quer-ler--light,
+  .login-page .mobile-menu-toggle .quer-ler--dark,
+  .cadastro-page .mobile-menu-toggle .quer-ler--light,
+  .cadastro-page .mobile-menu-toggle .quer-ler--dark {
+    display: none !important;
+  }
+
+  .perfil-page .mobile-menu-toggle,
+  .login-page .mobile-menu-toggle,
+  .cadastro-page .mobile-menu-toggle { display: none !important; }
 }
 /* ===== HEADER - MOBILE ONLY ===== */
 .header {
