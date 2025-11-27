@@ -1887,7 +1887,8 @@ body.dark-mode .search-form input::placeholder {
 }
 
 .book-preview-button:active {
-  transform: translateY(0);
+  /* Preserve the original horizontal offset when active to avoid jump */
+  transform: translateX(47px) translateY(0);
 }
 
 .book-preview-button:focus-visible {

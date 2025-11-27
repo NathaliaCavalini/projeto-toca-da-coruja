@@ -42,16 +42,7 @@ export const livros = {
         descricao: "Comédia romântica sobre identidade e autodescoberta.",
         sinopse: "Algumas Garotas é uma leitura tocante que captura as nuances do amor feminino, da amizade e do crescimento pessoal. Com personagens reais e profundas, o livro nos leva a uma jornada de autodescoberta onde a lealdade e a paixão se entrelaçam de forma emocionante. Para quem busca uma história autêntica sobre mulheres que se apoiam e se amam."
     },
-    "a-arte-de-jogar": {
-        titulo: "A arte da guerra",
-        autor: "Emillyn Lia",
-        imagem: "/imagens/coisas_obvias_sobre_o_amor.png",
-        genero: "Estratégia",
-        paginas: 368,
-        ano: 2022,
-        descricao: "Clássico chinês de estratégia militar e filosofia.",
-        sinopse: "Uma obra fascinante que entrelaça teoria dos jogos, psicologia e história. O autor nos guia por uma jornada onde cada decisão é crucial e cada movimento conta. Mais do que estratégias, este livro explora a mente humana e sua capacidade de prever, blefar e vencer em qualquer jogo da vida."
-    },
+    
     "iliada": {
         titulo: "Ilíada",
         autor: "Homero",
@@ -208,10 +199,21 @@ export const livros = {
     "divina-comedia": {
         titulo: "A divina comédia",
         autor: "Dante Alighieri",
-    imagem: "imagens/divina comédia.jpg",
+        imagem: "/imagens/a-divina-comedia.jpg",
         genero: "Poesia Épica",
         paginas: 928,
         ano: 1320,
+        descricao: "Jornada de Dante pelo Inferno, Purgatório e Paraíso.",
+        sinopse: "Uma jornada épica de Dante através do Inferno, Purgatório e Paraíso, guiado por Virgílio e Beatriz. Com alegorias ricas e reflexões profundas sobre pecado, redenção e amor divino, a Divina Comédia é uma das maiores obras da literatura ocidental, explorando a condição humana e a busca pela salvação eterna."
+    },
+    "a-divina-comedia": {
+        titulo: "A divina comédia",
+        autor: "Dante Alighieri",
+        imagem: "/imagens/a-divina-comedia.jpg",
+        genero: "Poesia Épica",
+        paginas: 928,
+        ano: 1320,
+        descricao: "Jornada de Dante pelo Inferno, Purgatório e Paraíso.",
         sinopse: "Uma jornada épica de Dante através do Inferno, Purgatório e Paraíso, guiado por Virgílio e Beatriz. Com alegorias ricas e reflexões profundas sobre pecado, redenção e amor divino, a Divina Comédia é uma das maiores obras da literatura ocidental, explorando a condição humana e a busca pela salvação eterna."
     },
     "gilgamesh": {
@@ -262,10 +264,11 @@ export const livros = {
     "a-arte-da-guerra": {
         titulo: "A Arte da Guerra",
         autor: "Sun Tzu",
-    imagem: "imagens/a arte da guerra.jpg",
+        imagem: "/imagens/a-arte-da-guerra.jpg",
         genero: "Estratégia",
         paginas: 112,
         ano: -500,
+        descricao: "Clássico chinês de estratégia militar e filosofia.",
         sinopse: "Um dos tratados militares mais influentes da história, escrito pelo estrategista chinês Sun Tzu. Com ensinamentos sobre estratégia, liderança, psicologia e táticas de combate, a obra transcende o campo de batalha e é aplicada em negócios, política e vida pessoal. Uma leitura essencial sobre o pensamento estratégico."
     },
     "principe": {
