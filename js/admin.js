@@ -46,6 +46,8 @@ async function renderBooksList(filter = "") {
   const books = await loadBooks();
   const container = document.getElementById("books-list");
   if (!container) return;
+  // remove any previous empty state marker
+  container.classList.remove("is-empty");
   // Mostrar/ocultar botão "Adicionar livro existente" quando estivermos gerenciando um gênero
   const addBookBtn = document.getElementById("btn-add-book");
   if (addBookBtn) {
@@ -102,6 +104,8 @@ async function renderBooksList(filter = "") {
                 <p class="hint">Tente outro termo de busca ou adicione livros usando o botão "Adicionar Livro" acima.</p>
             </div>
         `;
+    // mark container as empty so CSS can center the empty card
+    container.classList.add("is-empty");
     return;
   }
 
@@ -778,6 +782,9 @@ async function renderReviewsList(filter = "") {
   const container = document.getElementById("reviews-list");
   if (!container) return;
 
+  // remove any previous empty state marker
+  container.classList.remove("is-empty");
+
   container.innerHTML = "";
 
   if (!Array.isArray(reviews) || reviews.length === 0) {
@@ -821,6 +828,8 @@ async function renderReviewsList(filter = "") {
                 <p class="hint">Tente outro termo de busca.</p>
             </div>
         `;
+    // mark container as empty so CSS can center the empty card
+    container.classList.add("is-empty");
     return;
   }
 
@@ -888,6 +897,9 @@ async function renderGenresList(filter = "") {
 
   if (!container) return;
 
+  // remove any previous empty state marker
+  container.classList.remove("is-empty");
+
   container.innerHTML = "";
   let genreNames = Object.keys(genrePages);
 
@@ -905,6 +917,8 @@ async function renderGenresList(filter = "") {
                 <p class="hint">Tente outro termo de busca ou adicione novos gêneros usando o botão acima.</p>
             </div>
         `;
+    // mark container as empty so CSS can center the empty card
+    container.classList.add("is-empty");
     return;
   }
 

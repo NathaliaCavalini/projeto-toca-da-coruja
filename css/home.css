@@ -582,6 +582,29 @@ body.dark-mode .empty-state-box:hover {
   border-color: rgba(255, 255, 255, 0.38);
 }
 
+/* Center empty state when placed inside a book grid or list */
+.book-grid.is-empty {
+  /* make single-column so the empty card sits centered */
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.book-grid.is-empty > .empty-state-box,
+.books-list.is-empty > .empty-state-box {
+  justify-self: center;
+  margin: 50px auto 40px;
+  max-width: 760px;
+}
+
+@media (max-width: 900px) {
+  .book-grid.is-empty > .empty-state-box,
+  .books-list.is-empty > .empty-state-box {
+    max-width: 92%;
+    margin: 40px auto;
+  }
+}
+
 /* ===== ACTION BUTTON ===== */
 .action-btn {
   background-color: var(--color-primary);
