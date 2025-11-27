@@ -1398,22 +1398,33 @@ body.dark-mode .footer-bottom {
   .mobile-genre-toggle {
     background: var(--color-primary);
     border-radius: 12px;
-    padding: 12px 14px;
+    /* target size requested by designer */
+    width: 376px !important;
+    height: 42px !important;
+    padding: 0 14px !important;
     color: var(--color-text);
     display: flex;
     align-items: center;
     justify-content: flex-start; /* align content to the left like .menu-item */
     gap: 10px;
-    width: 100%;
     box-sizing: border-box;
     margin: 0;
     align-self: stretch; /* ensure it stretches across the column */
     text-decoration: none;
   }
   .mobile-genre-toggle:hover {
-    transform: translateX(6px);
+    /* disable hover move on mobile - keep it static */
+    transform: none !important;
   }
   .mobile-genre-toggle .chev { margin-left: auto; }
+
+  /* Ensure no transition/transform moves the toggle when opened or clicked on mobile */
+  .mobile-genre-toggle,
+  .mobile-genre-toggle:hover,
+  .mobile-genre-toggle:active {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 @media (max-width:900px){
